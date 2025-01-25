@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
+    fs: {
+      // Allow serving files from the public directory
+      strict: false,
+    },
   },
 })
