@@ -4,15 +4,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Perth",
-        "icon": "fa/FaCity",
-        "iconColor": "green"
+        "name": "Pinnacles Desert Discovery Centre",
+        "icon": "md/MdOutlinePark",
+        "color": "green"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          115.86151599884035,
-          -31.952180444648622
+          115.15552470948937,
+          -30.602928263871924
         ]
       }
     }
