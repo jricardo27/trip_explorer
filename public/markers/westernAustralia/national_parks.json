@@ -1,12 +1,14 @@
 {
   "type": "FeatureCollection",
+  "properties": {
+    "icon": "md/MdOutlinePark",
+    "color": "green"
+  },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "name": "Pinnacles Desert Discovery Centre",
-        "icon": "md/MdOutlinePark",
-        "color": "green"
+        "name": "Pinnacles Desert Discovery Centre"
       },
       "geometry": {
         "type": "Point",

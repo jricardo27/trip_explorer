@@ -16,7 +16,20 @@ const useMarkersWA = () => {
           filePaths.map((path) => fetch(`${path}?t=${timestamp}`).then((res) => res.json())),
         )
 
-        setMarkers(responses)
+        // Merge shared properties with each feature's properties
+        const mergedMarkers = responses.map((featureCollection) => {
+          const { properties: sharedProperties, features } = featureCollection
+
+          return features.map((feature) => ({
+            ...feature,
+            properties: {
+              ...sharedProperties,
+              ...feature.properties,
+            },
+          }))
+        }).flat() // Flatten the array of arrays into a single array
+
+        setMarkers(mergedMarkers)
       } catch (error) {
         console.error("Error loading markers:", error)
       }
