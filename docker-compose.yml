@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: ./
+    container_name: 2025_trip_explorer-frontend
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+      # One-way volume to use node_modules from inside image
+      - node-modules-trip-explorer:/app/node_modules
+    ports:
+      - "3000:5173"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    networks:
+      - 2025_trip_explorer
+
+networks:
+  2025_trip_explorer:
+
+volumes:
+  node-modules-trip-explorer:

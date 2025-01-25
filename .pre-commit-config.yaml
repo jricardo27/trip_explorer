@@ -1,0 +1,11 @@
+repos:
+  - repo: local
+    hooks:
+      - id: node-eslint
+        name: eslint
+        entry: npx eslint --config eslint.config.js --fix --max-warnings 0 --no-warn-ignored
+        language: node
+        require_serial: true
+        types_or: [html, javascript, json, jsx, ts, tsx]
+        additional_dependencies:
+          - eslint@9.16.0
