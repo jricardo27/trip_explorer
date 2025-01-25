@@ -1,0 +1,31 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.82759141921998,
+          -31.92945577087527
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pinnacles Desert Discovery Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.15552470948937,
+          -30.602928263871924
+        ]
+      }
+    }
+  ]
+}
