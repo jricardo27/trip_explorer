@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { LayerGroup, LayersControl, MapContainer, TileLayer } from "react-leaflet"
 
 import "leaflet/dist/leaflet.css"
 import { TCoordinate } from "../../data/types"
 
 import { BaseLayers } from "./BaseLayers"
+import MapStateManager from "./MapStateManager.tsx"
+import MapViewUpdater from "./MapViewUpdater.tsx"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
 interface LayerGroupChild {
@@ -22,10 +24,31 @@ type TMapProps = {
 const MapComponent = ({ children, center, layerGroupChildren }: TMapProps): React.ReactElement => {
   const mapRef = useRef(null)
   const [activeBaseLayer] = useState("esriWorldStreetMap")
+  const [mapState, setMapState] = useState({
+    center: center,
+    zoom: 13,
+  })
+
+  // Restore map state from localStorage on initial load
+  useEffect(() => {
+    const savedMapState = localStorage.getItem("mapState")
+
+    if (savedMapState) {
+      setMapState(JSON.parse(savedMapState))
+    }
+  }, [])
 
   return (
     <>
-      <MapContainer center={center} zoom={13} ref={mapRef} scrollWheelZoom={true} style={{ height: "100vh", width: "100%" }}>
+      <MapContainer
+        center={mapState.center}
+        zoom={mapState.zoom}
+        ref={mapRef}
+        scrollWheelZoom={true}
+        style={{ height: "100vh", width: "100%" }}
+      >
+        <MapStateManager />
+        <MapViewUpdater center={mapState.center} zoom={mapState.zoom} />
         <ZoomLevelDisplay />
         <LayersControl position="topright">
           {Object.entries(BaseLayers).map(([key, layer]) => (
