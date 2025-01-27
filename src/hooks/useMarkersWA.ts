@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 
 const filePaths = [
-  "/markers/westernAustralia/gas_stations.json",
+  "/markers/westernAustralia/gas_stations_openstreetmap.json",
+  "/markers/westernAustralia/gas_stations_fuelwatch.json",
+  "/markers/westernAustralia/gas_stations_bp.json",
   "/markers/westernAustralia/national_parks.json",
   "/markers/westernAustralia/places.json",
 ]
