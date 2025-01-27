@@ -5,8 +5,10 @@
       "type": "Feature",
       "properties": {
         "name": "Perth",
-        "icon": "fa/FaCity",
-        "iconColor": "green"
+        "style": {
+          "icon": "fa/FaCity",
+          "iconColor": "green"
+        }
       },
       "geometry": {
         "type": "Point",

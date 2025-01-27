@@ -1,8 +1,10 @@
 {
   "type": "FeatureCollection",
   "properties": {
-    "icon": "md/MdOutlinePark",
-    "color": "green"
+    "style": {
+      "icon": "md/MdOutlinePark",
+      "color": "green"
+    }
   },
   "features": [
     {

@@ -13,8 +13,8 @@ export const WesternAustralia = (): React.ReactNode => {
   const PERTH_LOCATION = { lat: -31.953512, lng: 115.857048 }
 
   const pointToLayer = (feature: unknown, latlng: unknown) => {
-    const iconName = feature.properties.icon || "fa/FaMapMarker"
-    const iconColor = feature.properties.color || "grey"
+    const iconName = feature.properties.style?.icon || "fa/FaMapMarker"
+    const iconColor = feature.properties.style?.color || "grey"
     const customIcon = createCustomIcon(iconName, iconColor)
     return L.marker(latlng, { icon: customIcon })
   }
