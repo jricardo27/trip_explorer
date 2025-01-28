@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import deepMerge from "../utils/deepmerge.ts"
+
 const filePaths = [
   "/markers/westernAustralia/gas_stations_openstreetmap.json",
   "/markers/westernAustralia/gas_stations_fuelwatch.json",
@@ -25,10 +27,7 @@ const useMarkersWA = () => {
 
           return features.map((feature) => ({
             ...feature,
-            properties: {
-              ...sharedProperties,
-              ...feature.properties,
-            },
+            properties: deepMerge(deepMerge({}, sharedProperties), feature.properties),
           }))
         }).flat() // Flatten the array of arrays into a single array
 
