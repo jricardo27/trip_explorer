@@ -2,6 +2,7 @@
   "type": "FeatureCollection",
   "properties": {
     "style": {
+      "layerName": "National Parks",
       "icon": "md/MdOutlinePark",
       "color": "green"
     }

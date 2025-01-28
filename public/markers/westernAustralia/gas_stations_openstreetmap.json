@@ -5,6 +5,7 @@
   "timestamp": "2025-01-25T11:07:05Z",
   "properties": {
     "style": {
+      "layerName": "Gas Stations [OpenStreetMap]",
       "icon": "bs/BsFuelPump",
       "color": "red"
     }

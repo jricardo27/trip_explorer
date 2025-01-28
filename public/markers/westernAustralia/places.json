@@ -1,5 +1,10 @@
 {
   "type": "FeatureCollection",
+  "properties": {
+    "style": {
+      "layerName": "Places"
+    }
+  },
   "features": [
     {
       "type": "Feature",

@@ -2,6 +2,7 @@
   "type": "FeatureCollection",
   "properties": {
     "style": {
+      "layerName": "Gas Stations [Fuelwatch]",
       "icon": "bs/BsFuelPump",
       "color": "black"
     }

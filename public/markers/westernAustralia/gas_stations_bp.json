@@ -2,6 +2,7 @@
   "type": "FeatureCollection",
   "properties": {
     "style": {
+      "layerName": "Gas Stations [BP]",
       "icon": "bs/BsFuelPump",
       "color": "magenta"
     }
