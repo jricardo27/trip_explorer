@@ -1,0 +1,84 @@
+[tool.coverage.report]
+omit=["backend/tests/*", "**/migrations/",]
+precision=2
+
+[tool.isort]
+combine_as_imports=true
+include_trailing_comma=true
+line_length=160
+lines_between_sections=0
+multi_line_output=3
+skip=[".git", ".eggs", "venv"]
+
+[tool.pylint]
+disable=[
+    "missing-module-docstring",         # C0114: Missing module docstring
+    "missing-class-docstring",          # C0115: Missing class docstring
+    "missing-function-docstring",       # C0116: Missing function or method docstring
+    "no-self-use",                      # R6301: Method could be a function
+    "too-few-public-methods",           # R0903: Too few public methods
+    "too-many-ancestors",               # R0901: Too many ancestors
+    "too-many-arguments",               # R0913: Too many arguments
+    "too-many-positional-arguments",    # R0917: Too many positional arguments
+]
+notes=[]
+
+[tool.pylint.format]
+max-line-length=160
+
+[tool.pylint.main]
+ignore-paths=["backend/venv/*", ".*/migrations/.*.py"]
+
+[tool.pylint.MASTER]
+load-plugins=[
+    "pylint_django",
+    "pylint_per_file_ignores",
+    "pylint.extensions.no_self_use"
+]
+
+[tool.pylint.'MESSAGES CONTROL']
+per-file-ignores = """
+    .*/migrations/:invalid-name,
+"""
+
+[tool.pyright]
+include=["backend"]
+exclude=["backend/venv", "**/migrations/", "**/__pycache__", "**/*.zip"]
+extraPaths=["src"]
+pythonVersion="3.12"
+pythonPlatform="Linux"
+reportIncompatibleVariableOverride=false  # Disabling as it gives false positives from Django's magic
+reportMissingImports=true
+reportPrivateImportUsage=true
+reportMissingTypeStubs=false
+venvPath=".."
+venv="venv"
+
+[tool.ruff]
+exclude=[]
+line-length = 160
+
+[tool.ruff.lint]
+ignore = [
+    "SIM105",  # suppressible-exception
+    "SIM112",  # uncapitalized-environment-variables
+]
+select = [
+    "E",  # pycodestyle
+    "F",  # Pyflakes
+    "UP",  # pyupgrade
+    "B",  # flake8-bugbear
+    "SIM",  # flake8-simplify
+]
+unfixable = ["I"]
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore F403 and F405 on Django settings files.
+# F403 `from package import *` used; unable to detect undefined names
+# F405 `VARIABLE` may be undefined, or defined from star imports
+"backend/config/settings/development.py" = ["F403", "F405"]
+"backend/config/settings/production.py" = ["F403", "F405"]
+"**/__init__.py" = ["F403"]
+
+[tool.ruff.format]
+preview=true  # Enable preview style formatting.
