@@ -12,7 +12,7 @@ const overlayFilePaths = [
   "/markers/westernAustralia/gas_stations_openstreetmap.json",
   "/markers/westernAustralia/gas_stations_fuelwatch.json",
   "/markers/westernAustralia/gas_stations_bp.json",
-  "/markers/westernAustralia/national_parks.json",
+  "/markers/westernAustralia/national_parks_simplified.json",
   "/markers/westernAustralia/places.json",
 ]
 
