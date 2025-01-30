@@ -5,8 +5,9 @@ import { IconType } from "react-icons"
 import * as bsIcons from "react-icons/bs" // Bootstrap Icons
 import * as faIcons from "react-icons/fa" // FontAwesome
 import * as hiIcons from "react-icons/hi" // Heroicons
-import { HiOutlineLocationMarker } from "react-icons/hi"
 import * as mdIcons from "react-icons/md" // Material Design
+
+import { MarkerIcon } from "../assets/MarkerIcon"
 
 type IconLibrary = Record<string, IconType>
 type IconMapping = Record<string, IconLibrary>
@@ -30,9 +31,9 @@ const createCustomIcon = (iconName: string, iconColor: string = "grey"): React.R
   return L.divIcon({
     html: `
     <div style="position: relative;">
-      ${renderToString(<HiOutlineLocationMarker size={32} color={iconColor} />)}
+      ${renderToString(<MarkerIcon size={32} color={iconColor} />)}
       <div style="position: absolute; top: 45%; left: 65%; transform: translate(-50%, -50%);">
-        ${renderToString(<IconComponent size={16} color="grey" />)}
+        ${renderToString(<IconComponent size={16} color={iconColor} />)}
       </div>
     </div>
   `,
