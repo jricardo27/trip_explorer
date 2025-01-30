@@ -1,6 +1,7 @@
 {
   "type": "FeatureCollection",
   "properties": {
+    "source": "https://www.bp.com/en_au/australia/home/who-we-are/find-your-nearest-bp.html",
     "style": {
       "layerName": "Gas Stations [BP]",
       "icon": "bs/BsFuelPump",
