@@ -24,7 +24,8 @@ export const WesternAustralia = (): React.ReactNode => {
   const pointToLayer = (feature: unknown, latlng: unknown) => {
     const iconName = feature.properties.style?.icon || "fa/FaMapMarker"
     const iconColor = feature.properties.style?.color || "grey"
-    const customIcon = createCustomIcon(iconName, iconColor)
+    const innerIconColor = feature.properties.style?.innerIconColor || iconColor
+    const customIcon = createCustomIcon(iconName, iconColor, innerIconColor)
     return L.marker(latlng, { icon: customIcon })
   }
 

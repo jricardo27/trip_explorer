@@ -58,7 +58,7 @@ const MapComponent = ({ children, center, layerGroupChildren }: TMapProps): Reac
           ))}
 
           {layerGroupChildren?.map((child, index) => (
-            <LayersControl.Overlay key={index} name={child.title}>
+            <LayersControl.Overlay key={child?.key || index} name={child.title}>
               <LayerGroup>{child.children}</LayerGroup>
             </LayersControl.Overlay>
           ))}
