@@ -1,7 +1,7 @@
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
-import { GeoJsonData, GeoJsonDataMap, GeoJsonFeature } from "../data/types"
+import { GeoJsonCollection, GeoJsonDataMap, GeoJsonFeature, GeoJsonProperties } from "../data/types"
 import deepMerge from "../utils/deepmerge.ts"
 
 const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
@@ -15,22 +15,38 @@ const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
       try {
         const timestamp = Date.now()
         const promises = filenames.map(async (filename) => {
-          const response = await axios.get<GeoJsonData>(filename, { params: { t: timestamp } })
+          const response = await axios.get<GeoJsonCollection>(filename, { params: { t: timestamp } })
           return [filename, response.data]
         })
 
         const results = await Promise.all(promises)
         const dataMap: GeoJsonDataMap = results.reduce((acc, [filename, featureCollection]) => {
-          const sharedProperties = featureCollection.properties || {}
-          const features = featureCollection.features || []
+          const sharedProperties: GeoJsonProperties = featureCollection.properties || {}
 
-          featureCollection.features = features.map((feature: GeoJsonFeature) => ({
-            ...feature,
-            properties: deepMerge(deepMerge({}, sharedProperties), feature.properties),
-          }))
+          featureCollection.features.forEach((feature: GeoJsonFeature) => {
+            if (feature.type !== "Feature") {
+              console.warn("Skipping non-feature item in features array")
+              return
+            }
+
+            // Merge top-level properties
+            feature.properties = {
+              ...sharedProperties,
+              ...feature.properties,
+            }
+
+            // Handle nested properties
+            Object.keys(sharedProperties).forEach((key) => {
+              if (typeof sharedProperties[key] === "object" &&
+                sharedProperties[key] !== null &&
+                feature.properties[key] !== undefined) {
+                // If both are objects, merge them deeply
+                feature.properties[key] = deepMerge(sharedProperties[key], feature.properties[key])
+              }
+            })
+          })
 
           acc[filename] = featureCollection
-
           return acc
         }, {})
         setGeoJsonData(dataMap)

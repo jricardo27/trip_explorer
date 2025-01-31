@@ -1,22 +1,19 @@
-export default function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<string, unknown>): T {
-  for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      const sourceValue = source[key]
-      const targetValue = target[key]
+export default function deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
+  const output = { ...target }
 
-      if (
-        typeof sourceValue === "object" &&
-        sourceValue !== null &&
-        typeof targetValue === "object" &&
-        targetValue !== null
-      ) {
-        // Recursive merge, maintaining type safety
-        target[key] = deepMerge(targetValue || {} as unknown, sourceValue) as T[keyof T]
+  if (isObject(target) && isObject(source)) {
+    Object.keys(source).forEach((key) => {
+      if (isObject(source[key])) {
+        if (!(key in target)) Object.assign(output, { [key]: source[key] })
+        else output[key] = deepMerge(target[key], source[key])
       } else {
-        // Simple assignment, type-safe
-        target[key] = sourceValue as T[keyof T]
+        Object.assign(output, { [key]: source[key] })
       }
-    }
+    })
   }
-  return target
+  return output
+}
+
+function isObject(item) {
+  return (item && typeof item === "object" && !Array.isArray(item))
 }

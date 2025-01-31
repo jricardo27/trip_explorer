@@ -4,7 +4,7 @@ export interface GeoJsonGeometry {
 }
 
 export interface GeoJsonProperties {
-  [key: string]: never
+  [key: string | Record<string, never>]: never
 }
 
 export interface GeoJsonFeature {
@@ -13,9 +13,10 @@ export interface GeoJsonFeature {
   geometry: GeoJsonGeometry
 }
 
-export interface GeoJsonData {
+export interface GeoJsonCollection {
   type: "FeatureCollection"
+  properties: GeoJsonProperties
   features: GeoJsonFeature[]
 }
 
-export type GeoJsonDataMap = Record<string, GeoJsonData | null>
+export type GeoJsonDataMap = Record<string, GeoJsonCollection | null>
