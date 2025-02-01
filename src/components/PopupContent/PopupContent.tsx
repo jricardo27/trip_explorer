@@ -3,23 +3,22 @@ import React, { useState } from "react"
 import ImageGallery from "react-image-gallery"
 
 import "react-image-gallery/styles/css/image-gallery.css"
+
 import { GeoJsonFeature } from "../../data/types"
+import { TTabMapping } from "../../data/types/TTabMapping.ts"
 
 import styles from "./PopupContent.module.css"
 
-interface PopupContentProps {
+interface iPopupContentProps {
   feature: GeoJsonFeature
+  tabMapping: TTabMapping
 }
 
-const PopupContent = ({ feature }: PopupContentProps): React.ReactNode => {
+const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactNode => {
   const [tabValue, setTabValue] = useState(0)
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
-  }
-
-  const tabMapping = {
-    General: ["name", { key: "description", className: styles.scrollableContent }],
   }
 
   // Extract images for the slideshow
@@ -31,6 +30,7 @@ const PopupContent = ({ feature }: PopupContentProps): React.ReactNode => {
         return {
           original: url,
           thumbnail: url,
+          originalHeight: "300",
           originalTitle: title,
           thumbnailTitle: title,
         }
@@ -72,7 +72,7 @@ const PopupContent = ({ feature }: PopupContentProps): React.ReactNode => {
                         <strong>{key}:</strong>
                         {className === "" && (<span>{" "}{value}</span>)}
                       </Typography>
-                      {className && <div className={className}><Typography>{value}</Typography></div>}
+                      {className && value && <div className={className}><Typography>{value}</Typography></div>}
                     </div>
                   )
                 })}
@@ -85,7 +85,7 @@ const PopupContent = ({ feature }: PopupContentProps): React.ReactNode => {
       {/* Image slideshow */}
       {images.length > 0 && (
         <div className={styles.imagesContainer}>
-          <ImageGallery items={images} originalHeight="200" />
+          <ImageGallery items={images} showNav={false} showPlayButton={false} />
         </div>
       )}
     </div>

@@ -4,8 +4,10 @@ import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
 import MapComponent from "../../components/MapComponent/MapComponent.tsx"
+import styles from "../../components/PopupContent/PopupContent.module.css"
 import PopupContent from "../../components/PopupContent/PopupContent.tsx"
 import { GeoJsonFeature } from "../../data/types"
+import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
 import createCustomIcon from "../../utils/createCustomIcon.tsx"
 
@@ -33,12 +35,40 @@ export const WesternAustralia = (): React.ReactNode => {
     return L.marker(latlng, { icon: customIcon })
   }
 
+  const popupTabMappings: Record<string, TTabMapping> = {
+    default: {
+      General: ["name", { key: "description", className: styles.scrollableContent }],
+    },
+    "National Parks": {
+      General: ["name", "url", { key: "description", className: styles.scrollableContent }],
+    },
+    "Accommodation (Campermate)": {
+      General: ["name", "fees", "bookable", { key: "description", className: styles.scrollableContent }],
+      Score: ["score", "thumbs_up", "thumbs_down"],
+    },
+    "Accommodation in WA": {
+      General: ["name", "website", "tarif", "isBookable"],
+      "More Info": ["operatorName", "GroupName", "CheckInTime", "CheckOutTime", "email", "address", "hours"],
+    },
+    "Gas Stations [BP]": {
+      General: ["name", "address", { key: "facilities", className: styles.scrollableContent }],
+      "More Info": [{ key: "products", className: styles.scrollableContent }, "website", "telephone"],
+    },
+    "Gas Stations [Fuelwatch]": {
+      General: ["name", "brandName", "manned", "operates247"],
+    },
+    "Gas Stations [OpenStreetMap]": {
+      General: ["name", "brand", "operator", "opening_hours"],
+    },
+  }
+
   let overlays = []
 
   if (!overlayMarkers.loading && !overlayMarkers.error) {
     overlays = overlayFilePaths.map((filename) => {
       const data = overlayMarkers[filename]
       const layerName = data.properties.style.layerName
+      const tabMapping = layerName in popupTabMappings ? popupTabMappings[layerName] : popupTabMappings["default"]
 
       return {
         key: layerName,
@@ -64,7 +94,7 @@ export const WesternAustralia = (): React.ReactNode => {
                     const container = L.DomUtil.create("div")
                     const root = createRoot(container)
                     root.render(
-                      <PopupContent feature={feature as GeoJsonFeature} />,
+                      <PopupContent feature={feature as GeoJsonFeature} tabMapping={tabMapping} />,
                     )
 
                     // Set the popup content
