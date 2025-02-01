@@ -1,0 +1,21 @@
+.scrollableContent {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.popupContent {
+  display: flex;
+  gap: 8px;
+}
+
+.tabsContainer {
+  flex: 1; /* Allow the tabs to take up remaining space */
+}
+
+.imagesContainer {
+  width: 450px;
+}
