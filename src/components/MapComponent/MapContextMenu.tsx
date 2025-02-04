@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import L from "leaflet"
+import React, { useCallback, useEffect, useState } from "react"
 import { useMapEvents } from "react-leaflet"
 
 import { TCoordinate, TPosition } from "../../data/types"
 import ContextMenu from "../ContextMenu/ContextMenu.tsx"
 
 interface IMapContextMenuProps {
+  latlng?: L.LatLng | undefined
   children: React.ReactNode
 }
 
@@ -15,14 +17,7 @@ const MapContextMenu = ({ ...props }: IMapContextMenuProps): React.ReactNode => 
   const map = useMapEvents({
     contextmenu: (event) => {
       event.originalEvent.preventDefault() // Prevent default context menu
-
-      // Get the clicked location's coordinates
-      const { lat, lng } = event.latlng
-      setCoordinates({ lat, lng })
-
-      // Convert the click position to container coordinates
-      const containerPoint = map.latLngToContainerPoint(event.latlng)
-      setMenuPosition({ x: containerPoint.x, y: containerPoint.y })
+      handleLatLng(event.latlng)
     },
     click: () => {
       setTimeout(() => {
@@ -30,6 +25,24 @@ const MapContextMenu = ({ ...props }: IMapContextMenuProps): React.ReactNode => 
       }, 100)
     },
   })
+
+  const handleLatLng = useCallback((latlng: L.LatLng) => {
+    const { lat, lng } = latlng
+    setCoordinates({ lat, lng })
+
+    // Convert the click position to container coordinates
+    const containerPoint = map.latLngToContainerPoint(latlng)
+    setMenuPosition({ x: containerPoint.x, y: containerPoint.y })
+  }, [map])
+
+  useEffect(() => {
+    if (!props.latlng) {
+      setCoordinates(null)
+      setMenuPosition(null)
+    } else {
+      handleLatLng(props.latlng)
+    }
+  }, [props.latlng, handleLatLng])
 
   return (
     <>

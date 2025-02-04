@@ -1,5 +1,5 @@
 import L from "leaflet"
-import React from "react"
+import React, { useState } from "react"
 import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
@@ -24,6 +24,9 @@ const overlayFilePaths = [
 ]
 
 export const WesternAustralia = (): React.ReactNode => {
+  const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
+  const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
+
   const overlayMarkers = useGeoJsonMarkers(overlayFilePaths)
   const PERTH_LOCATION = { lat: -31.953512, lng: 115.857048 }
 
@@ -101,6 +104,12 @@ export const WesternAustralia = (): React.ReactNode => {
                     popup.setContent(container)
                   }
                 })
+
+                layer.on("contextmenu", (event) => {
+                  L.DomEvent.stopPropagation(event)
+                  setContextMenuPosition(event.latlng)
+                  setSelectedFeature(feature as GeoJsonFeature)
+                })
               }
             }}
           />
@@ -111,7 +120,7 @@ export const WesternAustralia = (): React.ReactNode => {
 
   return (
     <MapComponent center={PERTH_LOCATION} layerGroupChildren={overlays}>
-      <WAContextMenu />
+      <WAContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
     </MapComponent>
   )
 }

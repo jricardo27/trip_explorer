@@ -1,22 +1,33 @@
+import L from "leaflet"
 import React from "react"
 import { toast } from "react-toastify"
 
 import MenuOption from "../../components/ContextMenu/MenuOption.tsx"
 import MapContextMenu from "../../components/MapComponent/MapContextMenu.tsx"
+import { GeoJsonFeature } from "../../data/types"
 
-const WAContextMenu = (): React.ReactNode => {
-  const copyFeatureToClipboard = (payload: object) => {
-    const coordinates = payload.coordinates
+interface iWAContextMenuProps {
+  menuLatLng?: L.LatLng | undefined
+  selectedFeature: GeoJsonFeature | null
+}
 
-    const feature = {
-      type: "Feature",
-      properties: {
-        name: "Location Name",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [coordinates.lng, coordinates.lat],
-      },
+const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
+  const copyFeatureToClipboard = (payload: object, selectedFeature: GeoJsonFeature | null) => {
+    let feature = selectedFeature
+
+    if (!feature) {
+      const coordinates = payload.coordinates
+
+      feature = {
+        type: "Feature",
+        properties: {
+          name: "Location Name",
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [coordinates.lng, coordinates.lat],
+        },
+      }
     }
 
     navigator.clipboard
@@ -30,8 +41,8 @@ const WAContextMenu = (): React.ReactNode => {
   }
 
   return (
-    <MapContextMenu>
-      <MenuOption title="Copy feature to clipboard" handler={copyFeatureToClipboard} />
+    <MapContextMenu latlng={props.menuLatLng}>
+      <MenuOption title="Copy feature to clipboard" handler={(payload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
     </MapContextMenu>
   )
 }
