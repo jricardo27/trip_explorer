@@ -14,7 +14,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/30432202",
+        "id": "node/30432202",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -32,7 +32,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/31085556",
+        "id": "node/31085556",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -51,7 +51,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/33121767",
+        "id": "node/33121767",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -80,7 +80,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/33121776",
+        "id": "node/33121776",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -101,7 +101,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/33121784",
+        "id": "node/33121784",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -124,7 +124,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/33682727",
+        "id": "node/33682727",
         "addr:country": "AU",
         "addr:housenumber": "59",
         "addr:state": "WA",
@@ -154,7 +154,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/35414806",
+        "id": "node/35414806",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -173,7 +173,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/38454161",
+        "id": "node/38454161",
         "amenity": "fuel",
         "name": "Warmun Roadhouse"
       },
@@ -189,7 +189,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/41185280",
+        "id": "node/41185280",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -208,7 +208,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/43201554",
+        "id": "node/43201554",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -231,7 +231,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/53841752",
+        "id": "node/53841752",
         "amenity": "fuel",
         "brand": "Liberty"
       },
@@ -247,7 +247,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/65012348",
+        "id": "node/65012348",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -267,7 +267,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/73859825",
+        "id": "node/73859825",
         "addr:street": "Viveash Way",
         "amenity": "fuel",
         "created_by": "JOSM",
@@ -289,7 +289,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/81398864",
+        "id": "node/81398864",
         "amenity": "fuel",
         "wheelchair": "yes"
       },
@@ -305,7 +305,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/96377535",
+        "id": "node/96377535",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -323,7 +323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/125558559",
+        "id": "node/125558559",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "operator": "Caltex"
@@ -340,7 +340,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/125908072",
+        "id": "node/125908072",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -359,7 +359,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/129904635",
+        "id": "node/129904635",
         "amenity": "fuel",
         "name": "Gull Waterloo"
       },
@@ -375,7 +375,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/129904933",
+        "id": "node/129904933",
         "amenity": "fuel",
         "created_by": "JOSM"
       },
@@ -391,7 +391,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/129904987",
+        "id": "node/129904987",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -411,7 +411,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/130026278",
+        "id": "node/130026278",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -430,7 +430,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/148954740",
+        "id": "node/148954740",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -450,7 +450,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/148954744",
+        "id": "node/148954744",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -469,7 +469,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/164435178",
+        "id": "node/164435178",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -489,7 +489,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/187130225",
+        "id": "node/187130225",
         "amenity": "fuel",
         "compressed_air": "yes",
         "name": "Karridale Servo"
@@ -506,7 +506,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/188774820",
+        "id": "node/188774820",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -525,7 +525,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/189480425",
+        "id": "node/189480425",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -546,7 +546,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/195557185",
+        "id": "node/195557185",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -564,7 +564,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/197129809",
+        "id": "node/197129809",
         "addr:country": "AU",
         "amenity": "fuel",
         "brand": "BP",
@@ -586,7 +586,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/197132644",
+        "id": "node/197132644",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -606,7 +606,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/252541261",
+        "id": "node/252541261",
         "amenity": "fuel",
         "name": "Condingup"
       },
@@ -622,7 +622,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/259149873",
+        "id": "node/259149873",
         "amenity": "fuel",
         "created_by": "Potlatch 0.8a"
       },
@@ -638,7 +638,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/260591889",
+        "id": "node/260591889",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -661,7 +661,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/266801478",
+        "id": "node/266801478",
         "addr:housenumber": "15",
         "addr:postcode": "6391",
         "addr:street": "Albany Highway",
@@ -685,7 +685,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/271830428",
+        "id": "node/271830428",
         "amenity": "fuel"
       },
       "geometry": {
@@ -700,7 +700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/275807535",
+        "id": "node/275807535",
         "amenity": "fuel"
       },
       "geometry": {
@@ -715,7 +715,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/276302782",
+        "id": "node/276302782",
         "amenity": "fuel",
         "compressed_air": "no",
         "created_by": "Potlatch 0.9c"
@@ -732,7 +732,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/277834989",
+        "id": "node/277834989",
         "amenity": "fuel",
         "created_by": "Potlatch 0.9c"
       },
@@ -748,7 +748,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/277838655",
+        "id": "node/277838655",
         "amenity": "fuel",
         "created_by": "Potlatch 0.9c"
       },
@@ -764,7 +764,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/277838662",
+        "id": "node/277838662",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -782,7 +782,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/279404093",
+        "id": "node/279404093",
         "amenity": "fuel",
         "created_by": "Potlatch 0.10"
       },
@@ -798,7 +798,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/304946819",
+        "id": "node/304946819",
         "amenity": "fuel",
         "brand": "Ampol",
         "fuel:diesel": "yes",
@@ -819,7 +819,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/311943544",
+        "id": "node/311943544",
         "amenity": "fuel",
         "name": "Drysdale River Station"
       },
@@ -835,7 +835,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/312165823",
+        "id": "node/312165823",
         "amenity": "fuel"
       },
       "geometry": {
@@ -850,7 +850,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/331256878",
+        "id": "node/331256878",
         "amenity": "fuel"
       },
       "geometry": {
@@ -865,7 +865,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/331571030",
+        "id": "node/331571030",
         "amenity": "fuel"
       },
       "geometry": {
@@ -880,7 +880,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/331588239",
+        "id": "node/331588239",
         "amenity": "fuel"
       },
       "geometry": {
@@ -895,7 +895,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/332953872",
+        "id": "node/332953872",
         "amenity": "fuel",
         "created_by": "Potlatch 0.10f"
       },
@@ -911,7 +911,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/342653147",
+        "id": "node/342653147",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -930,7 +930,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/345460400",
+        "id": "node/345460400",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -948,7 +948,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/370022269",
+        "id": "node/370022269",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -968,7 +968,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/377911795",
+        "id": "node/377911795",
         "addr:city": "Northampton",
         "addr:housenumber": "144",
         "addr:postcode": "6535",
@@ -995,7 +995,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/377927772",
+        "id": "node/377927772",
         "addr:housenumber": "50",
         "addr:postcode": "6530",
         "addr:state": "WA",
@@ -1026,7 +1026,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/419627400",
+        "id": "node/419627400",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1041,7 +1041,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/419635404",
+        "id": "node/419635404",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1060,7 +1060,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/420561783",
+        "id": "node/420561783",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -1078,7 +1078,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/429559127",
+        "id": "node/429559127",
         "amenity": "fuel",
         "name": "Tjukayirla Roadhouse",
         "note": "No Hot Food"
@@ -1095,7 +1095,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/457278055",
+        "id": "node/457278055",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -1116,7 +1116,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/473495751",
+        "id": "node/473495751",
         "addr:country": "AU",
         "addr:housenumber": "190",
         "addr:postcode": "6530",
@@ -1150,7 +1150,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/473495766",
+        "id": "node/473495766",
         "addr:housenumber": "115",
         "addr:postcode": "6530",
         "addr:state": "WA",
@@ -1182,7 +1182,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/473592672",
+        "id": "node/473592672",
         "addr:country": "AU",
         "addr:housenumber": "156",
         "addr:state": "WA",
@@ -1219,7 +1219,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/475150503",
+        "id": "node/475150503",
         "amenity": "fuel",
         "operator": "Caltex",
         "source": "survey"
@@ -1236,7 +1236,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/475669740",
+        "id": "node/475669740",
         "addr:city": "Lancelin",
         "addr:housenumber": "Lot 10",
         "addr:postcode": "6044",
@@ -1261,7 +1261,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/493881342",
+        "id": "node/493881342",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1283,7 +1283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/530609333",
+        "id": "node/530609333",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1302,7 +1302,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/541244965",
+        "id": "node/541244965",
         "amenity": "fuel",
         "name": "Smiths Shell"
       },
@@ -1318,7 +1318,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/563389269",
+        "id": "node/563389269",
         "amenity": "fuel",
         "name": "Peak"
       },
@@ -1334,7 +1334,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/567276116",
+        "id": "node/567276116",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1354,7 +1354,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/581122567",
+        "id": "node/581122567",
         "amenity": "fuel",
         "brand": "Ampol",
         "fuel:diesel": "yes",
@@ -1372,7 +1372,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127612",
+        "id": "node/585127612",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1393,7 +1393,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127625",
+        "id": "node/585127625",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1415,7 +1415,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127630",
+        "id": "node/585127630",
         "addr:country": "AU",
         "amenity": "fuel",
         "brand": "BP",
@@ -1437,7 +1437,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127663",
+        "id": "node/585127663",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1452,7 +1452,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127714",
+        "id": "node/585127714",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -1473,7 +1473,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/585127761",
+        "id": "node/585127761",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1488,7 +1488,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/595962936",
+        "id": "node/595962936",
         "amenity": "fuel",
         "branch": "Hardware Store",
         "brand": "United",
@@ -1508,7 +1508,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/606288940",
+        "id": "node/606288940",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -1526,7 +1526,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/606292014",
+        "id": "node/606292014",
         "addr:city": "Belmont",
         "addr:housenumber": "33",
         "addr:postcode": "6104",
@@ -1549,7 +1549,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/622798230",
+        "id": "node/622798230",
         "amenity": "fuel",
         "name": "Mobil"
       },
@@ -1565,7 +1565,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/622974432",
+        "id": "node/622974432",
         "amenity": "fuel",
         "brand": "Ampol"
       },
@@ -1581,7 +1581,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/631458488",
+        "id": "node/631458488",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -1603,7 +1603,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/634961371",
+        "id": "node/634961371",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -1626,7 +1626,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/634961621",
+        "id": "node/634961621",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -1644,7 +1644,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/634961758",
+        "id": "node/634961758",
         "amenity": "fuel",
         "atm": "yes",
         "brand": "Caltex",
@@ -1669,7 +1669,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/634961885",
+        "id": "node/634961885",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -1690,7 +1690,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/634962150",
+        "id": "node/634962150",
         "amenity": "fuel",
         "brand": "Shell",
         "fuel:diesel": "yes",
@@ -1710,7 +1710,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/639546795",
+        "id": "node/639546795",
         "amenity": "fuel",
         "name": "Better Choice"
       },
@@ -1726,7 +1726,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/652391220",
+        "id": "node/652391220",
         "amenity": "fuel",
         "operator": "Peak Petroleum"
       },
@@ -1742,7 +1742,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/677411520",
+        "id": "node/677411520",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -1763,7 +1763,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/690333643",
+        "id": "node/690333643",
         "amenity": "fuel",
         "operator": "Ampol"
       },
@@ -1779,7 +1779,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/694077932",
+        "id": "node/694077932",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1794,7 +1794,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/698192991",
+        "id": "node/698192991",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1809,7 +1809,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/713354989",
+        "id": "node/713354989",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -1829,7 +1829,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/786574546",
+        "id": "node/786574546",
         "amenity": "fuel"
       },
       "geometry": {
@@ -1844,7 +1844,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/823294260",
+        "id": "node/823294260",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -1865,7 +1865,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/828428066",
+        "id": "node/828428066",
         "amenity": "fuel",
         "name": "Snag Island Roadhouse",
         "phone": "+61 8 9953 1030"
@@ -1882,7 +1882,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/844464667",
+        "id": "node/844464667",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:lpg": "yes",
@@ -1903,7 +1903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/853323890",
+        "id": "node/853323890",
         "addr:city": "Como",
         "addr:country": "AU",
         "addr:street": "Canning Highway",
@@ -1926,7 +1926,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/865859032",
+        "id": "node/865859032",
         "addr:housenumber": "202",
         "addr:postcode": "6169",
         "addr:state": "WA",
@@ -1967,7 +1967,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/873547690",
+        "id": "node/873547690",
         "amenity": "fuel",
         "name": "Rabbit Flat Refuel"
       },
@@ -1983,7 +1983,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/888701494",
+        "id": "node/888701494",
         "amenity": "fuel",
         "name": "Better Choice Stratton"
       },
@@ -1999,7 +1999,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/897001532",
+        "id": "node/897001532",
         "addr:housenumber": "106",
         "addr:postcode": "6725",
         "addr:street": "Frederick Street",
@@ -2027,7 +2027,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/903705474",
+        "id": "node/903705474",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -2045,7 +2045,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1054601065",
+        "id": "node/1054601065",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -2063,7 +2063,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1266347173",
+        "id": "node/1266347173",
         "amenity": "fuel",
         "operator": "Vibe"
       },
@@ -2079,7 +2079,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1301476051",
+        "id": "node/1301476051",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -2098,7 +2098,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1304667697",
+        "id": "node/1304667697",
         "amenity": "fuel",
         "self_service": "yes"
       },
@@ -2114,7 +2114,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1369089550",
+        "id": "node/1369089550",
         "addr:housenumber": "70",
         "addr:postcode": "6230",
         "addr:street": "Forrest Avenue",
@@ -2139,7 +2139,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1411204235",
+        "id": "node/1411204235",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q154950",
@@ -2159,7 +2159,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1411287603",
+        "id": "node/1411287603",
         "amenity": "fuel",
         "operator": "Bremer Bay General & Liquor Store"
       },
@@ -2175,7 +2175,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1427277858",
+        "id": "node/1427277858",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -2195,7 +2195,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1427277860",
+        "id": "node/1427277860",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -2216,7 +2216,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1427319914",
+        "id": "node/1427319914",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -2237,7 +2237,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1427319917",
+        "id": "node/1427319917",
         "amenity": "fuel",
         "brand": "Liberty"
       },
@@ -2253,7 +2253,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1431061673",
+        "id": "node/1431061673",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -2271,7 +2271,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1431076605",
+        "id": "node/1431076605",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -2292,7 +2292,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1431097298",
+        "id": "node/1431097298",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -2311,7 +2311,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1431986109",
+        "id": "node/1431986109",
         "addr:housenumber": "28",
         "addr:postcode": "6280",
         "addr:state": "WA",
@@ -2335,7 +2335,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1431988902",
+        "id": "node/1431988902",
         "amenity": "fuel",
         "brand": "Puma",
         "name": "Puma"
@@ -2352,7 +2352,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1433559173",
+        "id": "node/1433559173",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2367,7 +2367,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1442988857",
+        "id": "node/1442988857",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -2386,7 +2386,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1447173783",
+        "id": "node/1447173783",
         "amenity": "fuel",
         "name": "Vibe"
       },
@@ -2402,7 +2402,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1447934736",
+        "id": "node/1447934736",
         "amenity": "fuel",
         "operator": "WA Fuel"
       },
@@ -2418,7 +2418,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1447943197",
+        "id": "node/1447943197",
         "amenity": "fuel",
         "brand": "Liberty",
         "check_date": "2023-04-07",
@@ -2437,7 +2437,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1551617358",
+        "id": "node/1551617358",
         "amenity": "fuel",
         "name": "Balingup General and Liquor Store"
       },
@@ -2453,7 +2453,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1557197878",
+        "id": "node/1557197878",
         "amenity": "fuel",
         "operator": "Ampol"
       },
@@ -2469,7 +2469,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1557313465",
+        "id": "node/1557313465",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -2490,7 +2490,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1562489290",
+        "id": "node/1562489290",
         "addr:housenumber": "280",
         "addr:postcode": "6530",
         "addr:state": "WA",
@@ -2518,7 +2518,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1567076183",
+        "id": "node/1567076183",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2533,7 +2533,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1572711267",
+        "id": "node/1572711267",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -2552,7 +2552,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1572762732",
+        "id": "node/1572762732",
         "amenity": "fuel",
         "operator": "Caltex"
       },
@@ -2568,7 +2568,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1596154053",
+        "id": "node/1596154053",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -2589,7 +2589,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1650759521",
+        "id": "node/1650759521",
         "amenity": "fuel",
         "fixme": "More information about petrol station",
         "source": "survey",
@@ -2607,7 +2607,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1681127397",
+        "id": "node/1681127397",
         "amenity": "fuel",
         "fuel:lpg": "no",
         "name": "Rose Gardens Caravan Park"
@@ -2624,7 +2624,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1681520035",
+        "id": "node/1681520035",
         "amenity": "fuel",
         "name": "Bakers Food and Fuel"
       },
@@ -2640,7 +2640,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1705517532",
+        "id": "node/1705517532",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -2659,7 +2659,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1723537355",
+        "id": "node/1723537355",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2674,7 +2674,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1782378377",
+        "id": "node/1782378377",
         "addr:postcode": "6220",
         "addr:state": "WA",
         "addr:street": "Old Coast Road",
@@ -2699,7 +2699,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1811172465",
+        "id": "node/1811172465",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -2719,7 +2719,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1811190462",
+        "id": "node/1811190462",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -2740,7 +2740,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1821070339",
+        "id": "node/1821070339",
         "amenity": "fuel",
         "compressed_air": "yes",
         "name": "Gull"
@@ -2757,7 +2757,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1824329376",
+        "id": "node/1824329376",
         "addr:country": "AU",
         "addr:state": "WA",
         "amenity": "fuel",
@@ -2784,7 +2784,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1826016763",
+        "id": "node/1826016763",
         "amenity": "fuel",
         "operator": "Gull"
       },
@@ -2800,7 +2800,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1827547924",
+        "id": "node/1827547924",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -2824,7 +2824,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1852481988",
+        "id": "node/1852481988",
         "amenity": "fuel",
         "brand": "Shell",
         "fuel:biodiesel": "no",
@@ -2851,7 +2851,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1852494272",
+        "id": "node/1852494272",
         "amenity": "fuel",
         "brand": "Caltex",
         "fuel:diesel": "yes",
@@ -2870,7 +2870,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1852583278",
+        "id": "node/1852583278",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2885,7 +2885,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1852641190",
+        "id": "node/1852641190",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -2905,7 +2905,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1919263023",
+        "id": "node/1919263023",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2920,7 +2920,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1947570169",
+        "id": "node/1947570169",
         "amenity": "fuel"
       },
       "geometry": {
@@ -2935,7 +2935,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1951595835",
+        "id": "node/1951595835",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -2954,7 +2954,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1951595836",
+        "id": "node/1951595836",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -2974,7 +2974,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1953239157",
+        "id": "node/1953239157",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -2993,7 +2993,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1959195576",
+        "id": "node/1959195576",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -3012,7 +3012,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1976209749",
+        "id": "node/1976209749",
         "amenity": "fuel",
         "brand": "Caltex",
         "name": "Caltex"
@@ -3029,7 +3029,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1977381633",
+        "id": "node/1977381633",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3044,7 +3044,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1977411776",
+        "id": "node/1977411776",
         "amenity": "fuel",
         "name": "Cosmo Newberry Store"
       },
@@ -3060,7 +3060,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1978742460",
+        "id": "node/1978742460",
         "amenity": "fuel",
         "name": "Docker River Community Store"
       },
@@ -3076,7 +3076,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1994335697",
+        "id": "node/1994335697",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3091,7 +3091,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1994421618",
+        "id": "node/1994421618",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -3110,7 +3110,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1994968037",
+        "id": "node/1994968037",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3125,7 +3125,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1996942892",
+        "id": "node/1996942892",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -3143,7 +3143,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1996942908",
+        "id": "node/1996942908",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3158,7 +3158,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1998048595",
+        "id": "node/1998048595",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3173,7 +3173,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1998438730",
+        "id": "node/1998438730",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3188,7 +3188,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1998487930",
+        "id": "node/1998487930",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -3208,7 +3208,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/1999553260",
+        "id": "node/1999553260",
         "amenity": "fuel",
         "name": "Warakurna Roadhouse"
       },
@@ -3224,7 +3224,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2002077945",
+        "id": "node/2002077945",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3239,7 +3239,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2002124766",
+        "id": "node/2002124766",
         "addr:street": "North West Coastal Highway",
         "amenity": "fuel",
         "brand": "Ampol",
@@ -3258,7 +3258,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2002164879",
+        "id": "node/2002164879",
         "amenity": "fuel",
         "contact:facebook": "https://www.facebook.com/pages/Wooramel-Roadhouse/493470797354478",
         "name": "Wooramel Roadhouse",
@@ -3276,7 +3276,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2002170097",
+        "id": "node/2002170097",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -3296,7 +3296,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2003851266",
+        "id": "node/2003851266",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -3321,7 +3321,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2003851303",
+        "id": "node/2003851303",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:lpg": "yes",
@@ -3340,7 +3340,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2003851720",
+        "id": "node/2003851720",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -3359,7 +3359,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2003852493",
+        "id": "node/2003852493",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3379,7 +3379,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2010742958",
+        "id": "node/2010742958",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -3401,7 +3401,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2010742960",
+        "id": "node/2010742960",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -3422,7 +3422,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2010742965",
+        "id": "node/2010742965",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -3442,7 +3442,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2030052980",
+        "id": "node/2030052980",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3461,7 +3461,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2066242636",
+        "id": "node/2066242636",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3476,7 +3476,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2099307809",
+        "id": "node/2099307809",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3496,7 +3496,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2099309534",
+        "id": "node/2099309534",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -3514,7 +3514,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2099602770",
+        "id": "node/2099602770",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -3532,7 +3532,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2101157333",
+        "id": "node/2101157333",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -3552,7 +3552,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2139478693",
+        "id": "node/2139478693",
         "amenity": "fuel",
         "fuel:electricity": "no",
         "fuel:lpg": "no",
@@ -3570,7 +3570,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2175143399",
+        "id": "node/2175143399",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -3589,7 +3589,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2257597311",
+        "id": "node/2257597311",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3612,7 +3612,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2285692603",
+        "id": "node/2285692603",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3627,7 +3627,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2287949231",
+        "id": "node/2287949231",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3642,7 +3642,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2299565985",
+        "id": "node/2299565985",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3661,7 +3661,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2299566043",
+        "id": "node/2299566043",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -3681,7 +3681,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2305894979",
+        "id": "node/2305894979",
         "amenity": "fuel",
         "brand": "Liberty"
       },
@@ -3697,7 +3697,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2349300900",
+        "id": "node/2349300900",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -3718,7 +3718,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2387624787",
+        "id": "node/2387624787",
         "addr:city": "Kwinana",
         "addr:housename": "Corner of Gilmore Ave and Chisam Ave",
         "addr:postcode": "6167",
@@ -3745,7 +3745,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2394956369",
+        "id": "node/2394956369",
         "addr:city": "Kwinana Town Centre",
         "addr:housenumber": "60",
         "addr:postcode": "6167",
@@ -3771,7 +3771,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2428758441",
+        "id": "node/2428758441",
         "amenity": "fuel",
         "name": "Hopetoun General Store"
       },
@@ -3787,7 +3787,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2428758444",
+        "id": "node/2428758444",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -3807,7 +3807,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2450040686",
+        "id": "node/2450040686",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -3825,7 +3825,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2450062284",
+        "id": "node/2450062284",
         "amenity": "fuel",
         "name": "Perenjori Roadhouse and General Store"
       },
@@ -3841,7 +3841,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2476912354",
+        "id": "node/2476912354",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -3861,7 +3861,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2479668401",
+        "id": "node/2479668401",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -3880,7 +3880,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2482140109",
+        "id": "node/2482140109",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3903,7 +3903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2493672737",
+        "id": "node/2493672737",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -3923,7 +3923,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2509041498",
+        "id": "node/2509041498",
         "amenity": "fuel"
       },
       "geometry": {
@@ -3938,7 +3938,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2528773041",
+        "id": "node/2528773041",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -3963,7 +3963,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2566913391",
+        "id": "node/2566913391",
         "amenity": "fuel",
         "brand": "Burk",
         "fuel:diesel": "yes",
@@ -3982,7 +3982,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2573027392",
+        "id": "node/2573027392",
         "addr:housenumber": "4267",
         "addr:postcode": "6207",
         "addr:street": "South Western Highway",
@@ -4001,7 +4001,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2602288027",
+        "id": "node/2602288027",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -4021,7 +4021,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2605748665",
+        "id": "node/2605748665",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -4039,7 +4039,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2612300532",
+        "id": "node/2612300532",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4054,7 +4054,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2612300560",
+        "id": "node/2612300560",
         "addr:city": "Katanning",
         "addr:postcode": "6317",
         "addr:street": "Clive Street",
@@ -4076,7 +4076,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2615927428",
+        "id": "node/2615927428",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4095,7 +4095,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2615939152",
+        "id": "node/2615939152",
         "addr:street": "Great Northern Highway",
         "amenity": "fuel",
         "name": "Willare Bridge Roadhouse",
@@ -4114,7 +4114,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2633455322",
+        "id": "node/2633455322",
         "alt_name": "Better Choice Minilya Bridge",
         "amenity": "fuel",
         "contact:facebook": "https://www.facebook.com/MinilyaBridgeRoadhouse",
@@ -4139,7 +4139,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2639793346",
+        "id": "node/2639793346",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4158,7 +4158,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2641069398",
+        "id": "node/2641069398",
         "amenity": "fuel",
         "brand": "Mobil Synergy",
         "brand:wikidata": "Q154950",
@@ -4179,7 +4179,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2641069399",
+        "id": "node/2641069399",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4202,7 +4202,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2655194154",
+        "id": "node/2655194154",
         "amenity": "fuel",
         "brand": "Ampol",
         "kiosk": "yes"
@@ -4219,7 +4219,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2658072624",
+        "id": "node/2658072624",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -4241,7 +4241,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2669042192",
+        "id": "node/2669042192",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4261,7 +4261,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2669046822",
+        "id": "node/2669046822",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -4280,7 +4280,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2669048576",
+        "id": "node/2669048576",
         "amenity": "fuel",
         "brand": "Peak",
         "name": "Peak Truckstop Kewdale",
@@ -4298,7 +4298,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2678489013",
+        "id": "node/2678489013",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4313,7 +4313,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2680274833",
+        "id": "node/2680274833",
         "amenity": "fuel",
         "name": "Wellstead Rural Services"
       },
@@ -4329,7 +4329,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2680302811",
+        "id": "node/2680302811",
         "addr:city": "Jerramungup",
         "addr:housenumber": "3",
         "addr:postcode": "6337",
@@ -4351,7 +4351,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2684054075",
+        "id": "node/2684054075",
         "addr:city": "Ravensthorpe",
         "addr:postcode": "6346",
         "amenity": "fuel",
@@ -4380,7 +4380,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2684272666",
+        "id": "node/2684272666",
         "addr:postcode": "6450",
         "addr:state": "WA",
         "addr:street": "Tubada Street",
@@ -4407,7 +4407,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2701431576",
+        "id": "node/2701431576",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -4425,7 +4425,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2771171335",
+        "id": "node/2771171335",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4440,7 +4440,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2785570514",
+        "id": "node/2785570514",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -4459,7 +4459,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2820089414",
+        "id": "node/2820089414",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -4479,7 +4479,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2949123330",
+        "id": "node/2949123330",
         "addr:country": "AU",
         "amenity": "fuel",
         "brand": "BP",
@@ -4500,7 +4500,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2959932164",
+        "id": "node/2959932164",
         "addr:housenumber": "66",
         "addr:postcode": "6101",
         "addr:state": "WA",
@@ -4531,7 +4531,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2971612385",
+        "id": "node/2971612385",
         "addr:housenumber": "6",
         "addr:street": "Jersey Street",
         "amenity": "fuel",
@@ -4558,7 +4558,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/2983168427",
+        "id": "node/2983168427",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4573,7 +4573,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3266895940",
+        "id": "node/3266895940",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -4594,7 +4594,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3267092359",
+        "id": "node/3267092359",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -4628,7 +4628,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3276590073",
+        "id": "node/3276590073",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4643,7 +4643,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3291531921",
+        "id": "node/3291531921",
         "addr:housenumber": "5",
         "addr:postcode": "6743",
         "addr:state": "WA",
@@ -4670,7 +4670,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3331341424",
+        "id": "node/3331341424",
         "addr:city": "Ellenbrook",
         "addr:postcode": "6069",
         "addr:street": "Gnangara Road",
@@ -4692,7 +4692,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3380141738",
+        "id": "node/3380141738",
         "addr:street": "Ivanhoe Road",
         "amenity": "fuel",
         "brand": "Coles Express",
@@ -4719,7 +4719,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3419441213",
+        "id": "node/3419441213",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4734,7 +4734,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3421293710",
+        "id": "node/3421293710",
         "amenity": "fuel",
         "name": "Station Service E. Leclerc"
       },
@@ -4750,7 +4750,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3517274990",
+        "id": "node/3517274990",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4771,7 +4771,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3517274991",
+        "id": "node/3517274991",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -4790,7 +4790,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3611937227",
+        "id": "node/3611937227",
         "amenity": "fuel",
         "check_date": "2022-10-30",
         "name": "Mobil Fuel"
@@ -4807,7 +4807,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3612031598",
+        "id": "node/3612031598",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4830,7 +4830,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3654336458",
+        "id": "node/3654336458",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -4848,7 +4848,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3654357355",
+        "id": "node/3654357355",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -4867,7 +4867,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3654361991",
+        "id": "node/3654361991",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -4886,7 +4886,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3725718649",
+        "id": "node/3725718649",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q154950",
@@ -4907,7 +4907,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3738994648",
+        "id": "node/3738994648",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -4926,7 +4926,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3739126542",
+        "id": "node/3739126542",
         "amenity": "fuel"
       },
       "geometry": {
@@ -4941,7 +4941,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3742186770",
+        "id": "node/3742186770",
         "addr:housenumber": "81",
         "addr:street": "Knight Terrace",
         "amenity": "fuel",
@@ -4963,7 +4963,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3742187828",
+        "id": "node/3742187828",
         "addr:country": "AU",
         "addr:housenumber": "1182",
         "addr:state": "WA",
@@ -4996,7 +4996,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3742187927",
+        "id": "node/3742187927",
         "amenity": "fuel",
         "name": "Geraldton Fuel"
       },
@@ -5012,7 +5012,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3743613353",
+        "id": "node/3743613353",
         "addr:city": "Carnarvon",
         "addr:housenumber": "90 - 92",
         "addr:postcode": "6701",
@@ -5039,7 +5039,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3743615208",
+        "id": "node/3743615208",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -5062,7 +5062,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3750545554",
+        "id": "node/3750545554",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -5081,7 +5081,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3751246116",
+        "id": "node/3751246116",
         "amenity": "fuel",
         "name": "Shell/Coles Express"
       },
@@ -5097,7 +5097,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3751246124",
+        "id": "node/3751246124",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5116,7 +5116,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3751269920",
+        "id": "node/3751269920",
         "amenity": "fuel",
         "brand": "Ampol",
         "fuel:diesel": "yes",
@@ -5134,7 +5134,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3751270525",
+        "id": "node/3751270525",
         "amenity": "fuel",
         "name": "Shell Coles Express"
       },
@@ -5150,7 +5150,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3751271494",
+        "id": "node/3751271494",
         "amenity": "fuel",
         "name": "24h Fuel",
         "opening_hours": "Mo-Su"
@@ -5167,7 +5167,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3772892873",
+        "id": "node/3772892873",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "payment:cash": "no",
@@ -5187,7 +5187,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3833116537",
+        "id": "node/3833116537",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5210,7 +5210,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3833116538",
+        "id": "node/3833116538",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -5231,7 +5231,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3833158560",
+        "id": "node/3833158560",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -5251,7 +5251,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3837359799",
+        "id": "node/3837359799",
         "addr:city": "Northcliffe",
         "addr:housenumber": "55",
         "addr:postcode": "6262",
@@ -5275,7 +5275,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3837359800",
+        "id": "node/3837359800",
         "addr:city": "Northcliffe",
         "addr:housenumber": "76",
         "addr:postcode": "6262",
@@ -5301,7 +5301,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3842674223",
+        "id": "node/3842674223",
         "addr:city": "Jerramungup",
         "addr:housenumber": "5",
         "addr:postcode": "6337",
@@ -5325,7 +5325,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3854382062",
+        "id": "node/3854382062",
         "addr:housenumber": "27",
         "addr:street": "Company Road",
         "amenity": "fuel",
@@ -5354,7 +5354,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3856994704",
+        "id": "node/3856994704",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -5377,7 +5377,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3858704673",
+        "id": "node/3858704673",
         "addr:city": "Carnarvon",
         "addr:housenumber": "520",
         "addr:postcode": "6701",
@@ -5403,7 +5403,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3858718587",
+        "id": "node/3858718587",
         "addr:city": "Carnarvon",
         "addr:housenumber": "1014",
         "addr:postcode": "6701",
@@ -5431,7 +5431,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3874348595",
+        "id": "node/3874348595",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -5453,7 +5453,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3908980857",
+        "id": "node/3908980857",
         "amenity": "fuel",
         "name": "Gas Station"
       },
@@ -5469,7 +5469,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3925393558",
+        "id": "node/3925393558",
         "amenity": "fuel",
         "brand": "E.Leclerc",
         "brand:wikidata": "Q1273376",
@@ -5488,7 +5488,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3932990752",
+        "id": "node/3932990752",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -5506,7 +5506,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3935355401",
+        "id": "node/3935355401",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5525,7 +5525,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3935355407",
+        "id": "node/3935355407",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -5543,7 +5543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3943263357",
+        "id": "node/3943263357",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -5562,7 +5562,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3966658197",
+        "id": "node/3966658197",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5583,7 +5583,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3993009988",
+        "id": "node/3993009988",
         "amenity": "fuel"
       },
       "geometry": {
@@ -5598,7 +5598,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/3993010003",
+        "id": "node/3993010003",
         "amenity": "fuel"
       },
       "geometry": {
@@ -5613,7 +5613,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4002400224",
+        "id": "node/4002400224",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5632,7 +5632,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4024765307",
+        "id": "node/4024765307",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -5652,7 +5652,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4082308826",
+        "id": "node/4082308826",
         "addr:housenumber": "23",
         "addr:postcode": "6233",
         "addr:state": "WA",
@@ -5678,7 +5678,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4214807093",
+        "id": "node/4214807093",
         "addr:housenumber": "23",
         "addr:street": "Imgram Street",
         "amenity": "fuel",
@@ -5697,7 +5697,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4218382993",
+        "id": "node/4218382993",
         "amenity": "fuel"
       },
       "geometry": {
@@ -5712,7 +5712,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4229395189",
+        "id": "node/4229395189",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -5733,7 +5733,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4304649250",
+        "id": "node/4304649250",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -5755,7 +5755,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4330444396",
+        "id": "node/4330444396",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -5775,7 +5775,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4444842177",
+        "id": "node/4444842177",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5796,7 +5796,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4459202531",
+        "id": "node/4459202531",
         "amenity": "fuel",
         "brand": "Metro Petroleum",
         "brand:wikidata": "Q111970125",
@@ -5816,7 +5816,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4470078951",
+        "id": "node/4470078951",
         "addr:country": "AU",
         "amenity": "fuel",
         "brand": "BP",
@@ -5842,7 +5842,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4470655314",
+        "id": "node/4470655314",
         "amenity": "fuel",
         "name": "Vibe",
         "self_service": "yes"
@@ -5859,7 +5859,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4488416989",
+        "id": "node/4488416989",
         "addr:postcode": "6101",
         "addr:street": "Orrong Road",
         "amenity": "fuel",
@@ -5883,7 +5883,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4537417807",
+        "id": "node/4537417807",
         "addr:housenumber": "11",
         "addr:postcode": "6111",
         "addr:state": "WA",
@@ -5911,7 +5911,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4553413430",
+        "id": "node/4553413430",
         "amenity": "fuel",
         "name": "Puma Diesel",
         "name:en": "Puma Diesel"
@@ -5928,7 +5928,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4564221105",
+        "id": "node/4564221105",
         "amenity": "fuel",
         "compressed_air": "yes",
         "name": "Gull",
@@ -5946,7 +5946,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4564222614",
+        "id": "node/4564222614",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -5966,7 +5966,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4564222615",
+        "id": "node/4564222615",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -5984,7 +5984,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4599081589",
+        "id": "node/4599081589",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -6005,7 +6005,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4606997455",
+        "id": "node/4606997455",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -6024,7 +6024,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4623225863",
+        "id": "node/4623225863",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6046,7 +6046,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4623231232",
+        "id": "node/4623231232",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6068,7 +6068,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4623790452",
+        "id": "node/4623790452",
         "amenity": "fuel",
         "brand": "Mobil Synergy",
         "name": "Yellowdine Roadhouse",
@@ -6087,7 +6087,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4644302706",
+        "id": "node/4644302706",
         "amenity": "fuel"
       },
       "geometry": {
@@ -6102,7 +6102,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4703398360",
+        "id": "node/4703398360",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -6124,7 +6124,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4704903929",
+        "id": "node/4704903929",
         "amenity": "fuel"
       },
       "geometry": {
@@ -6139,7 +6139,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4709309324",
+        "id": "node/4709309324",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -6157,7 +6157,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4714433694",
+        "id": "node/4714433694",
         "amenity": "fuel",
         "name": "24H Fuel",
         "opening_hours": "24/7"
@@ -6174,7 +6174,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4717596772",
+        "id": "node/4717596772",
         "addr:city": "Newman",
         "addr:postcode": "6753",
         "addr:street": "Great Northern Highway",
@@ -6200,7 +6200,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4748495635",
+        "id": "node/4748495635",
         "amenity": "fuel",
         "brand": "Liberty",
         "fuel:diesel": "yes",
@@ -6222,7 +6222,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4749174084",
+        "id": "node/4749174084",
         "amenity": "fuel",
         "brand": "Vortex"
       },
@@ -6238,7 +6238,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4755915168",
+        "id": "node/4755915168",
         "amenity": "fuel",
         "brand": "Shell",
         "fuel:diesel": "yes",
@@ -6259,7 +6259,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4756706427",
+        "id": "node/4756706427",
         "amenity": "fuel",
         "brand": "Puma"
       },
@@ -6275,7 +6275,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4756706428",
+        "id": "node/4756706428",
         "amenity": "fuel",
         "brand": "bp",
         "payment:american_express": "yes",
@@ -6295,7 +6295,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4792653061",
+        "id": "node/4792653061",
         "addr:city": "huntingale",
         "addr:street": "Cnr Warton Road & Matilda Street",
         "amenity": "fuel",
@@ -6321,7 +6321,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4827098217",
+        "id": "node/4827098217",
         "amenity": "fuel",
         "brand": "unkown"
       },
@@ -6337,7 +6337,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4870040574",
+        "id": "node/4870040574",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -6357,7 +6357,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/4870040575",
+        "id": "node/4870040575",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -6379,7 +6379,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5008551423",
+        "id": "node/5008551423",
         "addr:city": "South Lake",
         "addr:postcode": "6164",
         "addr:street": "Berrigan Drive",
@@ -6406,7 +6406,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5096897321",
+        "id": "node/5096897321",
         "amenity": "fuel"
       },
       "geometry": {
@@ -6421,7 +6421,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5219123949",
+        "id": "node/5219123949",
         "addr:city": "Perth",
         "addr:housenumber": "86",
         "addr:postcode": "6060",
@@ -6448,7 +6448,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5311582805",
+        "id": "node/5311582805",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -6467,7 +6467,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5317835917",
+        "id": "node/5317835917",
         "amenity": "fuel",
         "brand": "Mobil",
         "brand:wikidata": "Q109676002",
@@ -6486,7 +6486,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5317836131",
+        "id": "node/5317836131",
         "addr:housenumber": "3-5",
         "addr:postcode": "6050",
         "addr:state": "WA",
@@ -6511,7 +6511,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5372405921",
+        "id": "node/5372405921",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -6530,7 +6530,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5376924022",
+        "id": "node/5376924022",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6548,7 +6548,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5492856314",
+        "id": "node/5492856314",
         "amenity": "fuel",
         "name": "Box Wood Hill Roadhouse"
       },
@@ -6564,7 +6564,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5499138482",
+        "id": "node/5499138482",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6591,7 +6591,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5646688321",
+        "id": "node/5646688321",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -6610,7 +6610,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5649806274",
+        "id": "node/5649806274",
         "addr:country": "AU",
         "amenity": "fuel",
         "brand": "BP",
@@ -6631,7 +6631,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5724827422",
+        "id": "node/5724827422",
         "addr:postcode": "6743",
         "addr:state": "WA",
         "addr:street": "Stockman Road",
@@ -6654,7 +6654,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5731652521",
+        "id": "node/5731652521",
         "amenity": "fuel",
         "name": "CGL Fuel"
       },
@@ -6670,7 +6670,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5746100479",
+        "id": "node/5746100479",
         "amenity": "fuel",
         "name": "Shell Coles Express"
       },
@@ -6686,7 +6686,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5746104921",
+        "id": "node/5746104921",
         "amenity": "fuel",
         "name": "Exmouth Fuel Supplies"
       },
@@ -6702,7 +6702,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5755367521",
+        "id": "node/5755367521",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -6725,7 +6725,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5855587685",
+        "id": "node/5855587685",
         "amenity": "fuel",
         "name": "Shell"
       },
@@ -6741,7 +6741,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5865959685",
+        "id": "node/5865959685",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -6759,7 +6759,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5909004238",
+        "id": "node/5909004238",
         "addr:postcode": "6065",
         "addr:state": "WA",
         "addr:street": "Wanneroo Road",
@@ -6786,7 +6786,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5947582106",
+        "id": "node/5947582106",
         "amenity": "fuel",
         "description": "24/7 self serve petrol/diesal",
         "name": "Dunnings"
@@ -6803,7 +6803,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5948183885",
+        "id": "node/5948183885",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -6822,7 +6822,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/5985315244",
+        "id": "node/5985315244",
         "amenity": "fuel"
       },
       "geometry": {
@@ -6837,7 +6837,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6029876491",
+        "id": "node/6029876491",
         "amenity": "fuel"
       },
       "geometry": {
@@ -6852,7 +6852,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6066198385",
+        "id": "node/6066198385",
         "addr:housenumber": "44",
         "addr:street": "Eldridge Street",
         "amenity": "fuel",
@@ -6871,7 +6871,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6075344159",
+        "id": "node/6075344159",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -6890,7 +6890,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6133472015",
+        "id": "node/6133472015",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -6910,7 +6910,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6165392732",
+        "id": "node/6165392732",
         "amenity": "fuel",
         "branch": "Boyup Brook",
         "brand": "BP",
@@ -6930,7 +6930,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6191607388",
+        "id": "node/6191607388",
         "addr:housenumber": "317",
         "addr:postcode": "6330",
         "addr:street": "Albany Highway",
@@ -6954,7 +6954,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6237531956",
+        "id": "node/6237531956",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6973,7 +6973,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6237534607",
+        "id": "node/6237534607",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -6992,7 +6992,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6243480578",
+        "id": "node/6243480578",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -7011,7 +7011,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6243480579",
+        "id": "node/6243480579",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7031,7 +7031,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6247091955",
+        "id": "node/6247091955",
         "addr:country": "AU",
         "addr:street": "Charles Street",
         "amenity": "fuel",
@@ -7052,7 +7052,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6294895484",
+        "id": "node/6294895484",
         "amenity": "fuel",
         "name": "Boyanup Fuels"
       },
@@ -7068,7 +7068,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6305552305",
+        "id": "node/6305552305",
         "amenity": "fuel",
         "name": "Liberty Fuels"
       },
@@ -7084,7 +7084,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6424439685",
+        "id": "node/6424439685",
         "amenity": "fuel",
         "name": "General store"
       },
@@ -7100,7 +7100,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6449378141",
+        "id": "node/6449378141",
         "amenity": "fuel",
         "email": "fuel@elite-group.com.au",
         "fuel:diesel": "yes",
@@ -7132,7 +7132,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6497145341",
+        "id": "node/6497145341",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7151,7 +7151,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6503609129",
+        "id": "node/6503609129",
         "amenity": "fuel",
         "brand": "Liberty",
         "name": "Lake King Agencies"
@@ -7168,7 +7168,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6503642819",
+        "id": "node/6503642819",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7189,7 +7189,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6517886485",
+        "id": "node/6517886485",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7207,7 +7207,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6518115685",
+        "id": "node/6518115685",
         "amenity": "fuel",
         "brand": "BP",
         "fuel:diesel": "yes",
@@ -7229,7 +7229,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6520541604",
+        "id": "node/6520541604",
         "amenity": "fuel"
       },
       "geometry": {
@@ -7244,7 +7244,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6604496384",
+        "id": "node/6604496384",
         "amenity": "fuel",
         "name": "Vibe"
       },
@@ -7260,7 +7260,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6627053806",
+        "id": "node/6627053806",
         "addr:street": "Wimbridge Road",
         "amenity": "fuel",
         "name": "City and Regional Fuels"
@@ -7277,7 +7277,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6631305497",
+        "id": "node/6631305497",
         "amenity": "fuel",
         "operator": "Dunnings"
       },
@@ -7293,7 +7293,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6631305772",
+        "id": "node/6631305772",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -7311,7 +7311,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6634470775",
+        "id": "node/6634470775",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7330,7 +7330,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6691795690",
+        "id": "node/6691795690",
         "amenity": "fuel",
         "brand": "Vibe",
         "name": "Vibe"
@@ -7347,7 +7347,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6776623816",
+        "id": "node/6776623816",
         "amenity": "fuel",
         "name": "Mogas"
       },
@@ -7363,7 +7363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6780759213",
+        "id": "node/6780759213",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -7384,7 +7384,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6815278572",
+        "id": "node/6815278572",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7406,7 +7406,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6860154802",
+        "id": "node/6860154802",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -7424,7 +7424,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6873226315",
+        "id": "node/6873226315",
         "amenity": "fuel",
         "name": "Kimberley Motors"
       },
@@ -7440,7 +7440,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6873270753",
+        "id": "node/6873270753",
         "amenity": "fuel"
       },
       "geometry": {
@@ -7455,7 +7455,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6873270942",
+        "id": "node/6873270942",
         "amenity": "fuel",
         "name": "Caltex"
       },
@@ -7471,7 +7471,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6875139736",
+        "id": "node/6875139736",
         "addr:country": "AU",
         "addr:housenumber": "25",
         "addr:postcode": "6107",
@@ -7504,7 +7504,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6926580084",
+        "id": "node/6926580084",
         "addr:housenumber": "211",
         "addr:postcode": "6285",
         "addr:state": "WA",
@@ -7533,7 +7533,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6938943412",
+        "id": "node/6938943412",
         "amenity": "fuel",
         "brand": "Ampol",
         "fuel:diesel": "yes",
@@ -7554,7 +7554,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6943158251",
+        "id": "node/6943158251",
         "addr:housenumber": "170",
         "addr:postcode": "6100",
         "addr:state": "WA",
@@ -7579,7 +7579,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6943169149",
+        "id": "node/6943169149",
         "addr:postcode": "6280",
         "addr:state": "WA",
         "addr:street": "Causeway Road",
@@ -7604,7 +7604,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6950724094",
+        "id": "node/6950724094",
         "addr:city": "Jurien Bay",
         "addr:housenumber": "74",
         "addr:postcode": "6516",
@@ -7631,7 +7631,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6965486017",
+        "id": "node/6965486017",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7655,7 +7655,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6966401703",
+        "id": "node/6966401703",
         "addr:housenumber": "5",
         "addr:state": "WA",
         "addr:street": "Gnornbup Terrace",
@@ -7677,7 +7677,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6978562294",
+        "id": "node/6978562294",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7700,7 +7700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6978625884",
+        "id": "node/6978625884",
         "amenity": "fuel",
         "name": "Mount Barker Co Op"
       },
@@ -7716,7 +7716,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6978643192",
+        "id": "node/6978643192",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -7739,7 +7739,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7024930787",
+        "id": "node/7024930787",
         "amenity": "fuel",
         "name": "Caltex"
       },
@@ -7755,7 +7755,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7085743094",
+        "id": "node/7085743094",
         "amenity": "fuel"
       },
       "geometry": {
@@ -7770,7 +7770,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7105904839",
+        "id": "node/7105904839",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -7788,7 +7788,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7105904840",
+        "id": "node/7105904840",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -7806,7 +7806,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7428501928",
+        "id": "node/7428501928",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -7824,7 +7824,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7428503583",
+        "id": "node/7428503583",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -7845,7 +7845,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7625867094",
+        "id": "node/7625867094",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7864,7 +7864,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7660622838",
+        "id": "node/7660622838",
         "amenity": "fuel",
         "name": "Vibe West Swan"
       },
@@ -7880,7 +7880,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7677095049",
+        "id": "node/7677095049",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -7899,7 +7899,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7723761632",
+        "id": "node/7723761632",
         "amenity": "fuel",
         "fuel:adblue": "yes",
         "fuel:diesel": "yes",
@@ -7917,7 +7917,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7743533864",
+        "id": "node/7743533864",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -7935,7 +7935,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/7862251314",
+        "id": "node/7862251314",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -7955,7 +7955,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8015482543",
+        "id": "node/8015482543",
         "amenity": "fuel",
         "brand": "Costco Gasoline",
         "brand:wikidata": "Q715583",
@@ -7974,7 +7974,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8167030008",
+        "id": "node/8167030008",
         "addr:street": "Corner East Parade & Brown Street",
         "amenity": "fuel",
         "brand": "BP",
@@ -7996,7 +7996,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8269945792",
+        "id": "node/8269945792",
         "addr:housenumber": "7839",
         "addr:street": "Albany Highway",
         "amenity": "fuel",
@@ -8021,7 +8021,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8311602644",
+        "id": "node/8311602644",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8046,7 +8046,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8311675600",
+        "id": "node/8311675600",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8066,7 +8066,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8313774517",
+        "id": "node/8313774517",
         "addr:housenumber": "814",
         "addr:postcode": "6164",
         "addr:street": "North Lake Road",
@@ -8087,7 +8087,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8439612787",
+        "id": "node/8439612787",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -8106,7 +8106,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8481459755",
+        "id": "node/8481459755",
         "amenity": "fuel",
         "name": "Vibe"
       },
@@ -8122,7 +8122,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8481606803",
+        "id": "node/8481606803",
         "amenity": "fuel",
         "brand": "Shell Express",
         "brand:wikidata": "Q2289188",
@@ -8141,7 +8141,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8499427449",
+        "id": "node/8499427449",
         "addr:city": "Geraldton",
         "addr:country": "AU",
         "addr:postcode": "6530",
@@ -8188,7 +8188,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8530424617",
+        "id": "node/8530424617",
         "amenity": "fuel",
         "brand": "Ampol",
         "name": "Ampol"
@@ -8205,7 +8205,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8577121676",
+        "id": "node/8577121676",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8224,7 +8224,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8780147241",
+        "id": "node/8780147241",
         "amenity": "fuel"
       },
       "geometry": {
@@ -8239,7 +8239,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8788466910",
+        "id": "node/8788466910",
         "addr:housenumber": "102",
         "addr:postcode": "6061",
         "addr:state": "WA",
@@ -8269,7 +8269,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8860291094",
+        "id": "node/8860291094",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -8288,7 +8288,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8899582895",
+        "id": "node/8899582895",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -8308,7 +8308,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8926754470",
+        "id": "node/8926754470",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -8327,7 +8327,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8926816784",
+        "id": "node/8926816784",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -8346,7 +8346,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8926843688",
+        "id": "node/8926843688",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8366,7 +8366,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8926848057",
+        "id": "node/8926848057",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -8385,7 +8385,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8926874789",
+        "id": "node/8926874789",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -8404,7 +8404,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/8978989617",
+        "id": "node/8978989617",
         "addr:housenumber": "909",
         "addr:state": "WA",
         "addr:street": "Mandurah Road",
@@ -8428,7 +8428,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9131180805",
+        "id": "node/9131180805",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -8448,7 +8448,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9196772661",
+        "id": "node/9196772661",
         "addr:housenumber": "630",
         "addr:postcode": "6164",
         "addr:state": "WA",
@@ -8476,7 +8476,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9236548317",
+        "id": "node/9236548317",
         "amenity": "fuel",
         "name": "Forest Diesel"
       },
@@ -8492,7 +8492,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9236585990",
+        "id": "node/9236585990",
         "addr:housenumber": "410-412",
         "addr:postcode": "6105",
         "addr:state": "WA",
@@ -8522,7 +8522,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9236585991",
+        "id": "node/9236585991",
         "addr:housenumber": "394",
         "addr:postcode": "6157",
         "addr:state": "WA",
@@ -8550,7 +8550,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9236674762",
+        "id": "node/9236674762",
         "addr:housenumber": "770",
         "addr:postcode": "6111",
         "addr:state": "WA",
@@ -8578,7 +8578,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9364761547",
+        "id": "node/9364761547",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8598,7 +8598,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9370215984",
+        "id": "node/9370215984",
         "amenity": "fuel",
         "name": "Gnowangerup Roadhouse"
       },
@@ -8614,7 +8614,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9409191154",
+        "id": "node/9409191154",
         "addr:housenumber": "443",
         "addr:postcode": "6104",
         "addr:state": "WA",
@@ -8638,7 +8638,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9409191155",
+        "id": "node/9409191155",
         "addr:housenumber": "472",
         "addr:street": "Great Eastern Highway",
         "amenity": "fuel",
@@ -8659,7 +8659,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9409191156",
+        "id": "node/9409191156",
         "addr:housenumber": "49",
         "addr:postcode": "6056",
         "addr:state": "WA",
@@ -8683,7 +8683,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9409191157",
+        "id": "node/9409191157",
         "addr:housenumber": "1",
         "addr:postcode": "6109",
         "addr:state": "WA",
@@ -8707,7 +8707,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9412510871",
+        "id": "node/9412510871",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -8726,7 +8726,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9591073695",
+        "id": "node/9591073695",
         "amenity": "fuel",
         "name": "Wandering Petrol Station",
         "operator": "Shire of Wandering",
@@ -8744,7 +8744,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9665942270",
+        "id": "node/9665942270",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8764,7 +8764,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9682669448",
+        "id": "node/9682669448",
         "amenity": "fuel"
       },
       "geometry": {
@@ -8779,7 +8779,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9717281719",
+        "id": "node/9717281719",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -8799,7 +8799,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9742632911",
+        "id": "node/9742632911",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -8818,7 +8818,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9812398049",
+        "id": "node/9812398049",
         "amenity": "fuel",
         "name": "Ampol"
       },
@@ -8834,7 +8834,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9822719077",
+        "id": "node/9822719077",
         "addr:city": "Exmouth",
         "addr:country": "AU",
         "addr:housenumber": "6",
@@ -8859,7 +8859,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9830698332",
+        "id": "node/9830698332",
         "amenity": "fuel",
         "check_date": "2022-12-02",
         "fuel:diesel": "yes",
@@ -8881,7 +8881,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9846507682",
+        "id": "node/9846507682",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -8902,7 +8902,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9847433385",
+        "id": "node/9847433385",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -8922,7 +8922,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9847433423",
+        "id": "node/9847433423",
         "amenity": "fuel",
         "brand": "Ampol"
       },
@@ -8938,7 +8938,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9850511922",
+        "id": "node/9850511922",
         "amenity": "fuel",
         "name": "Marble Bar Roadhouse"
       },
@@ -8954,7 +8954,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9891043673",
+        "id": "node/9891043673",
         "amenity": "fuel"
       },
       "geometry": {
@@ -8969,7 +8969,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9891043674",
+        "id": "node/9891043674",
         "amenity": "fuel"
       },
       "geometry": {
@@ -8984,7 +8984,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9909130708",
+        "id": "node/9909130708",
         "amenity": "fuel",
         "brand": "Burk"
       },
@@ -9000,7 +9000,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9920273685",
+        "id": "node/9920273685",
         "addr:housenumber": "6",
         "addr:postcode": "6122",
         "addr:state": "WA",
@@ -9025,7 +9025,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9932826381",
+        "id": "node/9932826381",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -9044,7 +9044,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9935048316",
+        "id": "node/9935048316",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -9063,7 +9063,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9948985767",
+        "id": "node/9948985767",
         "addr:housenumber": "337",
         "addr:street": "Cambridge Street",
         "amenity": "fuel",
@@ -9089,7 +9089,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9952021122",
+        "id": "node/9952021122",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -9110,7 +9110,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/9999145264",
+        "id": "node/9999145264",
         "amenity": "fuel",
         "brand": "Metro Petroleum",
         "brand:wikidata": "Q111970125",
@@ -9135,7 +9135,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10026648925",
+        "id": "node/10026648925",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9154,7 +9154,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10074084762",
+        "id": "node/10074084762",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9175,7 +9175,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10074099354",
+        "id": "node/10074099354",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9197,7 +9197,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10089226402",
+        "id": "node/10089226402",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -9221,7 +9221,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10090999560",
+        "id": "node/10090999560",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9240,7 +9240,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10107452079",
+        "id": "node/10107452079",
         "addr:housenumber": "67",
         "addr:postcode": "6171",
         "addr:state": "WA",
@@ -9263,7 +9263,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10111100866",
+        "id": "node/10111100866",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -9286,7 +9286,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10111100868",
+        "id": "node/10111100868",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -9306,7 +9306,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10216289490",
+        "id": "node/10216289490",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9326,7 +9326,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10220940482",
+        "id": "node/10220940482",
         "amenity": "fuel",
         "brand": "Ampol",
         "name": "Ampol"
@@ -9343,7 +9343,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10239557798",
+        "id": "node/10239557798",
         "amenity": "fuel",
         "brand": "iOR",
         "description": "Payment at roadhouse or via iOR terminal",
@@ -9363,7 +9363,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10241484550",
+        "id": "node/10241484550",
         "amenity": "fuel",
         "brand": "Gull",
         "fixme": "recheck position",
@@ -9381,7 +9381,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10241517156",
+        "id": "node/10241517156",
         "amenity": "fuel",
         "name": "Fuel Distributors 24Hrs  (ex Three Springs Roadhouse)",
         "note": "Station  building locked up boarded up",
@@ -9400,7 +9400,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10241742188",
+        "id": "node/10241742188",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9419,7 +9419,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10241762526",
+        "id": "node/10241762526",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9437,7 +9437,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10242355803",
+        "id": "node/10242355803",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9456,7 +9456,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10244256051",
+        "id": "node/10244256051",
         "amenity": "fuel",
         "name": "Stallion Fuel"
       },
@@ -9472,7 +9472,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10245735428",
+        "id": "node/10245735428",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9491,7 +9491,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10245735430",
+        "id": "node/10245735430",
         "amenity": "fuel",
         "fuel:diesel": "yes"
       },
@@ -9507,7 +9507,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10246450812",
+        "id": "node/10246450812",
         "amenity": "fuel",
         "name": "Great Southern Fuel Supplies - 24Hr"
       },
@@ -9523,7 +9523,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10248551783",
+        "id": "node/10248551783",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9543,7 +9543,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10251812761",
+        "id": "node/10251812761",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9561,7 +9561,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10264424909",
+        "id": "node/10264424909",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9580,7 +9580,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10264964938",
+        "id": "node/10264964938",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -9598,7 +9598,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10266809408",
+        "id": "node/10266809408",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:unleaded": "yes",
@@ -9618,7 +9618,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10267187790",
+        "id": "node/10267187790",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9636,7 +9636,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10270710590",
+        "id": "node/10270710590",
         "amenity": "fuel",
         "name": "Great Southern Fuels 24Hr"
       },
@@ -9652,7 +9652,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10279603978",
+        "id": "node/10279603978",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9671,7 +9671,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10288832693",
+        "id": "node/10288832693",
         "amenity": "fuel",
         "name": "Watheroo Rural Traders"
       },
@@ -9687,7 +9687,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10294913597",
+        "id": "node/10294913597",
         "addr:postcode": "6562",
         "addr:street": "Great Eastern Highway",
         "addr:suburb": "Bakers Hill",
@@ -9716,7 +9716,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10296631109",
+        "id": "node/10296631109",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9738,7 +9738,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10297573524",
+        "id": "node/10297573524",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -9758,7 +9758,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10297584485",
+        "id": "node/10297584485",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -9779,7 +9779,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10301476424",
+        "id": "node/10301476424",
         "amenity": "fuel",
         "brand": "Liberty",
         "fixme": "Bowser active?",
@@ -9797,7 +9797,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10301513691",
+        "id": "node/10301513691",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9820,7 +9820,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10544468523",
+        "id": "node/10544468523",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -9842,7 +9842,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10553722720",
+        "id": "node/10553722720",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -9862,7 +9862,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10556287552",
+        "id": "node/10556287552",
         "amenity": "fuel",
         "brand": "Liberty",
         "fuel:diesel": "yes",
@@ -9881,7 +9881,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10564085087",
+        "id": "node/10564085087",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9903,7 +9903,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10568995121",
+        "id": "node/10568995121",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -9923,7 +9923,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10572049420",
+        "id": "node/10572049420",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -9946,7 +9946,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10572049434",
+        "id": "node/10572049434",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9967,7 +9967,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10572239779",
+        "id": "node/10572239779",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -9987,7 +9987,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10588000888",
+        "id": "node/10588000888",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -10005,7 +10005,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10588061501",
+        "id": "node/10588061501",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10027,7 +10027,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10588124906",
+        "id": "node/10588124906",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -10048,7 +10048,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10588124918",
+        "id": "node/10588124918",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -10070,7 +10070,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10591130244",
+        "id": "node/10591130244",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -10089,7 +10089,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10595204388",
+        "id": "node/10595204388",
         "amenity": "fuel",
         "brand": "Gull",
         "brand:wikidata": "Q5617739",
@@ -10110,7 +10110,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10597773009",
+        "id": "node/10597773009",
         "amenity": "fuel",
         "brand": "BP",
         "fuel:diesel": "yes",
@@ -10131,7 +10131,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10598336218",
+        "id": "node/10598336218",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -10150,7 +10150,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10600427707",
+        "id": "node/10600427707",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -10169,7 +10169,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10600782927",
+        "id": "node/10600782927",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -10188,7 +10188,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10605479380",
+        "id": "node/10605479380",
         "amenity": "fuel",
         "brand": "FuelDistribtors of Western Australia",
         "contact:facebook": "https://www.facebook.com/profile.php?id=100084886503518",
@@ -10209,7 +10209,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10605604819",
+        "id": "node/10605604819",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -10230,7 +10230,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10610797118",
+        "id": "node/10610797118",
         "amenity": "fuel",
         "brand": "Coles Express",
         "brand:wikidata": "Q5144653",
@@ -10251,7 +10251,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10610797119",
+        "id": "node/10610797119",
         "amenity": "fuel",
         "compressed_air": "yes",
         "name": "Petro"
@@ -10268,7 +10268,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10613381179",
+        "id": "node/10613381179",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "name": "Elders"
@@ -10285,7 +10285,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10629325822",
+        "id": "node/10629325822",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -10308,7 +10308,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10629325894",
+        "id": "node/10629325894",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -10331,7 +10331,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10629335469",
+        "id": "node/10629335469",
         "amenity": "fuel",
         "fuel:diesel": "yes",
         "fuel:octane_91": "yes",
@@ -10351,7 +10351,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10656531621",
+        "id": "node/10656531621",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10369,7 +10369,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10661059168",
+        "id": "node/10661059168",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -10388,7 +10388,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10669590537",
+        "id": "node/10669590537",
         "amenity": "fuel",
         "name": "Vibe Forrestfield"
       },
@@ -10404,7 +10404,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10673530674",
+        "id": "node/10673530674",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -10422,7 +10422,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10673536815",
+        "id": "node/10673536815",
         "amenity": "fuel"
       },
       "geometry": {
@@ -10437,7 +10437,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10685919481",
+        "id": "node/10685919481",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10455,7 +10455,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10692433084",
+        "id": "node/10692433084",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10473,7 +10473,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10707054920",
+        "id": "node/10707054920",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -10491,7 +10491,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10709729733",
+        "id": "node/10709729733",
         "addr:housenumber": "332",
         "addr:street": "Hale Road",
         "amenity": "fuel",
@@ -10515,7 +10515,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10742715916",
+        "id": "node/10742715916",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10534,7 +10534,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10817716593",
+        "id": "node/10817716593",
         "addr:country": "AU",
         "addr:housenumber": "620",
         "addr:postcode": "6530",
@@ -10582,7 +10582,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10826167523",
+        "id": "node/10826167523",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10605,7 +10605,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10864295648",
+        "id": "node/10864295648",
         "amenity": "fuel"
       },
       "geometry": {
@@ -10620,7 +10620,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10910595555",
+        "id": "node/10910595555",
         "addr:housenumber": "123",
         "addr:postcode": "6008",
         "addr:state": "WA",
@@ -10644,7 +10644,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10935469152",
+        "id": "node/10935469152",
         "amenity": "fuel",
         "brand": "Mobil",
         "brand:wikidata": "Q109676002",
@@ -10663,7 +10663,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10936227645",
+        "id": "node/10936227645",
         "addr:housenumber": "8",
         "addr:postcode": "6017",
         "addr:state": "WA",
@@ -10686,7 +10686,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10936227646",
+        "id": "node/10936227646",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10707,7 +10707,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/10976600693",
+        "id": "node/10976600693",
         "addr:country": "AU",
         "addr:housenumber": "50",
         "addr:state": "WA",
@@ -10738,7 +10738,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11100799185",
+        "id": "node/11100799185",
         "addr:housenumber": "227",
         "addr:street": "Morrison Road",
         "amenity": "fuel",
@@ -10758,7 +10758,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11100848661",
+        "id": "node/11100848661",
         "addr:housenumber": "36",
         "addr:street": "Welshpool Road",
         "amenity": "fuel",
@@ -10778,7 +10778,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11133371909",
+        "id": "node/11133371909",
         "addr:housenumber": "484",
         "addr:postcode": "6062",
         "addr:state": "WA",
@@ -10802,7 +10802,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11135427196",
+        "id": "node/11135427196",
         "amenity": "fuel",
         "brand": "Ampol",
         "fuel:diesel": "yes",
@@ -10823,7 +10823,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11135427197",
+        "id": "node/11135427197",
         "addr:city": "Carnarvon",
         "addr:country": "AU",
         "addr:housenumber": "59",
@@ -10851,7 +10851,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11269234471",
+        "id": "node/11269234471",
         "addr:housenumber": "2",
         "addr:postcode": "6530",
         "addr:state": "WA",
@@ -10884,7 +10884,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11271554341",
+        "id": "node/11271554341",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -10904,7 +10904,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11273775981",
+        "id": "node/11273775981",
         "addr:postcode": "6391",
         "addr:state": "WA",
         "addr:street": "Albany Highway",
@@ -10934,7 +10934,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11274634665",
+        "id": "node/11274634665",
         "addr:housenumber": "24",
         "addr:postcode": "6391",
         "addr:state": "WA",
@@ -10959,7 +10959,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11303811116",
+        "id": "node/11303811116",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -10980,7 +10980,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11342759677",
+        "id": "node/11342759677",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -11007,7 +11007,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11425003069",
+        "id": "node/11425003069",
         "addr:housenumber": "2",
         "addr:postcode": "6124",
         "addr:street": "Jarrahdale Road",
@@ -11028,7 +11028,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11458150036",
+        "id": "node/11458150036",
         "amenity": "fuel",
         "brand": "Liberty",
         "brand:wikidata": "Q106687078",
@@ -11046,7 +11046,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11458150051",
+        "id": "node/11458150051",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -11064,7 +11064,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11458150066",
+        "id": "node/11458150066",
         "amenity": "fuel",
         "brand": "United",
         "brand:wikidata": "Q28224393",
@@ -11082,7 +11082,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11581293254",
+        "id": "node/11581293254",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -11104,7 +11104,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11612700223",
+        "id": "node/11612700223",
         "addr:country": "AU",
         "addr:housenumber": "102",
         "addr:postcode": "6530",
@@ -11140,7 +11140,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11643636059",
+        "id": "node/11643636059",
         "amenity": "fuel",
         "brand": "Ampol",
         "hgv": "yes"
@@ -11157,7 +11157,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11643636060",
+        "id": "node/11643636060",
         "amenity": "fuel",
         "brand": "Ampol",
         "hgv": "yes"
@@ -11174,7 +11174,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11722083407",
+        "id": "node/11722083407",
         "amenity": "fuel",
         "brand": "Ampol"
       },
@@ -11190,7 +11190,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11781959978",
+        "id": "node/11781959978",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -11208,7 +11208,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11813449356",
+        "id": "node/11813449356",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -11229,7 +11229,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11834188194",
+        "id": "node/11834188194",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -11247,7 +11247,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11834275553",
+        "id": "node/11834275553",
         "amenity": "fuel",
         "brand": "Puma",
         "brand:wikidata": "Q7259769",
@@ -11265,7 +11265,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11862055265",
+        "id": "node/11862055265",
         "amenity": "fuel",
         "brand": "Shell",
         "brand:wikidata": "Q110716465",
@@ -11283,7 +11283,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/11862064986",
+        "id": "node/11862064986",
         "amenity": "fuel",
         "brand": "Caltex",
         "brand:wikidata": "Q277470",
@@ -11301,7 +11301,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12009036909",
+        "id": "node/12009036909",
         "amenity": "fuel",
         "name": "Caltex"
       },
@@ -11317,7 +11317,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12009036910",
+        "id": "node/12009036910",
         "amenity": "fuel",
         "name": "Petro"
       },
@@ -11333,7 +11333,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12052702476",
+        "id": "node/12052702476",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -11352,7 +11352,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12164685946",
+        "id": "node/12164685946",
         "amenity": "fuel",
         "check_date": "2024-09-09"
       },
@@ -11368,7 +11368,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12224154714",
+        "id": "node/12224154714",
         "addr:housenumber": "2",
         "addr:street": "George Street",
         "amenity": "fuel",
@@ -11394,7 +11394,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12234266076",
+        "id": "node/12234266076",
         "amenity": "fuel",
         "name": "Glen Forrest Fuel"
       },
@@ -11410,7 +11410,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12259889401",
+        "id": "node/12259889401",
         "amenity": "fuel",
         "brand": "7-Eleven",
         "brand:wikidata": "Q259340",
@@ -11428,7 +11428,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273495087",
+        "id": "node/12273495087",
         "amenity": "fuel",
         "brand": "Ampol",
         "brand:wikidata": "Q4748528",
@@ -11449,7 +11449,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273500883",
+        "id": "node/12273500883",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11464,7 +11464,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273507968",
+        "id": "node/12273507968",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11479,7 +11479,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273508070",
+        "id": "node/12273508070",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11494,7 +11494,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273530069",
+        "id": "node/12273530069",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11509,7 +11509,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273542917",
+        "id": "node/12273542917",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11524,7 +11524,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273544589",
+        "id": "node/12273544589",
         "addr:housenumber": "365",
         "addr:postcode": "6018",
         "addr:state": "WA",
@@ -11548,7 +11548,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273548251",
+        "id": "node/12273548251",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11563,7 +11563,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273553813",
+        "id": "node/12273553813",
         "amenity": "fuel",
         "car_wash": "yes"
       },
@@ -11579,7 +11579,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273570455",
+        "id": "node/12273570455",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11594,7 +11594,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273571164",
+        "id": "node/12273571164",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11609,7 +11609,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273576972",
+        "id": "node/12273576972",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11624,7 +11624,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273577566",
+        "id": "node/12273577566",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11639,7 +11639,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273587265",
+        "id": "node/12273587265",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11654,7 +11654,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273587672",
+        "id": "node/12273587672",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11669,7 +11669,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12273599859",
+        "id": "node/12273599859",
         "amenity": "fuel"
       },
       "geometry": {
@@ -11684,7 +11684,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12292678097",
+        "id": "node/12292678097",
         "amenity": "fuel",
         "brand": "BP",
         "brand:wikidata": "Q152057",
@@ -11702,7 +11702,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12373222430",
+        "id": "node/12373222430",
         "amenity": "fuel",
         "hgv": "yes"
       },
@@ -11718,7 +11718,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12373222431",
+        "id": "node/12373222431",
         "amenity": "fuel",
         "hgv": "no"
       },
@@ -11734,7 +11734,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12460402639",
+        "id": "node/12460402639",
         "addr:housenumber": "1321",
         "addr:street": "MacKenzie Crescent",
         "amenity": "fuel",
@@ -11761,7 +11761,7 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/12470373756",
+        "id": "node/12470373756",
         "addr:housenumber": "484",
         "addr:postcode": "6000",
         "addr:state": "WA",

@@ -9,6 +9,7 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "f1c1e48e-8b13-4e01-95ad-769486710086",
         "name": "Perth",
         "style": {
           "icon": "fa/FaCity",

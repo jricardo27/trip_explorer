@@ -1,6 +1,7 @@
 import L from "leaflet"
 import React, { useContext } from "react"
 import { toast } from "react-toastify"
+import { v4 as uuidv4 } from "uuid"
 
 import MenuOption from "../../components/ContextMenu/MenuOption.tsx"
 import MapContextMenu from "../../components/MapComponent/MapContextMenu.tsx"
@@ -24,6 +25,7 @@ const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
       feature = {
         type: "Feature",
         properties: {
+          id: uuidv4(),
           name: "Location Name",
         },
         geometry: {
