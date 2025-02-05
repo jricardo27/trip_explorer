@@ -1,9 +1,10 @@
 import L from "leaflet"
-import React from "react"
+import React, { useContext } from "react"
 import { toast } from "react-toastify"
 
 import MenuOption from "../../components/ContextMenu/MenuOption.tsx"
 import MapContextMenu from "../../components/MapComponent/MapContextMenu.tsx"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
 
 interface iWAContextMenuProps {
@@ -12,6 +13,8 @@ interface iWAContextMenuProps {
 }
 
 const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
+  const { addFeature } = useContext(SavedFeaturesContext)!
+
   const copyFeatureToClipboard = (payload: object, selectedFeature: GeoJsonFeature | null) => {
     let feature = selectedFeature
 
@@ -43,6 +46,7 @@ const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
   return (
     <MapContextMenu latlng={props.menuLatLng}>
       <MenuOption title="Copy feature to clipboard" handler={(payload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
+      <MenuOption title="Save feature to list" handler={() => { addFeature("all", props.selectedFeature) }} />
     </MapContextMenu>
   )
 }

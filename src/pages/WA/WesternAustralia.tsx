@@ -1,11 +1,13 @@
 import L from "leaflet"
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
 import MapComponent from "../../components/MapComponent/MapComponent.tsx"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import PopupContent from "../../components/PopupContent/PopupContent.tsx"
+import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer.tsx"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
@@ -26,11 +28,13 @@ const overlayFilePaths = [
 export const WesternAustralia = (): React.ReactNode => {
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
+  const { savedFeatures } = useContext(SavedFeaturesContext)!
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const overlayMarkers = useGeoJsonMarkers(overlayFilePaths)
   const PERTH_LOCATION = { lat: -31.953512, lng: 115.857048 }
 
-  const pointToLayer = (feature: unknown, latlng: unknown) => {
+  const pointToLayer = (feature: GeoJsonFeature, latlng: unknown) => {
     const iconName = feature.properties.style?.icon || "fa/FaMapMarker"
     const iconColor = feature.properties.style?.color || "grey"
     const innerIconColor = feature.properties.style?.innerIconColor || iconColor
@@ -119,8 +123,15 @@ export const WesternAustralia = (): React.ReactNode => {
   }
 
   return (
-    <MapComponent center={PERTH_LOCATION} layerGroupChildren={overlays}>
-      <WAContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
-    </MapComponent>
+    <>
+      <MapComponent center={PERTH_LOCATION} layerGroupChildren={overlays}>
+        <WAContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
+      </MapComponent>
+      <SavedFeaturesDrawer
+        savedFeatures={savedFeatures}
+        drawerOpen={drawerOpen}
+        onClose={() => setDrawerOpen(!drawerOpen)}
+      />
+    </>
   )
 }
