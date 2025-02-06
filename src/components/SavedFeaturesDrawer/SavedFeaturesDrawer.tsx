@@ -104,23 +104,29 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
         const sourceList = selectedTab
         let destinationList = selectedTab
 
-        for (const [category, features] of Object.entries(savedFeatures)) {
-          if (features.some((f) => f.properties?.id === over.id)) {
-            destinationList = category
-            break
+        if (over.data?.current?.type === "tab") {
+          destinationList = over.id // This is now the tab's ID/category name
+        } else {
+          // Handle case where drag is within the same list
+          for (const [category, features] of Object.entries(savedFeatures)) {
+            if (features.some((f) => f.properties?.id === over.id)) {
+              destinationList = category
+              break
+            }
           }
         }
 
         if (sourceList !== destinationList) {
-        // Move feature to new category
+          // Move feature to new category
           setSavedFeatures((prev) => {
             const newSavedFeatures = { ...prev }
             newSavedFeatures[sourceList] = newSavedFeatures[sourceList].filter((f) => f.properties?.id !== activeFeature.properties?.id)
             newSavedFeatures[destinationList] = [...newSavedFeatures[destinationList], activeFeature]
+
             return newSavedFeatures
           })
         } else {
-        // Reorder within the same category
+          // Reorder within the same category
           const oldIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === active.id)
           const newIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === over.id)
           const newOrder = arrayMove(savedFeatures[sourceList], oldIndex, newIndex)
