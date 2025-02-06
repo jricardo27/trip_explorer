@@ -16,17 +16,19 @@ interface iWAContextMenuProps {
 const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
   const { addFeature } = useContext(SavedFeaturesContext)!
 
-  const copyFeatureToClipboard = (payload: object, selectedFeature: GeoJsonFeature | null) => {
+  const getOrCreateFeature = (payload: object, selectedFeature: GeoJsonFeature | null): GeoJsonFeature => {
     let feature = selectedFeature
 
     if (!feature) {
+      const newName = prompt("Enter new name for feature")
       const coordinates = payload.coordinates
+      const featureId = uuidv4()
 
       feature = {
         type: "Feature",
         properties: {
-          id: uuidv4(),
-          name: "Location Name",
+          id: featureId,
+          name: newName || `Location ${featureId}`,
         },
         geometry: {
           type: "Point",
@@ -34,6 +36,12 @@ const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
         },
       }
     }
+
+    return feature
+  }
+
+  const copyFeatureToClipboard = (payload: object, selectedFeature: GeoJsonFeature | null) => {
+    const feature = getOrCreateFeature(payload, selectedFeature)
 
     navigator.clipboard
       .writeText(JSON.stringify(feature, null, 2))
@@ -48,7 +56,7 @@ const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
   return (
     <MapContextMenu latlng={props.menuLatLng}>
       <MenuOption title="Copy feature to clipboard" handler={(payload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
-      <MenuOption title="Save feature to list" handler={() => { addFeature("all", props.selectedFeature) }} />
+      <MenuOption title="Save feature to list" handler={(payload) => { addFeature("all", getOrCreateFeature(payload, props.selectedFeature)) }} />
     </MapContextMenu>
   )
 }
