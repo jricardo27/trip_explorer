@@ -21,6 +21,7 @@ const overlayFilePaths = [
   "/markers/westernAustralia/national_parks_simplified.json",
   "/markers/westernAustralia/accommodation_WA.json",
   "/markers/westernAustralia/accommodation_campermate.json",
+  "/markers/westernAustralia/western_australia_tourism.json",
   "/markers/westernAustralia/places.json",
 ]
 
@@ -64,6 +65,9 @@ export const WesternAustralia = (): React.ReactNode => {
     },
     "Gas Stations [OpenStreetMap]": {
       General: ["name", "brand", "operator", "opening_hours"],
+    },
+    "Western Australia website": {
+      General: ["name", "url", { key: "description", className: styles.scrollableContent }],
     },
   }
 
