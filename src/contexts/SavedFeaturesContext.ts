@@ -2,15 +2,16 @@ import React from "react"
 
 import { GeoJsonFeature } from "../data/types"
 
-export type SavedFeaturesState = {
+export type SavedFeaturesStateType = {
   [key: string]: GeoJsonFeature[]
 }
 
 export type SavedFeaturesContextType = {
-  savedFeatures: SavedFeaturesState
+  savedFeatures: SavedFeaturesStateType
   addFeature: (listName: string, feature: GeoJsonFeature) => void
   removeFeature: (listName: string, feature: GeoJsonFeature) => void
   updateFeature: (oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => void
+  setSavedFeatures: (newState: SavedFeaturesStateType) => void
   saveToLocalStorage: () => void
   loadFromLocalStorage: () => void
 }

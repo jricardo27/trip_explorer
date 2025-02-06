@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react"
 
 import { GeoJsonFeature } from "../data/types"
 
-import SavedFeaturesContext, { SavedFeaturesContextType, SavedFeaturesState } from "./SavedFeaturesContext"
+import SavedFeaturesContext, { SavedFeaturesContextType, SavedFeaturesStateType } from "./SavedFeaturesContext"
 
 interface SavedFeaturesProviderProps {
   children: React.ReactNode
@@ -12,7 +12,7 @@ const STORAGE_KEY = "savedFeatures"
 
 const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children }) => {
   // Initial state setup
-  const [savedFeatures, setSavedFeatures] = useState<SavedFeaturesState>(() => {
+  const [savedFeatures, setSavedFeaturesState] = useState<SavedFeaturesStateType>(() => {
     const storedFeatures = localStorage.getItem(STORAGE_KEY)
     return storedFeatures
       ? JSON.parse(storedFeatures)
@@ -30,7 +30,7 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
   const loadFromLocalStorage = useCallback(() => {
     const storedFeatures = localStorage.getItem(STORAGE_KEY)
     if (storedFeatures) {
-      setSavedFeatures(JSON.parse(storedFeatures))
+      setSavedFeaturesState(JSON.parse(storedFeatures))
     }
   }, [])
 
@@ -38,6 +38,10 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
   useEffect(() => {
     saveToLocalStorage()
   }, [savedFeatures, saveToLocalStorage])
+
+  const setSavedFeatures = useCallback((newState: SavedFeaturesStateType) => {
+    setSavedFeaturesState(newState)
+  }, [])
 
   // Function to add a feature to a specific list, but not to 'all' by default
   const addFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
@@ -58,7 +62,7 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
         }
       }
     })
-  }, [])
+  }, [setSavedFeatures])
 
   // Function to remove a feature from a specific list
   // Assuming features have unique 'id' or another identifier in properties
@@ -70,12 +74,12 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
         [listName]: newList,
       }
     })
-  }, [])
+  }, [setSavedFeatures])
 
   // Function to update a feature in all lists where it exists
   const updateFeature = useCallback((oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => {
     setSavedFeatures((prevFeatures) => {
-      const newFeatures: SavedFeaturesState = { ...prevFeatures }
+      const newFeatures: SavedFeaturesStateType = { ...prevFeatures }
       for (const key in newFeatures) {
         newFeatures[key] = newFeatures[key].map((item) =>
           item.properties?.id === oldFeature.properties?.id ? newFeature : item,
@@ -83,13 +87,14 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
       }
       return newFeatures
     })
-  }, [])
+  }, [setSavedFeatures])
 
   const contextValue: SavedFeaturesContextType = {
     savedFeatures,
     addFeature,
     removeFeature,
     updateFeature,
+    setSavedFeatures,
     saveToLocalStorage,
     loadFromLocalStorage,
   }

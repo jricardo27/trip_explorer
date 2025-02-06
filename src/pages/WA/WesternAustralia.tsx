@@ -1,5 +1,5 @@
 import L from "leaflet"
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
@@ -7,7 +7,6 @@ import MapComponent from "../../components/MapComponent/MapComponent.tsx"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import PopupContent from "../../components/PopupContent/PopupContent.tsx"
 import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer.tsx"
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
@@ -28,7 +27,6 @@ const overlayFilePaths = [
 export const WesternAustralia = (): React.ReactNode => {
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
-  const { savedFeatures } = useContext(SavedFeaturesContext)!
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const overlayMarkers = useGeoJsonMarkers(overlayFilePaths)
@@ -128,7 +126,6 @@ export const WesternAustralia = (): React.ReactNode => {
         <WAContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
       </MapComponent>
       <SavedFeaturesDrawer
-        savedFeatures={savedFeatures}
         drawerOpen={drawerOpen}
         onClose={() => setDrawerOpen(!drawerOpen)}
       />
