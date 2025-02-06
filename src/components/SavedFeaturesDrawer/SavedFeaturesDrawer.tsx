@@ -1,27 +1,10 @@
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  pointerWithin,
-  useSensor,
-  useSensors,
-  DragOverlay,
-} from "@dnd-kit/core"
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable"
+import { arrayMove } from "@dnd-kit/sortable"
 import {
   Drawer,
   Box,
-  Menu,
-  MenuItem,
   IconButton,
   useTheme,
   useMediaQuery,
-  ListItem, ListItemText,
 } from "@mui/material"
 import React, { useState, useContext, useCallback } from "react"
 import { MdMenu } from "react-icons/md"
@@ -29,6 +12,9 @@ import { MdMenu } from "react-icons/md"
 import SavedFeaturesContext, { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
 
+import { CategoryContextMenu } from "./CategoryContextMenu"
+import { FeatureContextMenu } from "./FeatureContextMenu"
+import { FeatureDragContext } from "./FeatureDragContext"
 import { FeatureList } from "./FeatureList"
 import { TabList } from "./TabList"
 
@@ -46,19 +32,11 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number } | null>(null)
   const [contextMenuTab, setContextMenuTab] = useState<string | null>(null)
   const [contextMenuFeature, setContextMenuFeature] = useState<GeoJsonFeature | null>(null)
-  const [activeId, setActiveId] = useState<string | null>(null)
   const theme = useTheme()
   const isSm = useMediaQuery(theme.breakpoints.up("sm"))
   const isMd = useMediaQuery(theme.breakpoints.up("md"))
 
   const drawerWidth = isMd ? "30%" : isSm ? "50%" : "80%"
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  )
 
   const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
@@ -88,61 +66,6 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const handleClose = useCallback(() => {
     setContextMenu(null)
     setContextMenuTab(null)
-  }, [])
-
-  const handleDragStart = useCallback((event) => {
-    setActiveId(event.active.id)
-  }, [])
-
-  const handleDragEnd = useCallback((event) => {
-    const { active, over } = event
-
-    if (over != null && active?.id !== over?.id) {
-      const activeFeature = savedFeatures[selectedTab].find((f) => f.properties?.id === active.id)
-
-      if (activeFeature) {
-        const sourceList = selectedTab
-        let destinationList = selectedTab
-
-        if (over.data?.current?.type === "tab") {
-          destinationList = over.id // This is now the tab's ID/category name
-        } else {
-          // Handle case where drag is within the same list
-          for (const [category, features] of Object.entries(savedFeatures)) {
-            if (features.some((f) => f.properties?.id === over.id)) {
-              destinationList = category
-              break
-            }
-          }
-        }
-
-        if (sourceList !== destinationList) {
-          // Move feature to new category
-          setSavedFeatures((prev) => {
-            const newSavedFeatures = { ...prev }
-            newSavedFeatures[sourceList] = newSavedFeatures[sourceList].filter((f) => f.properties?.id !== activeFeature.properties?.id)
-            newSavedFeatures[destinationList] = [...newSavedFeatures[destinationList], activeFeature]
-
-            return newSavedFeatures
-          })
-        } else {
-          // Reorder within the same category
-          const oldIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === active.id)
-          const newIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === over.id)
-          const newOrder = arrayMove(savedFeatures[sourceList], oldIndex, newIndex)
-          setSavedFeatures((prev) => ({
-            ...prev,
-            [sourceList]: newOrder,
-          }))
-        }
-      }
-    }
-
-    setActiveId(null)
-  }, [savedFeatures, selectedTab, setSavedFeatures])
-
-  const handleDragCancel = useCallback(() => {
-    setActiveId(null)
   }, [])
 
   const moveCategory = useCallback((direction: "up" | "down") => {
@@ -261,13 +184,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
       >
         <MdMenu />
       </IconButton>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={pointerWithin}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        onDragCancel={handleDragCancel}
-      >
+      <FeatureDragContext savedFeatures={savedFeatures} selectedTab={selectedTab} setSavedFeatures={setSavedFeatures}>
         <Drawer
           anchor="left"
           open={drawerOpen}
@@ -291,64 +208,33 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
               />
             </Box>
             <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
-              <SortableContext
-                items={savedFeatures[selectedTab] ? savedFeatures[selectedTab].map((f) => f.properties?.id || "") : []}
-                strategy={verticalListSortingStrategy}
-              >
-                <FeatureList
-                  features={savedFeatures[selectedTab] || []}
-                  selectedFeature={selectedFeature}
-                  setSelectedFeature={setSelectedFeature}
-                  handleContextMenu={handleContextMenu}
-                  excludedProperties={Array.from(excludedProperties)}
-                />
-              </SortableContext>
+              <FeatureList
+                features={savedFeatures[selectedTab] || []}
+                selectedFeature={selectedFeature}
+                setSelectedFeature={setSelectedFeature}
+                handleContextMenu={handleContextMenu}
+                excludedProperties={Array.from(excludedProperties)}
+              />
             </Box>
           </Box>
         </Drawer>
-        <Menu
-          open={contextMenu !== null}
-          onClose={handleClose}
-          anchorReference="anchorPosition"
-          anchorPosition={
-            contextMenu !== null
-              ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-              : undefined
-          }
-        >
-          {contextMenuFeature ? (
-            <>
-              {selectedTab != "all" && <MenuItem onClick={handleRemoveFromList}>Remove from this list</MenuItem>}
-              <MenuItem onClick={handleRemoveCompletely}>Remove</MenuItem>
-            </>
-          ) : contextMenuTab && contextMenuTab !== "all"
-            ? (
-                <>
-                  <MenuItem onClick={() => moveCategory("up")}>Move Up</MenuItem>
-                  <MenuItem onClick={() => moveCategory("down")}>Move Down</MenuItem>
-                  <MenuItem onClick={() => {
-                    const newName = prompt("Enter new name for category", contextMenuTab)
-                    if (newName && newName !== contextMenuTab) handleRenameCategory(newName)
-                  }}
-                  >
-                    Rename Category
-                  </MenuItem>
-                  <MenuItem onClick={handleRemoveCategory}>Remove Category</MenuItem>
-                </>
-              )
-            : null}
-          <MenuItem onClick={handleAddCategory}>Add New Category</MenuItem>
-        </Menu>
-        <DragOverlay>
-          {activeId ? (
-            <ListItem>
-              <ListItemText
-                primary={savedFeatures[selectedTab].find((f) => f.properties?.id === activeId)?.properties?.name || "Unnamed Feature"}
-              />
-            </ListItem>
-          ) : null}
-        </DragOverlay>
-      </DndContext>
+        <CategoryContextMenu
+          contextMenu={contextMenu}
+          contextMenuTab={contextMenuTab}
+          handleClose={handleClose}
+          moveCategory={moveCategory}
+          handleRenameCategory={handleRenameCategory}
+          handleAddCategory={handleAddCategory}
+          handleRemoveCategory={handleRemoveCategory}
+        />
+        <FeatureContextMenu
+          contextMenu={contextMenu}
+          contextMenuFeature={contextMenuFeature}
+          handleClose={handleClose}
+          handleRemoveFromList={handleRemoveFromList}
+          handleRemoveCompletely={handleRemoveCompletely}
+        />
+      </FeatureDragContext>
     </>
   )
 }

@@ -11,7 +11,7 @@ export type SavedFeaturesContextType = {
   addFeature: (listName: string, feature: GeoJsonFeature) => void
   removeFeature: (listName: string, feature: GeoJsonFeature) => void
   updateFeature: (oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => void
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void
+  setSavedFeatures: (newState: (prev: SavedFeaturesStateType) => { [p: string]: GeoJsonFeature[] }) => void
   saveToLocalStorage: () => void
   loadFromLocalStorage: () => void
 }
