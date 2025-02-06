@@ -1,8 +1,8 @@
 import {
   DndContext,
-  closestCenter,
   KeyboardSensor,
   PointerSensor,
+  pointerWithin,
   useSensor,
   useSensors,
   DragOverlay,
@@ -97,7 +97,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const handleDragEnd = useCallback((event) => {
     const { active, over } = event
 
-    if (active?.id !== over?.id) {
+    if (over != null && active?.id !== over?.id) {
       const activeFeature = savedFeatures[selectedTab].find((f) => f.properties?.id === active.id)
 
       if (activeFeature) {
@@ -257,7 +257,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
       </IconButton>
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCenter}
+        collisionDetection={pointerWithin}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
