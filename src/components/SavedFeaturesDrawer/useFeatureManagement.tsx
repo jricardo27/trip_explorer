@@ -1,27 +1,25 @@
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonFeature } from "../../data/types"
+import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext"
+import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
 
 interface UseFeatureManagement {
   handleRemoveFromList: () => void
   handleRemoveCompletely: () => void
 }
 
-interface UseFeatureManagementProps {
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void
-  selectedTab: string
-  contextMenuFeature: GeoJsonFeature | null
-  removeFeature: (listName: string, feature: GeoJsonFeature | null) => void
-}
-
-export const useFeatureManagement = ({ setSavedFeatures, selectedTab, contextMenuFeature, removeFeature }: UseFeatureManagementProps): UseFeatureManagement => {
+export const useFeatureManagement = (
+  setSavedFeatures: (newState: SavedFeaturesStateType) => void,
+  selectedTab: string,
+  contextMenuFeature: selectionInfo | null,
+  removeFeature: (listName: string, selection: selectionInfo | null) => void,
+): UseFeatureManagement => {
   const handleRemoveFromList = useCallback(() => {
     if (contextMenuFeature && selectedTab !== "all") {
       removeFeature(selectedTab, contextMenuFeature)
       setSavedFeatures((prev: SavedFeaturesStateType) => ({
         ...prev,
-        all: [...prev.all, contextMenuFeature],
+        all: [...prev.all, contextMenuFeature.feature],
       }))
     }
   }, [contextMenuFeature, selectedTab, removeFeature, setSavedFeatures])
@@ -31,7 +29,7 @@ export const useFeatureManagement = ({ setSavedFeatures, selectedTab, contextMen
       removeFeature(selectedTab, contextMenuFeature)
       setSavedFeatures((prev: SavedFeaturesStateType) => ({
         ...prev,
-        all: prev.all.filter((f) => f.properties?.id !== contextMenuFeature.properties?.id),
+        all: prev.all.filter((f, index) => idxFeat(index, f) !== idxSel(contextMenuFeature)),
       }))
     }
   }, [contextMenuFeature, selectedTab, removeFeature, setSavedFeatures])

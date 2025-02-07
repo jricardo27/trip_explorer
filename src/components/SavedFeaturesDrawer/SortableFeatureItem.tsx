@@ -4,17 +4,21 @@ import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
 import React from "react"
 import { MdDragIndicator } from "react-icons/md"
 
+import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
+import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature
   id: string
-  selectedFeature: GeoJsonFeature | null
-  setSelectedFeature: (feature: GeoJsonFeature | null) => void
-  handleContextMenu: (event: React.MouseEvent, feature: GeoJsonFeature) => void
+  index: number
+  selectedTab: string
+  selectedFeature: selectionInfo | null
+  setSelectedFeature: (selection: selectionInfo | null) => void
+  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
 }
 
-export const SortableFeatureItem = ({ feature, id, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
+export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
   const {
     attributes,
     listeners,
@@ -32,7 +36,8 @@ export const SortableFeatureItem = ({ feature, id, selectedFeature, setSelectedF
     border: isDragging ? "dashed" : "",
   }
 
-  const isSelected = selectedFeature?.properties?.id === feature.properties?.id
+  const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
+  const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
 
   return (
     <ListItem
@@ -41,10 +46,10 @@ export const SortableFeatureItem = ({ feature, id, selectedFeature, setSelectedF
       button="true"
       onClick={(event) => {
         event.stopPropagation()
-        setSelectedFeature(isSelected ? null : feature)
+        setSelectedFeature(isSelected ? null : selection)
       }}
       onContextMenu={(event) => {
-        handleContextMenu(event, feature)
+        handleContextMenu(event, selection)
         event.stopPropagation()
       }}
     >

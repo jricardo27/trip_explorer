@@ -10,13 +10,11 @@ interface UseCategoryManagement {
   handleRemoveCategory: () => void
 }
 
-interface UseCategoryManagementProps {
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void
-  savedFeatures: SavedFeaturesStateType
-  contextMenuTab: string | null
-}
-
-export const useCategoryManagement = ({ setSavedFeatures, savedFeatures, contextMenuTab }: UseCategoryManagementProps): UseCategoryManagement => {
+export const useCategoryManagement = (
+  setSavedFeatures: (newState: SavedFeaturesStateType) => void,
+  savedFeatures: SavedFeaturesStateType,
+  contextMenuTab: string | null,
+): UseCategoryManagement => {
   const moveCategory = useCallback((direction: "up" | "down") => {
     if (!contextMenuTab || contextMenuTab === "all") return
 
@@ -54,10 +52,15 @@ export const useCategoryManagement = ({ setSavedFeatures, savedFeatures, context
   }, [contextMenuTab, setSavedFeatures])
 
   const handleAddCategory = useCallback(() => {
-    const newCategoryName = `Category_${Object.keys(savedFeatures).length}`
+    let categoryName = prompt("Enter name for category")
+
+    if (!categoryName || Object.keys(savedFeatures).includes(categoryName)) {
+      categoryName = `Category_${Object.keys(savedFeatures).length}`
+    }
+
     setSavedFeatures((prev: SavedFeaturesStateType) => ({
       ...prev,
-      [newCategoryName]: [],
+      [categoryName]: [],
     }))
   }, [savedFeatures, setSavedFeatures])
 

@@ -1,17 +1,17 @@
 import { useCallback, useState } from "react"
 
-import { GeoJsonFeature } from "../../data/types"
+import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
 
 interface UseFeatureSelection {
-  selectedFeature: GeoJsonFeature | null
-  setSelectedFeature: (feature: GeoJsonFeature | null) => void
+  selectedFeature: selectionInfo | null
+  setSelectedFeature: (selection: selectionInfo | null) => void
 }
 
 export const useFeatureSelection = (): UseFeatureSelection => {
-  const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
+  const [selectedFeature, setSelectedFeature] = useState<selectionInfo | null>(null)
 
-  const setSelectedFeatureCallback = useCallback((feature: GeoJsonFeature | null) => {
-    setSelectedFeature((prev) => prev === feature ? null : feature)
+  const setSelectedFeatureCallback = useCallback((selection: selectionInfo | null) => {
+    setSelectedFeature((prev) => prev === selection ? null : selection)
   }, [])
 
   return {

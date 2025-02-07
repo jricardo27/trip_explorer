@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react"
 
 import { GeoJsonFeature } from "../data/types"
+import idxFeat, { idxSel } from "../utils/idxFeat"
 
-import SavedFeaturesContext, { SavedFeaturesContextType, SavedFeaturesStateType } from "./SavedFeaturesContext"
+import SavedFeaturesContext, { SavedFeaturesContextType, SavedFeaturesStateType, selectionInfo } from "./SavedFeaturesContext"
 
 interface SavedFeaturesProviderProps {
   children: React.ReactNode
@@ -65,10 +66,14 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
   }, [setSavedFeatures])
 
   // Function to remove a feature from a specific list
-  // Assuming features have unique 'id' or another identifier in properties
-  const removeFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
+  const removeFeature = useCallback((listName: string, selection: selectionInfo) => {
+    if (!selection) {
+      console.error("No selection info when trying to remove feature")
+      return
+    }
+
     setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
-      const newList = (prevFeatures[listName] || []).filter((item) => item.properties?.id !== feature.properties?.id)
+      const newList = (prevFeatures[listName] || []).filter((f, index) => idxFeat(index, f) !== idxSel(selection))
       return {
         ...prevFeatures,
         [listName]: newList,

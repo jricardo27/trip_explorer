@@ -13,6 +13,7 @@ import React, { useCallback, useState } from "react"
 
 import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
+import idxFeat from "../../utils/idxFeat.ts"
 
 interface FeatureDragContextProps {
   children: React.ReactNode
@@ -38,8 +39,8 @@ export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children
   const handleDragEnd = useCallback((event) => {
     const { active, over } = event
 
-    if (active.id !== over.id) {
-      const activeFeature = savedFeatures[selectedTab].find((f) => f.properties?.id === active.id)
+    if (over && active.id !== over.id) {
+      const activeFeature = savedFeatures[selectedTab].find((f, index) => idxFeat(index, f) === active.id)
 
       if (activeFeature) {
         const sourceList = selectedTab
@@ -47,25 +48,20 @@ export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children
 
         if (over.data?.current?.type === "tab") {
           destinationList = over.id
-        } else {
-          for (const [category, features] of Object.entries(savedFeatures)) {
-            if (features.some((f) => f.properties?.id === over.id)) {
-              destinationList = category
-              break
-            }
-          }
         }
 
         if (sourceList !== destinationList) {
           setSavedFeatures((prev: SavedFeaturesStateType) => {
             const newSavedFeatures = { ...prev }
-            newSavedFeatures[sourceList] = newSavedFeatures[sourceList].filter((f) => f.properties?.id !== activeFeature.properties?.id)
+            newSavedFeatures[sourceList] = newSavedFeatures[sourceList].filter((f, index) => {
+              return idxFeat(index, f) !== active.id
+            })
             newSavedFeatures[destinationList] = [...newSavedFeatures[destinationList], activeFeature]
             return newSavedFeatures
           })
         } else {
-          const oldIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === active.id)
-          const newIndex = savedFeatures[sourceList].findIndex((f) => f.properties?.id === over.id)
+          const oldIndex = savedFeatures[sourceList].findIndex((f, index) => idxFeat(index, f) === active.id)
+          const newIndex = savedFeatures[sourceList].findIndex((f, index) => idxFeat(index, f) === over.id)
           const newOrder = arrayMove(savedFeatures[sourceList], oldIndex, newIndex)
           setSavedFeatures((prev: SavedFeaturesStateType) => ({
             ...prev,
@@ -95,7 +91,7 @@ export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children
         {activeId ? (
           <ListItem>
             <ListItemText
-              primary={savedFeatures[selectedTab].find((f) => f.properties?.id === activeId)?.properties?.name || "Unnamed Feature"}
+              primary={savedFeatures[selectedTab].find((f, index) => idxFeat(index, f) === activeId)?.properties?.name || "Unnamed Feature"}
             />
           </ListItem>
         ) : null}

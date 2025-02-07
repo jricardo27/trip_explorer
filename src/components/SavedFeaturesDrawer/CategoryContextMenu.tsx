@@ -25,6 +25,13 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
     if (newName && newName !== contextMenuTab) handleRenameCategory(newName)
   }, [contextMenuTab, handleRenameCategory])
 
+  const wrapper = (handler: (event: React.MouseEvent) => void) => {
+    return (event: React.MouseEvent) => {
+      handler(event)
+      handleClose()
+    }
+  }
+
   if (!contextMenuTab) return <></>
 
   return (
@@ -40,13 +47,13 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
     >
       {contextMenuTab && contextMenuTab !== "all" ? (
         <>
-          <MenuItem onClick={() => moveCategory("up")}>Move Up</MenuItem>
-          <MenuItem onClick={() => moveCategory("down")}>Move Down</MenuItem>
-          <MenuItem onClick={handleRename}>Rename Category</MenuItem>
-          <MenuItem onClick={handleRemoveCategory}>Remove Category</MenuItem>
+          <MenuItem onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>
+          <MenuItem onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>
+          <MenuItem onClick={wrapper(handleRename)}>Rename Category</MenuItem>
+          <MenuItem onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
         </>
       ) : null}
-      <MenuItem onClick={handleAddCategory}>Add New Category</MenuItem>
+      <MenuItem onClick={wrapper(handleAddCategory)}>Add New Category</MenuItem>
     </Menu>
   )
 }

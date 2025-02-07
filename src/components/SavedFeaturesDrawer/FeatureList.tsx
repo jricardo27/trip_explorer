@@ -1,31 +1,36 @@
 import { List, ListItem, ListItemText, Collapse } from "@mui/material"
 import React from "react"
 
+import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
+import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
 
 import { SortableFeatureItem } from "./SortableFeatureItem"
 
 interface FeatureListProps {
   features: GeoJsonFeature[]
-  selectedFeature: GeoJsonFeature | null
-  setSelectedFeature: (feature: GeoJsonFeature | null) => void
-  handleContextMenu: (event: React.MouseEvent, feature: GeoJsonFeature) => void
+  selectedTab: string
+  selectedFeature: selectionInfo | null
+  setSelectedFeature: (selection: selectionInfo | null) => void
+  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
   excludedProperties: string[]
 }
 
-export const FeatureList = ({ features, selectedFeature, setSelectedFeature, handleContextMenu, excludedProperties }: FeatureListProps) => {
+export const FeatureList = ({ features, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu, excludedProperties }: FeatureListProps) => {
   return (
     <List>
       {features.map((feature, index) => (
-        <React.Fragment key={feature.properties?.id || index}>
+        <React.Fragment key={idxFeat(index, feature)}>
           <SortableFeatureItem
             feature={feature}
-            id={feature.properties?.id || index.toString()}
+            id={idxFeat(index, feature)}
+            index={index}
+            selectedTab={selectedTab}
             selectedFeature={selectedFeature}
             setSelectedFeature={setSelectedFeature}
             handleContextMenu={handleContextMenu}
           />
-          <Collapse in={selectedFeature === feature} timeout="auto" unmountOnExit>
+          <Collapse in={idxSel(selectedFeature) === idxFeat(index, feature)} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {Object.entries(feature.properties || {})
                 .filter(([key]) => !excludedProperties.includes(key))

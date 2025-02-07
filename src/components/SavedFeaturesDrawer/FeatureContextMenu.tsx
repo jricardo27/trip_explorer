@@ -1,11 +1,11 @@
 import { Menu, MenuItem } from "@mui/material"
 import React from "react"
 
-import { GeoJsonFeature } from "../../data/types"
+import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
 
 interface FeatureContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null
-  contextMenuFeature: GeoJsonFeature | null
+  contextMenuFeature: selectionInfo | null
   handleClose: () => void
   handleRemoveFromList: () => void
   handleRemoveCompletely: () => void
@@ -20,6 +20,13 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
 }) => {
   if (!contextMenuFeature) return <></>
 
+  const wrapper = (handler: (event: React.MouseEvent) => void) => {
+    return (event: React.MouseEvent) => {
+      handler(event)
+      handleClose()
+    }
+  }
+
   return (
     <Menu
       open={contextMenu !== null}
@@ -33,8 +40,8 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
     >
       {contextMenuFeature && (
         <>
-          <MenuItem onClick={handleRemoveFromList}>Remove from this list</MenuItem>
-          <MenuItem onClick={handleRemoveCompletely}>Remove</MenuItem>
+          {contextMenuFeature.category != "all" && <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>}
+          <MenuItem onClick={wrapper(handleRemoveCompletely)}>Remove</MenuItem>
         </>
       )}
     </Menu>
