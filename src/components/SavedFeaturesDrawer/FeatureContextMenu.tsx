@@ -7,6 +7,7 @@ interface FeatureContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null
   contextMenuFeature: selectionInfo | null
   handleClose: () => void
+  handleDuplicate: () => void
   handleRemoveFromList: () => void
   handleRemoveCompletely: () => void
 }
@@ -15,6 +16,7 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
   contextMenu,
   contextMenuFeature,
   handleClose,
+  handleDuplicate,
   handleRemoveFromList,
   handleRemoveCompletely,
 }) => {
@@ -40,6 +42,7 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
     >
       {contextMenuFeature && (
         <>
+          <MenuItem onClick={wrapper(handleDuplicate)}>Duplicate</MenuItem>
           {contextMenuFeature.category != "all" && <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>}
           <MenuItem onClick={wrapper(handleRemoveCompletely)}>Remove</MenuItem>
         </>

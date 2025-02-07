@@ -4,6 +4,7 @@ import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeatu
 import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
 
 interface UseFeatureManagement {
+  handleDuplicate: () => void
   handleRemoveFromList: () => void
   handleRemoveCompletely: () => void
 }
@@ -14,6 +15,15 @@ export const useFeatureManagement = (
   contextMenuFeature: selectionInfo | null,
   removeFeature: (listName: string, selection: selectionInfo | null) => void,
 ): UseFeatureManagement => {
+  const handleDuplicate = useCallback(() => {
+    if (contextMenuFeature) {
+      setSavedFeatures((prev: SavedFeaturesStateType) => ({
+        ...prev,
+        [selectedTab]: [...prev[selectedTab], contextMenuFeature.feature],
+      }))
+    }
+  }, [contextMenuFeature, selectedTab, setSavedFeatures])
+
   const handleRemoveFromList = useCallback(() => {
     if (contextMenuFeature && selectedTab !== "all") {
       removeFeature(selectedTab, contextMenuFeature)
@@ -35,6 +45,7 @@ export const useFeatureManagement = (
   }, [contextMenuFeature, selectedTab, removeFeature, setSavedFeatures])
 
   return {
+    handleDuplicate,
     handleRemoveFromList,
     handleRemoveCompletely,
   }

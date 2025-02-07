@@ -35,7 +35,8 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
   const { contextMenu, contextMenuTab, contextMenuFeature, handleContextMenu, handleTabContextMenu, handleClose } = useContextMenu()
   const { moveCategory, handleRenameCategory, handleAddCategory, handleRemoveCategory } = useCategoryManagement(setSavedFeatures, savedFeatures, contextMenuTab)
-  const { handleRemoveFromList, handleRemoveCompletely } = useFeatureManagement(setSavedFeatures, selectedTab, contextMenuFeature, removeFeature)
+  const { handleDuplicate, handleRemoveFromList, handleRemoveCompletely } = useFeatureManagement(
+    setSavedFeatures, selectedTab, contextMenuFeature, removeFeature)
 
   const theme = useTheme()
   const isSm = useMediaQuery(theme.breakpoints.up("sm"))
@@ -108,6 +109,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
           contextMenu={contextMenu}
           contextMenuFeature={contextMenuFeature}
           handleClose={handleClose}
+          handleDuplicate={handleDuplicate}
           handleRemoveFromList={handleRemoveFromList}
           handleRemoveCompletely={handleRemoveCompletely}
         />
