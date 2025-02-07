@@ -5,7 +5,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material"
-import React, { useState, useContext, useCallback } from "react"
+import React, { useState, useContext, useCallback, useEffect } from "react"
 import { MdMenu } from "react-icons/md"
 
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
@@ -34,7 +34,8 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
   const { contextMenu, contextMenuTab, contextMenuFeature, handleContextMenu, handleTabContextMenu, handleClose } = useContextMenu()
-  const { moveCategory, handleRenameCategory, handleAddCategory, handleRemoveCategory } = useCategoryManagement(setSavedFeatures, savedFeatures, contextMenuTab)
+  const { moveCategory, handleRenameCategory, handleAddCategory, handleRemoveCategory } = useCategoryManagement(
+    setSavedFeatures, setSelectedTab, savedFeatures, contextMenuTab)
   const { handleDuplicate, handleRemoveFromList, handleRemoveCompletely } = useFeatureManagement(
     setSavedFeatures, selectedTab, contextMenuFeature, removeFeature)
 
@@ -47,11 +48,13 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
     setSelectedFeature(null)
+  }, [setSelectedFeature])
 
+  useEffect(() => {
     if (setCurrentCategory) {
-      setCurrentCategory(newValue)
+      setCurrentCategory(selectedTab)
     }
-  }, [setSelectedFeature, setCurrentCategory])
+  }, [selectedTab, setCurrentCategory])
 
   return (
     <>

@@ -12,6 +12,7 @@ interface UseCategoryManagement {
 
 export const useCategoryManagement = (
   setSavedFeatures: (newState: SavedFeaturesStateType) => void,
+  setSelectedTab: (newState: string) => void,
   savedFeatures: SavedFeaturesStateType,
   contextMenuTab: string | null,
 ): UseCategoryManagement => {
@@ -24,7 +25,7 @@ export const useCategoryManagement = (
     if (index === -1) return
 
     let newIndex
-    if (direction === "up" && index > 0) {
+    if (direction === "up" && index > 1) {
       newIndex = index - 1
     } else if (direction === "down" && index < keys.length - 1) {
       newIndex = index + 1
@@ -73,8 +74,13 @@ export const useCategoryManagement = (
         newSavedFeatures.all = [...newSavedFeatures.all, ...featuresToMove]
         return newSavedFeatures
       })
+
+      const tabs = Object.keys(savedFeatures)
+      const indexToDelete = tabs.indexOf(contextMenuTab)
+      const previousTab = tabs[indexToDelete - 1]
+      setSelectedTab(previousTab)
     }
-  }, [contextMenuTab, setSavedFeatures])
+  }, [contextMenuTab, setSavedFeatures, setSelectedTab, savedFeatures])
 
   return {
     moveCategory,
