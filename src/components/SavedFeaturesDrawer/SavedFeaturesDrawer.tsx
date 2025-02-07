@@ -23,11 +23,12 @@ import { useFeatureSelection } from "./useFeatureSelection"
 interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
   onClose: () => void
+  setCurrentCategory?: (newState: string) => void
 }
 
 const excludedProperties = ["id", "images", "style"] as const
 
-const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose }) => {
+const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
   const [selectedTab, setSelectedTab] = useState<string>("all")
 
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
@@ -45,7 +46,11 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
     setSelectedFeature(null)
-  }, [setSelectedFeature])
+
+    if (setCurrentCategory) {
+      setCurrentCategory(newValue)
+    }
+  }, [setSelectedFeature, setCurrentCategory])
 
   return (
     <>

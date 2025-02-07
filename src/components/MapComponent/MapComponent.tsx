@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { LayerGroup, LayersControl, MapContainer, TileLayer } from "react-leaflet"
 
 import "leaflet/dist/leaflet.css"
@@ -10,7 +10,7 @@ import MapViewUpdater from "./MapViewUpdater.tsx"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
 export interface LayerGroupChild {
-  key: string
+  id: string
   title: string
   children: React.ReactNode
 }
@@ -29,14 +29,25 @@ const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProp
     zoom: 13,
   })
 
-  // Restore map state from localStorage on initial load
-  useEffect(() => {
+  const restoreMapStateFromLocalStorage = useCallback(() => {
     const savedMapState = localStorage.getItem("mapState")
 
     if (savedMapState) {
       setMapState(JSON.parse(savedMapState))
     }
   }, [])
+
+  useEffect(() => {
+    restoreMapStateFromLocalStorage()
+  }, [restoreMapStateFromLocalStorage])
+
+  const layerGroupChildrenMemo = useMemo(() => {
+    return layerGroupChildren?.map((child) => (
+      <LayersControl.Overlay key={child.id} name={child.title}>
+        <LayerGroup>{child.children}</LayerGroup>
+      </LayersControl.Overlay>
+    ))
+  }, [layerGroupChildren])
 
   return (
     <>
@@ -57,11 +68,7 @@ const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProp
             </LayersControl.BaseLayer>
           ))}
 
-          {layerGroupChildren?.map((child, index) => (
-            <LayersControl.Overlay key={child?.key || index} name={child.title}>
-              <LayerGroup>{child.children}</LayerGroup>
-            </LayersControl.Overlay>
-          ))}
+          {layerGroupChildrenMemo}
         </LayersControl>
         {children}
       </MapContainer>

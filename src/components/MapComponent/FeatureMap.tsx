@@ -1,9 +1,10 @@
 import L from "leaflet"
-import React, { useMemo, useCallback, useEffect, useState } from "react"
+import React, { useMemo, useCallback, useEffect, useState, useContext } from "react"
 
 import MapComponent, { LayerGroupChild, MapComponentProps } from "../../components/MapComponent/MapComponent.tsx"
 import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer.tsx"
-import { GeoJsonFeature } from "../../data/types"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
+import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
 import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson.tsx"
@@ -15,6 +16,8 @@ interface FeatureMapProps extends MapComponentProps {
 }
 
 export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapProps): React.ReactNode => {
+  const { savedFeatures } = useContext(SavedFeaturesContext)!
+
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -30,26 +33,58 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
 
   useEffect(() => {
     if (!overlayMarkers.loading && !overlayMarkers.error) {
-      setOverlays(Object.entries(geoJsonOverlaySources).map(([filename, tabMapping]) => {
-        const data = overlayMarkers[filename]
-        const layerName = data.properties.style.layerName
+      const layerNames: string[] = []
 
+      setOverlays((prev: LayerGroupChild[]) => {
+        const newOverlays = Object.entries(geoJsonOverlaySources).map(([filename, tabMapping]) => {
+          const data = overlayMarkers[filename]
+          const layerName = data.properties.style.layerName
+          layerNames.push(layerName)
+
+          return {
+            id: layerName,
+            title: layerName,
+            children: (
+              <StyledGeoJson
+                data={data}
+                popupTabMapping={tabMapping}
+                contextMenuHandler={onContextMenuHandler}
+                popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
+              />
+            ),
+          }
+        })
+        const existingOverlays = [...prev.filter((item) => !layerNames.includes(item.id))]
+        return [...existingOverlays, ...newOverlays]
+      })
+    }
+  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler])
+
+  useEffect(() => {
+    setOverlays((prev: LayerGroupChild[]) => [
+      ...prev.filter((item) => !Object.keys(savedFeatures).some((key) => item.id === `- ${key}`)),
+      ...Object.entries(savedFeatures).map(([category, features]) => {
+        const layerName = `- ${category}`
+        const data: GeoJsonCollection = {
+          type: "FeatureCollection",
+          features: features,
+          properties: {},
+        }
         return {
-          key: layerName,
+          id: layerName,
           title: layerName,
           children: (
             <StyledGeoJson
+              key={Date.now()}
               data={data}
-              popupTabMapping={tabMapping}
               contextMenuHandler={onContextMenuHandler}
               popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
             />
           ),
         }
-      },
-      ))
-    }
-  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler])
+      }),
+    ])
+  }, [savedFeatures, onContextMenuHandler])
 
   return (
     <>

@@ -1,11 +1,12 @@
 import L from "leaflet"
-import React, { useCallback } from "react"
+import React, { useCallback, useMemo } from "react"
 import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
 import { GeoJsonFeature, GeoJsonCollection } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import createCustomIcon from "../../utils/createCustomIcon.tsx"
+import styles from "../PopupContent/PopupContent.module.css"
 import PopupContent from "../PopupContent/PopupContent.tsx"
 
 export interface onPopupOpenProps {
@@ -27,7 +28,7 @@ export interface popupProps {
 
 interface StyleGeoJsonProps {
   data: GeoJsonCollection | null
-  popupTabMapping: TTabMapping
+  popupTabMapping?: TTabMapping
   popupOpenHandler?: ({ feature, layer, popupTabMapping }: onPopupOpenProps) => void
   contextMenuHandler?: ({ event, feature }: contextMenuHandlerProps) => void
   popupProps?: popupProps
@@ -41,6 +42,12 @@ const StyledGeoJson = ({ data, popupTabMapping, popupOpenHandler, contextMenuHan
     const customIcon = createCustomIcon(iconName, iconColor, innerIconColor)
     return L.marker(latlng, { icon: customIcon })
   }, [])
+
+  const defaultTabMapping: TTabMapping = useMemo(() => (
+    {
+      General: ["name", "url", { key: "description", className: styles.scrollableContent }],
+    }
+  ), [])
 
   const defaultOnPopupOpen = useCallback(({ feature, layer, popupTabMapping }: onPopupOpenProps) => {
     // Get the popup element
@@ -59,6 +66,7 @@ const StyledGeoJson = ({ data, popupTabMapping, popupOpenHandler, contextMenuHan
   }, [])
 
   const onPopupOpenHandler = popupOpenHandler || defaultOnPopupOpen
+  const tabMapping = popupTabMapping || defaultTabMapping
 
   return (
     <GeoJSON
@@ -74,7 +82,7 @@ const StyledGeoJson = ({ data, popupTabMapping, popupOpenHandler, contextMenuHan
 
           // Add an event listener for when the popup opens
           layer.on("popupopen", () => {
-            onPopupOpenHandler({ feature, layer, popupTabMapping })
+            onPopupOpenHandler({ feature, layer, popupTabMapping: tabMapping })
           })
 
           if (contextMenuHandler) {
