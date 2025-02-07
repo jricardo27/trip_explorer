@@ -8,12 +8,12 @@ import MapContextMenu from "../../components/MapComponent/MapContextMenu.tsx"
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
 
-interface iWAContextMenuProps {
+interface FeatureMapContextMenuProps {
   menuLatLng?: L.LatLng | undefined
   selectedFeature: GeoJsonFeature | null
 }
 
-const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
+const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.ReactNode => {
   const { addFeature } = useContext(SavedFeaturesContext)!
 
   const getOrCreateFeature = (payload: object, selectedFeature: GeoJsonFeature | null): GeoJsonFeature => {
@@ -61,4 +61,4 @@ const WAContextMenu = ({ ...props }: iWAContextMenuProps): React.ReactNode => {
   )
 }
 
-export default WAContextMenu
+export default FeatureMapContextMenu

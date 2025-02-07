@@ -9,19 +9,19 @@ import MapStateManager from "./MapStateManager.tsx"
 import MapViewUpdater from "./MapViewUpdater.tsx"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
-interface LayerGroupChild {
+export interface LayerGroupChild {
   key: string
   title: string
   children: React.ReactNode
 }
 
-type TMapProps = {
+export interface MapComponentProps {
   children?: React.ReactNode
   center: TCoordinate | [number, number]
   layerGroupChildren?: LayerGroupChild[]
 }
 
-const MapComponent = ({ children, center, layerGroupChildren }: TMapProps): React.ReactElement => {
+const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProps): React.ReactElement => {
   const mapRef = useRef(null)
   const [activeBaseLayer] = useState("esriWorldStreetMap")
   const [mapState, setMapState] = useState({
