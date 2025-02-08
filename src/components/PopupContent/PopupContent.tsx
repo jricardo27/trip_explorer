@@ -30,7 +30,6 @@ const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactN
         return {
           original: url,
           thumbnail: url,
-          originalHeight: "300",
           originalTitle: title,
           thumbnailTitle: title,
         }
@@ -95,7 +94,7 @@ const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactN
 
       {/* Image slideshow */}
       {images.length > 0 && (
-        <div className={styles.imagesContainer}>
+        <div style={{ width: "450px" }}>
           <ImageGallery items={images} showNav={false} showPlayButton={false} />
         </div>
       )}

@@ -15,7 +15,3 @@
 .tabsContainer {
   flex: 1; /* Allow the tabs to take up remaining space */
 }
-
-.imagesContainer {
-  width: 450px;
-}
