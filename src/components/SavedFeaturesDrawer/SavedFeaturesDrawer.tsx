@@ -90,6 +90,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
             <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
               <FeatureList
                 features={savedFeatures[selectedTab] || []}
+                setSavedFeatures={setSavedFeatures}
                 selectedTab={selectedTab}
                 selectedFeature={selectedFeature}
                 setSelectedFeature={setSelectedFeature}

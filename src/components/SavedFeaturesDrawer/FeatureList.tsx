@@ -1,14 +1,16 @@
-import { List, ListItem, ListItemText, Collapse } from "@mui/material"
-import React from "react"
+import { List, ListItem, ListItemText, Collapse, Button } from "@mui/material"
+import React, { useEffect, useState } from "react"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
+import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonFeature } from "../../data/types"
-import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
+import idxFeat, { idxSel } from "../../utils/idxFeat"
+import NoteEditor from "../NoteEditor/NoteEditor.tsx"
 
 import { SortableFeatureItem } from "./SortableFeatureItem"
 
 interface FeatureListProps {
   features: GeoJsonFeature[]
+  setSavedFeatures: (newState: SavedFeaturesStateType) => void
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
@@ -16,7 +18,52 @@ interface FeatureListProps {
   excludedProperties: string[]
 }
 
-export const FeatureList = ({ features, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu, excludedProperties }: FeatureListProps) => {
+export const FeatureList = ({
+  features,
+  setSavedFeatures,
+  selectedTab,
+  selectedFeature,
+  setSelectedFeature,
+  handleContextMenu,
+  excludedProperties,
+}: FeatureListProps) => {
+  const [editorVisible, setEditorVisible] = useState(false)
+  const [notes, setNotes] = useState("")
+
+  const openCloseEditor = (feature: GeoJsonFeature) => {
+    if (!editorVisible) {
+      setNotes(feature.properties.tripNotes || "")
+      setEditorVisible(true)
+    } else {
+      setEditorVisible(false)
+      setNotes("")
+    }
+  }
+
+  const handleNotesChange = (content: string) => {
+    setNotes(content)
+  }
+
+  const handleSaveNotes = () => {
+    if (selectedFeature) {
+      setSavedFeatures((prev) => {
+        const newFeatures = [...prev[selectedTab]]
+        const index = newFeatures.findIndex((f, index) => idxFeat(index, f) === idxSel(selectedFeature))
+        if (index !== -1) {
+          newFeatures[index].properties.tripNotes = notes
+        }
+        return { ...prev, [selectedTab]: newFeatures }
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (!selectedFeature && editorVisible) {
+      setEditorVisible(false)
+      setNotes("")
+    }
+  }, [editorVisible, selectedFeature, setNotes, setEditorVisible])
+
   return (
     <List>
       {features.map((feature, index) => (
@@ -31,6 +78,17 @@ export const FeatureList = ({ features, selectedTab, selectedFeature, setSelecte
             handleContextMenu={handleContextMenu}
           />
           <Collapse in={idxSel(selectedFeature) === idxFeat(index, feature)} timeout="auto" unmountOnExit>
+            <ListItem sx={{ pl: 4 }}>
+              <Button onClick={() => openCloseEditor(feature)}>Add/edit notes</Button>
+            </ListItem>
+            {editorVisible && (
+              <>
+                <ListItem sx={{ pl: 4 }}>
+                  <NoteEditor key={idxFeat(index, feature)} initialText={notes} onChange={handleNotesChange} />
+                </ListItem>
+                <ListItem sx={{ pl: 4 }}><Button onClick={handleSaveNotes}>Save notes</Button></ListItem>
+              </>
+            )}
             <List component="div" disablePadding>
               {Object.entries(feature.properties || {})
                 .filter(([key]) => !excludedProperties.includes(key))

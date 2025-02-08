@@ -58,21 +58,32 @@ const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactN
             {tabValue === index && (
               <Box sx={{ p: 3 }}>
                 {tabKeys.map((entry) => {
-                  const key = typeof entry === "string" ? entry : entry.key
-                  const className = typeof entry === "string" ? "" : entry.className
-                  let value = feature.properties[key]
+                  if (typeof entry === "string") {
+                    const value = feature.properties[entry]
+
+                    return (
+                      <Typography key={entry} variant="subtitle1">
+                        <strong>{entry}:</strong>
+                        <span>{" "}{value}</span>
+                      </Typography>
+                    )
+                  }
+
+                  const className = entry.className || ""
+                  const isHtml = entry.isHtml || false
+                  let value = feature.properties[entry.key]
 
                   if (typeof value === "object" && value !== null) {
                     value = <pre>{JSON.stringify(value, null, 2)}</pre>
                   }
 
                   return (
-                    <div key={key} style={{ marginBottom: "16px" }}>
+                    <div key={entry.key} style={{ marginBottom: "8px" }}>
                       <Typography variant="subtitle1">
-                        <strong>{key}:</strong>
-                        {className === "" && (<span>{" "}{value}</span>)}
+                        <strong>{entry.key}:</strong>
                       </Typography>
-                      {className && value && <div className={className}><Typography>{value}</Typography></div>}
+                      {value && !isHtml && <Typography component="div" className={className}>{value}</Typography>}
+                      {value && isHtml && <Typography component="div" className={className} dangerouslySetInnerHTML={{ __html: value }} />}
                     </div>
                   )
                 })}

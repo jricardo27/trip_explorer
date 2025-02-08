@@ -7,6 +7,7 @@ import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
 import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
+import styles from "../PopupContent/PopupContent.module.css"
 import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson.tsx"
 
 import FeatureMapContextMenu from "./FeatureMapContextMenu.tsx"
@@ -79,6 +80,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
               data={data}
               contextMenuHandler={onContextMenuHandler}
               popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
+              popupTabMappingExtra={{ Notes: [{ key: "tripNotes", className: styles.scrollableContent, isHtml: true }] }}
             />
           ),
         }

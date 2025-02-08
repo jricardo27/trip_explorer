@@ -29,12 +29,20 @@ export interface popupProps {
 interface StyleGeoJsonProps {
   data: GeoJsonCollection | null
   popupTabMapping?: TTabMapping
+  popupTabMappingExtra?: TTabMapping
   popupOpenHandler?: ({ feature, layer, popupTabMapping }: onPopupOpenProps) => void
   contextMenuHandler?: ({ event, feature }: contextMenuHandlerProps) => void
   popupProps?: popupProps
 }
 
-const StyledGeoJson = ({ data, popupTabMapping, popupOpenHandler, contextMenuHandler, popupProps }: StyleGeoJsonProps): React.ReactNode => {
+const StyledGeoJson = ({
+  data,
+  popupTabMapping,
+  popupTabMappingExtra,
+  popupOpenHandler,
+  contextMenuHandler,
+  popupProps,
+}: StyleGeoJsonProps): React.ReactNode => {
   const pointToLayer = useCallback((feature: GeoJsonFeature, latlng: unknown) => {
     const iconName = feature.properties.style?.icon || "fa/FaMapMarker"
     const iconColor = feature.properties.style?.color || "grey"
@@ -66,7 +74,7 @@ const StyledGeoJson = ({ data, popupTabMapping, popupOpenHandler, contextMenuHan
   }, [])
 
   const onPopupOpenHandler = popupOpenHandler || defaultOnPopupOpen
-  const tabMapping = popupTabMapping || defaultTabMapping
+  const tabMapping = Object.assign({}, popupTabMapping || defaultTabMapping, popupTabMappingExtra || {})
 
   return (
     <GeoJSON
