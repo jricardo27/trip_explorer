@@ -1,27 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { LayerGroup, LayersControl, MapContainer, TileLayer } from "react-leaflet"
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { LayersControl, MapContainer, TileLayer } from "react-leaflet"
 
 import "leaflet/dist/leaflet.css"
 import { TCoordinate } from "../../data/types"
+import { TLayerOverlay } from "../../data/types/TLayerOverlay"
 
 import { BaseLayers } from "./BaseLayers"
 import MapStateManager from "./MapStateManager.tsx"
 import MapViewUpdater from "./MapViewUpdater.tsx"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
-export interface LayerGroupChild {
-  id: string
-  title: string
-  children: React.ReactNode
-}
-
 export interface MapComponentProps {
   children?: React.ReactNode
   center: TCoordinate | [number, number]
-  layerGroupChildren?: LayerGroupChild[]
+  overlays?: TLayerOverlay[]
 }
 
-const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProps): React.ReactElement => {
+const MapComponent = ({ children, center, overlays }: MapComponentProps): React.ReactElement => {
   const mapRef = useRef(null)
   const [activeBaseLayer] = useState("esriWorldStreetMap")
   const [mapState, setMapState] = useState({
@@ -40,14 +35,6 @@ const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProp
   useEffect(() => {
     restoreMapStateFromLocalStorage()
   }, [restoreMapStateFromLocalStorage])
-
-  const layerGroupChildrenMemo = useMemo(() => {
-    return layerGroupChildren?.map((child) => (
-      <LayersControl.Overlay key={child.id} name={child.title}>
-        <LayerGroup>{child.children}</LayerGroup>
-      </LayersControl.Overlay>
-    ))
-  }, [layerGroupChildren])
 
   return (
     <>
@@ -68,7 +55,7 @@ const MapComponent = ({ children, center, layerGroupChildren }: MapComponentProp
             </LayersControl.BaseLayer>
           ))}
 
-          {layerGroupChildrenMemo}
+          {overlays}
         </LayersControl>
         {children}
       </MapContainer>
