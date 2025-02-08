@@ -50,7 +50,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
                 data={data}
                 popupTabMapping={tabMapping}
                 contextMenuHandler={onContextMenuHandler}
-                popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
+                popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true, autoPanPadding: L.point(160, 500) }}
               />
             ),
           }
