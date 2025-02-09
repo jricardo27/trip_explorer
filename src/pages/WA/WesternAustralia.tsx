@@ -31,6 +31,12 @@ export const WesternAustralia = (): React.ReactNode => {
       "/markers/westernAustralia/western_australia_tourism.json": {
         General: ["name", "url", { key: "description", className: styles.scrollableContent }],
       },
+      "/markers/westernAustralia/western_australia_visitor_centre.json": {
+        General: [
+          "name", "type", { key: "description", className: styles.scrollableContent }, { key: "pointOfDifference", className: styles.scrollableContent },
+        ],
+        Info: ["address", "hours", "email", "website"],
+      },
       "/markers/westernAustralia/places.json": {
         General: ["name"],
       },
