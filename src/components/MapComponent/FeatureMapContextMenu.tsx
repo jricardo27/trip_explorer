@@ -3,20 +3,20 @@ import React, { useContext } from "react"
 import { toast } from "react-toastify"
 import { v4 as uuidv4 } from "uuid"
 
-import MenuOption from "../../components/ContextMenu/MenuOption.tsx"
-import MapContextMenu from "../../components/MapComponent/MapContextMenu.tsx"
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
+import MenuOption, { MenuOptionPayload } from "../../components/ContextMenu/MenuOption"
+import MapContextMenu from "../../components/MapComponent/MapContextMenu"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
 
 interface FeatureMapContextMenuProps {
-  menuLatLng?: L.LatLng | undefined
-  selectedFeature: GeoJsonFeature | null
+  menuLatLng?: L.LatLng | null
+  selectedFeature?: GeoJsonFeature | null
 }
 
 const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.ReactNode => {
   const { addFeature } = useContext(SavedFeaturesContext)!
 
-  const getOrCreateFeature = (payload: object, selectedFeature: GeoJsonFeature | null): GeoJsonFeature => {
+  const getOrCreateFeature = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null): GeoJsonFeature => {
     let feature = selectedFeature
 
     if (!feature) {
@@ -40,7 +40,7 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
     return feature
   }
 
-  const copyFeatureToClipboard = (payload: object, selectedFeature: GeoJsonFeature | null) => {
+  const copyFeatureToClipboard = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null) => {
     const feature = getOrCreateFeature(payload, selectedFeature)
 
     navigator.clipboard
@@ -53,10 +53,15 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       })
   }
 
+  if (!props.menuLatLng) return null
+
   return (
     <MapContextMenu latlng={props.menuLatLng}>
-      <MenuOption title="Copy feature to clipboard" handler={(payload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
-      <MenuOption title="Save feature to list" handler={(payload) => { addFeature("all", getOrCreateFeature(payload, props.selectedFeature)) }} />
+      <MenuOption title="Copy feature to clipboard" handler={(payload: MenuOptionPayload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
+      <MenuOption
+        title="Save feature to list"
+        handler={(payload: MenuOptionPayload) => { addFeature("all", getOrCreateFeature(payload, props.selectedFeature)) }}
+      />
     </MapContextMenu>
   )
 }

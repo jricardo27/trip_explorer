@@ -1,18 +1,17 @@
 import L from "leaflet"
 import React, { useMemo, useCallback, useEffect, useState, useContext } from "react"
-import { LayersControl } from "react-leaflet"
 
-import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent.tsx"
-import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer.tsx"
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext.ts"
+import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent"
+import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
 import { TLayerOverlay } from "../../data/types/TLayerOverlay"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
-import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers.ts"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers"
 import styles from "../PopupContent/PopupContent.module.css"
-import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson.tsx"
+import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson"
 
-import FeatureMapContextMenu from "./FeatureMapContextMenu.tsx"
+import FeatureMapContextMenu from "./FeatureMapContextMenu"
 
 interface FeatureMapProps extends MapComponentProps {
   geoJsonOverlaySources: Record<string, TTabMapping>
@@ -39,18 +38,19 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
     if (!overlayMarkers.loading && !overlayMarkers.error) {
       setFixedOverlays(Object.entries(geoJsonOverlaySources).map(([filename, tabMapping]): TLayerOverlay => {
         const data = overlayMarkers[filename]
-        const layerName = data.properties.style.layerName
+        const layerName = data?.properties?.style.layerName
 
-        return (
-          <LayersControl.Overlay key={layerName} name={layerName}>
+        return {
+          name: layerName,
+          children: (
             <StyledGeoJson
               data={data}
               popupTabMapping={tabMapping}
               contextMenuHandler={onContextMenuHandler}
               popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true, autoPanPadding: L.point(160, 500) }}
             />
-          </LayersControl.Overlay>
-        )
+          ),
+        }
       }))
     }
   }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler])
@@ -63,8 +63,9 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
         features: features,
         properties: {},
       }
-      return (
-        <LayersControl.Overlay key={layerName} name={layerName}>
+      return {
+        name: layerName,
+        children: (
           <StyledGeoJson
             key={Date.now()}
             data={data}
@@ -72,8 +73,8 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
             popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
             popupTabMappingExtra={{ Notes: [{ key: "tripNotes", className: styles.scrollableContent, isHtml: true }] }}
           />
-        </LayersControl.Overlay>
-      )
+        ),
+      }
     }))
   }, [savedFeatures, onContextMenuHandler])
 

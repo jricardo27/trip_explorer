@@ -1,22 +1,11 @@
-export interface GeoJsonGeometry {
-  type: "Point" | "MultiPoint" | "LineString" | "MultiLineString" | "Polygon" | "MultiPolygon"
-  coordinates: [number, number]
-}
+import { Feature, FeatureCollection, GeoJsonProperties as BaseGeoJsonProperties } from "geojson" // eslint-disable-line import/no-unresolved
 
-export interface GeoJsonProperties {
-  [key: string | Record<string, never>]: never
-}
+export type GeoJsonProperties = BaseGeoJsonProperties
 
-export interface GeoJsonFeature {
-  type: "Feature"
-  properties: GeoJsonProperties
-  geometry: GeoJsonGeometry
-}
+export type GeoJsonFeature = Feature
 
-export interface GeoJsonCollection {
-  type: "FeatureCollection"
-  properties: GeoJsonProperties
-  features: GeoJsonFeature[]
+export interface GeoJsonCollection extends FeatureCollection {
+  properties?: GeoJsonProperties
 }
 
 export type GeoJsonDataMap = Record<string, GeoJsonCollection | null>

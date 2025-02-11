@@ -21,6 +21,8 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
   handleRemoveCategory,
 }) => {
   const handleRename = useCallback(() => {
+    if (!contextMenuTab) return
+
     const newName = prompt("Enter new name for category", contextMenuTab)
     if (newName && newName !== contextMenuTab) handleRenameCategory(newName)
   }, [contextMenuTab, handleRenameCategory])

@@ -6,6 +6,8 @@ import {
   useSensor,
   useSensors,
   DragOverlay,
+  DragStartEvent,
+  DragEndEvent,
 } from "@dnd-kit/core"
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { ListItem, ListItemText } from "@mui/material"
@@ -13,13 +15,16 @@ import React, { useCallback, useState } from "react"
 
 import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
-import idxFeat from "../../utils/idxFeat.ts"
+import idxFeat from "../../utils/idxFeat"
 
 interface FeatureDragContextProps {
   children: React.ReactNode
   savedFeatures: { [key: string]: GeoJsonFeature[] }
   selectedTab: string
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void
+  setSavedFeatures: {
+    (newState: SavedFeaturesStateType): void
+    (updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
+  }
 }
 
 export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children, savedFeatures, selectedTab, setSavedFeatures }) => {
@@ -32,11 +37,11 @@ export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children
     }),
   )
 
-  const handleDragStart = useCallback((event) => {
-    setActiveId(event.active.id)
+  const handleDragStart = useCallback((event: DragStartEvent) => {
+    setActiveId(event.active.id.toString())
   }, [])
 
-  const handleDragEnd = useCallback((event) => {
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
     const { active, over } = event
 
     if (over && active.id !== over.id) {
@@ -47,7 +52,7 @@ export const FeatureDragContext: React.FC<FeatureDragContextProps> = ({ children
         let destinationList = selectedTab
 
         if (over.data?.current?.type === "tab") {
-          destinationList = over.id
+          destinationList = over.id.toString()
         }
 
         if (sourceList !== destinationList) {

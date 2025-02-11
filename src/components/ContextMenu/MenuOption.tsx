@@ -1,18 +1,26 @@
 import React from "react"
 
-import styles from "./ContextMenu.module.css" // Import CSS Module
+import { TCoordinate } from "../../data/types" // Import CSS Module
+
+import styles from "./ContextMenu.module.css"
+
+export interface MenuOptionPayload {
+  coordinates: TCoordinate
+}
 
 interface IMenuOptionsProps {
   title: string
-  handler: (arg0: object) => void
+  handler: (arg0: MenuOptionPayload) => void
   closeMenu?: () => void
-  payload?: object
+  payload?: MenuOptionPayload
 }
 
 const MenuOption = ({ ...props }: IMenuOptionsProps): React.ReactNode => {
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation()
-    props.handler(props.payload)
+    if (props.payload) {
+      props.handler(props.payload)
+    }
 
     if (props.closeMenu) {
       props.closeMenu()

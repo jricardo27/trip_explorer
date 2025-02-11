@@ -11,7 +11,10 @@ interface UseCategoryManagement {
 }
 
 export const useCategoryManagement = (
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void,
+  setSavedFeatures: {
+    (newState: SavedFeaturesStateType): void
+    (updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
+  },
   setSelectedTab: (newState: string) => void,
   savedFeatures: SavedFeaturesStateType,
   contextMenuTab: string | null,

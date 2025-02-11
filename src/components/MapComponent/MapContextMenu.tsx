@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useMapEvents } from "react-leaflet"
 
 import { TCoordinate, TPosition } from "../../data/types"
-import ContextMenu from "../ContextMenu/ContextMenu.tsx"
+import ContextMenu from "../ContextMenu/ContextMenu"
 
 interface IMapContextMenuProps {
   latlng?: L.LatLng | undefined

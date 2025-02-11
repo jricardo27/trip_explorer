@@ -6,8 +6,8 @@ import { TCoordinate } from "../../data/types"
 import { TLayerOverlay } from "../../data/types/TLayerOverlay"
 
 import { BaseLayers } from "./BaseLayers"
-import MapStateManager from "./MapStateManager.tsx"
-import MapViewUpdater from "./MapViewUpdater.tsx"
+import MapStateManager from "./MapStateManager"
+import MapViewUpdater from "./MapViewUpdater"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
 export interface MapComponentProps {
@@ -55,7 +55,11 @@ const MapComponent = ({ children, center, overlays }: MapComponentProps): React.
             </LayersControl.BaseLayer>
           ))}
 
-          {overlays}
+          {overlays && overlays.map((layerProps) => (
+            <LayersControl.Overlay key={layerProps.name} name={layerProps.name} checked={layerProps.checked}>
+              {layerProps.children}
+            </LayersControl.Overlay>
+          ))}
         </LayersControl>
         {children}
       </MapContainer>

@@ -1,7 +1,7 @@
 import { useCallback } from "react"
 
 import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext"
-import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
+import idxFeat, { idxSel } from "../../utils/idxFeat"
 
 interface UseFeatureManagement {
   handleDuplicate: () => void
@@ -10,7 +10,10 @@ interface UseFeatureManagement {
 }
 
 export const useFeatureManagement = (
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void,
+  setSavedFeatures: {
+    (newState: SavedFeaturesStateType): void
+    (updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
+  },
   selectedTab: string,
   contextMenuFeature: selectionInfo | null,
   removeFeature: (listName: string, selection: selectionInfo | null) => void,

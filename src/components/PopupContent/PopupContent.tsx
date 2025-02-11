@@ -5,7 +5,7 @@ import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
 
 import { GeoJsonFeature } from "../../data/types"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { TTabMapping, TTabMappingDynamicTab } from "../../data/types/TTabMapping"
 
 import styles from "./PopupContent.module.css"
 
@@ -17,13 +17,13 @@ interface iPopupContentProps {
 const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactNode => {
   const [tabValue, setTabValue] = useState(0)
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
   }
 
   // Extract images for the slideshow
-  const images = feature.properties.images
-    ? feature.properties.images.map((entry) => {
+  const images = feature.properties?.images
+    ? feature.properties.images.map((entry: string | { src: string; title: string }) => {
         const url = typeof entry === "string" ? entry : entry.src
         const title = typeof entry == "string" ? "" : entry.title
 
@@ -56,9 +56,9 @@ const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactN
           >
             {tabValue === index && (
               <Box sx={{ p: 3 }}>
-                {tabKeys.map((entry) => {
+                {tabKeys.map((entry: string | TTabMappingDynamicTab) => {
                   if (typeof entry === "string") {
-                    const value = feature.properties[entry]
+                    const value = feature.properties ? feature.properties[entry] : ""
 
                     return (
                       <Typography key={entry} variant="subtitle1">
@@ -70,7 +70,7 @@ const PopupContent = ({ feature, tabMapping }: iPopupContentProps): React.ReactN
 
                   const className = entry.className || ""
                   const isHtml = entry.isHtml || false
-                  let value = feature.properties[entry.key]
+                  let value = feature.properties ? feature.properties[entry.key] : ""
 
                   if (typeof value === "object" && value !== null) {
                     value = <pre>{JSON.stringify(value, null, 2)}</pre>

@@ -4,7 +4,7 @@ import { useMap } from "react-leaflet"
 function ZoomLevelDisplay(): React.ReactNode {
   const map = useMap()
   const [zoomLevel, setZoomLevel] = useState(map.getZoom())
-  const style = {
+  const style: React.CSSProperties = {
     background: "white",
     bottom: "10px",
     color: "black",

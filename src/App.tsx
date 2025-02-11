@@ -1,8 +1,8 @@
 import React from "react"
 
 import "./App.css"
-import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider.tsx"
-import { WesternAustralia } from "./pages/WA/WesternAustralia.tsx"
+import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
+import { WesternAustralia } from "./pages/WA/WesternAustralia"
 
 function App(): React.ReactNode {
   return (

@@ -1,6 +1,6 @@
-import { GenIcon } from "react-icons"
+import { GenIcon, IconBaseProps } from "react-icons"
 
-export const MarkerIcon = (props) => {
+export const MarkerIcon = (props: IconBaseProps) => {
   return GenIcon(
     {
       tag: "svg",

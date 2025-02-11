@@ -1,7 +1,7 @@
 import { Menu, MenuItem } from "@mui/material"
 import React from "react"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
+import { selectionInfo } from "../../contexts/SavedFeaturesContext"
 
 interface FeatureContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null

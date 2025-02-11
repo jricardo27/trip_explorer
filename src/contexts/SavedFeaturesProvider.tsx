@@ -40,9 +40,13 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
     saveToLocalStorage()
   }, [savedFeatures, saveToLocalStorage])
 
-  const setSavedFeatures = useCallback((newState: SavedFeaturesStateType) => {
-    setSavedFeaturesState(newState)
-  }, [])
+  const setSavedFeatures = useCallback((arg: SavedFeaturesStateType | ((prev: SavedFeaturesStateType) => SavedFeaturesStateType)) => {
+    if (typeof arg === "function") {
+      setSavedFeaturesState((prevState: SavedFeaturesStateType) => arg(prevState))
+    } else {
+      setSavedFeaturesState(arg)
+    }
+  }, [setSavedFeaturesState])
 
   // Function to add a feature to a specific list, but not to 'all' by default
   const addFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
@@ -66,7 +70,7 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
   }, [setSavedFeatures])
 
   // Function to remove a feature from a specific list
-  const removeFeature = useCallback((listName: string, selection: selectionInfo) => {
+  const removeFeature = useCallback((listName: string, selection: selectionInfo | null) => {
     if (!selection) {
       console.error("No selection info when trying to remove feature")
       return
@@ -83,8 +87,8 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
 
   // Function to update a feature in all lists where it exists
   const updateFeature = useCallback((oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => {
-    setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
-      const newFeatures: SavedFeaturesStateType = { ...prevFeatures }
+    setSavedFeatures((prevFeatures: SavedFeaturesStateType): SavedFeaturesStateType => {
+      const newFeatures = { ...prevFeatures }
       for (const key in newFeatures) {
         newFeatures[key] = newFeatures[key].map((item) =>
           item.properties?.id === oldFeature.properties?.id ? newFeature : item,

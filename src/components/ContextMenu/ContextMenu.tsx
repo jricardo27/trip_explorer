@@ -5,50 +5,40 @@ import { TPosition } from "../../data/types"
 import styles from "./ContextMenu.module.css"
 
 interface IContextMenuProps {
-  position: TPosition
+  position: TPosition | null
   onClose?: () => void
   children?: React.ReactNode
   payload?: object
 }
 
-const ContextMenu = ({ ...props }: IContextMenuProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true)
-  const payload = props.payload || {}
+const ContextMenu: React.FC<IContextMenuProps> = ({ position, onClose, children, payload = {} }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(!!position)
 
   useEffect(() => {
-    if (!props.position) {
-      setIsOpen(false)
-    } else {
-      setIsOpen(true)
-    }
-  }, [props.position])
+    setIsOpen(!!position)
+  }, [position])
 
   const closeMenu = () => {
     setIsOpen(false)
-
-    if (props.onClose) {
-      props.onClose()
-    }
+    onClose?.()
   }
 
-  return (
-    <>
-      {isOpen && (
+  return isOpen
+    ? (
         <div
           className={styles.contextMenu}
           style={{
             position: "absolute",
-            left: props.position.x,
-            top: props.position.y,
+            left: position?.x,
+            top: position?.y,
           }}
         >
-          {React.Children.map(props?.children, (child) =>
-            React.cloneElement(child, { closeMenu, payload }),
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child as React.ReactElement, { closeMenu, payload }),
           )}
         </div>
-      )}
-    </>
-  )
+      )
+    : null
 }
 
 export default ContextMenu

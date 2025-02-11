@@ -1,13 +1,13 @@
-import L from "leaflet"
+import L, { LeafletMouseEvent, PopupOptions } from "leaflet"
 import React, { useCallback, useMemo } from "react"
 import { createRoot } from "react-dom/client"
 import { GeoJSON } from "react-leaflet"
 
 import { GeoJsonFeature, GeoJsonCollection } from "../../data/types"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
-import createCustomIcon from "../../utils/createCustomIcon.tsx"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import createCustomIcon from "../../utils/createCustomIcon"
+import PopupContent from "../PopupContent/PopupContent"
 import styles from "../PopupContent/PopupContent.module.css"
-import PopupContent from "../PopupContent/PopupContent.tsx"
 
 export interface onPopupOpenProps {
   feature: GeoJsonFeature
@@ -16,14 +16,8 @@ export interface onPopupOpenProps {
 }
 
 export interface contextMenuHandlerProps {
-  event: L.Event
+  event: LeafletMouseEvent
   feature: GeoJsonFeature
-}
-
-export interface popupProps {
-  minWidth: number
-  maxHeight: number
-  keepInView: boolean
 }
 
 interface StyleGeoJsonProps {
@@ -32,7 +26,7 @@ interface StyleGeoJsonProps {
   popupTabMappingExtra?: TTabMapping
   popupOpenHandler?: ({ feature, layer, popupTabMapping }: onPopupOpenProps) => void
   contextMenuHandler?: ({ event, feature }: contextMenuHandlerProps) => void
-  popupProps?: popupProps
+  popupProps?: PopupOptions
 }
 
 const StyledGeoJson = ({
@@ -43,10 +37,10 @@ const StyledGeoJson = ({
   contextMenuHandler,
   popupProps,
 }: StyleGeoJsonProps): React.ReactNode => {
-  const pointToLayer = useCallback((feature: GeoJsonFeature, latlng: unknown) => {
-    const iconName = feature.properties.style?.icon || "fa/FaMapMarker"
-    const iconColor = feature.properties.style?.color || "grey"
-    const innerIconColor = feature.properties.style?.innerIconColor || iconColor
+  const pointToLayer = useCallback((feature: GeoJsonFeature, latlng: L.LatLng) => {
+    const iconName = feature.properties?.style?.icon || "fa/FaMapMarker"
+    const iconColor = feature.properties?.style?.color || "grey"
+    const innerIconColor = feature.properties?.style?.innerIconColor || iconColor
     const customIcon = createCustomIcon(iconName, iconColor, innerIconColor)
     return L.marker(latlng, { icon: customIcon })
   }, [])
@@ -78,7 +72,7 @@ const StyledGeoJson = ({
 
   return (
     <GeoJSON
-      data={data}
+      data={data as GeoJsonCollection}
       pointToLayer={pointToLayer}
       onEachFeature={(feature, layer) => {
         if (feature.properties) {

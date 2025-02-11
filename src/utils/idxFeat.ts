@@ -1,4 +1,4 @@
-import { selectionInfo } from "../contexts/SavedFeaturesContext.ts"
+import { selectionInfo } from "../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../data/types"
 
 const idxFeat = (index: number, feature: GeoJsonFeature) => {

@@ -1,19 +1,7 @@
-import "tinymce/tinymce"
-import "tinymce/icons/default"
-import "tinymce/models/dom/model"
-import "tinymce/plugins/advlist"
-import "tinymce/plugins/autolink"
-import "tinymce/plugins/charmap"
-import "tinymce/plugins/code"
-import "tinymce/plugins/fullscreen"
-import "tinymce/plugins/image"
-import "tinymce/plugins/link"
-import "tinymce/plugins/lists"
-import "tinymce/plugins/table"
-import "tinymce/skins/ui/oxide/skin.min.css"
-import "tinymce/themes/silver"
 import { Editor as TinyMCEEditor } from "@tinymce/tinymce-react"
 import React, { useState } from "react"
+
+import { TAny } from "../../data/types"
 
 import styles from "./NoteEditor.module.css"
 
@@ -24,7 +12,7 @@ interface EditorProps {
 
 const NoteEditor: React.FC<EditorProps> = ({ initialText, onChange }) => {
   const [contentEditor, setContentEditor] = useState(initialText)
-  const handleEditorChange = (content) => {
+  const handleEditorChange = (content: TAny) => {
     if (typeof content === "string") {
       setContentEditor(content)
       onChange(content)
@@ -41,9 +29,10 @@ const NoteEditor: React.FC<EditorProps> = ({ initialText, onChange }) => {
           menubar: false,
           plugins: ["lists", "advlist", "fullscreen", "autolink", "charmap", "code", "image", "link", "table"],
           toolbar: [
-            "undo redo | bold italic backcolor image charmap link" +
+            "undo redo bold italic backcolor image charmap link" +
             " | advlist bullist numlist outdent indent table | code  fullscreen",
           ],
+          skin_url: "/public/tinymce/skins/ui/oxide",
         }}
         value={contentEditor}
         onEditorChange={handleEditorChange}

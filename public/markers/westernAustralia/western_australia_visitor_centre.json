@@ -303,7 +303,7 @@
         "address": "2/1 Kennedy St Exmouth WA 6707",
         "type": "Cruises",
         "style": {
-          "icon": "gi/GiCruiseShip",
+          "icon": "gi/GiCruiser",
           "innerIconColor": "black"
         }
       }
@@ -5687,7 +5687,7 @@
         "address": "92 Southside Dr, Hillarys WA 6025",
         "type": "Cruises",
         "style": {
-          "icon": "gi/GiCruiseShip",
+          "icon": "gi/GiCruiser",
           "innerIconColor": "black"
         }
       }
@@ -8107,7 +8107,7 @@
         "address": "153 Arcadia Drive, (corner of Penguin Road), Shoalwater, WA, 6169, Australia",
         "type": "Cruises, Cruises, Sailing and Water Tours",
         "style": {
-          "icon": "gi/GiCruiseShip",
+          "icon": "gi/GiCruiser",
           "innerIconColor": "black"
         }
       }

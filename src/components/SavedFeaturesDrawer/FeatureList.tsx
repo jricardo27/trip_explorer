@@ -1,16 +1,19 @@
 import { List, ListItem, ListItemText, Collapse, Button } from "@mui/material"
 import React, { useEffect, useState } from "react"
 
-import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
+import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
 import idxFeat, { idxSel } from "../../utils/idxFeat"
-import NoteEditor from "../NoteEditor/NoteEditor.tsx"
+import NoteEditor from "../NoteEditor/NoteEditor"
 
 import { SortableFeatureItem } from "./SortableFeatureItem"
 
 interface FeatureListProps {
   features: GeoJsonFeature[]
-  setSavedFeatures: (newState: SavedFeaturesStateType) => void
+  setSavedFeatures: {
+    (newState: SavedFeaturesStateType): void
+    (updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
+  }
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
@@ -32,7 +35,7 @@ export const FeatureList = ({
 
   const openCloseEditor = (feature: GeoJsonFeature) => {
     if (!editorVisible) {
-      setNotes(feature.properties.tripNotes || "")
+      setNotes(feature.properties?.tripNotes || "")
       setEditorVisible(true)
     } else {
       setEditorVisible(false)
@@ -49,7 +52,7 @@ export const FeatureList = ({
       setSavedFeatures((prev) => {
         const newFeatures = [...prev[selectedTab]]
         const index = newFeatures.findIndex((f, index) => idxFeat(index, f) === idxSel(selectedFeature))
-        if (index !== -1) {
+        if (index !== -1 && newFeatures[index].properties) {
           newFeatures[index].properties.tripNotes = notes
         }
         return { ...prev, [selectedTab]: newFeatures }

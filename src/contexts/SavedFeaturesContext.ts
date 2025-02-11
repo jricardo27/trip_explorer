@@ -13,9 +13,10 @@ export interface selectionInfo {
 export type SavedFeaturesContextType = {
   savedFeatures: SavedFeaturesStateType
   addFeature: (listName: string, feature: GeoJsonFeature) => void
-  removeFeature: (listName: string, selection: selectionInfo) => void
+  removeFeature: (listName: string, selection: selectionInfo | null) => void
   updateFeature: (oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => void
-  setSavedFeatures: (newState: (prev: SavedFeaturesStateType) => SavedFeaturesStateType) => void
+  setSavedFeatures(newState: SavedFeaturesStateType): void
+  setSavedFeatures(updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
   saveToLocalStorage: () => void
   loadFromLocalStorage: () => void
 }

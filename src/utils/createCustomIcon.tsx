@@ -1,31 +1,29 @@
 import L from "leaflet"
 import React from "react"
 import { renderToString } from "react-dom/server"
-import { IconType } from "react-icons"
-import * as bsIcons from "react-icons/bs" // Bootstrap Icons
-import * as faIcons from "react-icons/fa" // FontAwesome
-import * as giIcons from "react-icons/gi" // Game Icons
-import * as hiIcons from "react-icons/hi" // Heroicons
-import * as mdIcons from "react-icons/md" // Material Design
-import * as tbIcons from "react-icons/tb" // Tabler
+import { BsBrightnessAltHigh, BsFillCarFrontFill, BsFuelPump, BsHouseExclamation, BsImage } from "react-icons/bs"
+import { FaCampground, FaCity, FaMapMarker, FaTheaterMasks, FaWineBottle } from "react-icons/fa"
+import { GiBunkBeds, GiBus, GiCruiser, GiElephant, GiHelicopter, GiJourney, GiTicket } from "react-icons/gi"
+import { MdFestival, MdHotel, MdKayaking, MdLocationCity, MdOutlineHiking, MdOutlinePark, MdOutlineTour, MdRestaurant } from "react-icons/md"
+import { TbAirBalloon } from "react-icons/tb"
 
 import { MarkerIcon } from "../assets/MarkerIcon"
 
-type IconLibrary = Record<string, IconType>
-type IconMapping = Record<string, IconLibrary>
+type IconType = React.ComponentType<{ size: number; color: string }>
 
-const iconMapping: IconMapping = {
-  bs: bsIcons,
-  fa: faIcons,
-  gi: giIcons,
-  hi: hiIcons,
-  md: mdIcons,
-  tb: tbIcons,
+type IconLibrary = Record<string, IconType>
+
+const iconMapping: Record<string, IconLibrary> = {
+  bs: { BsBrightnessAltHigh, BsFillCarFrontFill, BsFuelPump, BsHouseExclamation, BsImage },
+  fa: { FaCampground, FaCity, FaMapMarker, FaTheaterMasks, FaWineBottle },
+  gi: { GiBunkBeds, GiBus, GiCruiser, GiElephant, GiHelicopter, GiJourney, GiTicket },
+  md: { MdFestival, MdHotel, MdKayaking, MdLocationCity, MdOutlineHiking, MdOutlinePark, MdOutlineTour, MdRestaurant },
+  tb: { TbAirBalloon },
 }
 
-const createCustomIcon = (iconName: string, iconColor: string = "grey", innerIconColor: string = "grey"): React.ReactNode => {
+const createCustomIcon = (iconName: string, iconColor: string = "grey", innerIconColor: string = "grey"): L.DivIcon => {
   const [iconSet, iconLibName] = iconName.split("/")
-  const IconComponent = iconMapping[iconSet][iconLibName]
+  const IconComponent = iconMapping[iconSet]?.[iconLibName as keyof typeof iconMapping[string]]
 
   if (!IconComponent) {
     console.error(`Icon "${iconName}" not found in "${iconSet}" set`)

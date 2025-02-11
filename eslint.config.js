@@ -10,7 +10,7 @@ import tseslint from "typescript-eslint" // eslint-disable-line import/no-unreso
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ["**/package.json", "**/package-lock.json"],
+    ignores: ["**/package.json", "**/package-lock.json", "public/tinymce/**/*", "src/geojson-to-kml.d.ts"],
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,

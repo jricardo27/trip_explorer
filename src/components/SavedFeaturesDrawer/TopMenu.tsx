@@ -10,7 +10,7 @@ import { useCallback } from "react"
 
 import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
-import formatFeature from "../../utils/formatFeature.ts"
+import formatFeature from "../../utils/formatFeature"
 
 interface TopMenuProps {
   savedFeatures: SavedFeaturesStateType

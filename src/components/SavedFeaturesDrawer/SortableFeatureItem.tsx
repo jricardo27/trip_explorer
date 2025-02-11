@@ -4,9 +4,9 @@ import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
 import React from "react"
 import { MdDragIndicator } from "react-icons/md"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext.ts"
+import { selectionInfo } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
-import idxFeat, { idxSel } from "../../utils/idxFeat.ts"
+import idxFeat, { idxSel } from "../../utils/idxFeat"
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature
@@ -43,8 +43,7 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
     <ListItem
       ref={setNodeRef}
       style={style}
-      button="true"
-      onClick={(event) => {
+      onClick={(event: React.MouseEvent) => {
         event.stopPropagation()
         setSelectedFeature(isSelected ? null : selection)
       }}
@@ -52,6 +51,7 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
         handleContextMenu(event, selection)
         event.stopPropagation()
       }}
+      {...{ button: "true" }}
     >
       <ListItemIcon>
         <IconButton

@@ -46,7 +46,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
 
   const drawerWidth = isMd ? "30%" : isSm ? "50%" : "80%"
 
-  const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = useCallback((_event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
     setSelectedFeature(null)
   }, [setSelectedFeature])

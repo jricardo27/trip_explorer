@@ -1,7 +1,7 @@
 import { Tabs } from "@mui/material"
 import React from "react"
 
-import DroppableTab from "./DroppableTab.tsx"
+import DroppableTab from "./DroppableTab"
 
 interface TabListProps {
   tabs: string[]

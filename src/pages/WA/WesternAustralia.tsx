@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap.tsx"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 
 export const WesternAustralia = (): React.ReactNode => {
