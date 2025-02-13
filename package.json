@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node postbuild.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -49,6 +49,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "replace-in-file": "^8.3.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",

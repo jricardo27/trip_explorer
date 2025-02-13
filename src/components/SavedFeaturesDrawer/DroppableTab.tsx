@@ -20,7 +20,9 @@ const DroppableTab: React.FC<DroppableTabProps> = ({ tab, onContextMenu, value, 
       value={value}
       onContextMenu={onContextMenu}
       sx={{
-        border: (node as never)?.rect ? "1px dashed #ccc" : "none", // Visual feedback when draggable item is over
+        // Visual feedback when draggable item is over
+        // @ts-expect-error rect is not defined in node
+        border: node?.rect ? "1px dashed #ccc" : "none",
       }}
       {...otherProps}
     />

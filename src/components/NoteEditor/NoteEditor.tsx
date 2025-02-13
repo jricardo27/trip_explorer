@@ -32,7 +32,7 @@ const NoteEditor: React.FC<EditorProps> = ({ initialText, onChange }) => {
             "undo redo bold italic backcolor image charmap link" +
             " | advlist bullist numlist outdent indent table | code  fullscreen",
           ],
-          skin_url: "/public/tinymce/skins/ui/oxide",
+          skin_url: "./tinymce/skins/ui/oxide",
         }}
         value={contentEditor}
         onEditorChange={handleEditorChange}

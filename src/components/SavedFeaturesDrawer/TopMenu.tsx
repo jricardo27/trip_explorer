@@ -2,7 +2,7 @@ import Button from "@mui/material/Button"
 import Fade from "@mui/material/Fade"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
-import { saveAs } from "file-saver"
+import FileSaver from "file-saver"
 import tokml from "geojson-to-kml"
 import JSZip from "jszip"
 import * as React from "react"
@@ -46,7 +46,7 @@ const TopMenu = ({ savedFeatures }: TopMenuProps) => {
     })
 
     zip.generateAsync({ type: "blob" }).then((blob) => {
-      saveAs(blob, "trip_explorer_features.json.zip")
+      FileSaver.saveAs(blob, "trip_explorer_features.json.zip")
     })
   }, [savedFeatures])
 
@@ -64,7 +64,7 @@ const TopMenu = ({ savedFeatures }: TopMenuProps) => {
     })
 
     zip.generateAsync({ type: "blob" }).then((blob) => {
-      saveAs(blob, "trip_explorer_features.kml.zip")
+      FileSaver.saveAs(blob, "trip_explorer_features.kml.zip")
     })
   }, [savedFeatures])
 
