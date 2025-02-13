@@ -27,6 +27,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
   const [dynamicOverlays, setDynamicOverlays] = useState<TLayerOverlay[]>([])
   const overlayFilePaths = useMemo(() => (Object.keys(geoJsonOverlaySources)), [geoJsonOverlaySources])
   const overlayMarkers = useGeoJsonMarkers(overlayFilePaths)
+  const popupProps = useMemo(() => ({ minWidth: 900, maxHeight: 500, autoPanPadding: L.point(160, 500) }), [])
 
   const onContextMenuHandler = useCallback(({ event, feature }: contextMenuHandlerProps) => {
     L.DomEvent.stopPropagation(event)
@@ -47,13 +48,13 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
               data={data}
               popupTabMapping={tabMapping}
               contextMenuHandler={onContextMenuHandler}
-              popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true, autoPanPadding: L.point(160, 500) }}
+              popupProps={popupProps}
             />
           ),
         }
       }))
     }
-  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler])
+  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps])
 
   useEffect(() => {
     setDynamicOverlays(Object.entries(savedFeatures).map(([category, features]): TLayerOverlay => {
@@ -70,13 +71,13 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
             key={Date.now()}
             data={data}
             contextMenuHandler={onContextMenuHandler}
-            popupProps={{ minWidth: 900, maxHeight: 500, keepInView: true }}
+            popupProps={popupProps}
             popupTabMappingExtra={{ Notes: [{ key: "tripNotes", className: styles.scrollableContent, isHtml: true }] }}
           />
         ),
       }
     }))
-  }, [savedFeatures, onContextMenuHandler])
+  }, [savedFeatures, onContextMenuHandler, popupProps])
 
   return (
     <>
