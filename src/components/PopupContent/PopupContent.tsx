@@ -18,9 +18,10 @@ export interface iPopupContentProps {
   feature: GeoJsonFeature
   tabMapping: TTabMapping
   containerProps?: iPopupContainerProps
+  bottomMenu?: React.ReactNode
 }
 
-const PopupContent = ({ feature, tabMapping, containerProps }: iPopupContentProps): React.ReactNode => {
+const PopupContent = ({ feature, tabMapping, containerProps, bottomMenu }: iPopupContentProps): React.ReactNode => {
   const [tabValue, setTabValue] = useState(0)
   const theme = useTheme()
   const isXs = useMediaQuery(theme.breakpoints.down("sm"))
@@ -46,93 +47,100 @@ const PopupContent = ({ feature, tabMapping, containerProps }: iPopupContentProp
     : []
 
   return (
-    <div style={{ display: "flex" }}>
-      <div className={styles.tabsContainer} style={{ height: containerProps?.height || "400px" }}>
-        {/* Tabs for properties */}
-        <Tabs value={tabValue} onChange={handleTabChange}>
-          {Object.keys(tabMapping).map((tabName) => (
-            <Tab key={tabName} label={tabName} />
-          ))}
-          {(isXs || isSm) && images.length > 0 && <Tab label="Gallery" />}
-        </Tabs>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "row", height: containerProps?.height || "400px" }}>
+        <div className={styles.tabsContainer}>
+          {/* Tabs for properties */}
+          <Tabs value={tabValue} onChange={handleTabChange}>
+            {Object.keys(tabMapping).map((tabName) => (
+              <Tab key={tabName} label={tabName} />
+            ))}
+            {(isXs || isSm) && images.length > 0 && <Tab label="Gallery" />}
+          </Tabs>
 
-        {/* Tab content */}
-        {Object.entries(tabMapping).map(([tabName, tabKeys], index) => (
-          <div
-            key={tabName}
-            role="tabpanel"
-            hidden={tabValue !== index}
-            id={`tabpanel-${index}`}
-          >
-            {tabValue === index && (
-              <Box sx={{ p: 1 }}>
-                {tabKeys.map((entry: string | TTabMappingDynamicTab) => {
-                  if (!feature.properties) return null
+          {/* Tab content */}
+          {Object.entries(tabMapping).map(([tabName, tabKeys], index) => (
+            <div
+              key={tabName}
+              role="tabpanel"
+              hidden={tabValue !== index}
+              id={`tabpanel-${index}`}
+            >
+              {tabValue === index && (
+                <Box sx={{ p: 1 }}>
+                  {tabKeys.map((entry: string | TTabMappingDynamicTab) => {
+                    if (!feature.properties) return null
 
-                  let value = null
-                  let propTitle: string | number = ""
-                  let className = ""
-                  let isHtml = false
-                  let isFlat = true
+                    let value = null
+                    let propTitle: string | number = ""
+                    let className = ""
+                    let isHtml = false
+                    let isFlat = true
 
-                  if (typeof entry === "string") {
-                    propTitle = entry
-                    value = feature.properties[entry]
-                  } else {
-                    propTitle = entry.key
-                    value = feature.properties[entry.key]
-                    className = entry.className || ""
-                    isHtml = entry.isHtml || false
-                    isFlat = false
-                  }
+                    if (typeof entry === "string") {
+                      propTitle = entry
+                      value = feature.properties[entry]
+                    } else {
+                      propTitle = entry.key
+                      value = feature.properties[entry.key]
+                      className = entry.className || ""
+                      isHtml = entry.isHtml || false
+                      isFlat = false
+                    }
 
-                  if (isFlat && typeof value === "string") {
+                    if (isFlat && typeof value === "string") {
+                      return (
+                        <Typography key={propTitle} variant="subtitle1">
+                          <strong>{propTitle}:</strong>
+                          <span>{" "}{value}</span>
+                        </Typography>
+                      )
+                    } else if (typeof value === "object" && value !== null) {
+                      value = <pre>{JSON.stringify(value, null, 2)}</pre>
+                    }
+
                     return (
-                      <Typography key={propTitle} variant="subtitle1">
-                        <strong>{propTitle}:</strong>
-                        <span>{" "}{value}</span>
-                      </Typography>
+                      <div key={propTitle} style={{ marginBottom: "8px" }}>
+                        <Typography variant="subtitle1">
+                          <strong>{propTitle}:</strong>
+                        </Typography>
+                        {value && !isHtml && <Typography component="div" className={className}>{value}</Typography>}
+                        {value && isHtml && <Typography component="div" className={className} dangerouslySetInnerHTML={{ __html: value }} />}
+                      </div>
                     )
-                  } else if (typeof value === "object" && value !== null) {
-                    value = <pre>{JSON.stringify(value, null, 2)}</pre>
-                  }
+                  })}
+                </Box>
+              )}
+            </div>
+          ))}
 
-                  return (
-                    <div key={propTitle} style={{ marginBottom: "8px" }}>
-                      <Typography variant="subtitle1">
-                        <strong>{propTitle}:</strong>
-                      </Typography>
-                      {value && !isHtml && <Typography component="div" className={className}>{value}</Typography>}
-                      {value && isHtml && <Typography component="div" className={className} dangerouslySetInnerHTML={{ __html: value }} />}
-                    </div>
-                  )
-                })}
-              </Box>
-            )}
-          </div>
-        ))}
+          {/* Image gallery as a tab on small screens */}
+          {(isXs || isSm) && images.length > 0 && (
+            <div
+              role="tabpanel"
+              hidden={tabValue !== Object.keys(tabMapping).length}
+              id={`tabpanel-${Object.keys(tabMapping).length}`}
+              style={{ display: tabValue === Object.keys(tabMapping).length ? "block" : "none" }}
+            >
+              {tabValue === Object.keys(tabMapping).length && (
+                <Box sx={{ p: 1 }}>
+                  <ImageGallery items={images} showNav={false} showPlayButton={false} />
+                </Box>
+              )}
+            </div>
+          )}
+        </div>
 
-        {/* Image gallery as a tab on small screens */}
-        {(isXs || isSm) && images.length > 0 && (
-          <div
-            role="tabpanel"
-            hidden={tabValue !== Object.keys(tabMapping).length}
-            id={`tabpanel-${Object.keys(tabMapping).length}`}
-            style={{ display: tabValue === Object.keys(tabMapping).length ? "block" : "none" }}
-          >
-            {tabValue === Object.keys(tabMapping).length && (
-              <Box sx={{ p: 1 }}>
-                <ImageGallery items={images} showNav={false} showPlayButton={false} />
-              </Box>
-            )}
+        {/* Image slideshow */}
+        {!(isXs || isSm) && images.length > 0 && (
+          <div style={{ width: "50%", flex: 1 }}>
+            <ImageGallery items={images} showNav={false} showPlayButton={false} />
           </div>
         )}
       </div>
-
-      {/* Image slideshow */}
-      {!(isXs || isSm) && images.length > 0 && (
-        <div style={{ width: "50%", flex: 1, border: "1px solid #ccc" }}>
-          <ImageGallery items={images} showNav={false} showPlayButton={false} />
+      {bottomMenu && (
+        <div style={{ height: "30px", borderTop: "1px solid #ccc", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+          { bottomMenu }
         </div>
       )}
     </div>

@@ -1,6 +1,8 @@
 import { useMediaQuery, useTheme } from "@mui/material"
 import L, { PopupOptions } from "leaflet"
 import React, { useMemo, useCallback, useEffect, useState, useContext } from "react"
+import { MdAssignmentAdd } from "react-icons/md"
+import { toast } from "react-toastify"
 
 import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent"
 import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer"
@@ -20,7 +22,7 @@ interface FeatureMapProps extends MapComponentProps {
 }
 
 export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapProps): React.ReactNode => {
-  const { savedFeatures } = useContext(SavedFeaturesContext)!
+  const { addFeature, savedFeatures } = useContext(SavedFeaturesContext)!
 
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
@@ -59,6 +61,11 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
     setSelectedFeature(feature)
   }, [])
 
+  const onSaveFeatureToList = useCallback((feature: GeoJsonFeature) => {
+    addFeature("all", feature)
+    toast.success("Saved")
+  }, [addFeature])
+
   useEffect(() => {
     if (!overlayMarkers.loading && !overlayMarkers.error) {
       setFixedOverlays(Object.entries(geoJsonOverlaySources).map(([filename, tabMapping]): TLayerOverlay => {
@@ -74,12 +81,16 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
               contextMenuHandler={onContextMenuHandler}
               popupProps={popupProps}
               popupContainerProps={popupContainerProps}
+              popupActionButtons={[{
+                label: "Save",
+                startIcon: <MdAssignmentAdd />,
+                onClick: onSaveFeatureToList }]}
             />
           ),
         }
       }))
     }
-  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps, popupContainerProps])
+  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps, popupContainerProps, onSaveFeatureToList])
 
   useEffect(() => {
     setDynamicOverlays(Object.entries(savedFeatures).map(([category, features]): TLayerOverlay => {
