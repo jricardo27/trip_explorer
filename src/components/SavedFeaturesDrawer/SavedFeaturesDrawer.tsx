@@ -41,10 +41,11 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
     setSavedFeatures, selectedTab, contextMenuFeature, removeFeature)
 
   const theme = useTheme()
-  const isSm = useMediaQuery(theme.breakpoints.up("sm"))
-  const isMd = useMediaQuery(theme.breakpoints.up("md"))
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"))
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"))
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"))
 
-  const drawerWidth = isMd ? "30%" : isSm ? "50%" : "80%"
+  const drawerWidth = isMd ? "70%" : isSm ? "50%" : isXs ? "92%" : "50%"
 
   const handleTabChange = useCallback((_event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
