@@ -1,4 +1,5 @@
 import { Tabs, Tab, Box, Typography, useTheme, useMediaQuery } from "@mui/material"
+import { Variant } from "@mui/material/styles/createTypography"
 import React, { useState } from "react"
 import ImageGallery from "react-image-gallery"
 
@@ -76,6 +77,8 @@ const PopupContent = ({ feature, tabMapping, containerProps, bottomMenu }: iPopu
                     let className = ""
                     let isHtml = false
                     let isFlat = true
+                    let htmlComponent: React.ElementType = "div"
+                    let htmlVariant: Variant = "subtitle1"
 
                     if (typeof entry === "string") {
                       propTitle = entry
@@ -88,15 +91,17 @@ const PopupContent = ({ feature, tabMapping, containerProps, bottomMenu }: iPopu
                       isFlat = false
                     }
 
-                    if (isFlat && typeof value === "string") {
+                    if (isFlat && (typeof value === "string" || typeof value === "number" || typeof value === "boolean")) {
                       return (
                         <Typography key={propTitle} variant="subtitle1">
                           <strong>{propTitle}:</strong>
-                          <span>{" "}{value}</span>
+                          <span>{" "}{String(value)}</span>
                         </Typography>
                       )
                     } else if (typeof value === "object" && value !== null) {
-                      value = <pre>{JSON.stringify(value, null, 2)}</pre>
+                      value = JSON.stringify(value, null, 2)
+                      htmlComponent = "pre"
+                      htmlVariant = "body2"
                     }
 
                     return (
@@ -104,7 +109,7 @@ const PopupContent = ({ feature, tabMapping, containerProps, bottomMenu }: iPopu
                         <Typography variant="subtitle1">
                           <strong>{propTitle}:</strong>
                         </Typography>
-                        {value && !isHtml && <Typography component="div" className={className}>{value}</Typography>}
+                        {value && !isHtml && <Typography component={htmlComponent} variant={htmlVariant} className={className}>{String(value)}</Typography>}
                         {value && isHtml && <Typography component="div" className={className} dangerouslySetInnerHTML={{ __html: value }} />}
                       </div>
                     )
