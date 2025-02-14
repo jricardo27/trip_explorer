@@ -6,13 +6,14 @@ import { GeoJSON } from "react-leaflet"
 import { GeoJsonFeature, GeoJsonCollection } from "../../data/types"
 import { TTabMapping } from "../../data/types/TTabMapping"
 import createCustomIcon from "../../utils/createCustomIcon"
-import PopupContent from "../PopupContent/PopupContent"
+import PopupContent, { iPopupContainerProps } from "../PopupContent/PopupContent"
 import styles from "../PopupContent/PopupContent.module.css"
 
 export interface onPopupOpenProps {
   feature: GeoJsonFeature
   layer: L.Layer
   popupTabMapping: TTabMapping
+  popupContainerProps?: iPopupContainerProps
 }
 
 export interface contextMenuHandlerProps {
@@ -27,6 +28,7 @@ interface StyleGeoJsonProps {
   popupOpenHandler?: ({ feature, layer, popupTabMapping }: onPopupOpenProps) => void
   contextMenuHandler?: ({ event, feature }: contextMenuHandlerProps) => void
   popupProps?: PopupOptions
+  popupContainerProps?: iPopupContainerProps
 }
 
 const StyledGeoJson = ({
@@ -36,6 +38,7 @@ const StyledGeoJson = ({
   popupOpenHandler,
   contextMenuHandler,
   popupProps,
+  popupContainerProps,
 }: StyleGeoJsonProps): React.ReactNode => {
   const pointToLayer = useCallback((feature: GeoJsonFeature, latlng: L.LatLng) => {
     const iconName = feature.properties?.style?.icon || "fa/FaMapMarker"
@@ -51,7 +54,7 @@ const StyledGeoJson = ({
     }
   ), [])
 
-  const defaultOnPopupOpen = useCallback(({ feature, layer, popupTabMapping }: onPopupOpenProps) => {
+  const defaultOnPopupOpen = useCallback(({ feature, layer, popupTabMapping, popupContainerProps }: onPopupOpenProps) => {
     // Get the popup element
     const popup = layer.getPopup()
     if (popup) {
@@ -59,7 +62,7 @@ const StyledGeoJson = ({
       const container = L.DomUtil.create("div")
       const root = createRoot(container)
       root.render(
-        <PopupContent feature={feature as GeoJsonFeature} tabMapping={popupTabMapping} />,
+        <PopupContent feature={feature as GeoJsonFeature} tabMapping={popupTabMapping} containerProps={popupContainerProps} />,
       )
 
       // Set the popup content
@@ -84,7 +87,7 @@ const StyledGeoJson = ({
 
           // Add an event listener for when the popup opens
           layer.on("popupopen", () => {
-            onPopupOpenHandler({ feature, layer, popupTabMapping: tabMapping })
+            onPopupOpenHandler({ feature, layer, popupTabMapping: tabMapping, popupContainerProps: popupContainerProps })
           })
 
           if (contextMenuHandler) {

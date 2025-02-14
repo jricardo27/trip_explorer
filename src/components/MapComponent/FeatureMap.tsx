@@ -1,4 +1,5 @@
-import L from "leaflet"
+import { useMediaQuery, useTheme } from "@mui/material"
+import L, { PopupOptions } from "leaflet"
 import React, { useMemo, useCallback, useEffect, useState, useContext } from "react"
 
 import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent"
@@ -9,6 +10,7 @@ import { TLayerOverlay } from "../../data/types/TLayerOverlay"
 import { TTabMapping } from "../../data/types/TTabMapping"
 import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers"
 import styles from "../PopupContent/PopupContent.module.css"
+import { iPopupContainerProps } from "../PopupContent/PopupContent.tsx"
 import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson"
 
 import FeatureMapContextMenu from "./FeatureMapContextMenu"
@@ -27,7 +29,29 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
   const [dynamicOverlays, setDynamicOverlays] = useState<TLayerOverlay[]>([])
   const overlayFilePaths = useMemo(() => (Object.keys(geoJsonOverlaySources)), [geoJsonOverlaySources])
   const overlayMarkers = useGeoJsonMarkers(overlayFilePaths)
-  const popupProps = useMemo(() => ({ minWidth: 900, maxHeight: 500, autoPanPadding: L.point(160, 500) }), [])
+
+  const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"))
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"))
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"))
+  const [popupProps, setPopupProps] = useState<PopupOptions>({})
+  const [popupContainerProps, setPopupContainerProps] = useState<iPopupContainerProps>({})
+
+  useEffect(() => {
+    const width = isMd ? 600 : isSm ? 450 : isXs ? 275 : 900
+    const height = isMd ? 450 : isSm ? 400 : isXs ? 350 : 500
+
+    setPopupProps({
+      minWidth: width,
+      maxWidth: width,
+      maxHeight: height,
+      autoPanPadding: isMd ? L.point(100, 300) : isSm ? L.point(10, 420) : isXs ? L.point(50, 100) : L.point(160, 500),
+    })
+
+    setPopupContainerProps({
+      height: height,
+    })
+  }, [isXs, isSm, isMd, setPopupProps, setPopupContainerProps])
 
   const onContextMenuHandler = useCallback(({ event, feature }: contextMenuHandlerProps) => {
     L.DomEvent.stopPropagation(event)
@@ -49,12 +73,13 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
               popupTabMapping={tabMapping}
               contextMenuHandler={onContextMenuHandler}
               popupProps={popupProps}
+              popupContainerProps={popupContainerProps}
             />
           ),
         }
       }))
     }
-  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps])
+  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps, popupContainerProps])
 
   useEffect(() => {
     setDynamicOverlays(Object.entries(savedFeatures).map(([category, features]): TLayerOverlay => {
@@ -73,11 +98,12 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
             contextMenuHandler={onContextMenuHandler}
             popupProps={popupProps}
             popupTabMappingExtra={{ Notes: [{ key: "tripNotes", className: styles.scrollableContent, isHtml: true }] }}
+            popupContainerProps={popupContainerProps}
           />
         ),
       }
     }))
-  }, [savedFeatures, onContextMenuHandler, popupProps])
+  }, [savedFeatures, onContextMenuHandler, popupProps, popupContainerProps])
 
   return (
     <>
