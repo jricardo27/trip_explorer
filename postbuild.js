@@ -2,14 +2,9 @@ import { replaceInFile } from "replace-in-file"
 
 const replacements = [
   {
-    files: "dist/index.html",
-    from: /\.\/public\/tinymce\//g,
-    to: "./tinymce/",
-  },
-  {
     files: "dist/assets/*.js",
-    from: /\.\/public\/markers/g,
-    to: "./markers",
+    from: /"\/markers\//g,
+    to: '"./markers/',
   },
 ]
 
