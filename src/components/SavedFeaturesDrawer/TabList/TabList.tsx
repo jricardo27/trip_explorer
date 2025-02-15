@@ -10,7 +10,6 @@ interface TabListProps {
   handleTabContextMenu: (event: React.MouseEvent, tab: string) => void
 }
 
-export const DEFAULT_CATEGORY = "all"
 export const NULL_TAB = "--NULL-TAB--"
 
 export const TabList: React.FC<TabListProps> = ({ tabs, selectedTab, handleTabChange, handleTabContextMenu }) => {

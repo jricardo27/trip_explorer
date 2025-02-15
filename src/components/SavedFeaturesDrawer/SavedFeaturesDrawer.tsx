@@ -8,7 +8,7 @@ import {
 import React, { useState, useContext, useCallback, useEffect } from "react"
 import { MdMenu } from "react-icons/md"
 
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
 import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"

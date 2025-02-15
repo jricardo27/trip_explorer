@@ -21,6 +21,8 @@ export type SavedFeaturesContextType = {
   loadFromLocalStorage: () => void
 }
 
+export const DEFAULT_CATEGORY = "all"
+
 const SavedFeaturesContext = React.createContext<SavedFeaturesContextType | undefined>(undefined)
 
 export default SavedFeaturesContext

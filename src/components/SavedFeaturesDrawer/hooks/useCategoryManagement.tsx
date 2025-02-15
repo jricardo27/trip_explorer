@@ -1,7 +1,7 @@
 import { arrayMove } from "@dnd-kit/sortable"
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext"
+import { DEFAULT_CATEGORY, SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext"
 
 interface UseCategoryManagement {
   moveCategory: (direction: "up" | "down") => void
@@ -20,7 +20,7 @@ export const useCategoryManagement = (
   contextMenuTab: string | null,
 ): UseCategoryManagement => {
   const moveCategory = useCallback((direction: "up" | "down") => {
-    if (!contextMenuTab || contextMenuTab === "all") return
+    if (!contextMenuTab || contextMenuTab === DEFAULT_CATEGORY) return
 
     const keys = Object.keys(savedFeatures)
     const index = keys.indexOf(contextMenuTab)
@@ -42,7 +42,7 @@ export const useCategoryManagement = (
   }, [contextMenuTab, savedFeatures, setSavedFeatures])
 
   const handleRenameCategory = useCallback((newName: string) => {
-    if (contextMenuTab && contextMenuTab !== "all" && newName !== "all") {
+    if (contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && newName !== DEFAULT_CATEGORY) {
       setSavedFeatures((prev: SavedFeaturesStateType) => {
         const newSavedFeatures = { ...prev }
         newSavedFeatures[newName] = newSavedFeatures[contextMenuTab]
@@ -69,12 +69,12 @@ export const useCategoryManagement = (
   }, [savedFeatures, setSavedFeatures])
 
   const handleRemoveCategory = useCallback(() => {
-    if (contextMenuTab && contextMenuTab !== "all") {
+    if (contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY) {
       setSavedFeatures((prev: SavedFeaturesStateType) => {
         const featuresToMove = prev[contextMenuTab]
         const newSavedFeatures = { ...prev }
         delete newSavedFeatures[contextMenuTab]
-        newSavedFeatures.all = [...newSavedFeatures.all, ...featuresToMove]
+        newSavedFeatures[DEFAULT_CATEGORY] = [...newSavedFeatures[DEFAULT_CATEGORY], ...featuresToMove]
         return newSavedFeatures
       })
 

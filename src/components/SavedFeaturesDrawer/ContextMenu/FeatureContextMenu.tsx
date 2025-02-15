@@ -1,8 +1,7 @@
 import { Menu, MenuItem } from "@mui/material"
 import React from "react"
 
-import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
-import { DEFAULT_CATEGORY } from "../TabList/TabList"
+import { DEFAULT_CATEGORY, selectionInfo } from "../../../contexts/SavedFeaturesContext"
 
 interface FeatureContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null

@@ -6,7 +6,7 @@ import { toast } from "react-toastify"
 
 import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent"
 import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer"
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
 import { TLayerOverlay } from "../../data/types/TLayerOverlay"
 import { TTabMapping } from "../../data/types/TTabMapping"
@@ -62,7 +62,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
   }, [])
 
   const onSaveFeatureToList = useCallback((feature: GeoJsonFeature) => {
-    addFeature("all", feature)
+    addFeature(DEFAULT_CATEGORY, feature)
     toast.success("Saved")
   }, [addFeature])
 

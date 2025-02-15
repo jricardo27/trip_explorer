@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid"
 
 import MenuOption, { MenuOptionPayload } from "../../components/ContextMenu/MenuOption"
 import MapContextMenu from "../../components/MapComponent/MapContextMenu"
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../data/types"
 
 interface FeatureMapContextMenuProps {
@@ -60,7 +60,7 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       <MenuOption title="Copy feature to clipboard" handler={(payload: MenuOptionPayload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
       <MenuOption
         title="Save feature to list"
-        handler={(payload: MenuOptionPayload) => { addFeature("all", getOrCreateFeature(payload, props.selectedFeature)) }}
+        handler={(payload: MenuOptionPayload) => { addFeature(DEFAULT_CATEGORY, getOrCreateFeature(payload, props.selectedFeature)) }}
       />
     </MapContextMenu>
   )

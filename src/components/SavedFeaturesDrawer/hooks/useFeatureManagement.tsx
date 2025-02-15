@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType, selectionInfo } from "../../../contexts/SavedFeaturesContext"
+import { DEFAULT_CATEGORY, SavedFeaturesStateType, selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
 
 interface UseFeatureManagement {
@@ -28,11 +28,11 @@ export const useFeatureManagement = (
   }, [contextMenuFeature, selectedTab, setSavedFeatures])
 
   const handleRemoveFromList = useCallback(() => {
-    if (contextMenuFeature && selectedTab !== "all") {
+    if (contextMenuFeature && selectedTab !== DEFAULT_CATEGORY) {
       removeFeature(selectedTab, contextMenuFeature)
       setSavedFeatures((prev: SavedFeaturesStateType) => ({
         ...prev,
-        all: [...prev.all, contextMenuFeature.feature],
+        [DEFAULT_CATEGORY]: [...prev[DEFAULT_CATEGORY], contextMenuFeature.feature],
       }))
     }
   }, [contextMenuFeature, selectedTab, removeFeature, setSavedFeatures])
@@ -42,7 +42,7 @@ export const useFeatureManagement = (
       removeFeature(selectedTab, contextMenuFeature)
       setSavedFeatures((prev: SavedFeaturesStateType) => ({
         ...prev,
-        all: prev.all.filter((f, index) => idxFeat(index, f) !== idxSel(contextMenuFeature)),
+        [DEFAULT_CATEGORY]: prev[DEFAULT_CATEGORY].filter((f, index) => idxFeat(index, f) !== idxSel(contextMenuFeature)),
       }))
     }
   }, [contextMenuFeature, selectedTab, removeFeature, setSavedFeatures])

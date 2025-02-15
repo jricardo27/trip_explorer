@@ -1,7 +1,8 @@
 import { Menu, MenuItem } from "@mui/material"
 import React, { useCallback } from "react"
 
-import { DEFAULT_CATEGORY, NULL_TAB } from "../TabList/TabList.tsx"
+import { DEFAULT_CATEGORY } from "../../../contexts/SavedFeaturesContext"
+import { NULL_TAB } from "../TabList/TabList.tsx"
 
 interface CategoryContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null
