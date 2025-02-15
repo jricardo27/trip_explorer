@@ -1,7 +1,7 @@
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext"
-import idxFeat, { idxSel } from "../../utils/idxFeat"
+import { SavedFeaturesStateType, selectionInfo } from "../../../contexts/SavedFeaturesContext"
+import idxFeat, { idxSel } from "../../../utils/idxFeat"
 
 interface UseFeatureManagement {
   handleDuplicate: () => void

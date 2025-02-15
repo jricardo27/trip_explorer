@@ -13,9 +13,9 @@ import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { ListItem, ListItemText } from "@mui/material"
 import React, { useCallback, useState } from "react"
 
-import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonFeature } from "../../data/types"
-import idxFeat from "../../utils/idxFeat"
+import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext"
+import { GeoJsonFeature } from "../../../data/types"
+import idxFeat from "../../../utils/idxFeat"
 
 interface FeatureDragContextProps {
   children: React.ReactNode

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext"
+import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 
 interface UseFeatureSelection {
   selectedFeature: selectionInfo | null

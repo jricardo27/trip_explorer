@@ -1,7 +1,8 @@
 import { Menu, MenuItem } from "@mui/material"
 import React from "react"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext"
+import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
+import { DEFAULT_CATEGORY } from "../TabList/TabList"
 
 interface FeatureContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null
@@ -49,7 +50,7 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
       {contextMenuFeature && (
         <>
           <MenuItem onClick={wrapper(handleDuplicate)}>Duplicate</MenuItem>
-          {contextMenuFeature.category != "all" && <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>}
+          {contextMenuFeature.category != DEFAULT_CATEGORY && <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>}
           <MenuItem onClick={wrapper(handleRemoveCompletely)}>Remove</MenuItem>
         </>
       )}

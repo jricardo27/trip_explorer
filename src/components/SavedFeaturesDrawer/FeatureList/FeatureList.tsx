@@ -1,10 +1,10 @@
 import { List, ListItem, ListItemText, Collapse, Button } from "@mui/material"
 import React, { useEffect, useState } from "react"
 
-import { SavedFeaturesStateType, selectionInfo } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonFeature } from "../../data/types"
-import idxFeat, { idxSel } from "../../utils/idxFeat"
-import NoteEditor from "../NoteEditor/NoteEditor"
+import { SavedFeaturesStateType, selectionInfo } from "../../../contexts/SavedFeaturesContext"
+import { GeoJsonFeature } from "../../../data/types"
+import idxFeat, { idxSel } from "../../../utils/idxFeat"
+import NoteEditor from "../../NoteEditor/NoteEditor"
 
 import { SortableFeatureItem } from "./SortableFeatureItem"
 

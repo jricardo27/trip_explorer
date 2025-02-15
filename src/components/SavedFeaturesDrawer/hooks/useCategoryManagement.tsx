@@ -1,7 +1,7 @@
 import { arrayMove } from "@dnd-kit/sortable"
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
+import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext"
 
 interface UseCategoryManagement {
   moveCategory: (direction: "up" | "down") => void

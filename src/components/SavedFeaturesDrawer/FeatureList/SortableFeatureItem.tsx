@@ -4,9 +4,9 @@ import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
 import React from "react"
 import { MdDragIndicator } from "react-icons/md"
 
-import { selectionInfo } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonFeature } from "../../data/types"
-import idxFeat, { idxSel } from "../../utils/idxFeat"
+import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
+import { GeoJsonFeature } from "../../../data/types"
+import idxFeat, { idxSel } from "../../../utils/idxFeat"
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature

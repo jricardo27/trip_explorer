@@ -8,9 +8,9 @@ import JSZip from "jszip"
 import * as React from "react"
 import { useCallback } from "react"
 
-import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
-import formatFeature from "../../utils/formatFeature"
+import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext"
+import { GeoJsonCollection, GeoJsonFeature } from "../../../data/types"
+import formatFeature from "../../../utils/formatFeature"
 
 interface TopMenuProps {
   savedFeatures: SavedFeaturesStateType

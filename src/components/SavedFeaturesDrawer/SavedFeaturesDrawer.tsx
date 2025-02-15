@@ -10,16 +10,16 @@ import { MdMenu } from "react-icons/md"
 
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 
-import { CategoryContextMenu } from "./CategoryContextMenu"
-import { FeatureContextMenu } from "./FeatureContextMenu"
-import { FeatureDragContext } from "./FeatureDragContext"
-import { FeatureList } from "./FeatureList"
-import { TabList } from "./TabList"
-import TopMenu from "./TopMenu"
-import { useCategoryManagement } from "./useCategoryManagement"
-import { useContextMenu } from "./useContextMenu"
-import { useFeatureManagement } from "./useFeatureManagement"
-import { useFeatureSelection } from "./useFeatureSelection"
+import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
+import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
+import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
+import { FeatureList } from "./FeatureList/FeatureList"
+import { useCategoryManagement } from "./hooks/useCategoryManagement"
+import { useContextMenu } from "./hooks/useContextMenu"
+import { useFeatureManagement } from "./hooks/useFeatureManagement"
+import { useFeatureSelection } from "./hooks/useFeatureSelection"
+import { TabList } from "./TabList/TabList"
+import TopMenu from "./TopMenu/TopMenu"
 
 interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
@@ -30,7 +30,7 @@ interface SavedFeaturesDrawerProps {
 const excludedProperties = ["id", "images", "style"] as const
 
 const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
-  const [selectedTab, setSelectedTab] = useState<string>("all")
+  const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
 
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
