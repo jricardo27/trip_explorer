@@ -10,6 +10,9 @@ interface TabListProps {
   handleTabContextMenu: (event: React.MouseEvent, tab: string) => void
 }
 
+export const DEFAULT_CATEGORY = "all"
+export const NULL_TAB = "--NULL-TAB--"
+
 export const TabList: React.FC<TabListProps> = ({ tabs, selectedTab, handleTabChange, handleTabContextMenu }) => {
   return (
     <Tabs
@@ -17,6 +20,7 @@ export const TabList: React.FC<TabListProps> = ({ tabs, selectedTab, handleTabCh
       variant="scrollable"
       value={selectedTab}
       onChange={handleTabChange}
+      onContextMenu={(event) => handleTabContextMenu(event, NULL_TAB)}
       aria-label="Saved Features Tabs"
       sx={{ height: "100%" }}
     >

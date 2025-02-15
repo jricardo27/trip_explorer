@@ -1,6 +1,8 @@
 import { Menu, MenuItem } from "@mui/material"
 import React, { useCallback } from "react"
 
+import { DEFAULT_CATEGORY, NULL_TAB } from "./TabList.tsx"
+
 interface CategoryContextMenuProps {
   contextMenu: { mouseX: number; mouseY: number } | null
   contextMenuTab: string | null
@@ -21,17 +23,15 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
   handleRemoveCategory,
 }) => {
   const handleRename = useCallback(() => {
-    if (!contextMenuTab) return
+    if (!contextMenuTab || contextMenuTab === NULL_TAB) return
 
     const newName = prompt("Enter new name for category", contextMenuTab)
     if (newName && newName !== contextMenuTab) handleRenameCategory(newName)
   }, [contextMenuTab, handleRenameCategory])
 
-  const wrapper = (handler: (event: React.MouseEvent) => void) => {
-    return (event: React.MouseEvent) => {
-      handler(event)
-      handleClose()
-    }
+  const wrapper = (handler: (event: React.MouseEvent) => void) => (event: React.MouseEvent) => {
+    handler(event)
+    handleClose()
   }
 
   if (!contextMenuTab) return <></>
@@ -47,15 +47,15 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
           : undefined
       }
     >
-      {contextMenuTab && contextMenuTab !== "all" ? (
+      {contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && contextMenuTab !== NULL_TAB ? (
         <>
-          <MenuItem onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>
-          <MenuItem onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>
-          <MenuItem onClick={wrapper(handleRename)}>Rename Category</MenuItem>
-          <MenuItem onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
+          <MenuItem key="move-up" onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>
+          <MenuItem key="move-down" onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>
+          <MenuItem key="rename" onClick={wrapper(handleRename)}>Rename Category</MenuItem>
+          <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
         </>
       ) : null}
-      <MenuItem onClick={wrapper(handleAddCategory)}>Add New Category</MenuItem>
+      <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>Add New Category</MenuItem>
     </Menu>
   )
 }

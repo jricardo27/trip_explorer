@@ -18,6 +18,7 @@ export const useContextMenu = (): UseContextMenu => {
 
   const handleContextMenu = useCallback((event: React.MouseEvent, selection?: selectionInfo, tab?: string) => {
     event.preventDefault()
+    event.stopPropagation()
     setContextMenu({
       mouseX: event.clientX + 2,
       mouseY: event.clientY - 6,
