@@ -34,12 +34,18 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
     handleClose()
   }
 
+  const preventDefault = (event: React.MouseEvent) => {
+    event.preventDefault()
+    handleClose()
+  }
+
   if (!contextMenuTab) return <></>
 
   return (
     <Menu
       open={contextMenu !== null}
       onClose={handleClose}
+      onContextMenu={preventDefault}
       anchorReference="anchorPosition"
       anchorPosition={
         contextMenu !== null

@@ -29,10 +29,16 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
     }
   }
 
+  const preventDefault = (event: React.MouseEvent) => {
+    event.preventDefault()
+    handleClose()
+  }
+
   return (
     <Menu
       open={contextMenu !== null}
       onClose={handleClose}
+      onContextMenu={preventDefault}
       anchorReference="anchorPosition"
       anchorPosition={
         contextMenu !== null
