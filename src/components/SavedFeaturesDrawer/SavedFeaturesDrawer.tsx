@@ -81,7 +81,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
           }}
         >
           <Box sx={{ display: "flex", height: "50px", border: "1px solid #ccc" }}>
-            <TopMenu savedFeatures={savedFeatures} />
+            <TopMenu />
           </Box>
           <Box sx={{ display: "flex", height: "100%" }}>
             <Box sx={{ width: 150, bgcolor: "background.paper", borderRight: 1, borderColor: "divider" }}>
