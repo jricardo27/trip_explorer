@@ -55,7 +55,14 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
     })
   }, [isXs, isSm, isMd, setPopupProps, setPopupContainerProps])
 
-  const onContextMenuHandler = useCallback(({ event, feature }: contextMenuHandlerProps) => {
+  const onMapContextMenuHandler = useCallback((event: L.LeafletMouseEvent) => {
+    L.DomEvent.stopPropagation(event)
+    event.originalEvent.preventDefault()
+    setContextMenuPosition(event.latlng)
+    setSelectedFeature(null)
+  }, [])
+
+  const onFeatureContextMenuHandler = useCallback(({ event, feature }: contextMenuHandlerProps) => {
     L.DomEvent.stopPropagation(event)
     setContextMenuPosition(event.latlng)
     setSelectedFeature(feature)
@@ -78,7 +85,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
             <StyledGeoJson
               data={data}
               popupTabMapping={tabMapping}
-              contextMenuHandler={onContextMenuHandler}
+              contextMenuHandler={onFeatureContextMenuHandler}
               popupProps={popupProps}
               popupContainerProps={popupContainerProps}
               popupActionButtons={[{
@@ -90,7 +97,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
         }
       }))
     }
-  }, [geoJsonOverlaySources, overlayMarkers, onContextMenuHandler, popupProps, popupContainerProps, onSaveFeatureToList])
+  }, [geoJsonOverlaySources, overlayMarkers, onFeatureContextMenuHandler, popupProps, popupContainerProps, onSaveFeatureToList])
 
   useEffect(() => {
     setDynamicOverlays(Object.entries(savedFeatures).map(([category, features]): TLayerOverlay => {
@@ -106,7 +113,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
           <StyledGeoJson
             key={Date.now()}
             data={data}
-            contextMenuHandler={onContextMenuHandler}
+            contextMenuHandler={onFeatureContextMenuHandler}
             popupProps={popupProps}
             popupTabMappingExtra={{ Notes: [{ key: "tripNotes", className: styles.scrollableContent, isHtml: true }] }}
             popupContainerProps={popupContainerProps}
@@ -114,11 +121,11 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
         ),
       }
     }))
-  }, [savedFeatures, onContextMenuHandler, popupProps, popupContainerProps])
+  }, [savedFeatures, onFeatureContextMenuHandler, popupProps, popupContainerProps])
 
   return (
     <>
-      <MapComponent overlays={[...fixedOverlays, ...dynamicOverlays]} {...mapProps}>
+      <MapComponent overlays={[...fixedOverlays, ...dynamicOverlays]} contextMenuHandler={onMapContextMenuHandler} {...mapProps}>
         <FeatureMapContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
       </MapComponent>
       <SavedFeaturesDrawer

@@ -50,6 +50,8 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
 
   // Function to add a feature to a specific list, but not to 'all' by default
   const addFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
+    if (!feature) return
+
     setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
       const newList = [...(prevFeatures[listName] || []), feature]
 

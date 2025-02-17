@@ -16,11 +16,17 @@ interface FeatureMapContextMenuProps {
 const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.ReactNode => {
   const { addFeature } = useContext(SavedFeaturesContext)!
 
-  const getOrCreateFeature = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null): GeoJsonFeature => {
+  const getOrCreateFeature = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null): GeoJsonFeature | null => {
     let feature = selectedFeature
 
     if (!feature) {
       const newName = prompt("Enter new name for feature")
+
+      if (!newName) {
+        toast.warn("Action cancelled")
+        return null
+      }
+
       const coordinates = payload.coordinates
       const featureId = uuidv4()
 
@@ -37,11 +43,17 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       }
     }
 
+    toast.success("Saved")
+
     return feature
   }
 
   const copyFeatureToClipboard = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null) => {
     const feature = getOrCreateFeature(payload, selectedFeature)
+
+    if (!feature) {
+      return
+    }
 
     navigator.clipboard
       .writeText(JSON.stringify(feature, null, 2))
@@ -53,6 +65,16 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       })
   }
 
+  const addFeatureToList = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null) => {
+    const feature = getOrCreateFeature(payload, selectedFeature)
+
+    if (!feature) {
+      return
+    }
+
+    addFeature(DEFAULT_CATEGORY, feature)
+  }
+
   if (!props.menuLatLng) return null
 
   return (
@@ -60,7 +82,7 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       <MenuOption title="Copy feature to clipboard" handler={(payload: MenuOptionPayload) => { copyFeatureToClipboard(payload, props.selectedFeature) }} />
       <MenuOption
         title="Save feature to list"
-        handler={(payload: MenuOptionPayload) => { addFeature(DEFAULT_CATEGORY, getOrCreateFeature(payload, props.selectedFeature)) }}
+        handler={(payload: MenuOptionPayload) => { addFeatureToList(payload, props.selectedFeature) }}
       />
     </MapContextMenu>
   )

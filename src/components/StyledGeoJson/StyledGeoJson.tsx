@@ -27,7 +27,7 @@ export interface onPopupOpenProps {
 
 export interface contextMenuHandlerProps {
   event: LeafletMouseEvent
-  feature: GeoJsonFeature
+  feature: GeoJsonFeature | null
 }
 
 interface StyleGeoJsonProps {
