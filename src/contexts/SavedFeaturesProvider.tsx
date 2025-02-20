@@ -3,7 +3,7 @@ import React, { useState, useCallback, useEffect } from "react"
 import { GeoJsonFeature } from "../data/types"
 import idxFeat, { idxSel } from "../utils/idxFeat"
 
-import SavedFeaturesContext, { SavedFeaturesContextType, SavedFeaturesStateType, selectionInfo } from "./SavedFeaturesContext"
+import SavedFeaturesContext, { DEFAULT_CATEGORY, SavedFeaturesContextType, SavedFeaturesStateType, selectionInfo } from "./SavedFeaturesContext"
 
 interface SavedFeaturesProviderProps {
   children: React.ReactNode
@@ -50,10 +50,12 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
 
   // Function to add a feature to a specific list, but not to 'all' by default
   const addFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
+    if (!feature) return
+
     setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
       const newList = [...(prevFeatures[listName] || []), feature]
-      // If listName is not 'all', don't add to 'all' list
-      if (listName === "all") {
+
+      if (listName === DEFAULT_CATEGORY) {
         return {
           ...prevFeatures,
           [listName]: newList,
@@ -63,7 +65,7 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
           ...prevFeatures,
           [listName]: newList,
           // Remove feature from 'all' if it exists there, ensuring it's not in both
-          all: prevFeatures.all.filter((f) => f.properties?.id !== feature.properties?.id),
+          [DEFAULT_CATEGORY]: prevFeatures[DEFAULT_CATEGORY].filter((f) => f.properties?.id !== feature.properties?.id),
         }
       }
     })

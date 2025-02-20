@@ -1,6 +1,7 @@
 {
   "type": "FeatureCollection",
   "properties": {
+    "source": "https://www.fuelwatch.wa.gov.au/",
     "style": {
       "layerName": "Gas Stations [Fuelwatch]",
       "icon": "bs/BsFuelPump",

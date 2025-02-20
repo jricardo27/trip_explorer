@@ -15,7 +15,7 @@ indent_size=2
 [{*.js,*.ts,*.tsx}]
 indent_size=2
 
-[*.scss]
+[{*.scss,*.css}]
 indent_size=2
 
 [{*.yml,*.yaml}]

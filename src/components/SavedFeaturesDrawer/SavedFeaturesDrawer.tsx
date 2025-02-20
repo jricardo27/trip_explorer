@@ -8,18 +8,18 @@ import {
 import React, { useState, useContext, useCallback, useEffect } from "react"
 import { MdMenu } from "react-icons/md"
 
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
-import { CategoryContextMenu } from "./CategoryContextMenu"
-import { FeatureContextMenu } from "./FeatureContextMenu"
-import { FeatureDragContext } from "./FeatureDragContext"
-import { FeatureList } from "./FeatureList"
-import { TabList } from "./TabList"
-import TopMenu from "./TopMenu"
-import { useCategoryManagement } from "./useCategoryManagement"
-import { useContextMenu } from "./useContextMenu"
-import { useFeatureManagement } from "./useFeatureManagement"
-import { useFeatureSelection } from "./useFeatureSelection"
+import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
+import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
+import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
+import { FeatureList } from "./FeatureList/FeatureList"
+import { useCategoryManagement } from "./hooks/useCategoryManagement"
+import { useContextMenu } from "./hooks/useContextMenu"
+import { useFeatureManagement } from "./hooks/useFeatureManagement"
+import { useFeatureSelection } from "./hooks/useFeatureSelection"
+import { TabList } from "./TabList/TabList"
+import TopMenu from "./TopMenu/TopMenu"
 
 interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
@@ -30,7 +30,7 @@ interface SavedFeaturesDrawerProps {
 const excludedProperties = ["id", "images", "style"] as const
 
 const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
-  const [selectedTab, setSelectedTab] = useState<string>("all")
+  const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
 
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
@@ -41,10 +41,11 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
     setSavedFeatures, selectedTab, contextMenuFeature, removeFeature)
 
   const theme = useTheme()
-  const isSm = useMediaQuery(theme.breakpoints.up("sm"))
-  const isMd = useMediaQuery(theme.breakpoints.up("md"))
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"))
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"))
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"))
 
-  const drawerWidth = isMd ? "30%" : isSm ? "50%" : "80%"
+  const drawerWidth = isMd ? "70%" : isSm ? "50%" : isXs ? "92%" : "50%"
 
   const handleTabChange = useCallback((_event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue)
@@ -80,7 +81,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
           }}
         >
           <Box sx={{ display: "flex", height: "50px", border: "1px solid #ccc" }}>
-            <TopMenu savedFeatures={savedFeatures} />
+            <TopMenu />
           </Box>
           <Box sx={{ display: "flex", height: "100%" }}>
             <Box sx={{ width: 150, bgcolor: "background.paper", borderRight: 1, borderColor: "divider" }}>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import { LayersControl, MapContainer, TileLayer } from "react-leaflet"
+import { LayersControl, MapContainer, TileLayer, useMapEvents } from "react-leaflet"
 
 import "leaflet/dist/leaflet.css"
 import { TCoordinate } from "../../data/types"
@@ -14,15 +14,24 @@ export interface MapComponentProps {
   children?: React.ReactNode
   center: TCoordinate | [number, number]
   overlays?: TLayerOverlay[]
+  contextMenuHandler?: (event: L.LeafletMouseEvent) => void
 }
 
-const MapComponent = ({ children, center, overlays }: MapComponentProps): React.ReactElement => {
+const MapComponent = ({ children, center, overlays, contextMenuHandler }: MapComponentProps): React.ReactElement => {
   const mapRef = useRef(null)
   const [activeBaseLayer] = useState("esriWorldStreetMap")
   const [mapState, setMapState] = useState({
     center: center,
     zoom: 13,
   })
+
+  const MapEvents = () => {
+    useMapEvents({
+      contextmenu: contextMenuHandler,
+    })
+
+    return null
+  }
 
   const restoreMapStateFromLocalStorage = useCallback(() => {
     const savedMapState = localStorage.getItem("mapState")
@@ -45,6 +54,7 @@ const MapComponent = ({ children, center, overlays }: MapComponentProps): React.
         scrollWheelZoom={true}
         style={{ height: "100vh", width: "100%" }}
       >
+        <MapEvents />
         <MapStateManager />
         <MapViewUpdater center={mapState.center} zoom={mapState.zoom} />
         <ZoomLevelDisplay />

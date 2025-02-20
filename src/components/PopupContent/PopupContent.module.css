@@ -7,11 +7,9 @@
   background-color: #f9f9f9;
 }
 
-.popupContent {
-  display: flex;
-  gap: 8px;
-}
-
 .tabsContainer {
-  flex: 1; /* Allow the tabs to take up remaining space */
+  flex: 1;
+  overflow-y: auto;
+  width: 50%;
+  word-wrap: break-word;
 }
