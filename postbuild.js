@@ -6,6 +6,11 @@ const replacements = [
     from: /"\/markers\//g,
     to: '"./markers/',
   },
+  {
+    files: "dist/assets/*.js",
+    from: /src:"public\//g,
+    to: 'src:"',
+  },
 ]
 
 try {
