@@ -17,6 +17,6 @@ export const saveAsGeoJson = (savedFeatures: SavedFeaturesStateType) => {
   })
 
   zip.generateAsync({ type: "blob" }).then((blob) => {
-    FileSaver.saveAs(blob, "trip_explorer_features.json.zip")
+    FileSaver.saveAs(blob, "trip_explorer_features.zip")
   })
 }

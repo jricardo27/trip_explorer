@@ -2,7 +2,9 @@ import React from "react"
 
 import { GeoJsonFeature } from "../data/types"
 
-export type SavedFeaturesStateType = Record<string, GeoJsonFeature[]>
+export interface SavedFeaturesStateType {
+  [key: string]: GeoJsonFeature[]
+}
 
 export interface selectionInfo {
   feature: GeoJsonFeature
@@ -10,13 +12,14 @@ export interface selectionInfo {
   index: number
 }
 
+export type setSavedFeaturesType = (newStateOrUpdater: SavedFeaturesStateType | ((prev: SavedFeaturesStateType) => SavedFeaturesStateType)) => void
+
 export type SavedFeaturesContextType = {
   savedFeatures: SavedFeaturesStateType
   addFeature: (listName: string, feature: GeoJsonFeature) => void
   removeFeature: (listName: string, selection: selectionInfo | null) => void
   updateFeature: (oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => void
-  setSavedFeatures(newState: SavedFeaturesStateType): void
-  setSavedFeatures(updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
+  setSavedFeatures: setSavedFeaturesType
   saveToLocalStorage: () => void
   loadFromLocalStorage: () => void
 }
