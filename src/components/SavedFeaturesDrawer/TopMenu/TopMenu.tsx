@@ -1,3 +1,4 @@
+import { Menu as MenuIcon } from "@mui/icons-material"
 import { Grid2 as Grid } from "@mui/material"
 import Button from "@mui/material/Button"
 import Fade from "@mui/material/Fade"
@@ -9,28 +10,41 @@ import { MdHelpOutline } from "react-icons/md"
 import SavedFeaturesContext from "../../../contexts/SavedFeaturesContext"
 import WelcomeModal from "../../WelcomeModal/WelcomeModal"
 
+import { importBackup } from "./importBackup"
+import { saveAsBackup } from "./saveAsBackup"
 import { saveAsGeoJson } from "./saveAsGeoJson"
 import { saveAsKml } from "./saveAsKml"
 
 const TopMenu = () => {
-  const { savedFeatures } = useContext(SavedFeaturesContext)!
+  const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [openWelcomeModal, setOpenWelcomeModal] = useState<boolean>(false)
+  const [importAnchorEl, setImportAnchorEl] = useState<null | HTMLElement>(null)
+  const importMenuIsOpen = Boolean(importAnchorEl)
+  const exportMenuIsOpen = Boolean(anchorEl)
 
-  const open = Boolean(anchorEl)
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const openExportMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
-  const handleClose = () => {
+
+  const closeExportMenu = () => {
     setAnchorEl(null)
   }
 
-  const wrapper = (handler: (event: React.MouseEvent) => void) => {
+  const openImportMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setImportAnchorEl(event.currentTarget)
+  }
+
+  const closeImportMenu = () => {
+    setImportAnchorEl(null)
+  }
+
+  const closeMenuAfterAction = (handler: (event: React.MouseEvent) => void) => {
     return (event: React.MouseEvent) => {
       handler(event)
-      handleClose()
+      closeExportMenu()
+      closeImportMenu()
     }
   }
 
@@ -43,10 +57,10 @@ const TopMenu = () => {
       <Grid size={4}>
         <Button
           id="fade-button"
-          aria-controls={open ? "fade-menu" : undefined}
+          aria-controls={exportMenuIsOpen ? "fade-menu" : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
+          aria-expanded={exportMenuIsOpen ? "true" : undefined}
+          onClick={openExportMenu}
         >
           Export
         </Button>
@@ -56,13 +70,39 @@ const TopMenu = () => {
             "aria-labelledby": "fade-button",
           }}
           anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
+          open={exportMenuIsOpen}
+          onClose={closeExportMenu}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={wrapper(() => saveAsGeoJson(savedFeatures))}>To GeoJson</MenuItem>
-          <MenuItem onClick={wrapper(() => saveAsKml(savedFeatures))}>To KML</MenuItem>
+          <MenuItem onClick={closeMenuAfterAction(() => saveAsGeoJson(savedFeatures))}>To GeoJson</MenuItem>
+          <MenuItem onClick={closeMenuAfterAction(() => saveAsKml(savedFeatures))}>To KML</MenuItem>
+          <MenuItem onClick={closeMenuAfterAction(() => saveAsBackup(savedFeatures))}>Export backup</MenuItem>
         </Menu>
+      </Grid>
+      <Grid size={4}>
+        <Button
+          id="import-button"
+          aria-controls={importMenuIsOpen ? "import-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={importMenuIsOpen ? "true" : undefined}
+          onClick={openImportMenu}
+        >
+          Import <MenuIcon />
+        </Button>
+        <Menu
+          id="import-menu"
+          anchorEl={importAnchorEl}
+          open={importMenuIsOpen}
+          onClose={closeImportMenu}
+          MenuListProps={{
+            "aria-labelledby": "import-button",
+          }}
+        >
+          <MenuItem onClick={closeMenuAfterAction(() => { importBackup("override", setSavedFeatures) })}>Override existing POIs</MenuItem>
+          <MenuItem onClick={closeMenuAfterAction(() => { importBackup("append", setSavedFeatures) })}>Append categories</MenuItem>
+          <MenuItem onClick={closeMenuAfterAction(() => { importBackup("merge", setSavedFeatures) })}>Merge Categories</MenuItem>
+        </Menu>
+
       </Grid>
       <Grid size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }} offset="auto">
         <Button onClick={handleOpenWelcomeModal}>Help <MdHelpOutline /></Button>

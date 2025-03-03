@@ -50,6 +50,6 @@ export const saveAsKml = (savedFeatures: SavedFeaturesStateType) => {
   })
 
   zip.generateAsync({ type: "blob" }).then((blob) => {
-    FileSaver.saveAs(blob, "trip_explorer_features.kml.zip")
+    FileSaver.saveAs(blob, "trip_explorer_features.zip")
   })
 }
