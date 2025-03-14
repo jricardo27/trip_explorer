@@ -42,6 +42,9 @@ export const WesternAustralia = (): React.ReactNode => {
       "/markers/westernAustralia/places.json": {
         General: ["name"],
       },
+      "/markers/westernAustralia/big4_holiday_parks.json": {
+        General: ["name", "website", "reviews"],
+      },
     }), [])
 
   return <FeatureMap center={PERTH_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} />
