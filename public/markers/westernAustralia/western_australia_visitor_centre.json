@@ -661,8 +661,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "124.9131754",
+          "-16.8217019"
         ]
       },
       "properties": {
@@ -1717,8 +1717,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "114.1264341",
+          "-21.9357808"
         ]
       },
       "properties": {
@@ -2141,8 +2141,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "121.4679483",
+          "-30.748746"
         ]
       },
       "properties": {
@@ -3317,8 +3317,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.7174371",
+          "-32.5281312"
         ]
       },
       "properties": {
@@ -3949,8 +3949,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "122.2239352",
+          "-17.9466391"
         ]
       },
       "properties": {
@@ -4557,8 +4557,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "113.7706481",
+          "-23.141816"
         ]
       },
       "properties": {
@@ -4597,8 +4597,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "116.7802473",
+          "-20.6333104"
         ]
       },
       "properties": {
@@ -6209,8 +6209,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "116.0078847",
+          "-31.7961888"
         ]
       },
       "properties": {
@@ -6433,8 +6433,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "123.0065703",
+          "-16.4519728"
         ]
       },
       "properties": {
@@ -6717,8 +6717,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "145.0549456",
+          "-37.9662074"
         ]
       },
       "properties": {
@@ -6989,8 +6989,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "113.5570369",
+          "-25.9804721"
         ]
       },
       "properties": {
@@ -7040,7 +7040,7 @@
         "hours": "9am to 5pm",
         "town": "Denham",
         "pointOfDifference": "Shark Bay Dive and Marine Safari tours take you to the Westernmost point of Australia, Steep Point and to the untouched wilderness of Dirk Hartog Island. If you want adventure, a once in a lifetime ex...\n",
-        "address": "<1> <Ocean Park Road>, <shark bay>, <WA>, <6537>, <Australia>",
+        "address": "1 Ocean Park Road, shark bay, WA, 6537, Australia",
         "type": "Local Business, Dirk Hartog Island, Dive Shop",
         "style": {
           "icon": "md/MdOutlineTour",
@@ -7485,8 +7485,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "122.2223877",
+          "-17.9684362"
         ]
       },
       "properties": {
@@ -8873,8 +8873,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8544125",
+          "-31.9575763"
         ]
       },
       "properties": {
@@ -9837,8 +9837,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8557013",
+          "-31.9593063"
         ]
       },
       "properties": {
@@ -10057,8 +10057,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8814578",
+          "-32.0865915"
         ]
       },
       "properties": {
@@ -10409,8 +10409,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8556619",
+          "-31.9593511"
         ]
       },
       "properties": {
@@ -10440,7 +10440,7 @@
         "hours": null,
         "town": "Perth",
         "pointOfDifference": "Unique and distinct architectural tower housing the historic St Martins in the Fields bells along with Australia's largest swinging bell, the Anzac.\n",
-        "address": "Barrack Square, Riverside Drive",
+        "address": "Barrack Square, Riverside Drive, Perth",
         "type": "null"
       }
     },
@@ -10649,8 +10649,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.0433151",
+          "-30.2896595"
         ]
       },
       "properties": {
@@ -10925,8 +10925,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "122.2047945",
+          "-17.9999285"
         ]
       },
       "properties": {
@@ -12452,8 +12452,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8814578",
+          "-32.0865915"
         ]
       },
       "properties": {
@@ -12484,8 +12484,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "119.2440343",
+          "-17.3988585"
         ]
       },
       "properties": {
@@ -12624,8 +12624,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.7642858",
+          "-31.9536839"
         ]
       },
       "properties": {
@@ -13000,8 +13000,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "114.0635193",
+          "-27.665859"
         ]
       },
       "properties": {
@@ -13556,8 +13556,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.0618681",
+          "-33.9532079"
         ]
       },
       "properties": {
@@ -13940,8 +13940,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "116.0130996",
+          "-31.8501864"
         ]
       },
       "properties": {
@@ -13980,8 +13980,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.7510394",
+          "-32.054978"
         ]
       },
       "properties": {
@@ -14216,8 +14216,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "110.3472232",
+          "-24.0421377"
         ]
       },
       "properties": {
@@ -14848,8 +14848,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "110.3472233",
+          "-24.0421377"
         ]
       },
       "properties": {
@@ -15092,8 +15092,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.6319119",
+          "-32.0396376"
         ]
       },
       "properties": {
@@ -15252,8 +15252,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "122.2360834",
+          "-17.9549759"
         ]
       },
       "properties": {
@@ -15400,8 +15400,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "116.0198179",
+          "-31.8120126"
         ]
       },
       "properties": {
@@ -15476,8 +15476,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.7830314",
+          "-32.0581207"
         ]
       },
       "properties": {
@@ -15536,8 +15536,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8594299",
+          "-31.9504423"
         ]
       },
       "properties": {
@@ -15704,8 +15704,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "113.9755608",
+          "-21.9124491"
         ]
       },
       "properties": {
@@ -16668,8 +16668,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8428498",
+          "-31.9437322"
         ]
       },
       "properties": {
@@ -17047,8 +17047,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "110.7271781",
+          "-22.7175413"
         ]
       },
       "properties": {
@@ -17307,8 +17307,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.8505487",
+          "-31.9414097"
         ]
       },
       "properties": {
@@ -17335,8 +17335,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "123.6798959",
+          "-17.3404917"
         ]
       },
       "properties": {
@@ -17383,8 +17383,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "122.2311226",
+          "-17.9557473"
         ]
       },
       "properties": {
@@ -17415,8 +17415,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "115.5804135",
+          "-31.4948382"
         ]
       },
       "properties": {
@@ -17871,8 +17871,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "118.187173",
+          "-34.3159958"
         ]
       },
       "properties": {
@@ -17919,8 +17919,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          "0",
-          "0"
+          "114.6010973",
+          "-28.7770692"
         ]
       },
       "properties": {

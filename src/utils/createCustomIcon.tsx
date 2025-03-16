@@ -7,6 +7,8 @@ import { GiBunkBeds, GiBus, GiCruiser, GiElephant, GiHelicopter, GiJourney, GiTi
 import { MdFestival, MdHotel, MdKayaking, MdLocationCity, MdOutlineHiking, MdOutlinePark, MdOutlineTour, MdRestaurant } from "react-icons/md"
 import { TbAirBalloon } from "react-icons/tb"
 
+import { Big4Icon } from "../assets/Big4Icon.ts"
+import { DiscoveryParksIcon } from "../assets/DiscoveryParksIcon"
 import { MarkerIcon } from "../assets/MarkerIcon"
 
 type IconType = React.ComponentType<{ size: number; color: string }>
@@ -19,6 +21,7 @@ const iconMapping: Record<string, IconLibrary> = {
   gi: { GiBunkBeds, GiBus, GiCruiser, GiElephant, GiHelicopter, GiJourney, GiTicket },
   md: { MdFestival, MdHotel, MdKayaking, MdLocationCity, MdOutlineHiking, MdOutlinePark, MdOutlineTour, MdRestaurant },
   tb: { TbAirBalloon },
+  custom: { Big4Icon, DiscoveryParksIcon },
 }
 
 const createCustomIcon = (iconName: string, iconColor: string = "grey", innerIconColor: string = "grey"): L.DivIcon => {
