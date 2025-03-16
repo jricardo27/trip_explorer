@@ -39,14 +39,14 @@ export const WesternAustralia = (): React.ReactNode => {
         ],
         Info: ["address", "hours", "email", "website"],
       },
-      "/markers/westernAustralia/places.json": {
-        General: ["name"],
-      },
-      "/markers/westernAustralia/big4_holiday_parks.json": {
+      "/markers/westernAustralia/big4_holiday_parks_WA.json": {
         General: ["name", "website", "reviews"],
       },
       "/markers/westernAustralia/discovery_parks_WA.json": {
         General: ["name", "area", "website", "reviews"],
+      },
+      "/markers/westernAustralia/places.json": {
+        General: ["name"],
       },
     }), [])
 
