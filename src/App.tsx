@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import "./App.css"
 import WelcomeModal from "./components/WelcomeModal/WelcomeModal"
 import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
+import NotFound from "./pages/NotFound/NotFound.tsx"
 import { WesternAustralia } from "./pages/WA/WesternAustralia"
 
 function App(): React.ReactNode {
@@ -21,12 +23,15 @@ function App(): React.ReactNode {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <SavedFeaturesProvider>
-        <WesternAustralia />
+        <Routes>
+          <Route path="/" element={<WesternAustralia />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </SavedFeaturesProvider>
       <WelcomeModal open={open} onClose={handleClose} />
-    </>
+    </BrowserRouter>
   )
 }
 
