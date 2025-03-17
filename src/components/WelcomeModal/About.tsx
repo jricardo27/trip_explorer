@@ -3,6 +3,20 @@ import React from "react"
 import { MdStarBorder } from "react-icons/md"
 
 const About = (): React.ReactNode => {
+  const sources = [
+    { name: "OpenStreetMap", url: "https://www.openstreetmap.org/" },
+    { name: "Campermate", url: "https://campermate.com/" },
+    { name: "Wiki Camps", url: "https://wikicamps.com.au/" },
+    { name: "Big4 Holiday Parks", url: "https://www.big4.com.au" },
+    { name: "Discovery Parks", url: "https://www.discoveryholidayparks.com.au" },
+    { name: "BP Australia", url: "https://www.bp.com/en_au/australia/home/who-we-are/find-your-nearest-bp.html" },
+    { name: "Fuel Watch", url: "https://www.fuelwatch.wa.gov.au/" },
+    { name: "Explore Parks WA", url: "https://exploreparks.dbca.wa.gov.au/" },
+    { name: "Western Australia Visitor Centre", url: "https://www.wavisitorcentre.com.au/" },
+    { name: "Western Australia website", url: "https://www.westernaustralia.com/" },
+    { name: "Australia Public Toilet Map", url: "https://toiletmap.gov.au/" },
+  ]
+
   return (
     <Box p={2}>
       <Typography variant="body1">
@@ -42,118 +56,19 @@ const About = (): React.ReactNode => {
       </Typography>
 
       <List>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://campermate.com/" target="_blank" rel="noopener noreferrer">Campermate</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://wikicamps.com.au/" target="_blank" rel="noopener noreferrer">Wiki Camps</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.big4.com.au" target="_blank" rel="noopener noreferrer">Big4 Holiday Parks</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.discoveryholidayparks.com.au" target="_blank" rel="noopener noreferrer">Discovery Parks</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.bp.com/en_au/australia/home/who-we-are/find-your-nearest-bp.html" target="_blank" rel="noopener noreferrer">
-                  BP Australia
-                </Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.fuelwatch.wa.gov.au/" target="_blank" rel="noopener noreferrer">Fuel Watch</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://exploreparks.dbca.wa.gov.au/" target="_blank" rel="noopener noreferrer">Explore Parks WA</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.wavisitorcentre.com.au/" target="_blank" rel="noopener noreferrer">Western Australia Visitor Centre</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
-        <ListItem sx={{ paddingBottom: 0 }}>
-          <ListItemIcon><MdStarBorder /></ListItemIcon>
-          <ListItemText
-            sx={{ margin: 0 }}
-            primary={(
-              <Typography variant="body1">
-                <Link href="https://www.westernaustralia.com/" target="_blank" rel="noopener noreferrer">Western Australia website</Link>
-              </Typography>
-            )}
-          />
-        </ListItem>
+        {sources.map(({ name, url }) => (
+          <ListItem key={name} sx={{ paddingBottom: 0 }}>
+            <ListItemIcon><MdStarBorder /></ListItemIcon>
+            <ListItemText
+              sx={{ margin: 0 }}
+              primary={(
+                <Typography variant="body1">
+                  <Link href={url} target="_blank" rel="noopener noreferrer">{name}</Link>
+                </Typography>
+              )}
+            />
+          </ListItem>
+        ))}
       </List>
     </Box>
   )
