@@ -2,6 +2,8 @@ import { Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography } fro
 import React from "react"
 import { MdStarBorder } from "react-icons/md"
 
+import qrCode from "../../../public/docs/img/online_trip_explorer_qr.svg"
+
 const About = (): React.ReactNode => {
   const sources = [
     { name: "OpenStreetMap", url: "https://www.openstreetmap.org/" },
@@ -19,10 +21,24 @@ const About = (): React.ReactNode => {
 
   return (
     <Box p={2}>
-      <Typography variant="body1">
-        Trip Explorer is a simple application that enables users to select points of interest (POIs) from a curated list on a map and export them as a KML
-        (Keyhole Markup Language) file.
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
+        <Typography variant="body1" sx={{ overflow: "hidden" }}>
+          <Box
+            component="img"
+            src={qrCode}
+            alt="Trip Explorer QR Code"
+            sx={{
+              width: "100px",
+              float: "right",
+              marginRight: "0.2rem",
+              marginBottom: "0.2rem",
+              objectFit: "contain",
+            }}
+          />
+          Trip Explorer is a simple application that enables users to select points of interest (POIs) from a curated list on a map and export them as a KML
+          (Keyhole Markup Language) file.
+        </Typography>
+      </Box>
 
       <Typography variant="body1">
         This file can be imported into an offline map such as Organic Maps in case you are travelling to a remote area with no phone coverage.

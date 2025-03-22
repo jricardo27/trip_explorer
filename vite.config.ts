@@ -16,6 +16,7 @@ export default defineConfig({
         "react",
         "react-image-gallery",
         "react-leaflet",
+        "react-router-dom",
         "tinymce",
         "turndown",
         "uuid",
