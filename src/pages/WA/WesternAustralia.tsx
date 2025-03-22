@@ -45,6 +45,9 @@ export const WesternAustralia = (): React.ReactNode => {
       "/markers/westernAustralia/discovery_parks_WA.json": {
         General: ["name", "area", "website", "reviews"],
       },
+      "/markers/westernAustralia/toiletmap_aus_2025_WA.json": {
+        General: ["Name", "Male", "Female", "Unisex", "Shower", "OpeningHours", "OpeningHoursNote", "Address1", "URL"],
+      },
       "/markers/westernAustralia/places.json": {
         General: ["name"],
       },

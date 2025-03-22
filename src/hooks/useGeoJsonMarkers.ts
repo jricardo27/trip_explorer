@@ -22,6 +22,11 @@ const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
 
         const promises = filenames.map(async (filename): Promise<[string, GeoJsonCollection]> => {
           const response = await axios.get<GeoJsonCollection>(filename, params)
+
+          if (typeof response.data == "string") {
+            throw new Error(`Error requesting ${filename}, ensure that the path is valid.`)
+          }
+
           return [filename, response.data]
         })
 
@@ -60,6 +65,8 @@ const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
         }, {})
         setGeoJsonData(dataMap)
       } catch (err: unknown) {
+        console.error(err)
+
         if (err instanceof Error) {
           setError(err.message)
         }
