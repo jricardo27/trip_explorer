@@ -31,6 +31,7 @@ const NotFound: React.FC = () => {
             URL.
             <br />
             If you think this is an error, contact support by creating an issue on our
+            {" "}
             <a href={ISSUE_MANAGER_URL} target="_blank" rel="noopener noreferrer">issue manager</a>
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center" }}>

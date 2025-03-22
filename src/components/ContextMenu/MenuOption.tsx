@@ -8,11 +8,11 @@ export interface MenuOptionPayload {
   coordinates: TCoordinate
 }
 
-interface IMenuOptionsProps {
+export interface IMenuOptionsProps {
   title: string
   handler: (arg0: MenuOptionPayload) => void
   closeMenu?: () => void
-  payload?: MenuOptionPayload
+  payload?: MenuOptionPayload | null
 }
 
 const MenuOption = ({ ...props }: IMenuOptionsProps): React.ReactNode => {

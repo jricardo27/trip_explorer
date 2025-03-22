@@ -22,8 +22,10 @@ function App(): React.ReactNode {
     setOpen(false)
   }
 
+  const basename = import.meta.env.MODE === "production" ? "/online_trip_explorer" : "/"
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <SavedFeaturesProvider>
         <Routes>
           <Route path="/" element={<WesternAustralia />} />
