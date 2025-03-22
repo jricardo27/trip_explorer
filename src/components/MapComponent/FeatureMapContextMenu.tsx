@@ -43,8 +43,6 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       }
     }
 
-    toast.success("Saved")
-
     return feature
   }
 
@@ -55,14 +53,18 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
       return
     }
 
-    navigator.clipboard
-      .writeText(JSON.stringify(feature, null, 2))
-      .then(() => {
-        toast.success("Copied feature to clipboard")
-      })
-      .catch((error) => {
-        toast.error(`Failed to copy feature to clipboard. ${error}`)
-      })
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(JSON.stringify(feature, null, 2))
+        .then(() => {
+          toast.success("Copied feature to clipboard")
+        })
+        .catch((error) => {
+          toast.error(`Failed to copy feature to clipboard. ${error}`)
+        })
+    } else {
+      toast.error("Copy to clipboard failed: Clipboard API not available.")
+    }
   }
 
   const addFeatureToList = (payload: MenuOptionPayload, selectedFeature?: GeoJsonFeature | null) => {
@@ -73,6 +75,7 @@ const FeatureMapContextMenu = ({ ...props }: FeatureMapContextMenuProps): React.
     }
 
     addFeature(DEFAULT_CATEGORY, feature)
+    toast.success("Saved")
   }
 
   if (!props.menuLatLng) return null

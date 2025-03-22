@@ -44,15 +44,15 @@ const MapContextMenu = ({ ...props }: IMapContextMenuProps): React.ReactNode => 
     }
   }, [props.latlng, handleLatLng])
 
-  return (
-    <>
-      {menuPosition && (
-        <ContextMenu position={menuPosition} onClose={() => setMenuPosition(null)} payload={{ coordinates: coordinates }}>
+  const payload = coordinates ? { coordinates } : null
+
+  return menuPosition
+    ? (
+        <ContextMenu position={menuPosition} onClose={() => setMenuPosition(null)} payload={payload}>
           {props.children}
         </ContextMenu>
-      )}
-    </>
-  )
+      )
+    : null
 }
 
 export default MapContextMenu

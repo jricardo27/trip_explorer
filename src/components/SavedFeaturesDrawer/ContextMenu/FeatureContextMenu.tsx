@@ -20,8 +20,6 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
   handleRemoveFromList,
   handleRemoveCompletely,
 }) => {
-  if (!contextMenuFeature) return <></>
-
   const wrapper = (handler: (event: React.MouseEvent) => void) => {
     return (event: React.MouseEvent) => {
       handler(event)
@@ -33,6 +31,8 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
     event.preventDefault()
     handleClose()
   }
+
+  if (!contextMenuFeature) return null
 
   return (
     <Menu
@@ -46,13 +46,11 @@ export const FeatureContextMenu: React.FC<FeatureContextMenuProps> = ({
           : undefined
       }
     >
-      {contextMenuFeature && (
-        <>
-          <MenuItem onClick={wrapper(handleDuplicate)}>Duplicate</MenuItem>
-          {contextMenuFeature.category != DEFAULT_CATEGORY && <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>}
-          <MenuItem onClick={wrapper(handleRemoveCompletely)}>Remove</MenuItem>
-        </>
+      <MenuItem onClick={wrapper(handleDuplicate)}>Duplicate</MenuItem>
+      {contextMenuFeature.category !== DEFAULT_CATEGORY && (
+        <MenuItem onClick={wrapper(handleRemoveFromList)}>Remove from this list</MenuItem>
       )}
+      <MenuItem onClick={wrapper(handleRemoveCompletely)}>Remove</MenuItem>
     </Menu>
   )
 }

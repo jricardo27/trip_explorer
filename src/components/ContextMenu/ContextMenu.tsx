@@ -3,15 +3,16 @@ import React, { useEffect, useState } from "react"
 import { TPosition } from "../../data/types"
 
 import styles from "./ContextMenu.module.css"
+import { IMenuOptionsProps, MenuOptionPayload } from "./MenuOption.tsx"
 
 interface IContextMenuProps {
   position: TPosition | null
   onClose?: () => void
   children?: React.ReactNode
-  payload?: object
+  payload?: MenuOptionPayload | null
 }
 
-const ContextMenu: React.FC<IContextMenuProps> = ({ position, onClose, children, payload = {} }) => {
+const ContextMenu: React.FC<IContextMenuProps> = ({ position, onClose, children, payload = undefined }) => {
   const [isOpen, setIsOpen] = useState<boolean>(!!position)
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({ position, onClose, children,
           }}
         >
           {React.Children.map(children, (child) =>
-            React.cloneElement(child as React.ReactElement, { closeMenu, payload }),
+            React.cloneElement(child as React.ReactElement<IMenuOptionsProps>, { closeMenu, payload }),
           )}
         </div>
       )
