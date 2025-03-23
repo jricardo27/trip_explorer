@@ -3,7 +3,7 @@ import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemTex
 import React, { useContext, useState } from "react"
 import { FaDownload, FaUpload } from "react-icons/fa"
 import { MdHelpOutline, MdLocationOn } from "react-icons/md"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
@@ -96,9 +96,13 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
         <Toolbar>
           <Grid2 container spacing={2} sx={{ flexGrow: 1 }}>
             <Grid2 size={2}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Trip Explorer
-              </Typography>
+              <Tooltip title="Go back to destination selection" aria-label="Go back to destination selection">
+                <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Trip Explorer
+                  </Typography>
+                </Link>
+              </Tooltip>
             </Grid2>
             <Grid2 size={2}>
               <Tooltip title="Saved Features" aria-label="Saved Features">
