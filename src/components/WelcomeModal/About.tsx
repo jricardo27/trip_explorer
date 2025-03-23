@@ -23,7 +23,7 @@ const About = (): React.ReactNode => {
         <Typography variant="body1" sx={{ overflow: "hidden" }}>
           <Box
             component="img"
-            src="/docs/img/online_trip_explorer_qr.svg"
+            src="./docs/img/online_trip_explorer_qr.svg"
             alt="Trip Explorer QR Code"
             sx={{
               width: "100px",
