@@ -1,8 +1,9 @@
 import { Menu as MenuIcon } from "@mui/icons-material"
-import { AppBar, Box, Button, Grid2, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material"
+import { AppBar, Box, Button, Grid2, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
 import React, { useContext, useState } from "react"
 import { FaDownload, FaUpload } from "react-icons/fa"
-import { MdHelpOutline } from "react-icons/md"
+import { MdHelpOutline, MdLocationOn } from "react-icons/md"
+import { useNavigate } from "react-router-dom"
 
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
@@ -16,14 +17,30 @@ interface TopMenuProps {
   onMenuClick: () => void
 }
 
+const destinations = [
+  { path: "/", label: "Western Australia" },
+  { path: "/newSouthWales", label: "New South Wales" },
+  { path: "/victoria", label: "Victoria" },
+  { path: "/queensland", label: "Queensland" },
+  { path: "/southAustralia", label: "South Australia" },
+  { path: "/tasmania", label: "Tasmania" },
+  { path: "/northernTerritory", label: "Northern Territory" },
+  { path: "/australianCapitalTerritory", label: "Australian Capital Territory" },
+  { path: "/newZealand", label: "New Zealand" },
+]
+
 const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
+  const location = window.location.pathname
   const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!
+  const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [openWelcomeModal, setOpenWelcomeModal] = useState<boolean>(false)
   const [importAnchorEl, setImportAnchorEl] = useState<null | HTMLElement>(null)
+  const [destinationAnchorEl, setDestinationAnchorEl] = useState<null | HTMLElement>(null)
   const importMenuIsOpen = Boolean(importAnchorEl)
   const exportMenuIsOpen = Boolean(anchorEl)
+  const destinationMenuIsOpen = Boolean(destinationAnchorEl)
 
   const openExportMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -41,6 +58,14 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
     setImportAnchorEl(null)
   }
 
+  const openDestinationMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setDestinationAnchorEl(event.currentTarget)
+  }
+
+  const closeDestinationMenu = () => {
+    setDestinationAnchorEl(null)
+  }
+
   const closeMenuAfterAction = (handler: (event: React.MouseEvent) => void) => {
     return (event: React.MouseEvent) => {
       handler(event)
@@ -52,12 +77,17 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
   const handleOpenWelcomeModal = () => setOpenWelcomeModal(true)
   const handleCloseWelcomeModal = () => setOpenWelcomeModal(false)
 
+  const handleDestinationChange = (_event: React.MouseEvent<HTMLElement>, newDestination: string) => {
+    navigate(newDestination)
+    closeDestinationMenu()
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Grid2 container spacing={2} sx={{ flexGrow: 1 }}>
-            <Grid2 size={3}>
+            <Grid2 size={2}>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Trip Explorer
               </Typography>
@@ -77,8 +107,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
                   onClick={openExportMenu}
                   color="inherit"
                   startIcon={<FaDownload />}
-                >
-                </Button>
+                />
               </Tooltip>
               <Menu
                 id="fade-menu"
@@ -91,7 +120,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
                 <MenuItem onClick={closeMenuAfterAction(() => saveAsBackup(savedFeatures))}>Export backup</MenuItem>
               </Menu>
             </Grid2>
-            <Grid2 size={3}>
+            <Grid2 size={2}>
               <Tooltip title="Import" aria-label="Import">
                 <Button
                   id="import-button"
@@ -101,8 +130,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
                   onClick={openImportMenu}
                   color="inherit"
                   startIcon={<FaUpload />}
-                >
-                </Button>
+                />
               </Tooltip>
               <Menu
                 id="import-menu"
@@ -113,6 +141,37 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("override", setSavedFeatures) })}>Override existing POIs</MenuItem>
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("append", setSavedFeatures) })}>Append categories</MenuItem>
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("merge", setSavedFeatures) })}>Merge Categories</MenuItem>
+              </Menu>
+            </Grid2>
+            <Grid2 size={2}>
+              <Tooltip title="Destinations" aria-label="Destinations">
+                <Button
+                  id="destination-button"
+                  aria-controls={destinationMenuIsOpen ? "destination-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={destinationMenuIsOpen ? "true" : undefined}
+                  onClick={openDestinationMenu}
+                  color="inherit"
+                  startIcon={<MdLocationOn />}
+                />
+              </Tooltip>
+              <Menu
+                id="destination-menu"
+                anchorEl={destinationAnchorEl}
+                open={destinationMenuIsOpen}
+                onClose={closeDestinationMenu}
+              >
+                {destinations.map((dest) => (
+                  <MenuItem
+                    key={dest.path}
+                    onClick={(event) => handleDestinationChange(event, dest.path)}
+                    sx={{
+                      bgcolor: location === dest.path ? (theme) => alpha(theme.palette.primary.main, 0.2) : "transparent",
+                    }}
+                  >
+                    {dest.label}
+                  </MenuItem>
+                ))}
               </Menu>
             </Grid2>
             <Grid2 size={2}>

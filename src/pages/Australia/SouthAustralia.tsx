@@ -1,0 +1,39 @@
+import React, { useMemo } from "react"
+
+import { FeatureMap } from "../../components/MapComponent/FeatureMap"
+import styles from "../../components/PopupContent/PopupContent.module.css"
+import { TTabMapping } from "../../data/types/TTabMapping.ts"
+
+interface SouthAustraliaProps {
+  drawerOpen: boolean
+  closeDrawer: () => void
+}
+
+export const SouthAustralia = ({ drawerOpen, closeDrawer }: SouthAustraliaProps): React.ReactNode => {
+  const ADELAIDE_LOCATION = useMemo(() => ({ lat: -34.9285, lng: 138.6007 }), [])
+
+  const geoJsonOverlaySources = useMemo(
+    (): Record<string, TTabMapping> => ({
+      "/markers/southAustralia/accommodation_SA.json": {
+        General: ["name", "website", "tarif", "isBookable"],
+        "More Info": ["operatorName", "GroupName", "CheckInTime", "CheckOutTime", "email", "address", "hours"],
+      },
+      "/markers/southAustralia/accommodation_campermate.json": {
+        General: ["name", "fees", "bookable", { key: "description", className: styles.scrollableContent }],
+        Score: ["score", "thumbs_up", "thumbs_down"],
+      },
+      "/markers/southAustralia/toiletmap_aus_2025_SA.json": {
+        General: ["Name", "Male", "Female", "Unisex", "Shower", "OpeningHours", "OpeningHoursNote", "Address1", "URL"],
+      },
+      "/markers/southAustralia/big4_holiday_parks_SA.json": {
+        General: ["name", "website", "reviews"],
+      },
+      "/markers/southAustralia/discovery_parks_SA.json": {
+        General: ["name", "area", "website", "reviews"],
+      },
+    }),
+    [],
+  )
+
+  return <FeatureMap center={ADELAIDE_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+}

@@ -6,8 +6,16 @@ import "./App.css"
 import TopMenu from "./components/TopMenu/TopMenu"
 import WelcomeModal from "./components/WelcomeModal/WelcomeModal"
 import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
-import NotFound from "./pages/NotFound/NotFound.tsx"
-import { WesternAustralia } from "./pages/WA/WesternAustralia"
+import { AustralianCapitalTerritory } from "./pages/Australia/AustralianCapitalTerritory"
+import { NewSouthWales } from "./pages/Australia/NewSouthWales"
+import { NorthernTerritory } from "./pages/Australia/NorthernTerritory"
+import { Queensland } from "./pages/Australia/Queensland"
+import { SouthAustralia } from "./pages/Australia/SouthAustralia"
+import { Tasmania } from "./pages/Australia/Tasmania"
+import { Victoria } from "./pages/Australia/Victoria"
+import { WesternAustralia } from "./pages/Australia/WesternAustralia"
+import { NewZealand } from "./pages/NewZealand/NewZealand"
+import NotFound from "./pages/NotFound/NotFound"
 
 function App(): React.ReactNode {
   const [welcomeDialogOpen, setWelcomeDialogOpen] = useState(false)
@@ -43,6 +51,14 @@ function App(): React.ReactNode {
           <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
             <Routes>
               <Route path="/" element={<WesternAustralia drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/newSouthWales" element={<NewSouthWales drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/victoria" element={<Victoria drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/queensland" element={<Queensland drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/southAustralia" element={<SouthAustralia drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/tasmania" element={<Tasmania drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/northernTerritory" element={<NorthernTerritory drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/australianCapitalTerritory" element={<AustralianCapitalTerritory drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
+              <Route path="/newZealand" element={<NewZealand drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>

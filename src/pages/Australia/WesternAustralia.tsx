@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap.tsx"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 
