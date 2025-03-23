@@ -1,5 +1,5 @@
 import { Menu as MenuIcon } from "@mui/icons-material"
-import { AppBar, Box, Button, Grid2, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
+import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
 import React, { useContext, useState } from "react"
 import { FaDownload, FaUpload } from "react-icons/fa"
 import { MdHelpOutline, MdLocationOn } from "react-icons/md"
@@ -18,15 +18,23 @@ interface TopMenuProps {
 }
 
 const destinations = [
-  { path: "/", label: "Western Australia" },
-  { path: "/newSouthWales", label: "New South Wales" },
-  { path: "/victoria", label: "Victoria" },
-  { path: "/queensland", label: "Queensland" },
-  { path: "/southAustralia", label: "South Australia" },
-  { path: "/tasmania", label: "Tasmania" },
-  { path: "/northernTerritory", label: "Northern Territory" },
-  { path: "/australianCapitalTerritory", label: "Australian Capital Territory" },
-  { path: "/newZealand", label: "New Zealand" },
+  {
+    label: "Australia",
+    children: [
+      { path: "/australianCapitalTerritory", label: "Australian Capital Territory" },
+      { path: "/newSouthWales", label: "New South Wales" },
+      { path: "/northernTerritory", label: "Northern Territory" },
+      { path: "/queensland", label: "Queensland" },
+      { path: "/victoria", label: "Victoria" },
+      { path: "/southAustralia", label: "South Australia" },
+      { path: "/tasmania", label: "Tasmania" },
+      { path: "/", label: "Western Australia" },
+    ],
+  },
+  {
+    label: "New Zealand",
+    children: [{ path: "/newZealand", label: "New Zealand" }],
+  },
 ]
 
 const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
@@ -161,16 +169,25 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
                 open={destinationMenuIsOpen}
                 onClose={closeDestinationMenu}
               >
-                {destinations.map((dest) => (
-                  <MenuItem
-                    key={dest.path}
-                    onClick={(event) => handleDestinationChange(event, dest.path)}
-                    sx={{
-                      bgcolor: location === dest.path ? (theme) => alpha(theme.palette.primary.main, 0.2) : "transparent",
-                    }}
-                  >
-                    {dest.label}
-                  </MenuItem>
+                {destinations.map((region) => (
+                  <Box key={region.label}>
+                    <MenuItem disabled>{region.label}</MenuItem>
+                    <List disablePadding>
+                      {region.children.map((dest) => (
+                        <ListItem key={dest.path} disablePadding>
+                          <ListItemButton
+                            onClick={(event) => handleDestinationChange(event, dest.path)}
+                            sx={{
+                              pl: 4,
+                              bgcolor: location === dest.path ? (theme) => alpha(theme.palette.primary.main, 0.2) : "transparent",
+                            }}
+                          >
+                            <ListItemText primary={dest.label} />
+                          </ListItemButton>
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
                 ))}
               </Menu>
             </Grid2>
