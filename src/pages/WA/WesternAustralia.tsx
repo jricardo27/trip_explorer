@@ -4,7 +4,12 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
 
-export const WesternAustralia = (): React.ReactNode => {
+interface WesternAustraliaProps {
+  drawerOpen: boolean
+  closeDrawer: () => void
+}
+
+export const WesternAustralia = ({ drawerOpen, closeDrawer }: WesternAustraliaProps): React.ReactNode => {
   const PERTH_LOCATION = useMemo(() => ({ lat: -31.953512, lng: 115.857048 }), [])
 
   const geoJsonOverlaySources = useMemo(
@@ -53,5 +58,5 @@ export const WesternAustralia = (): React.ReactNode => {
       },
     }), [])
 
-  return <FeatureMap center={PERTH_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} />
+  return <FeatureMap center={PERTH_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

@@ -2,9 +2,9 @@ import FileSaver from "file-saver"
 import tokml from "geojson-to-kml"
 import JSZip from "jszip"
 
-import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext.ts"
-import { GeoJsonCollection, GeoJsonFeature } from "../../../data/types"
-import formatFeature from "../../../utils/formatFeature.ts"
+import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext.ts"
+import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
+import formatFeature from "../../utils/formatFeature.ts"
 
 const convertToMultiLineString = (feature: GeoJsonFeature): GeoJsonFeature => {
   if (feature.geometry.type === "Polygon") {

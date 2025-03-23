@@ -1,6 +1,6 @@
 import JSZip from "jszip"
 
-import { SavedFeaturesStateType, setSavedFeaturesType } from "../../../contexts/SavedFeaturesContext.ts"
+import { SavedFeaturesStateType, setSavedFeaturesType } from "../../contexts/SavedFeaturesContext.ts"
 
 const handleFileImport = async (file: File, importMode: "override" | "append" | "merge", setSavedFeatures: setSavedFeaturesType) => {
   try {
