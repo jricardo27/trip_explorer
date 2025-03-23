@@ -17,7 +17,6 @@ import { useContextMenu } from "./hooks/useContextMenu"
 import { useFeatureManagement } from "./hooks/useFeatureManagement"
 import { useFeatureSelection } from "./hooks/useFeatureSelection"
 import { TabList } from "./TabList/TabList"
-import TopMenu from "./TopMenu/TopMenu"
 
 interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
@@ -68,13 +67,11 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
             flexShrink: 0,
             "& .MuiDrawer-paper": {
               width: drawerWidth,
+              marginTop: "64px",
               boxSizing: "border-box",
             },
           }}
         >
-          <Box sx={{ display: "flex", height: "50px", border: "1px solid #ccc" }}>
-            <TopMenu />
-          </Box>
           <Box sx={{ display: "flex", height: "100%" }}>
             <Box sx={{ width: 150, bgcolor: "background.paper", borderRight: 1, borderColor: "divider" }}>
               <TabList

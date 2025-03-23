@@ -1,8 +1,8 @@
 import FileSaver from "file-saver"
 import JSZip from "jszip"
 
-import { SavedFeaturesStateType } from "../../../contexts/SavedFeaturesContext.ts"
-import { GeoJsonCollection } from "../../../data/types"
+import { SavedFeaturesStateType } from "../../contexts/SavedFeaturesContext.ts"
+import { GeoJsonCollection } from "../../data/types"
 
 export const saveAsGeoJson = (savedFeatures: SavedFeaturesStateType) => {
   const zip = new JSZip()

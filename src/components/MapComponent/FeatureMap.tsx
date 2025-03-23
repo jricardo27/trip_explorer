@@ -131,7 +131,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
       </MapComponent>
       <SavedFeaturesDrawer
         drawerOpen={drawerOpen}
-        onClose={() => closeDrawer()}
+        onClose={closeDrawer}
       />
     </>
   )

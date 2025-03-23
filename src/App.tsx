@@ -26,7 +26,7 @@ function App(): React.ReactNode {
   }
 
   const openDrawer = () => {
-    setDrawerOpen(!drawerOpen)
+    setDrawerOpen(true)
   }
 
   const closeDrawer = () => {
@@ -38,15 +38,15 @@ function App(): React.ReactNode {
   return (
     <BrowserRouter basename={basename}>
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-        <TopMenu onMenuClick={openDrawer} />
-        <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
-          <SavedFeaturesProvider>
+        <SavedFeaturesProvider>
+          <TopMenu onMenuClick={openDrawer} />
+          <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
             <Routes>
               <Route path="/" element={<WesternAustralia drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </SavedFeaturesProvider>
-        </Box>
+          </Box>
+        </SavedFeaturesProvider>
       </Box>
       <WelcomeModal open={welcomeDialogOpen} onClose={handleClose} />
     </BrowserRouter>
