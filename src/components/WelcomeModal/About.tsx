@@ -2,8 +2,6 @@ import { Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography } fro
 import React from "react"
 import { MdStarBorder } from "react-icons/md"
 
-import qrCode from "../../../public/docs/img/online_trip_explorer_qr.svg"
-
 const About = (): React.ReactNode => {
   const sources = [
     { name: "OpenStreetMap", url: "https://www.openstreetmap.org/" },
@@ -25,7 +23,7 @@ const About = (): React.ReactNode => {
         <Typography variant="body1" sx={{ overflow: "hidden" }}>
           <Box
             component="img"
-            src={qrCode}
+            src="/docs/img/online_trip_explorer_qr.svg"
             alt="Trip Explorer QR Code"
             sx={{
               width: "100px",
