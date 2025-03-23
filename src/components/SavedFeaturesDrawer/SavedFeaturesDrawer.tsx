@@ -1,12 +1,10 @@
 import {
   Drawer,
   Box,
-  IconButton,
   useTheme,
   useMediaQuery,
 } from "@mui/material"
 import React, { useState, useContext, useCallback, useEffect } from "react"
-import { MdMenu } from "react-icons/md"
 
 import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
@@ -60,12 +58,6 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
 
   return (
     <>
-      <IconButton
-        onClick={onClose}
-        style={{ position: "absolute", top: 10, left: 40, zIndex: 1000 }}
-      >
-        <MdMenu />
-      </IconButton>
       <FeatureDragContext savedFeatures={savedFeatures} selectedTab={selectedTab} setSavedFeatures={setSavedFeatures}>
         <Drawer
           anchor="left"

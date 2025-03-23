@@ -19,14 +19,15 @@ import FeatureMapContextMenu from "./FeatureMapContextMenu"
 
 interface FeatureMapProps extends MapComponentProps {
   geoJsonOverlaySources: Record<string, TTabMapping>
+  drawerOpen: boolean
+  closeDrawer: () => void
 }
 
-export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapProps): React.ReactNode => {
+export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...mapProps }: FeatureMapProps): React.ReactNode => {
   const { addFeature, savedFeatures } = useContext(SavedFeaturesContext)!
 
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
-  const [drawerOpen, setDrawerOpen] = useState(false)
   const [fixedOverlays, setFixedOverlays] = useState<TLayerOverlay[]>([])
   const [dynamicOverlays, setDynamicOverlays] = useState<TLayerOverlay[]>([])
   const overlayFilePaths = useMemo(() => (Object.keys(geoJsonOverlaySources)), [geoJsonOverlaySources])
@@ -130,7 +131,7 @@ export const FeatureMap = ({ geoJsonOverlaySources, ...mapProps }: FeatureMapPro
       </MapComponent>
       <SavedFeaturesDrawer
         drawerOpen={drawerOpen}
-        onClose={() => setDrawerOpen(!drawerOpen)}
+        onClose={() => closeDrawer()}
       />
     </>
   )
