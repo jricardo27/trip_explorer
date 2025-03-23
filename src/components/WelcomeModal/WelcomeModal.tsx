@@ -27,7 +27,7 @@ const WelcomeModal = ({ open, onClose }: WelcomeModalProps) => {
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-      <DialogTitle>Welcome to Trip Explorer</DialogTitle>
+      <DialogTitle>Welcome to Trip Explorer (by Ricardo Perez)</DialogTitle>
       <DialogContent>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={tabValue} onChange={handleTabChange} variant="fullWidth">
