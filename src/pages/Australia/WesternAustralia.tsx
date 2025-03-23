@@ -1,8 +1,10 @@
 import React, { useMemo } from "react"
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap.tsx"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { PERTH_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface WesternAustraliaProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface WesternAustraliaProps {
 }
 
 export const WesternAustralia = ({ drawerOpen, closeDrawer }: WesternAustraliaProps): React.ReactNode => {
-  const PERTH_LOCATION = useMemo(() => ({ lat: -31.953512, lng: 115.857048 }), [])
+  useMapState({ capitalCity: PERTH_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({

@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
+import { HOBART_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { useMapState } from "../../hooks/useMapState"
 
 interface TasmaniaProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface TasmaniaProps {
 }
 
 export const Tasmania = ({ drawerOpen, closeDrawer }: TasmaniaProps): React.ReactNode => {
-  const HOBART_LOCATION = useMemo(() => ({ lat: -42.8821, lng: 147.3272 }), [])
+  useMapState({ capitalCity: HOBART_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -31,9 +33,7 @@ export const Tasmania = ({ drawerOpen, closeDrawer }: TasmaniaProps): React.Reac
       "/markers/tasmania/discovery_parks_TAS.json": {
         General: ["name", "area", "website", "reviews"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={HOBART_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

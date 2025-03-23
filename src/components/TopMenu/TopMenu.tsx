@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom"
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
 
-import { importBackup } from "./importBackup.ts"
-import { saveAsBackup } from "./saveAsBackup.ts"
-import { saveAsGeoJson } from "./saveAsGeoJson.ts"
-import { saveAsKml } from "./saveAsKml.ts"
+import { importBackup } from "./importBackup"
+import { saveAsBackup } from "./saveAsBackup"
+import { saveAsGeoJson } from "./saveAsGeoJson"
+import { saveAsKml } from "./saveAsKml"
 
 interface TopMenuProps {
   onMenuClick: () => void
@@ -37,7 +37,7 @@ const destinations = [
   },
 ]
 
-const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
+const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const location = window.location.pathname
   const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!
   const navigate = useNavigate()
@@ -86,7 +86,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }) => {
   const handleCloseWelcomeModal = () => setOpenWelcomeModal(false)
 
   const handleDestinationChange = (_event: React.MouseEvent<HTMLElement>, newDestination: string) => {
-    navigate(newDestination)
+    navigate(`${newDestination}?fresh=true`)
     closeDestinationMenu()
   }
 

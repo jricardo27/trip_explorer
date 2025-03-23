@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { DARWIN_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface NorthernTerritoryProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface NorthernTerritoryProps {
 }
 
 export const NorthernTerritory = ({ drawerOpen, closeDrawer }: NorthernTerritoryProps): React.ReactNode => {
-  const DARWIN_LOCATION = useMemo(() => ({ lat: -12.4634, lng: 130.8456 }), [])
+  useMapState({ capitalCity: DARWIN_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -31,9 +33,7 @@ export const NorthernTerritory = ({ drawerOpen, closeDrawer }: NorthernTerritory
       "/markers/northernTerritory/discovery_parks_NT.json": {
         General: ["name", "area", "website", "reviews"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={DARWIN_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

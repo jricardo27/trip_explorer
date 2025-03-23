@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { MELBOURNE_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface VictoriaProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface VictoriaProps {
 }
 
 export const Victoria = ({ drawerOpen, closeDrawer }: VictoriaProps): React.ReactNode => {
-  const MELBOURNE_LOCATION = useMemo(() => ({ lat: -37.8136, lng: 144.9631 }), [])
+  useMapState({ capitalCity: MELBOURNE_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -31,9 +33,7 @@ export const Victoria = ({ drawerOpen, closeDrawer }: VictoriaProps): React.Reac
       "/markers/victoria/discovery_parks_VIC.json": {
         General: ["name", "area", "website", "reviews"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={MELBOURNE_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

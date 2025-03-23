@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { AUCKLAND_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface NewZealandProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface NewZealandProps {
 }
 
 export const NewZealand = ({ drawerOpen, closeDrawer }: NewZealandProps): React.ReactNode => {
-  const AUCKLAND_LOCATION = useMemo(() => ({ lat: -36.848460, lng: 174.763332 }), [])
+  useMapState({ capitalCity: AUCKLAND_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -18,9 +20,7 @@ export const NewZealand = ({ drawerOpen, closeDrawer }: NewZealandProps): React.
         General: ["name", "fees", "bookable", { key: "description", className: styles.scrollableContent }],
         Score: ["score", "thumbs_up", "thumbs_down"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={AUCKLAND_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

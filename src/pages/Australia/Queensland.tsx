@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { BRISBANE_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface QueenslandProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface QueenslandProps {
 }
 
 export const Queensland = ({ drawerOpen, closeDrawer }: QueenslandProps): React.ReactNode => {
-  const BRISBANE_LOCATION = useMemo(() => ({ lat: -27.4698, lng: 153.0251 }), [])
+  useMapState({ capitalCity: BRISBANE_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -31,9 +33,7 @@ export const Queensland = ({ drawerOpen, closeDrawer }: QueenslandProps): React.
       "/markers/queensland/discovery_parks_QLD.json": {
         General: ["name", "area", "website", "reviews"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={BRISBANE_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

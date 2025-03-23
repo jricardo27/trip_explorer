@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { SYDNEY_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface NewSouthWalesProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface NewSouthWalesProps {
 }
 
 export const NewSouthWales = ({ drawerOpen, closeDrawer }: NewSouthWalesProps): React.ReactNode => {
-  const SYDNEY_LOCATION = useMemo(() => ({ lat: -33.8688, lng: 151.2093 }), []) // Sydney coordinates
+  useMapState({ capitalCity: SYDNEY_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -31,9 +33,7 @@ export const NewSouthWales = ({ drawerOpen, closeDrawer }: NewSouthWalesProps): 
       "/markers/newSouthWales/discovery_parks_NSW.json": {
         General: ["name", "area", "website", "reviews"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={SYDNEY_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

@@ -2,7 +2,9 @@ import React, { useMemo } from "react"
 
 import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { CANBERRA_LOCATION } from "../../data/locations"
+import { TTabMapping } from "../../data/types/TTabMapping"
+import { useMapState } from "../../hooks/useMapState"
 
 interface AustralianCapitalTerritoryProps {
   drawerOpen: boolean
@@ -10,7 +12,7 @@ interface AustralianCapitalTerritoryProps {
 }
 
 export const AustralianCapitalTerritory = ({ drawerOpen, closeDrawer }: AustralianCapitalTerritoryProps): React.ReactNode => {
-  const CANBERRA_LOCATION = useMemo(() => ({ lat: -35.2809, lng: 149.1300 }), [])
+  useMapState({ capitalCity: CANBERRA_LOCATION })
 
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
@@ -25,9 +27,7 @@ export const AustralianCapitalTerritory = ({ drawerOpen, closeDrawer }: Australi
       "/markers/australianCapitalTerritory/toiletmap_aus_2025_ACT.json": {
         General: ["Name", "Male", "Female", "Unisex", "Shower", "OpeningHours", "OpeningHoursNote", "Address1", "URL"],
       },
-    }),
-    [],
-  )
+    }), [])
 
   return <FeatureMap center={CANBERRA_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
 }

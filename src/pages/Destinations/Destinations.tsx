@@ -26,7 +26,7 @@ const Destinations: React.FC = () => {
   const navigate = useNavigate()
 
   const handleDestinationClick = (path: string) => {
-    navigate(path)
+    navigate(`${path}?fresh=true`)
   }
 
   return (
