@@ -28,7 +28,7 @@ const destinations = [
       { path: "/victoria", label: "Victoria" },
       { path: "/southAustralia", label: "South Australia" },
       { path: "/tasmania", label: "Tasmania" },
-      { path: "/", label: "Western Australia" },
+      { path: "/westernAustralia", label: "Western Australia" },
     ],
   },
   {
