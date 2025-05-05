@@ -4,7 +4,6 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { HOBART_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping.ts"
-import { useMapState } from "../../hooks/useMapState"
 
 interface TasmaniaProps {
   drawerOpen: boolean
@@ -12,8 +11,6 @@ interface TasmaniaProps {
 }
 
 export const Tasmania = ({ drawerOpen, closeDrawer }: TasmaniaProps): React.ReactNode => {
-  useMapState({ capitalCity: HOBART_LOCATION })
-
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/tasmania/accommodation_TAS.json": {

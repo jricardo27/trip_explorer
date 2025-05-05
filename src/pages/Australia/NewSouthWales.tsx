@@ -4,7 +4,6 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { SYDNEY_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping"
-import { useMapState } from "../../hooks/useMapState"
 
 interface NewSouthWalesProps {
   drawerOpen: boolean
@@ -12,8 +11,6 @@ interface NewSouthWalesProps {
 }
 
 export const NewSouthWales = ({ drawerOpen, closeDrawer }: NewSouthWalesProps): React.ReactNode => {
-  useMapState({ capitalCity: SYDNEY_LOCATION })
-
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/newSouthWales/accommodation_NSW.json": {

@@ -86,7 +86,8 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const handleCloseWelcomeModal = () => setOpenWelcomeModal(false)
 
   const handleDestinationChange = (_event: React.MouseEvent<HTMLElement>, newDestination: string) => {
-    navigate(`${newDestination}?fresh=true`)
+    localStorage.removeItem("mapState")
+    navigate(newDestination)
     closeDestinationMenu()
   }
 

@@ -1,3 +1,4 @@
+import L from "leaflet"
 import React, { useCallback, useEffect, useState } from "react"
 import { LayersControl, MapContainer, TileLayer } from "react-leaflet"
 
@@ -24,9 +25,20 @@ const MapComponent = ({
   overlays,
   contextMenuHandler,
 }: MapComponentProps): React.ReactElement => {
-  const [mapState, setMapState] = useState({
-    center: center,
-    zoom: 13,
+  const [mapState, setMapState] = useState(() => {
+    const saved = localStorage.getItem("mapState")
+
+    if (saved) {
+      const parsed = JSON.parse(saved)
+      return {
+        center: parsed.center,
+        zoom: parsed.zoom,
+      }
+    }
+    return {
+      center: center,
+      zoom: 13,
+    }
   })
 
   const [overlayVisibility, setOverlayVisibility] = useState<Record<string, boolean>>(() => {
@@ -38,17 +50,6 @@ const MapComponent = ({
     const savedBaseLayer = localStorage.getItem("activeBaseLayer")
     return savedBaseLayer ?? "Esri World Street Map"
   })
-
-  const restoreMapStateFromLocalStorage = useCallback(() => {
-    const savedMapState = localStorage.getItem("mapState")
-    if (savedMapState) {
-      setMapState(JSON.parse(savedMapState))
-    }
-  }, [])
-
-  useEffect(() => {
-    restoreMapStateFromLocalStorage()
-  }, [restoreMapStateFromLocalStorage])
 
   const memoizedSetOverlayVisibility = useCallback(
     (newVisibility: React.SetStateAction<Record<string, boolean>>) => {
@@ -72,6 +73,10 @@ const MapComponent = ({
     localStorage.setItem("activeBaseLayer", activeBaseLayer)
   }, [activeBaseLayer])
 
+  const handleMapMove = useCallback((center: [number, number], zoom: number) => {
+    setMapState({ center, zoom })
+  }, [])
+
   return (
     <>
       <MapContainer
@@ -85,7 +90,7 @@ const MapComponent = ({
           setActiveBaseLayer={memoizedSetActiveBaseLayer}
           contextMenuHandler={contextMenuHandler}
         />
-        <MapStateManager />
+        <MapStateManager onMapMove={handleMapMove} />
         <MapViewUpdater center={mapState.center} zoom={mapState.zoom} />
         <ZoomLevelDisplay />
         <LayersControl position="topright">

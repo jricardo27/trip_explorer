@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import React, { useEffect, useState } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom"
 
 import "./App.css"
 import TopMenu from "./components/TopMenu/TopMenu"
@@ -17,6 +17,23 @@ import { WesternAustralia } from "./pages/Australia/WesternAustralia"
 import Destinations from "./pages/Destinations/Destinations"
 import { NewZealand } from "./pages/NewZealand/NewZealand"
 import NotFound from "./pages/NotFound/NotFound"
+
+const RedirectHandler = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  useEffect(() => {
+    const referrer = sessionStorage.getItem("referrer")
+    if (referrer) {
+      sessionStorage.removeItem("referrer")
+
+      // Check if we're on any valid route in the app
+      if (location.pathname !== referrer) {
+        navigate(referrer)
+      }
+    }
+  }, [navigate, location])
+  return null
+}
 
 function App(): React.ReactNode {
   const [welcomeDialogOpen, setWelcomeDialogOpen] = useState(false)
@@ -42,11 +59,10 @@ function App(): React.ReactNode {
     setDrawerOpen(false)
   }
 
-  const basename = import.meta.env.MODE === "production" ? "/online_trip_explorer" : "/"
-
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter basename="">
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        <RedirectHandler />
         <SavedFeaturesProvider>
           <TopMenu onMenuClick={openDrawer} />
           <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
@@ -67,7 +83,7 @@ function App(): React.ReactNode {
         </SavedFeaturesProvider>
       </Box>
       <WelcomeModal open={welcomeDialogOpen} onClose={handleClose} />
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
