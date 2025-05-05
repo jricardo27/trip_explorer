@@ -4,7 +4,6 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { BRISBANE_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping"
-import { useMapState } from "../../hooks/useMapState"
 
 interface QueenslandProps {
   drawerOpen: boolean
@@ -12,8 +11,6 @@ interface QueenslandProps {
 }
 
 export const Queensland = ({ drawerOpen, closeDrawer }: QueenslandProps): React.ReactNode => {
-  useMapState({ capitalCity: BRISBANE_LOCATION })
-
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/queensland/accommodation_QLD.json": {

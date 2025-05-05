@@ -26,7 +26,8 @@ const Destinations: React.FC = () => {
   const navigate = useNavigate()
 
   const handleDestinationClick = (path: string) => {
-    navigate(`${path}?fresh=true`)
+    localStorage.removeItem("mapState")
+    navigate(path)
   }
 
   return (

@@ -4,7 +4,6 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { MELBOURNE_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping"
-import { useMapState } from "../../hooks/useMapState"
 
 interface VictoriaProps {
   drawerOpen: boolean
@@ -12,8 +11,6 @@ interface VictoriaProps {
 }
 
 export const Victoria = ({ drawerOpen, closeDrawer }: VictoriaProps): React.ReactNode => {
-  useMapState({ capitalCity: MELBOURNE_LOCATION })
-
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/victoria/accommodation_VIC.json": {

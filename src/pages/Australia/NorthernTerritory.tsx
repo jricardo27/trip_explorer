@@ -4,7 +4,6 @@ import { FeatureMap } from "../../components/MapComponent/FeatureMap"
 import styles from "../../components/PopupContent/PopupContent.module.css"
 import { DARWIN_LOCATION } from "../../data/locations"
 import { TTabMapping } from "../../data/types/TTabMapping"
-import { useMapState } from "../../hooks/useMapState"
 
 interface NorthernTerritoryProps {
   drawerOpen: boolean
@@ -12,8 +11,6 @@ interface NorthernTerritoryProps {
 }
 
 export const NorthernTerritory = ({ drawerOpen, closeDrawer }: NorthernTerritoryProps): React.ReactNode => {
-  useMapState({ capitalCity: DARWIN_LOCATION })
-
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/northernTerritory/accommodation_NT.json": {
