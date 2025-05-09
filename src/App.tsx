@@ -1,10 +1,12 @@
 import { Box } from "@mui/material"
 import React, { useEffect, useState } from "react"
+import ReactGA from "react-ga4"
 import { HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom"
 
 import "./App.css"
 import TopMenu from "./components/TopMenu/TopMenu"
 import WelcomeModal from "./components/WelcomeModal/WelcomeModal"
+import config from "./config"
 import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
 import { AustralianCapitalTerritory } from "./pages/Australia/AustralianCapitalTerritory"
 import { NewSouthWales } from "./pages/Australia/NewSouthWales"
@@ -38,6 +40,8 @@ const RedirectHandler = () => {
 function App(): React.ReactNode {
   const [welcomeDialogOpen, setWelcomeDialogOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+
+  ReactGA.initialize(config.ga.measurementId)
 
   useEffect(() => {
     const hasShownModal = localStorage.getItem("hasShownModal")
