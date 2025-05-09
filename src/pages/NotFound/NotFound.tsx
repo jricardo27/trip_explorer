@@ -2,7 +2,7 @@ import { Container, Typography, Button, Box } from "@mui/material"
 import React from "react"
 import { Link } from "react-router-dom"
 
-import { ISSUE_MANAGER_URL } from "../../config.ts"
+import config from "../../config.ts"
 
 import { Illustration } from "./Illustration"
 import classes from "./NotFound.module.css"
@@ -32,7 +32,7 @@ const NotFound: React.FC = () => {
             <br />
             If you think this is an error, contact support by creating an issue on our
             {" "}
-            <a href={ISSUE_MANAGER_URL} target="_blank" rel="noopener noreferrer">issue manager</a>
+            <a href={config.issue_manager_url} target="_blank" rel="noopener noreferrer">issue manager</a>
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button component={Link} to="/" size="large" variant="contained">

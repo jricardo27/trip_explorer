@@ -11,6 +11,11 @@ const replacements = [
     from: /src:"public\//g,
     to: 'src:"',
   },
+  {
+    files: "dist/index.html",
+    from: /<script type="importmap">/g,
+    to: '<script src="./assets/runtime-config.js"></script>\n\t<script type="importmap">',
+  },
 ]
 
 try {

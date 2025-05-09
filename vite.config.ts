@@ -14,6 +14,7 @@ export default defineConfig({
         "geojson-to-kml",
         "leaflet",
         "react",
+        "react-ga4",
         "react-image-gallery",
         "react-leaflet",
         "react-router-dom",
