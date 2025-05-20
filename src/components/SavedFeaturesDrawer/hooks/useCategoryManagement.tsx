@@ -44,16 +44,20 @@ export const useCategoryManagement = (
   const handleRenameCategory = useCallback((newName: string) => {
     if (contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && newName !== DEFAULT_CATEGORY) {
       setSavedFeatures((prev: SavedFeaturesStateType) => {
-        const newSavedFeatures = { ...prev }
-        newSavedFeatures[newName] = newSavedFeatures[contextMenuTab]
-        delete newSavedFeatures[contextMenuTab]
-        const keys = Object.keys(newSavedFeatures)
-        const index = keys.indexOf(contextMenuTab)
-        if (index !== -1) keys.splice(index, 1, newName)
-        return Object.fromEntries(keys.map((key) => [key, newSavedFeatures[key]]))
+        const orderedKeys = Object.keys(prev);
+        const newSavedFeatures: SavedFeaturesStateType = {};
+        for (const key of orderedKeys) {
+          if (key === contextMenuTab) {
+            newSavedFeatures[newName] = prev[contextMenuTab];
+          } else {
+            newSavedFeatures[key] = prev[key];
+          }
+        }
+        return newSavedFeatures;
       })
+      setSelectedTab(newName)
     }
-  }, [contextMenuTab, setSavedFeatures])
+  }, [contextMenuTab, setSavedFeatures, setSelectedTab])
 
   const handleAddCategory = useCallback(() => {
     let categoryName = prompt("Enter name for category")
