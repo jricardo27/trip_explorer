@@ -1,9 +1,10 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
-import React from "react"
+import React from "react" // Keep React import
 import { MdDragIndicator } from "react-icons/md"
 
+import { useLongPress } from "../../../hooks/useLongPress" // Import useLongPress
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
@@ -15,7 +16,8 @@ interface SortableFeatureItemProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
+  // Update handleContextMenu prop type
+  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
 }
 
 export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
@@ -39,19 +41,26 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
   const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
   const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
 
+  // Integrate useLongPress
+  const longPressProps = useLongPress(
+    (event) => {
+      handleContextMenu(event, selection)
+      // event.stopPropagation() is called by useLongPress if the long press is successful
+    },
+    500 // Duration for long press
+  )
+
   return (
     <ListItem
       ref={setNodeRef}
       style={style}
       onClick={(event: React.MouseEvent) => {
-        event.stopPropagation()
+        event.stopPropagation() // Keep stopPropagation for regular clicks
         setSelectedFeature(isSelected ? null : selection)
       }}
-      onContextMenu={(event) => {
-        handleContextMenu(event, selection)
-        event.stopPropagation()
-      }}
-      {...{ button: "true" }}
+      // Spread longPressProps here. This replaces the old onContextMenu.
+      {...longPressProps}
+      {...{ button: "true" }} // Ensure this is still applied correctly
     >
       <ListItemIcon>
         <IconButton
