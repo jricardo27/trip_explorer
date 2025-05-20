@@ -1,20 +1,24 @@
-import { Menu as MenuIcon } from "@mui/icons-material"
+import { Menu as MenuIcon, VpnKey as VpnKeyIcon } from "@mui/icons-material"
 import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
 import React, { useContext, useState } from "react"
-import { FaDownload, FaUpload } from "react-icons/fa"
-import { MdHelpOutline, MdLocationOn } from "react-icons/md"
-import { useNavigate, Link } from "react-router-dom"
+import { FaDownload, FaUpload } from "react-icons/fa";
+import { MdHelpOutline, MdLocationOn } from "react-icons/md";
+import { useNavigate, Link } from "react-router-dom";
 
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext from "../../contexts/SavedFeaturesContext";
+import { TCurrentSearchResult } from "../../data/types";
+import { ApiKeyModal } from "../ApiKeyModal";
+import { GeocodingSearch } from "../GeocodingSearch"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
 
 import { importBackup } from "./importBackup"
 import { saveAsBackup } from "./saveAsBackup"
 import { saveAsGeoJson } from "./saveAsGeoJson"
-import { saveAsKml } from "./saveAsKml"
+import { saveAsKml } from "./saveAsKml";
 
 interface TopMenuProps {
-  onMenuClick: () => void
+  onMenuClick: () => void;
+  setCurrentSearchResult: (result: TCurrentSearchResult) => void;
 }
 
 const destinations = [
@@ -35,15 +39,16 @@ const destinations = [
     label: "New Zealand",
     children: [{ path: "/newZealand", label: "New Zealand" }],
   },
-]
+];
 
-const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
-  const location = window.location.pathname
-  const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!
+const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick, setCurrentSearchResult }: TopMenuProps) => {
+  const location = window.location.pathname;
+  const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!;
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [openWelcomeModal, setOpenWelcomeModal] = useState<boolean>(false)
+  const [apiKeyModalOpen, setApiKeyModalOpen] = useState<boolean>(false)
   const [importAnchorEl, setImportAnchorEl] = useState<null | HTMLElement>(null)
   const [destinationAnchorEl, setDestinationAnchorEl] = useState<null | HTMLElement>(null)
   const importMenuIsOpen = Boolean(importAnchorEl)
@@ -85,6 +90,9 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const handleOpenWelcomeModal = () => setOpenWelcomeModal(true)
   const handleCloseWelcomeModal = () => setOpenWelcomeModal(false)
 
+  const handleOpenApiKeyModal = () => setApiKeyModalOpen(true)
+  const handleCloseApiKeyModal = () => setApiKeyModalOpen(false)
+
   const handleDestinationChange = (_event: React.MouseEvent<HTMLElement>, newDestination: string) => {
     localStorage.removeItem("mapState")
     navigate(newDestination)
@@ -95,8 +103,8 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Grid2 container spacing={2} sx={{ flexGrow: 1 }}>
-            <Grid2 size={2}>
+          <Grid2 container spacing={1} alignItems="center" sx={{ flexGrow: 1 }}>
+            <Grid2 xs={12} sm={2} md={2}>
               <Tooltip title="Go back to destination selection" aria-label="Go back to destination selection">
                 <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -105,24 +113,29 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                 </Link>
               </Tooltip>
             </Grid2>
-            <Grid2 size={2}>
-              <Tooltip title="Saved Features" aria-label="Saved Features">
-                <Button onClick={onMenuClick} color="inherit" startIcon={<MenuIcon />} />
-              </Tooltip>
+            <Grid2 xs={12} sm={4} md={3}>
+              <GeocodingSearch setCurrentSearchResult={setCurrentSearchResult} />
             </Grid2>
-            <Grid2 size={2}>
-              <Tooltip title="Export" aria-label="Export">
-                <Button
-                  id="fade-button"
+            <Grid2 xs={12} sm={6} md={7}>
+              <Grid2 container spacing={1} justifyContent="flex-end">
+                <Grid2>
+                  <Tooltip title="Saved Features" aria-label="Saved Features">
+                    <Button onClick={onMenuClick} color="inherit" startIcon={<MenuIcon />} />
+                  </Tooltip>
+                </Grid2>
+                <Grid2>
+                  <Tooltip title="Export" aria-label="Export">
+                    <Button
+                      id="fade-button"
                   aria-controls={exportMenuIsOpen ? "fade-menu" : undefined}
                   aria-haspopup="true"
                   aria-expanded={exportMenuIsOpen ? "true" : undefined}
                   onClick={openExportMenu}
                   color="inherit"
-                  startIcon={<FaDownload />}
-                />
-              </Tooltip>
-              <Menu
+                      startIcon={<FaDownload />}
+                    />
+                  </Tooltip>
+                  <Menu
                 id="fade-menu"
                 anchorEl={anchorEl}
                 open={exportMenuIsOpen}
@@ -130,22 +143,22 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
               >
                 <MenuItem onClick={closeMenuAfterAction(() => saveAsGeoJson(savedFeatures))}>To GeoJson</MenuItem>
                 <MenuItem onClick={closeMenuAfterAction(() => saveAsKml(savedFeatures))}>To KML</MenuItem>
-                <MenuItem onClick={closeMenuAfterAction(() => saveAsBackup(savedFeatures))}>Export backup</MenuItem>
-              </Menu>
-            </Grid2>
-            <Grid2 size={2}>
-              <Tooltip title="Import" aria-label="Import">
-                <Button
-                  id="import-button"
+                    <MenuItem onClick={closeMenuAfterAction(() => saveAsBackup(savedFeatures))}>Export backup</MenuItem>
+                  </Menu>
+                </Grid2>
+                <Grid2>
+                  <Tooltip title="Import" aria-label="Import">
+                    <Button
+                      id="import-button"
                   aria-controls={importMenuIsOpen ? "import-menu" : undefined}
                   aria-haspopup="true"
                   aria-expanded={importMenuIsOpen ? "true" : undefined}
                   onClick={openImportMenu}
                   color="inherit"
-                  startIcon={<FaUpload />}
-                />
-              </Tooltip>
-              <Menu
+                      startIcon={<FaUpload />}
+                    />
+                  </Tooltip>
+                  <Menu
                 id="import-menu"
                 anchorEl={importAnchorEl}
                 open={importMenuIsOpen}
@@ -153,22 +166,22 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
               >
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("override", setSavedFeatures) })}>Override existing POIs</MenuItem>
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("append", setSavedFeatures) })}>Append categories</MenuItem>
-                <MenuItem onClick={closeMenuAfterAction(() => { importBackup("merge", setSavedFeatures) })}>Merge Categories</MenuItem>
-              </Menu>
-            </Grid2>
-            <Grid2 size={2}>
-              <Tooltip title="Destinations" aria-label="Destinations">
-                <Button
-                  id="destination-button"
+                    <MenuItem onClick={closeMenuAfterAction(() => { importBackup("merge", setSavedFeatures) })}>Merge Categories</MenuItem>
+                  </Menu>
+                </Grid2>
+                <Grid2>
+                  <Tooltip title="Destinations" aria-label="Destinations">
+                    <Button
+                      id="destination-button"
                   aria-controls={destinationMenuIsOpen ? "destination-menu" : undefined}
                   aria-haspopup="true"
                   aria-expanded={destinationMenuIsOpen ? "true" : undefined}
                   onClick={openDestinationMenu}
                   color="inherit"
-                  startIcon={<MdLocationOn />}
-                />
-              </Tooltip>
-              <Menu
+                      startIcon={<MdLocationOn />}
+                    />
+                  </Tooltip>
+                  <Menu
                 id="destination-menu"
                 anchorEl={destinationAnchorEl}
                 open={destinationMenuIsOpen}
@@ -191,22 +204,30 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                           </ListItemButton>
                         </ListItem>
                       ))}
-                    </List>
-                  </Box>
-                ))}
-              </Menu>
-            </Grid2>
-            <Grid2 size={2}>
-              <Tooltip title="Help" aria-label="Help">
-                <Button onClick={handleOpenWelcomeModal} color="inherit" startIcon={<MdHelpOutline />} />
-              </Tooltip>
-              <WelcomeModal open={openWelcomeModal} onClose={handleCloseWelcomeModal} />
+                        </List>
+                      </Box>
+                    ))}
+                  </Menu>
+                </Grid2>
+                <Grid2>
+                  <Tooltip title="Help" aria-label="Help">
+                    <Button onClick={handleOpenWelcomeModal} color="inherit" startIcon={<MdHelpOutline />} />
+                  </Tooltip>
+                  <WelcomeModal open={openWelcomeModal} onClose={handleCloseWelcomeModal} />
+                </Grid2>
+                <Grid2>
+                  <Tooltip title="Set API Key" aria-label="Set API Key">
+                    <Button onClick={handleOpenApiKeyModal} color="inherit" startIcon={<VpnKeyIcon />} />
+                  </Tooltip>
+                  <ApiKeyModal open={apiKeyModalOpen} onClose={handleCloseApiKeyModal} />
+                </Grid2>
+              </Grid2>
             </Grid2>
           </Grid2>
         </Toolbar>
       </AppBar>
     </Box>
-  )
+  );
 }
 
-export default TopMenu
+export default TopMenu;

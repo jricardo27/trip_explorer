@@ -1,16 +1,19 @@
 import React, { useMemo } from "react"
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { PERTH_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping"
+import React, { useMemo } from "react";
+
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { PERTH_LOCATION } from "../../data/locations";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface WesternAustraliaProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
-export const WesternAustralia = ({ drawerOpen, closeDrawer }: WesternAustraliaProps): React.ReactNode => {
+export const WesternAustralia = ({ drawerOpen, closeDrawer, currentSearchResult }: WesternAustraliaProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/westernAustralia/gas_stations_openstreetmap.json": {
@@ -57,5 +60,5 @@ export const WesternAustralia = ({ drawerOpen, closeDrawer }: WesternAustraliaPr
       },
     }), [])
 
-  return <FeatureMap center={PERTH_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={PERTH_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }

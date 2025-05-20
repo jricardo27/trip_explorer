@@ -1,32 +1,45 @@
-import L from "leaflet"
-import React, { useCallback, useEffect, useState } from "react"
-import { LayersControl, MapContainer, TileLayer } from "react-leaflet"
+import L, { Icon, Point } from "leaflet";
+import React, { useCallback, useEffect, useState } from "react";
+import { LayersControl, MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-import "leaflet/dist/leaflet.css"
-import { TCoordinate } from "../../data/types"
-import { TLayerOverlay } from "../../data/types/TLayerOverlay"
+import "leaflet/dist/leaflet.css";
+import { TCoordinate, TCurrentSearchResult } from "../../data/types"; // Added TCurrentSearchResult
+import { TLayerOverlay } from "../../data/types/TLayerOverlay";
 
-import { BaseLayers } from "./BaseLayers"
+import { BaseLayers } from "./BaseLayers";
 import MapEvents from "./MapEvents"
 import MapStateManager from "./MapStateManager"
 import MapViewUpdater from "./MapViewUpdater"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
 export interface MapComponentProps {
-  children?: React.ReactNode
-  center: TCoordinate | [number, number]
-  overlays?: TLayerOverlay[]
-  contextMenuHandler?: (event: L.LeafletMouseEvent) => void
+  children?: React.ReactNode;
+  center: TCoordinate | [number, number];
+  overlays?: TLayerOverlay[];
+  contextMenuHandler?: (event: L.LeafletMouseEvent) => void;
+  currentSearchResult?: TCurrentSearchResult; // Updated type
 }
+
+// Custom icon for search result
+const searchResultIcon = new Icon({
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: new Point(25, 41),
+  iconAnchor: new Point(12, 41),
+  popupAnchor: new Point(1, -34),
+  shadowSize: new Point(41, 41),
+});
 
 const MapComponent = ({
   children,
   center,
   overlays,
   contextMenuHandler,
+  currentSearchResult,
 }: MapComponentProps): React.ReactElement => {
   const [mapState, setMapState] = useState(() => {
-    const saved = localStorage.getItem("mapState")
+    const saved = localStorage.getItem("mapState");
 
     if (saved) {
       const parsed = JSON.parse(saved)
@@ -91,7 +104,7 @@ const MapComponent = ({
           contextMenuHandler={contextMenuHandler}
         />
         <MapStateManager onMapMove={handleMapMove} />
-        <MapViewUpdater center={mapState.center} zoom={mapState.zoom} />
+        <MapViewUpdater center={mapState.center} zoom={mapState.zoom} currentSearchResult={currentSearchResult} />
         <ZoomLevelDisplay />
         <LayersControl position="topright">
           {Object.entries(BaseLayers).map(([key, layer]) => (
@@ -125,6 +138,11 @@ const MapComponent = ({
               </LayersControl.Overlay>
             ))}
         </LayersControl>
+        {currentSearchResult && currentSearchResult.coordinate && (
+          <Marker position={[currentSearchResult.coordinate.lat, currentSearchResult.coordinate.lng]} icon={searchResultIcon}>
+            <Popup>{currentSearchResult.address || "Searched Location"}</Popup>
+          </Marker>
+        )}
         {children}
       </MapContainer>
     </>

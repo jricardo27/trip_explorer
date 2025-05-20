@@ -1,16 +1,17 @@
-import React, { useMemo } from "react"
+import React, { useMemo } from "react";
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { CANBERRA_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { CANBERRA_LOCATION } from "../../data/locations";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface AustralianCapitalTerritoryProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
-export const AustralianCapitalTerritory = ({ drawerOpen, closeDrawer }: AustralianCapitalTerritoryProps): React.ReactNode => {
+export const AustralianCapitalTerritory = ({ drawerOpen, closeDrawer, currentSearchResult }: AustralianCapitalTerritoryProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/australianCapitalTerritory/accommodation_ACT.json": {
@@ -26,5 +27,5 @@ export const AustralianCapitalTerritory = ({ drawerOpen, closeDrawer }: Australi
       },
     }), [])
 
-  return <FeatureMap center={CANBERRA_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={CANBERRA_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }

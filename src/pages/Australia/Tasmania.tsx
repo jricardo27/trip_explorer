@@ -1,16 +1,17 @@
-import React, { useMemo } from "react"
+import React, { useMemo } from "react";
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { HOBART_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping.ts"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { HOBART_LOCATION } from "../../data/locations";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface TasmaniaProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
-export const Tasmania = ({ drawerOpen, closeDrawer }: TasmaniaProps): React.ReactNode => {
+export const Tasmania = ({ drawerOpen, closeDrawer, currentSearchResult }: TasmaniaProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/tasmania/accommodation_TAS.json": {
@@ -32,5 +33,5 @@ export const Tasmania = ({ drawerOpen, closeDrawer }: TasmaniaProps): React.Reac
       },
     }), [])
 
-  return <FeatureMap center={HOBART_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={HOBART_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }
