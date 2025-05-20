@@ -54,14 +54,12 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
           : undefined
       }
     >
-      {contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && contextMenuTab !== NULL_TAB ? (
-        <>
-          <MenuItem key="move-up" onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>
-          <MenuItem key="move-down" onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>
-          <MenuItem key="rename" onClick={wrapper(handleRename)}>Rename Category</MenuItem>
-          <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
-        </>
-      ) : null}
+      {contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && contextMenuTab !== NULL_TAB ? [
+        <MenuItem key="move-up" onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>,
+        <MenuItem key="move-down" onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>,
+        <MenuItem key="rename" onClick={wrapper(handleRename)}>Rename Category</MenuItem>,
+        <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
+      ] : null}
       <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>Add New Category</MenuItem>
     </Menu>
   )
