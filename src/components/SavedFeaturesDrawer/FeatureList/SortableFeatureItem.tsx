@@ -8,6 +8,7 @@ import { useLongPress } from "../../../hooks/useLongPress" // Import useLongPres
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
+import { filterFeatures } from "../filterUtils" // Import filterFeatures
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature
@@ -16,11 +17,11 @@ interface SortableFeatureItemProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  // Update handleContextMenu prop type
   handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
+  searchQuery: string // Added searchQuery prop
 }
 
-export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
+export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu, searchQuery }: SortableFeatureItemProps) => {
   const {
     attributes,
     listeners,
@@ -41,6 +42,9 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
   const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
   const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
 
+  // Determine visibility based on searchQuery
+  const isVisible = searchQuery ? filterFeatures([feature], searchQuery).length > 0 : true
+
   // Integrate useLongPress
   const longPressProps = useLongPress(
     (event) => {
@@ -49,6 +53,10 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
     },
     500 // Duration for long press
   )
+
+  if (!isVisible) {
+    return null // If not visible, render nothing
+  }
 
   return (
     <ListItem

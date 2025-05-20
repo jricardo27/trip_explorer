@@ -17,8 +17,9 @@ interface FeatureListProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
+  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void // Updated for long press
   excludedProperties: string[]
+  searchQuery: string // Added searchQuery prop
 }
 
 export const FeatureList = ({
@@ -29,6 +30,7 @@ export const FeatureList = ({
   setSelectedFeature,
   handleContextMenu,
   excludedProperties,
+  searchQuery, // Destructure searchQuery
 }: FeatureListProps) => {
   const [editorVisible, setEditorVisible] = useState(false)
   const [notes, setNotes] = useState("")
@@ -79,6 +81,7 @@ export const FeatureList = ({
             selectedFeature={selectedFeature}
             setSelectedFeature={setSelectedFeature}
             handleContextMenu={handleContextMenu}
+            searchQuery={searchQuery} // Pass searchQuery to SortableFeatureItem
           />
           <Collapse in={idxSel(selectedFeature) === idxFeat(index, feature)} timeout="auto" unmountOnExit>
             <ListItem sx={{ pl: 4 }}>

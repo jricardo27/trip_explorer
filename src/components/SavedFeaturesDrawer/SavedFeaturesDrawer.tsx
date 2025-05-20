@@ -64,7 +64,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
 
   const currentFeatures = savedFeatures[selectedTab] || []
   // Use the filterFeatures helper function
-  const filteredFeatures = filterFeatures(currentFeatures, searchQuery)
+  // const filteredFeatures = filterFeatures(currentFeatures, searchQuery) // Reverted: Filtering moved to SortableFeatureItem
 
   return (
     <>
@@ -102,7 +102,8 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
                 sx={{ mb: 2 }}
               />
               <FeatureList
-                features={filteredFeatures}
+                features={currentFeatures} // Changed from filteredFeatures to currentFeatures
+                searchQuery={searchQuery} // Pass searchQuery as a new prop
                 setSavedFeatures={setSavedFeatures}
                 selectedTab={selectedTab}
                 selectedFeature={selectedFeature}
