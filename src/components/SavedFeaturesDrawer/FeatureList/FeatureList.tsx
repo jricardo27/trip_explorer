@@ -100,27 +100,34 @@ export const FeatureList = ({
                       return;
                     }
                     const geometry = selectedFeature.feature.geometry;
-                    let rawCoords: number[] | undefined;
+                    let rawCoordsAny: any[] | undefined; 
 
                     if (geometry.type === 'Point' && geometry.coordinates) {
-                      rawCoords = geometry.coordinates as number[]; // Asserting type based on GeoJSON spec
+                      rawCoordsAny = geometry.coordinates;
                     } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0]) {
-                      rawCoords = geometry.coordinates[0] as number[];
+                      rawCoordsAny = geometry.coordinates[0];
                     } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0]) {
-                      rawCoords = geometry.coordinates[0][0] as number[];
+                      rawCoordsAny = geometry.coordinates[0][0];
                     } else {
                       console.warn("Unsupported geometry type or missing coordinates for navigation:", geometry.type);
                       return;
                     }
 
-                    if (rawCoords && typeof rawCoords[0] === 'number' && typeof rawCoords[1] === 'number' && rawCoords.length >= 2) {
-                      const leafletCoords: [number, number] = [rawCoords[1], rawCoords[0]];
-                      navigateToCoordinates(leafletCoords);
-                      if (onClose) {
-                        onClose();
+                    if (Array.isArray(rawCoordsAny) && rawCoordsAny.length === 2) {
+                      const lng = parseFloat(rawCoordsAny[0]);
+                      const lat = parseFloat(rawCoordsAny[1]);
+
+                      if (!isNaN(lng) && !isNaN(lat)) {
+                        const leafletCoords: [number, number] = [lat, lng];
+                        navigateToCoordinates(leafletCoords);
+                        if (onClose) {
+                          onClose();
+                        }
+                      } else {
+                        console.error("Invalid coordinates after parsing. Expected numbers, received:", rawCoordsAny);
                       }
                     } else {
-                      console.warn("Invalid coordinates for navigation:", rawCoords);
+                      console.error("Coordinates are missing, not an array, or not a pair:", rawCoordsAny);
                     }
                   }}
                 >
