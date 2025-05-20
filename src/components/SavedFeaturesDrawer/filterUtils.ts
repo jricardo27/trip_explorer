@@ -1,19 +1,6 @@
-// Define a simplified GeoJsonFeature type for our filtering purposes
-export interface GeoJsonFeature {
-  type: "Feature";
-  properties: {
-    // Making name and description optional as per test cases
-    name?: string;
-    description?: string;
-    // Allow other properties
-    [key: string]: any;
-  };
-  geometry: {
-    type: string;
-    coordinates: any;
-  };
-  id?: string;
-}
+import { GeoJsonFeature } from "../../data/types"; // Import the global GeoJsonFeature type
+
+// The local GeoJsonFeature interface definition has been removed.
 
 export const filterFeatures = (features: GeoJsonFeature[], searchQuery: string): GeoJsonFeature[] => {
   if (!searchQuery) {
