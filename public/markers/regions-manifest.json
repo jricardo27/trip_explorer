@@ -1,0 +1,11 @@
+[
+  { "id": "westernAustralia", "name": "Western Australia" },
+  { "id": "newSouthWales", "name": "New South Wales" },
+  { "id": "victoria", "name": "Victoria" },
+  { "id": "queensland", "name": "Queensland" },
+  { "id": "southAustralia", "name": "South Australia" },
+  { "id": "tasmania", "name": "Tasmania" },
+  { "id": "northernTerritory", "name": "Northern Territory" },
+  { "id": "australianCapitalTerritory", "name": "Australian Capital Territory" },
+  { "id": "newZealand", "name": "New Zealand" }
+]

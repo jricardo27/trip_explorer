@@ -1,0 +1,16 @@
+{
+  "files": [
+    "accommodation_WA.json",
+    "accommodation_campermate.json",
+    "big4_holiday_parks_WA.json",
+    "discovery_parks_WA.json",
+    "gas_stations_bp.json",
+    "gas_stations_fuelwatch.json",
+    "gas_stations_openstreetmap.json",
+    "national_parks_simplified.json",
+    "places.json",
+    "toiletmap_aus_2025_WA.json",
+    "western_australia_tourism.json",
+    "western_australia_visitor_centre.json"
+  ]
+}

@@ -7,6 +7,7 @@ import "./App.css"
 import TopMenu from "./components/TopMenu/TopMenu"
 import WelcomeModal from "./components/WelcomeModal/WelcomeModal"
 import config from "./config"
+import { PoiSelectionProvider } from "./contexts/PoiSelectionProvider.tsx" // Added import
 import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
 import { AustralianCapitalTerritory } from "./pages/Australia/AustralianCapitalTerritory"
 import { NewSouthWales } from "./pages/Australia/NewSouthWales"
@@ -67,10 +68,11 @@ function App(): React.ReactNode {
     <HashRouter basename="">
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <RedirectHandler />
-        <SavedFeaturesProvider>
-          <TopMenu onMenuClick={openDrawer} />
-          <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
-            <Routes>
+        <PoiSelectionProvider> {/* Added PoiSelectionProvider */}
+          <SavedFeaturesProvider>
+            <TopMenu onMenuClick={openDrawer} />
+            <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
+              <Routes>
               <Route path="/" element={<Destinations />} />
               <Route path="/australianCapitalTerritory" element={<AustralianCapitalTerritory drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
               <Route path="/newSouthWales" element={<NewSouthWales drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
@@ -83,8 +85,9 @@ function App(): React.ReactNode {
               <Route path="/newZealand" element={<NewZealand drawerOpen={drawerOpen} closeDrawer={closeDrawer} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Box>
-        </SavedFeaturesProvider>
+            </Box>
+          </SavedFeaturesProvider>
+        </PoiSelectionProvider> {/* Added PoiSelectionProvider */}
       </Box>
       <WelcomeModal open={welcomeDialogOpen} onClose={handleClose} />
     </HashRouter>
