@@ -100,22 +100,26 @@ export const FeatureList = ({
                       return;
                     }
                     const geometry = selectedFeature.feature.geometry;
-                    let rawCoordsAny: any[] | undefined; 
+                    let lngStr: string | number | undefined;
+                    let latStr: string | number | undefined;
 
-                    if (geometry.type === 'Point' && geometry.coordinates) {
-                      rawCoordsAny = geometry.coordinates;
-                    } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0]) {
-                      rawCoordsAny = geometry.coordinates[0];
-                    } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0]) {
-                      rawCoordsAny = geometry.coordinates[0][0];
+                    if (geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length === 2) {
+                      lngStr = geometry.coordinates[0];
+                      latStr = geometry.coordinates[1];
+                    } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0].length === 2) {
+                      lngStr = geometry.coordinates[0][0];
+                      latStr = geometry.coordinates[0][1];
+                    } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0] && geometry.coordinates[0][0].length === 2) {
+                      lngStr = geometry.coordinates[0][0][0];
+                      latStr = geometry.coordinates[0][0][1];
                     } else {
-                      console.warn("Unsupported geometry type or missing coordinates for navigation:", geometry.type);
+                      console.warn("Unsupported geometry type or malformed coordinates for navigation:", geometry.type);
                       return;
                     }
 
-                    if (Array.isArray(rawCoordsAny) && rawCoordsAny.length === 2) {
-                      const lng = parseFloat(rawCoordsAny[0]);
-                      const lat = parseFloat(rawCoordsAny[1]);
+                    if (lngStr !== undefined && latStr !== undefined) {
+                      const lng = parseFloat(String(lngStr)); // Explicitly convert to string before parseFloat
+                      const lat = parseFloat(String(latStr)); // Explicitly convert to string before parseFloat
 
                       if (!isNaN(lng) && !isNaN(lat)) {
                         const leafletCoords: [number, number] = [lat, lng];
@@ -124,10 +128,12 @@ export const FeatureList = ({
                           onClose();
                         }
                       } else {
-                        console.error("Invalid coordinates after parsing. Expected numbers, received:", rawCoordsAny);
+                        console.error("Invalid coordinates after parsing. Original values:", {lngStr, latStr});
                       }
                     } else {
-                      console.error("Coordinates are missing, not an array, or not a pair:", rawCoordsAny);
+                      // This case should ideally be caught by the geometry type checks if types are correct,
+                      // but as a fallback:
+                      console.error("Coordinates could not be extracted.");
                     }
                   }}
                 >
