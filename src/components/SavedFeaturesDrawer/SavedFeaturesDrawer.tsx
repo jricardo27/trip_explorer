@@ -24,11 +24,17 @@ interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
   onClose: () => void
   setCurrentCategory?: (newState: string) => void
+  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
 }
 
 const excludedProperties = ["id", "images", "style"] as const
 
-const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
+const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({
+  drawerOpen,
+  onClose,
+  setCurrentCategory,
+  navigateToCoordinates, // Destructured navigateToCoordinates
+}) => {
   const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
   const [searchQuery, setSearchQuery] = useState<string>("")
 
@@ -110,6 +116,8 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
                 setSelectedFeature={setSelectedFeature}
                 handleContextMenu={handleContextMenu}
                 excludedProperties={Array.from(excludedProperties)}
+                navigateToCoordinates={navigateToCoordinates} // Pass navigateToCoordinates to FeatureList
+                onClose={onClose} // Pass the onClose prop
               />
             </Box>
           </Box>

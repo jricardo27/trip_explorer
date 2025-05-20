@@ -20,6 +20,8 @@ interface FeatureListProps {
   handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void // Updated for long press
   excludedProperties: string[]
   searchQuery: string // Added searchQuery prop
+  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
+  onClose?: () => void // Added onClose prop
 }
 
 export const FeatureList = ({
@@ -31,6 +33,8 @@ export const FeatureList = ({
   handleContextMenu,
   excludedProperties,
   searchQuery, // Destructure searchQuery
+  navigateToCoordinates, // Destructure navigateToCoordinates
+  onClose, // Destructure onClose
 }: FeatureListProps) => {
   const [editorVisible, setEditorVisible] = useState(false)
   const [notes, setNotes] = useState("")
@@ -87,6 +91,43 @@ export const FeatureList = ({
             <ListItem sx={{ pl: 4 }}>
               <Button onClick={() => openCloseEditor(feature)}>Add/edit notes</Button>
             </ListItem>
+            {/* Add "Go to on Map" button here */}
+            {navigateToCoordinates && selectedFeature?.feature.geometry && (
+              <ListItem sx={{ pl: 4 }}>
+                <Button
+                  onClick={() => {
+                    if (!selectedFeature || !selectedFeature.feature.geometry || !navigateToCoordinates) {
+                      return;
+                    }
+                    const geometry = selectedFeature.feature.geometry;
+                    let rawCoords: number[] | undefined;
+
+                    if (geometry.type === 'Point' && geometry.coordinates) {
+                      rawCoords = geometry.coordinates as number[]; // Asserting type based on GeoJSON spec
+                    } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0]) {
+                      rawCoords = geometry.coordinates[0] as number[];
+                    } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0]) {
+                      rawCoords = geometry.coordinates[0][0] as number[];
+                    } else {
+                      console.warn("Unsupported geometry type or missing coordinates for navigation:", geometry.type);
+                      return;
+                    }
+
+                    if (rawCoords && typeof rawCoords[0] === 'number' && typeof rawCoords[1] === 'number' && rawCoords.length >= 2) {
+                      const leafletCoords: [number, number] = [rawCoords[1], rawCoords[0]];
+                      navigateToCoordinates(leafletCoords);
+                      if (onClose) {
+                        onClose();
+                      }
+                    } else {
+                      console.warn("Invalid coordinates for navigation:", rawCoords);
+                    }
+                  }}
+                >
+                  Go to on Map
+                </Button>
+              </ListItem>
+            )}
             {editorVisible && (
               <>
                 <ListItem sx={{ pl: 4 }}>
