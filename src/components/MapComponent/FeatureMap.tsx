@@ -15,18 +15,20 @@ import styles from "../PopupContent/PopupContent.module.css"
 import { iPopupContainerProps } from "../PopupContent/PopupContent.tsx"
 import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson"
 
-import FeatureMapContextMenu from "./FeatureMapContextMenu"
+import FeatureMapContextMenu from "./FeatureMapContextMenu";
+import { TCoordinate } from "../../data/types"; // Added import
 
 interface FeatureMapProps extends MapComponentProps {
-  geoJsonOverlaySources: Record<string, TTabMapping>
-  drawerOpen: boolean
-  closeDrawer: () => void
+  geoJsonOverlaySources: Record<string, TTabMapping>;
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult?: TCoordinate | null; // Added prop
 }
 
-export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...mapProps }: FeatureMapProps): React.ReactNode => {
-  const { addFeature, savedFeatures } = useContext(SavedFeaturesContext)!
+export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, currentSearchResult, ...mapProps }: FeatureMapProps): React.ReactNode => {
+  const { addFeature, savedFeatures } = useContext(SavedFeaturesContext)!;
 
-  const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
+  const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null);
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
   const [fixedOverlays, setFixedOverlays] = useState<TLayerOverlay[]>([])
   const [dynamicOverlays, setDynamicOverlays] = useState<TLayerOverlay[]>([])
@@ -126,7 +128,12 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
 
   return (
     <>
-      <MapComponent overlays={[...fixedOverlays, ...dynamicOverlays]} contextMenuHandler={onMapContextMenuHandler} {...mapProps}>
+      <MapComponent
+        overlays={[...fixedOverlays, ...dynamicOverlays]}
+        contextMenuHandler={onMapContextMenuHandler}
+        currentSearchResult={currentSearchResult} // Pass prop
+        {...mapProps}
+      >
         <FeatureMapContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
       </MapComponent>
       <SavedFeaturesDrawer

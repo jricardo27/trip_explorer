@@ -1,16 +1,17 @@
-import React, { useMemo } from "react"
+import React, { useMemo } from "react";
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { MELBOURNE_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { MELBOURNE_LOCATION } from "../../data/locations";
+import { TCoordinate, TTabMapping } from "../../data/types";
 
 interface VictoriaProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCoordinate | null;
 }
 
-export const Victoria = ({ drawerOpen, closeDrawer }: VictoriaProps): React.ReactNode => {
+export const Victoria = ({ drawerOpen, closeDrawer, currentSearchResult }: VictoriaProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/victoria/accommodation_VIC.json": {
@@ -32,5 +33,5 @@ export const Victoria = ({ drawerOpen, closeDrawer }: VictoriaProps): React.Reac
       },
     }), [])
 
-  return <FeatureMap center={MELBOURNE_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={MELBOURNE_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }

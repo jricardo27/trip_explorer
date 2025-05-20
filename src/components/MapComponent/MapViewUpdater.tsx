@@ -1,24 +1,28 @@
-import React, { useEffect } from "react"
-import { useMap } from "react-leaflet"
+import React, { useEffect } from "react";
+import { useMap } from "react-leaflet";
 
-import { TCoordinate } from "../../data/types"
+import { TCoordinate } from "../../data/types";
 
 interface IMapViewUpdaterProps {
-  center: TCoordinate | [number, number]
-  zoom: number
+  center: TCoordinate | [number, number];
+  zoom: number;
+  currentSearchResult?: TCoordinate | null;
 }
 
-const MapViewUpdater = ({ center, zoom }: IMapViewUpdaterProps): React.ReactNode => {
-  const map = useMap()
+const MapViewUpdater = ({ center, zoom, currentSearchResult }: IMapViewUpdaterProps): React.ReactNode => {
+  const map = useMap();
 
-  // Update the map view when center or zoom changes
   useEffect(() => {
-    if (center && zoom) {
-      map.setView(center, zoom)
+    if (currentSearchResult) {
+      map.flyTo([currentSearchResult.lat, currentSearchResult.lng], Math.max(map.getZoom(), 15));
+    } else if (center && zoom) {
+      // Ensure center is always [number, number] for setView
+      const viewCenter: [number, number] = Array.isArray(center) ? center : [center.lat, center.lng];
+      map.setView(viewCenter, zoom);
     }
-  }, [center, zoom, map])
+  }, [center, zoom, map, currentSearchResult]);
 
-  return null
-}
+  return null;
+};
 
-export default MapViewUpdater
+export default MapViewUpdater;

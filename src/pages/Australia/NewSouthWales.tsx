@@ -1,16 +1,17 @@
-import React, { useMemo } from "react"
+import React, { useMemo } from "react";
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { SYDNEY_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { SYDNEY_LOCATION } from "../../data/locations";
+import { TCoordinate, TTabMapping } from "../../data/types";
 
 interface NewSouthWalesProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCoordinate | null;
 }
 
-export const NewSouthWales = ({ drawerOpen, closeDrawer }: NewSouthWalesProps): React.ReactNode => {
+export const NewSouthWales = ({ drawerOpen, closeDrawer, currentSearchResult }: NewSouthWalesProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/newSouthWales/accommodation_NSW.json": {
@@ -32,5 +33,5 @@ export const NewSouthWales = ({ drawerOpen, closeDrawer }: NewSouthWalesProps): 
       },
     }), [])
 
-  return <FeatureMap center={SYDNEY_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={SYDNEY_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }

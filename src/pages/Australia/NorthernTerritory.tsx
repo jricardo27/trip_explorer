@@ -1,16 +1,17 @@
-import React, { useMemo } from "react"
+import React, { useMemo } from "react";
 
-import { FeatureMap } from "../../components/MapComponent/FeatureMap"
-import styles from "../../components/PopupContent/PopupContent.module.css"
-import { DARWIN_LOCATION } from "../../data/locations"
-import { TTabMapping } from "../../data/types/TTabMapping"
+import { FeatureMap } from "../../components/MapComponent/FeatureMap";
+import styles from "../../components/PopupContent/PopupContent.module.css";
+import { DARWIN_LOCATION } from "../../data/locations";
+import { TCoordinate, TTabMapping } from "../../data/types";
 
 interface NorthernTerritoryProps {
-  drawerOpen: boolean
-  closeDrawer: () => void
+  drawerOpen: boolean;
+  closeDrawer: () => void;
+  currentSearchResult: TCoordinate | null;
 }
 
-export const NorthernTerritory = ({ drawerOpen, closeDrawer }: NorthernTerritoryProps): React.ReactNode => {
+export const NorthernTerritory = ({ drawerOpen, closeDrawer, currentSearchResult }: NorthernTerritoryProps): React.ReactNode => {
   const geoJsonOverlaySources = useMemo(
     (): Record<string, TTabMapping> => ({
       "/markers/northernTerritory/accommodation_NT.json": {
@@ -32,5 +33,5 @@ export const NorthernTerritory = ({ drawerOpen, closeDrawer }: NorthernTerritory
       },
     }), [])
 
-  return <FeatureMap center={DARWIN_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} />
+  return <FeatureMap center={DARWIN_LOCATION} geoJsonOverlaySources={geoJsonOverlaySources} drawerOpen={drawerOpen} closeDrawer={closeDrawer} currentSearchResult={currentSearchResult} />
 }
