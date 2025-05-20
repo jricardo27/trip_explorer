@@ -110,15 +110,16 @@ export const SortableFeatureItem = ({
             onClick={(event: React.MouseEvent) => {
               event.stopPropagation(); // Prevent ListItem's onClick
 
-              if (!navigateToCoordinates) { // feature.geometry check is handled by getCoordinatesForNavigation
-                console.warn("Navigation prerequisites not met (missing navigateToCoordinates).");
-                return;
-              }
+              // The check for navigateToCoordinates and feature.geometry is removed
+              // as it's covered by the conditional rendering of the button
+              // and getCoordinatesForNavigation handles null feature/geometry.
 
               const leafletCoords = getCoordinatesForNavigation(feature);
 
               if (leafletCoords) {
-                navigateToCoordinates(leafletCoords);
+                // navigateToCoordinates is guaranteed to be defined here
+                // due to the conditional rendering: {navigateToCoordinates && feature.geometry && ...}
+                navigateToCoordinates(leafletCoords); 
                 if (onClose) {
                   onClose();
                 }

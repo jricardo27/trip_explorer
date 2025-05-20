@@ -13,6 +13,7 @@ import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
 import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
 import { FeatureList } from "./FeatureList/FeatureList"
+import { filterFeatures } from "./filterUtils" // Ensure this import is active
 import { useCategoryManagement } from "./hooks/useCategoryManagement"
 import { useContextMenu } from "./hooks/useContextMenu"
 import { useFeatureManagement } from "./hooks/useFeatureManagement"
@@ -77,20 +78,9 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({
 
   // Create filteredItems
   const filteredItems = useMemo(() => {
-    if (!searchQuery) {
-      return itemsWithOriginalIndex;
-    }
-    const query = searchQuery.toLowerCase();
-    return itemsWithOriginalIndex.filter(item => {
-      const feature = item.feature; // Access the feature for filtering
-      const nameMatch = feature.properties?.name &&
-        typeof feature.properties.name === 'string' &&
-        feature.properties.name.toLowerCase().includes(query);
-      const descriptionMatch = feature.properties?.description &&
-        typeof feature.properties.description === 'string' &&
-        feature.properties.description.toLowerCase().includes(query);
-      return nameMatch || descriptionMatch;
-    });
+    // The itemsWithOriginalIndex already handles the case where savedFeatures[selectedTab] might be empty.
+    // filterFeatures will handle the empty searchQuery case.
+    return filterFeatures(itemsWithOriginalIndex, searchQuery);
   }, [itemsWithOriginalIndex, searchQuery]);
 
   // Dead code related to currentFeatures and filteredFeatures has been removed.
