@@ -1,6 +1,7 @@
 import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material"
 import React from "react"
 import { useNavigate } from "react-router-dom"
+// import SelectedPoisDisplay from "../../components/SelectedPoisDisplay.tsx" // Removed import
 
 const destinations = [
   {
@@ -51,6 +52,7 @@ const Destinations: React.FC = () => {
           </List>
         </Box>
       ))}
+      {/* <SelectedPoisDisplay /> */} {/* Removed component */}
     </Box>
   )
 }

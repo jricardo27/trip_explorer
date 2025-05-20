@@ -1,10 +1,72 @@
-import { Box, ImageList, ImageListItem, ImageListItemBar, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material"
-import React from "react"
+import { Box, ImageList, ImageListItem, ImageListItemBar, List, ListItem, ListItemIcon, ListItemText, Typography, Button } from "@mui/material"
+import React, { useState } from "react"
+import Joyride, { Step, EVENTS, STATUS, ACTIONS } from "react-joyride"
+import "react-joyride/lib/styles.css" // Default styles
 import { TbPoint } from "react-icons/tb"
 
 const Tutorial = (): React.ReactNode => {
+  const [runTour, setRunTour] = useState(false)
+
+  const tourSteps: Step[] = [
+    {
+      target: "#poi-selection-tab",
+      content: "This is where you can select specific Points of Interest (POIs) and categories to display on the map. Click Next to see how.",
+      placement: "bottom",
+      disableBeacon: true,
+    },
+    {
+      target: "#region-select-dropdown",
+      content: "First, choose a major region or country from this dropdown.",
+      placement: "bottom",
+    },
+    {
+      target: "#category-list-container",
+      content: "After selecting a region, available POI categories will appear here. Check the boxes for the categories you're interested in.",
+      placement: "top",
+    },
+    {
+      target: ".MuiDialogContent-root", // Targets the main content area of the dialog
+      content: "Your selections will be active when you visit the map page for the chosen region. You can now close this welcome screen or explore other tabs.",
+      placement: "auto",
+    },
+  ]
+
+  const handleJoyrideCallback = (data: any) => {
+    const { action, index, status, type } = data
+    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      setRunTour(false)
+    } else if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+      // Potentially handle advancing steps or errors
+      console.log(`Tour event: ${type}, action: ${action}, index: ${index}`)
+    }
+  }
+
+  const startTour = () => {
+    // A small timeout can help if elements are not immediately ready,
+    // especially if tabs need to switch. For now, assuming elements are on the same "page" effectively.
+    setTimeout(() => {
+        setRunTour(true)
+    }, 100)
+  }
+
   return (
-    <Box p={2}>
+    <Box p={2} sx={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
+      <Joyride
+        steps={tourSteps}
+        run={runTour}
+        continuous={true}
+        showProgress={true}
+        showSkipButton={true}
+        callback={handleJoyrideCallback}
+        styles={{
+          options: {
+            zIndex: 10000, // Ensure Joyride is above other elements like Dialog
+          },
+        }}
+      />
+      <Button variant="contained" onClick={startTour} sx={{ mb: 2 }}>
+        Start Interactive Tour of POI Selection
+      </Button>
       <Typography variant="h6">Base layer</Typography>
 
       <Typography variant="body1">
