@@ -3,12 +3,12 @@ import React, { useMemo } from "react";
 import { FeatureMap } from "../../components/MapComponent/FeatureMap";
 import styles from "../../components/PopupContent/PopupContent.module.css";
 import { AUCKLAND_LOCATION } from "../../data/locations";
-import { TCoordinate, TTabMapping } from "../../data/types";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface NewZealandProps {
   drawerOpen: boolean;
   closeDrawer: () => void;
-  currentSearchResult: TCoordinate | null;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
 export const NewZealand = ({ drawerOpen, closeDrawer, currentSearchResult }: NewZealandProps): React.ReactNode => {

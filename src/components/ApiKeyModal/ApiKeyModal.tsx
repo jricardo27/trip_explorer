@@ -29,10 +29,15 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ open, onClose }) => {
     setError(null);
 
     try {
-      const encryptedApiKey = CryptoJS.AES.encrypt(apiKey, password).toString();
-      localStorage.setItem('googleApiKey', encryptedApiKey);
-      localStorage.setItem('googleApiKeyPassword', password); // Storing password for decryption
-      console.log('API Key encrypted and stored.');
+      const encryptedApiKeyString = CryptoJS.AES.encrypt(apiKey, password).toString();
+      // Store only the encrypted key
+      localStorage.setItem('googleEncryptedApiKey', encryptedApiKeyString);
+      
+      // Remove old insecurely stored items if they exist
+      localStorage.removeItem('googleApiKeyPassword'); // Remove insecure password
+      localStorage.removeItem('googleApiKey'); // Remove old key if name changed
+
+      console.log('API Key encrypted and stored (key only). Password is not stored.');
       onClose(); // Close the modal
       setApiKey(''); // Clear fields
       setPassword('');
@@ -52,12 +57,13 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ open, onClose }) => {
   return (
     <>
       <Dialog open={open} onClose={handleCancel}>
-        <DialogTitle>Google Geocoding API Key</DialogTitle>
+        <DialogTitle>Set Google Geocoding API Key</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ mb: 2 }}>
-            Enter your Google Geocoding API Key and a password to encrypt it.
-            This key will be stored locally in your browser, encrypted with your password.
-            The password will also be stored to enable automatic decryption.
+            Enter your Google Geocoding API Key and a password.
+            The API key will be stored encrypted in your browser's local storage.
+            You will need to enter this password again each session to unlock the geocoding feature.
+            The password itself is NOT stored.
           </DialogContentText>
           <TextField
             autoFocus

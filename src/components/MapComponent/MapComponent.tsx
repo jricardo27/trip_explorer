@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { LayersControl, MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
-import { TCoordinate } from "../../data/types";
+import { TCoordinate, TCurrentSearchResult } from "../../data/types"; // Added TCurrentSearchResult
 import { TLayerOverlay } from "../../data/types/TLayerOverlay";
 
 import { BaseLayers } from "./BaseLayers";
@@ -17,7 +17,7 @@ export interface MapComponentProps {
   center: TCoordinate | [number, number];
   overlays?: TLayerOverlay[];
   contextMenuHandler?: (event: L.LeafletMouseEvent) => void;
-  currentSearchResult?: TCoordinate | null;
+  currentSearchResult?: TCurrentSearchResult; // Updated type
 }
 
 // Custom icon for search result
@@ -138,9 +138,9 @@ const MapComponent = ({
               </LayersControl.Overlay>
             ))}
         </LayersControl>
-        {currentSearchResult && (
-          <Marker position={[currentSearchResult.lat, currentSearchResult.lng]} icon={searchResultIcon}>
-            <Popup>Searched Location</Popup>
+        {currentSearchResult && currentSearchResult.coordinate && (
+          <Marker position={[currentSearchResult.coordinate.lat, currentSearchResult.coordinate.lng]} icon={searchResultIcon}>
+            <Popup>{currentSearchResult.address || "Searched Location"}</Popup>
           </Marker>
         )}
         {children}

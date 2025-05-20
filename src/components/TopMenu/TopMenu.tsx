@@ -6,7 +6,7 @@ import { MdHelpOutline, MdLocationOn } from "react-icons/md";
 import { useNavigate, Link } from "react-router-dom";
 
 import SavedFeaturesContext from "../../contexts/SavedFeaturesContext";
-import { TCoordinate } from "../../data/types";
+import { TCurrentSearchResult } from "../../data/types";
 import { ApiKeyModal } from "../ApiKeyModal";
 import { GeocodingSearch } from "../GeocodingSearch"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
@@ -18,7 +18,7 @@ import { saveAsKml } from "./saveAsKml";
 
 interface TopMenuProps {
   onMenuClick: () => void;
-  setCurrentSearchResult: (coordinate: TCoordinate | null) => void;
+  setCurrentSearchResult: (result: TCurrentSearchResult) => void;
 }
 
 const destinations = [

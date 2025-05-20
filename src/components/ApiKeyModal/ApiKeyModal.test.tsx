@@ -89,9 +89,12 @@ describe('ApiKeyModal', () => {
     // Check if CryptoJS.AES.encrypt was called
     expect(CryptoJS.AES.encrypt).toHaveBeenCalledWith(testApiKey, testPassword);
 
-    // Check if localStorage.setItem was called with the mock encrypted key
-    expect(localStorageMock.getItem('googleApiKey')).toBe('encrypted-api-key');
-    expect(localStorageMock.getItem('googleApiKeyPassword')).toBe(testPassword);
+    // Check if localStorage.setItem was called with the new key name
+    expect(localStorageMock.getItem('googleEncryptedApiKey')).toBe('encrypted-api-key');
+    
+    // Check that old/insecure items are removed
+    expect(localStorageMock.getItem('googleApiKeyPassword')).toBeNull();
+    expect(localStorageMock.getItem('googleApiKey')).toBeNull();
     
     // Check if onClose was called
     expect(mockOnClose).toHaveBeenCalledTimes(1);
@@ -154,7 +157,7 @@ describe('ApiKeyModal', () => {
     // If they were stateful within a parent that didn't re-render, we could check.
     // For now, focus on onClose and no save action.
     expect(CryptoJS.AES.encrypt).not.toHaveBeenCalled();
-    expect(localStorageMock.getItem('googleApiKey')).toBeNull();
+    expect(localStorageMock.getItem('googleEncryptedApiKey')).toBeNull(); // Check new key name
   });
 
   it('modal should not be visible if open prop is false', () => {
@@ -162,7 +165,7 @@ describe('ApiKeyModal', () => {
     render(<ApiKeyModal open={false} onClose={mockOnClose} />);
     
     // Dialog content is typically not rendered or hidden when open is false
-    // Querying for a specific element that's only in the dialog
-    expect(screen.queryByText(/Google Geocoding API Key/i)).toBeNull(); // DialogTitle
+    // Querying for the updated dialog title
+    expect(screen.queryByText(/Set Google Geocoding API Key/i)).toBeNull(); 
   });
 });

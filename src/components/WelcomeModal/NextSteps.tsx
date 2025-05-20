@@ -41,7 +41,7 @@ const NextSteps = (): React.ReactNode => {
           <ListItemIcon sx={{minWidth: '32px'}}><MdStorage /></ListItemIcon>
           <ListItemText 
             primary="Secure Local Storage" 
-            secondary="Your API key is encrypted with your chosen password and stored securely in your browser's local storage. It's only used by your browser to make requests directly to Google." 
+            secondary="Your API key is stored encrypted in your browser's local storage. For security, your password is NOT stored. You will be asked to enter your password each time you start a new session (or refresh the page) to unlock the geocoding feature." 
           />
         </ListItem>
       </List>

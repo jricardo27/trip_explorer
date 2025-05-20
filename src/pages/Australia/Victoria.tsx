@@ -3,12 +3,12 @@ import React, { useMemo } from "react";
 import { FeatureMap } from "../../components/MapComponent/FeatureMap";
 import styles from "../../components/PopupContent/PopupContent.module.css";
 import { MELBOURNE_LOCATION } from "../../data/locations";
-import { TCoordinate, TTabMapping } from "../../data/types";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface VictoriaProps {
   drawerOpen: boolean;
   closeDrawer: () => void;
-  currentSearchResult: TCoordinate | null;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
 export const Victoria = ({ drawerOpen, closeDrawer, currentSearchResult }: VictoriaProps): React.ReactNode => {

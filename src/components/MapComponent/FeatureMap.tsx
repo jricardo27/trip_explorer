@@ -4,13 +4,13 @@ import React, { useMemo, useCallback, useEffect, useState, useContext } from "re
 import { MdAssignmentAdd } from "react-icons/md"
 import { toast } from "react-toastify"
 
-import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent"
-import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer"
-import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
-import { GeoJsonCollection, GeoJsonFeature } from "../../data/types"
-import { TLayerOverlay } from "../../data/types/TLayerOverlay"
-import { TTabMapping } from "../../data/types/TTabMapping"
-import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers"
+import MapComponent, { MapComponentProps } from "../../components/MapComponent/MapComponent";
+import SavedFeaturesDrawer from "../../components/SavedFeaturesDrawer/SavedFeaturesDrawer";
+import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext";
+import { GeoJsonCollection, GeoJsonFeature, TCurrentSearchResult } from "../../data/types"; // Added TCurrentSearchResult
+import { TLayerOverlay } from "../../data/types/TLayerOverlay";
+import { TTabMapping } from "../../data/types/TTabMapping";
+import useGeoJsonMarkers from "../../hooks/useGeoJsonMarkers";
 import styles from "../PopupContent/PopupContent.module.css"
 import { iPopupContainerProps } from "../PopupContent/PopupContent.tsx"
 import StyledGeoJson, { contextMenuHandlerProps } from "../StyledGeoJson/StyledGeoJson"
@@ -22,7 +22,7 @@ interface FeatureMapProps extends MapComponentProps {
   geoJsonOverlaySources: Record<string, TTabMapping>;
   drawerOpen: boolean;
   closeDrawer: () => void;
-  currentSearchResult?: TCoordinate | null; // Added prop
+  currentSearchResult?: TCurrentSearchResult; // Updated type
 }
 
 export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, currentSearchResult, ...mapProps }: FeatureMapProps): React.ReactNode => {
@@ -128,10 +128,10 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, cur
 
   return (
     <>
-      <MapComponent
-        overlays={[...fixedOverlays, ...dynamicOverlays]}
-        contextMenuHandler={onMapContextMenuHandler}
-        currentSearchResult={currentSearchResult} // Pass prop
+      <MapComponent 
+        overlays={[...fixedOverlays, ...dynamicOverlays]} 
+        contextMenuHandler={onMapContextMenuHandler} 
+        currentSearchResult={currentSearchResult} // Pass prop correctly
         {...mapProps}
       >
         <FeatureMapContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />

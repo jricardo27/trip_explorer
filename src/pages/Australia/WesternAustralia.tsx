@@ -5,12 +5,12 @@ import React, { useMemo } from "react";
 import { FeatureMap } from "../../components/MapComponent/FeatureMap";
 import styles from "../../components/PopupContent/PopupContent.module.css";
 import { PERTH_LOCATION } from "../../data/locations";
-import { TCoordinate, TTabMapping } from "../../data/types";
+import { TCurrentSearchResult, TTabMapping } from "../../data/types"; // Updated TCoordinate to TCurrentSearchResult
 
 interface WesternAustraliaProps {
   drawerOpen: boolean;
   closeDrawer: () => void;
-  currentSearchResult: TCoordinate | null;
+  currentSearchResult: TCurrentSearchResult; // Updated type
 }
 
 export const WesternAustralia = ({ drawerOpen, closeDrawer, currentSearchResult }: WesternAustraliaProps): React.ReactNode => {
