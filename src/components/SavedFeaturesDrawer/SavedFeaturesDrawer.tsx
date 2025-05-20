@@ -5,7 +5,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material"
-import React, { useState, useContext, useCallback, useEffect } from "react"
+import React, { useState, useContext, useCallback, useEffect, useMemo } from "react" // Added useMemo
 
 import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
@@ -13,7 +13,6 @@ import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
 import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
 import { FeatureList } from "./FeatureList/FeatureList"
-import { filterFeatures } from "./filterUtils" // Import the new helper function
 import { useCategoryManagement } from "./hooks/useCategoryManagement"
 import { useContextMenu } from "./hooks/useContextMenu"
 import { useFeatureManagement } from "./hooks/useFeatureManagement"
@@ -68,9 +67,33 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({
     }
   }, [selectedTab, setCurrentCategory])
 
-  const currentFeatures = savedFeatures[selectedTab] || []
-  // Use the filterFeatures helper function
-  // const filteredFeatures = filterFeatures(currentFeatures, searchQuery) // Reverted: Filtering moved to SortableFeatureItem
+  // Create itemsWithOriginalIndex
+  const itemsWithOriginalIndex = useMemo(() => {
+    return (savedFeatures[selectedTab] || []).map((feature, index) => ({
+      feature,
+      originalIndex: index,
+    }));
+  }, [savedFeatures, selectedTab]);
+
+  // Create filteredItems
+  const filteredItems = useMemo(() => {
+    if (!searchQuery) {
+      return itemsWithOriginalIndex;
+    }
+    const query = searchQuery.toLowerCase();
+    return itemsWithOriginalIndex.filter(item => {
+      const feature = item.feature; // Access the feature for filtering
+      const nameMatch = feature.properties?.name &&
+        typeof feature.properties.name === 'string' &&
+        feature.properties.name.toLowerCase().includes(query);
+      const descriptionMatch = feature.properties?.description &&
+        typeof feature.properties.description === 'string' &&
+        feature.properties.description.toLowerCase().includes(query);
+      return nameMatch || descriptionMatch;
+    });
+  }, [itemsWithOriginalIndex, searchQuery]);
+
+  // Dead code related to currentFeatures and filteredFeatures has been removed.
 
   return (
     <>
@@ -108,16 +131,16 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({
                 sx={{ mb: 2 }}
               />
               <FeatureList
-                features={currentFeatures} // Changed from filteredFeatures to currentFeatures
-                searchQuery={searchQuery} // Pass searchQuery as a new prop
+                items={filteredItems} // New prop
+                // features and searchQuery props removed
                 setSavedFeatures={setSavedFeatures}
                 selectedTab={selectedTab}
                 selectedFeature={selectedFeature}
                 setSelectedFeature={setSelectedFeature}
                 handleContextMenu={handleContextMenu}
                 excludedProperties={Array.from(excludedProperties)}
-                navigateToCoordinates={navigateToCoordinates} // Pass navigateToCoordinates to FeatureList
-                onClose={onClose} // Pass the onClose prop
+                navigateToCoordinates={navigateToCoordinates}
+                onClose={onClose}
               />
             </Box>
           </Box>

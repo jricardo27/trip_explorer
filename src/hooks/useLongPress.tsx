@@ -68,14 +68,52 @@ export const useLongPress = (
   }, [clearTimer]);
 
   const handleContextMenu = useCallback((event: React.MouseEvent) => {
-    // Prevent the default context menu, which can be triggered by long press on some mobile browsers
-    // or right-click on desktop.
+    // Prevent the default context menu.
     event.preventDefault();
-    // As per prompt, only preventDefault. If we wanted context menu to also trigger long press:
-    // clearTimer(); // Clear any touch-based timer
-    // callbackRef.current(event); // Trigger callback
-    // event.stopPropagation();
-  }, []);
+    clearTimer(); // Clear any touch-based timer
+    callbackRef.current(event); // Trigger callback
+    event.stopPropagation();
+  }, [clearTimer, callbackRef]);
+
+  // Mouse event handlers for desktop
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    if (event.button !== 0) return; // Only left click
+
+    clearTimer();
+    startPositionRef.current = { x: event.clientX, y: event.clientY };
+
+    timerRef.current = setTimeout(() => {
+      callbackRef.current(event);
+      event.preventDefault();
+      event.stopPropagation();
+      startPositionRef.current = null; 
+    }, duration);
+  }, [duration, clearTimer, callbackRef]);
+
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
+    if (!startPositionRef.current || event.buttons !== 1) { // event.buttons === 1 means left button is pressed
+      return;
+    }
+
+    const deltaX = Math.abs(event.clientX - startPositionRef.current.x);
+    const deltaY = Math.abs(event.clientY - startPositionRef.current.y);
+
+    if (deltaX > TOUCH_MOVE_TOLERANCE || deltaY > TOUCH_MOVE_TOLERANCE) {
+      clearTimer();
+    }
+  }, [clearTimer]);
+
+  const handleMouseUp = useCallback(() => {
+    clearTimer();
+  }, [clearTimer]);
+
+  const handleMouseLeave = useCallback(() => {
+    // Clear timer only if a press was potentially active and mouse left the element
+    if (startPositionRef.current) {
+      clearTimer();
+    }
+  }, [clearTimer]);
+
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -91,20 +129,11 @@ export const useLongPress = (
     onTouchMove: handleTouchMove,
     onTouchEnd: handleTouchEnd,
     onContextMenu: handleContextMenu,
-    // Also include mouse events for desktop "long press" like behavior (optional but good UX)
-    // onMouseDown: (event: React.MouseEvent) => {
-    //   // Only handle left click for mouse down long press
-    //   if (event.button === 0) {
-    //     handleTouchStart(event as any); // Cast to any or create a common handler
-    //   }
-    // },
-    // onMouseUp: handleTouchEnd,
-    // onMouseMove: (event: React.MouseEvent) => {
-    //    if (event.buttons === 1) { // If left button is pressed
-    //      handleTouchMove(event as any); // Cast to any or create a common handler
-    //    }
-    // },
-    // onMouseLeave: handleTouchEnd, // If mouse leaves the element
+    // Desktop mouse event handlers
+    onMouseDown: handleMouseDown,
+    onMouseUp: handleMouseUp,
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave,
   };
 };
 

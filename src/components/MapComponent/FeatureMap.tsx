@@ -26,7 +26,6 @@ interface FeatureMapProps extends MapComponentProps {
 export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...mapProps }: FeatureMapProps): React.ReactNode => {
   const { addFeature, savedFeatures } = useContext(SavedFeaturesContext)!
 
-  // 1. State variable for dynamic map center
   const [dynamicCenter, setDynamicCenter] = useState<[number, number] | undefined>(mapProps.center)
   const [contextMenuPosition, setContextMenuPosition] = useState<L.LatLng | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJsonFeature | null>(null)
@@ -42,7 +41,6 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
   const [popupProps, setPopupProps] = useState<PopupOptions>({})
   const [popupContainerProps, setPopupContainerProps] = useState<iPopupContainerProps>({})
 
-  // 2. useEffect to update dynamicCenter when mapProps.center changes
   useEffect(() => {
     setDynamicCenter(mapProps.center)
   }, [mapProps.center])
@@ -131,7 +129,6 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
     }))
   }, [savedFeatures, onFeatureContextMenuHandler, popupProps, popupContainerProps])
 
-  // 4. Callback to handle navigation
   const handleNavigateToCoordinates = useCallback((coords: [number, number]) => {
     // Leaflet expects [lat, lng]. Ensure coords are in this format.
     // GeoJSON is typically [lng, lat]. This will be handled when the callback is called.
@@ -140,7 +137,6 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
 
   return (
     <>
-      {/* 3. Use dynamicCenter in MapComponent */}
       <MapComponent
         overlays={[...fixedOverlays, ...dynamicOverlays]}
         contextMenuHandler={onMapContextMenuHandler}
@@ -149,7 +145,6 @@ export const FeatureMap = ({ geoJsonOverlaySources, drawerOpen, closeDrawer, ...
       >
         <FeatureMapContextMenu selectedFeature={selectedFeature} menuLatLng={contextMenuPosition} />
       </MapComponent>
-      {/* 5. Pass handleNavigateToCoordinates to SavedFeaturesDrawer */}
       <SavedFeaturesDrawer
         drawerOpen={drawerOpen}
         onClose={closeDrawer}

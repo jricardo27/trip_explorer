@@ -8,7 +8,8 @@ import { useLongPress } from "../../../hooks/useLongPress"
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
-import { filterFeatures } from "../filterUtils" // Import filterFeatures
+// filterFeatures import removed as it's not used
+import { getCoordinatesForNavigation } from "../../../utils/navigationUtils" // Import the new utility function
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature
@@ -18,22 +19,22 @@ interface SortableFeatureItemProps {
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
   handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
-  searchQuery: string // Added searchQuery prop
-  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
-  onClose?: () => void // Added onClose prop
+  // searchQuery: string // Removed searchQuery prop
+  navigateToCoordinates?: (coords: [number, number]) => void
+  onClose?: () => void
 }
 
 export const SortableFeatureItem = ({
   feature,
   id,
-  index,
+  index, // This will now be originalIndex
   selectedTab,
   selectedFeature,
   setSelectedFeature,
   handleContextMenu,
-  searchQuery,
-  navigateToCoordinates, // Destructured navigateToCoordinates
-  onClose, // Destructured onClose
+  // searchQuery, // Removed from destructuring
+  navigateToCoordinates,
+  onClose,
 }: SortableFeatureItemProps) => {
   const {
     attributes,
@@ -52,11 +53,14 @@ export const SortableFeatureItem = ({
     border: isDragging ? "dashed" : "",
   }
 
-  const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
-  const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
+  const isSelected = idxSel(selectedFeature) === idxFeat(index, feature) // index is originalIndex
+  const selection: selectionInfo = { feature: feature, index: index, category: selectedTab } // index is originalIndex
 
-  // Determine visibility based on searchQuery
-  const isVisible = searchQuery ? filterFeatures([feature], searchQuery).length > 0 : true
+  // Removed isVisible calculation and conditional rendering
+  // const isVisible = searchQuery ? filterFeatures([feature], searchQuery).length > 0 : true
+  // if (!isVisible) {
+  //   return null;
+  // }
 
   // Integrate useLongPress
   const longPressProps = useLongPress(
@@ -66,10 +70,6 @@ export const SortableFeatureItem = ({
     },
     500 // Duration for long press
   )
-
-  if (!isVisible) {
-    return null // If not visible, render nothing
-  }
 
   return (
     <ListItem
@@ -110,45 +110,20 @@ export const SortableFeatureItem = ({
             onClick={(event: React.MouseEvent) => {
               event.stopPropagation(); // Prevent ListItem's onClick
 
-              if (!navigateToCoordinates || !feature.geometry) {
-                console.warn("Navigation prerequisites not met (missing navigateToCoordinates or geometry).");
+              if (!navigateToCoordinates) { // feature.geometry check is handled by getCoordinatesForNavigation
+                console.warn("Navigation prerequisites not met (missing navigateToCoordinates).");
                 return;
               }
 
-              const geometry = feature.geometry;
-              let lngStr: string | number | undefined;
-              let latStr: string | number | undefined;
+              const leafletCoords = getCoordinatesForNavigation(feature);
 
-              if (geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length === 2) {
-                lngStr = geometry.coordinates[0];
-                latStr = geometry.coordinates[1];
-              } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0].length === 2) {
-                lngStr = geometry.coordinates[0][0];
-                latStr = geometry.coordinates[0][1];
-              } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0] && geometry.coordinates[0][0].length === 2) {
-                lngStr = geometry.coordinates[0][0][0];
-                latStr = geometry.coordinates[0][0][1];
-              } else {
-                console.warn(`Unsupported geometry type (${geometry.type}) or malformed coordinates for navigation for feature ID: ${feature.id}`);
-                return;
-              }
-
-              if (lngStr !== undefined && latStr !== undefined) {
-                const lng = parseFloat(String(lngStr));
-                const lat = parseFloat(String(latStr));
-
-                if (!isNaN(lng) && !isNaN(lat)) {
-                  const leafletCoords: [number, number] = [lat, lng];
-                  navigateToCoordinates(leafletCoords);
-                  if (onClose) {
-                    onClose();
-                  }
-                } else {
-                  console.error(`Invalid coordinates after parsing for feature ID: ${feature.id}. Original values:`, { lngStr, latStr });
+              if (leafletCoords) {
+                navigateToCoordinates(leafletCoords);
+                if (onClose) {
+                  onClose();
                 }
-              } else {
-                console.error(`Coordinates could not be extracted for feature ID: ${feature.id}.`);
               }
+              // If leafletCoords is null, getCoordinatesForNavigation has already logged the error/warning.
             }}
           >
             <MdNearMe />

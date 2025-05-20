@@ -9,7 +9,7 @@ import NoteEditor from "../../NoteEditor/NoteEditor"
 import { SortableFeatureItem } from "./SortableFeatureItem"
 
 interface FeatureListProps {
-  features: GeoJsonFeature[]
+  items: Array<{ feature: GeoJsonFeature; originalIndex: number }> // Updated to items
   setSavedFeatures: {
     (newState: SavedFeaturesStateType): void
     (updater: (prev: SavedFeaturesStateType) => SavedFeaturesStateType): void
@@ -17,24 +17,24 @@ interface FeatureListProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void // Updated for long press
+  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
   excludedProperties: string[]
-  searchQuery: string // Added searchQuery prop
-  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
-  onClose?: () => void // Added onClose prop
+  // searchQuery prop removed
+  navigateToCoordinates?: (coords: [number, number]) => void
+  onClose?: () => void
 }
 
 export const FeatureList = ({
-  features,
+  items, // Destructure items
   setSavedFeatures,
   selectedTab,
   selectedFeature,
   setSelectedFeature,
   handleContextMenu,
   excludedProperties,
-  searchQuery, // Destructure searchQuery
-  navigateToCoordinates, // Destructure navigateToCoordinates
-  onClose, // Destructure onClose
+  // searchQuery, // Removed from destructuring
+  navigateToCoordinates,
+  onClose,
 }: FeatureListProps) => {
   const [editorVisible, setEditorVisible] = useState(false)
   const [notes, setNotes] = useState("")
@@ -57,11 +57,12 @@ export const FeatureList = ({
     if (selectedFeature) {
       setSavedFeatures((prev) => {
         const newFeatures = [...prev[selectedTab]]
-        const index = newFeatures.findIndex((f, index) => idxFeat(index, f) === idxSel(selectedFeature))
-        if (index !== -1 && newFeatures[index].properties) {
-          newFeatures[index].properties.tripNotes = notes
+        // Note: selectedFeature.index is originalIndex. Find by that.
+        const featureToUpdate = newFeatures[selectedFeature.index];
+        if (featureToUpdate && featureToUpdate.properties) {
+          featureToUpdate.properties.tripNotes = notes;
         }
-        return { ...prev, [selectedTab]: newFeatures }
+        return { ...prev, [selectedTab]: newFeatures };
       })
     }
   }
@@ -75,35 +76,36 @@ export const FeatureList = ({
 
   return (
     <List>
-      {features.map((feature, index) => (
-        <React.Fragment key={idxFeat(index, feature)}>
+      {items.map((item) => ( // Changed to items.map; mapIndex is not strictly needed if key is stable
+        <React.Fragment key={idxFeat(item.originalIndex, item.feature)}>
           <SortableFeatureItem
-            feature={feature}
-            id={idxFeat(index, feature)}
-            index={index}
+            feature={item.feature}
+            id={idxFeat(item.originalIndex, item.feature)} // Use originalIndex for stable ID
+            index={item.originalIndex} // Pass originalIndex as index
             selectedTab={selectedTab}
             selectedFeature={selectedFeature}
             setSelectedFeature={setSelectedFeature}
             handleContextMenu={handleContextMenu}
-            searchQuery={searchQuery} // Pass searchQuery to SortableFeatureItem
-            navigateToCoordinates={navigateToCoordinates} // Pass navigateToCoordinates
-            onClose={onClose} // Pass onClose
+            // searchQuery prop removed
+            navigateToCoordinates={navigateToCoordinates}
+            onClose={onClose}
           />
-          <Collapse in={idxSel(selectedFeature) === idxFeat(index, feature)} timeout="auto" unmountOnExit>
+          <Collapse in={idxSel(selectedFeature) === idxFeat(item.originalIndex, item.feature)} timeout="auto" unmountOnExit>
             <ListItem sx={{ pl: 4 }}>
-              <Button onClick={() => openCloseEditor(feature)}>Add/edit notes</Button>
+              <Button onClick={() => openCloseEditor(item.feature)}>Add/edit notes</Button>
             </ListItem>
             {/* The "Go to on Map" button ListItem has been removed from here. */}
             {editorVisible && (
               <>
                 <ListItem sx={{ pl: 4 }}>
-                  <NoteEditor key={idxFeat(index, feature)} initialText={notes} onChange={handleNotesChange} />
+                  {/* Key for NoteEditor should be stable with the selected feature if possible */}
+                  <NoteEditor key={idxFeat(item.originalIndex, item.feature)} initialText={notes} onChange={handleNotesChange} />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}><Button onClick={handleSaveNotes}>Save notes</Button></ListItem>
               </>
             )}
             <List component="div" disablePadding>
-              {Object.entries(feature.properties || {})
+              {Object.entries(item.feature.properties || {})
                 .filter(([key]) => !excludedProperties.includes(key))
                 .map(([key, value]) => (
                   <ListItem key={key} sx={{ pl: 4 }}>
