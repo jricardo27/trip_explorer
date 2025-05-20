@@ -1,161 +1,204 @@
-// Simplified self-contained test for category renaming logic
+// --- Mocking Area ---
+const DEFAULT_CATEGORY = "all";
+let mockSavedFeatures = {};
+let mockContextMenuTab = null;
+let mockSelectedTab = null;
+let mockAlerts = [];
+let mockConsoleErrors = [];
 
-const DEFAULT_CATEGORY = "all"; // Mimicking the constant
-
-// --- State and Mock Functions ---
-let savedFeatures = {
-  [DEFAULT_CATEGORY]: [], // Initialize with the default category
+// Mock alert and console.error
+global.alert = (message) => {
+  console.log(`ALERT: ${message}`);
+  mockAlerts.push(message);
 };
-let selectedTab = DEFAULT_CATEGORY; // Mock selected tab state
-let contextMenuTab = null; // Mock context menu tab (the category being operated on)
+global.console.error = (message) => {
+  console.log(`CONSOLE.ERROR: ${message}`);
+  mockConsoleErrors.push(message);
+};
 
-// Mock for setSavedFeatures (updates our local `savedFeatures` and logs)
-const setSavedFeatures = (updater) => {
+// Simplified version of the core logic of useCategoryManagement's handleRenameCategory
+// Based on the last known good state of the function.
+const setSavedFeaturesMock = (updater) => {
   if (typeof updater === 'function') {
-    savedFeatures = updater(savedFeatures);
+    mockSavedFeatures = updater(mockSavedFeatures);
   } else {
-    savedFeatures = updater;
+    mockSavedFeatures = updater;
   }
-  console.log('SavedFeatures updated:', JSON.stringify(savedFeatures, null, 2));
 };
 
-// Mock for setSelectedTab (updates our local `selectedTab` and logs)
-const setSelectedTab = (tab) => {
-  selectedTab = tab;
-  console.log('SelectedTab updated:', selectedTab);
+const setSelectedTabMock = (tabName) => {
+  mockSelectedTab = tabName;
 };
 
-// --- Simplified Category Management Logic (incorporating the fix) ---
-
-// Simplified version of handleAddCategory
-const handleAddCategory = (newCategoryName) => {
-  if (!newCategoryName || Object.keys(savedFeatures).includes(newCategoryName)) {
-    console.error(`Category "${newCategoryName}" already exists or is invalid.`);
+const handleRenameCategory = (newName) => {
+  // Initial Guard & Default Category Checks
+  if (!mockContextMenuTab) {
+    console.error("Rename category called without contextMenuTab");
     return;
   }
-  setSavedFeatures(prev => ({
-    ...prev,
-    [newCategoryName]: [],
-  }));
-  console.log(`Category "${newCategoryName}" added.`);
-};
+  if (mockContextMenuTab === DEFAULT_CATEGORY) {
+    alert(`Cannot rename the default category "${DEFAULT_CATEGORY}".`);
+    return;
+  }
+  if (newName === DEFAULT_CATEGORY) {
+    alert(`Cannot rename category to "${DEFAULT_CATEGORY}". Please choose a different name.`);
+    return;
+  }
 
-// Simplified version of handleRenameCategory (this is the logic we are testing)
-const handleRenameCategory = (newName) => {
-  // contextMenuTab should be set to the oldName before calling this
-  const oldName = contextMenuTab;
+  // No-op Rename Check
+  if (newName === mockContextMenuTab) {
+    return; // It's the same name, do nothing
+  }
 
-  if (oldName && oldName !== DEFAULT_CATEGORY && newName && newName !== DEFAULT_CATEGORY && oldName !== newName) {
-    setSavedFeatures(prev => {
-      const orderedKeys = Object.keys(prev);
-      const newSavedFeatures = {}; // Use SavedFeaturesStateType equivalent
-      for (const key of orderedKeys) {
-        if (key === oldName) {
-          newSavedFeatures[newName] = prev[oldName];
-        } else if (key !== oldName) { // Ensure we don't copy the old key if it's different
-          newSavedFeatures[key] = prev[key];
-        }
+  // Existing Name Check (Data Loss Prevention)
+  // This check uses the `savedFeatures` state directly.
+  if (Object.keys(mockSavedFeatures).includes(newName)) {
+    alert(`Category "${newName}" already exists. Please choose a different name.`);
+    return; // Prevent renaming
+  }
+
+  // If all checks pass, then we attempt to save and select.
+  setSavedFeaturesMock((prev) => {
+    const orderedKeys = Object.keys(prev);
+    const newSavedFeatures = {};
+    for (const key of orderedKeys) {
+      if (key === mockContextMenuTab) {
+        newSavedFeatures[newName] = prev[mockContextMenuTab];
+      } else {
+        newSavedFeatures[key] = prev[key];
       }
-      // If oldName was not in orderedKeys (should not happen if logic is correct)
-      // or if newName somehow overwrote a different key (should also not happen)
-      // this logic preserves the order of iteration from original keys.
-      return newSavedFeatures;
-    });
-    setSelectedTab(newName); // Update the selected tab to the new name
-    console.log(`Category "${oldName}" renamed to "${newName}".`);
+    }
+    return newSavedFeatures;
+  });
+
+  setSelectedTabMock(newName);
+};
+
+// --- Test Runner ---
+const resetMocks = () => {
+  mockAlerts = [];
+  mockConsoleErrors = [];
+  mockSavedFeatures = {};
+  mockContextMenuTab = null;
+  mockSelectedTab = null;
+};
+
+const printState = (testName) => {
+  console.log(`--- ${testName} ---`);
+  console.log("Alerts:", mockAlerts);
+  console.log("Console Errors:", mockConsoleErrors);
+  console.log("Saved Features:", JSON.stringify(mockSavedFeatures, null, 2));
+  console.log("Selected Tab:", mockSelectedTab);
+  console.log("---------------------\n");
+};
+
+const verify = (condition, passMessage, failMessage) => {
+  if (condition) {
+    console.log(`PASS: ${passMessage}`);
+    return true;
   } else {
-    console.error("Invalid rename operation:", { oldName, newName, DEFAULT_CATEGORY });
+    console.error(`FAIL: ${failMessage}`);
+    return false;
   }
 };
 
-// Helper to add a dummy feature (not strictly necessary for order testing, but good for mimicking state)
-const addDummyFeature = (categoryName, featureId) => {
-  if (savedFeatures[categoryName]) {
-    savedFeatures[categoryName].push({ id: featureId, properties: {} });
-    // No need to call setSavedFeatures here if we're directly mutating for test setup simplicity,
-    // but for consistency with actual implementation, one might prefer it.
-    // For this test, direct mutation is fine for setup before rename.
-    console.log(`Dummy feature "${featureId}" added to category "${categoryName}".`);
-  } else {
-    console.error(`Category "${categoryName}" does not exist for adding feature.`);
-  }
-};
+// --- Test Scenarios ---
+
+// 1. Data Loss Prevention
+resetMocks();
+console.log("Starting Test 1: Data Loss Prevention");
+mockSavedFeatures = { "all": [], "Category A": ["feat1"], "Category B": ["feat2"] };
+mockContextMenuTab = "Category A";
+const originalSelectedTab1 = "Category A"; // Assume this was the selected tab
+mockSelectedTab = originalSelectedTab1;
+const originalSavedFeatures1 = JSON.parse(JSON.stringify(mockSavedFeatures)); // Deep copy
+
+handleRenameCategory("Category B");
+
+let test1_passed = true;
+test1_passed = test1_passed && verify(mockAlerts.length === 1 && mockAlerts[0].includes('Category "Category B" already exists'), "Alert for existing category name triggered.", "Alert for existing category name NOT triggered or incorrect message.");
+test1_passed = test1_passed && verify(JSON.stringify(mockSavedFeatures) === JSON.stringify(originalSavedFeatures1), "savedFeatures remains unchanged.", "savedFeatures was changed!");
+test1_passed = test1_passed && verify(mockSelectedTab === originalSelectedTab1, "selectedTab remains unchanged.", `selectedTab changed to ${mockSelectedTab}!`);
+printState("Test 1 Results");
+if(test1_passed) console.log("Test 1: Data Loss Prevention PASSED\n"); else console.error("Test 1: Data Loss Prevention FAILED\n");
 
 
-// --- Test Execution ---
+// 2. No-Op Rename
+resetMocks();
+console.log("Starting Test 2: No-Op Rename");
+mockSavedFeatures = { "all": [], "Category C": ["feat3"] };
+mockContextMenuTab = "Category C";
+const originalSelectedTab2 = "Category C";
+mockSelectedTab = originalSelectedTab2;
+const originalSavedFeatures2 = JSON.parse(JSON.stringify(mockSavedFeatures));
 
-console.log('Initial state:', JSON.stringify(savedFeatures, null, 2));
+handleRenameCategory("Category C");
 
-// 1. Application running (simulated)
+let test2_passed = true;
+test2_passed = test2_passed && verify(mockAlerts.length === 0, "No alert triggered.", `Alerts triggered: ${mockAlerts.join(", ")}`);
+test2_passed = test2_passed && verify(JSON.stringify(mockSavedFeatures) === JSON.stringify(originalSavedFeatures2), "savedFeatures remains unchanged.", "savedFeatures was changed!");
+test2_passed = test2_passed && verify(mockSelectedTab === originalSelectedTab2, "selectedTab remains unchanged.", `selectedTab changed to ${mockSelectedTab}!`);
+printState("Test 2 Results");
+if(test2_passed) console.log("Test 2: No-Op Rename PASSED\n"); else console.error("Test 2: No-Op Rename FAILED\n");
 
-// 2. Create categories
-handleAddCategory("Category A");
-handleAddCategory("Category B");
-handleAddCategory("Category C");
 
-console.log('\nState after adding categories:', JSON.stringify(savedFeatures, null, 2));
+// 3. General Rename (Order Preservation & setSelectedTab)
+resetMocks();
+console.log("Starting Test 3: General Rename");
+mockSavedFeatures = { "all": [], "Cat X": [], "Cat Y": ["featY"], "Cat Z": [] };
+mockContextMenuTab = "Cat Y";
+mockSelectedTab = "Cat Y"; // Current tab is Cat Y
+const expectedSavedFeatures3 = { "all": [], "Cat X": [], "Cat Y New": ["featY"], "Cat Z": [] };
+const expectedKeyOrder3 = ["all", "Cat X", "Cat Y New", "Cat Z"];
 
-// 3. Add dummy features
-addDummyFeature("Category A", "featA1");
-addDummyFeature("Category B", "featB1");
-addDummyFeature("Category C", "featC1");
+handleRenameCategory("Cat Y New");
 
-console.log('\nState after adding features:', JSON.stringify(savedFeatures, null, 2));
+let test3_passed = true;
+test3_passed = test3_passed && verify(mockAlerts.length === 0, "No alert triggered.", `Alerts triggered: ${mockAlerts.join(", ")}`);
+test3_passed = test3_passed && verify(JSON.stringify(mockSavedFeatures) === JSON.stringify(expectedSavedFeatures3), "savedFeatures updated correctly.", `savedFeatures is ${JSON.stringify(mockSavedFeatures)}`);
+const actualKeyOrder3 = Object.keys(mockSavedFeatures);
+test3_passed = test3_passed && verify(JSON.stringify(actualKeyOrder3) === JSON.stringify(expectedKeyOrder3), `Key order is correct: ${actualKeyOrder3.join(", ")}`, `Key order is incorrect: ${actualKeyOrder3.join(", ")}`);
+test3_passed = test3_passed && verify(mockSelectedTab === "Cat Y New", "selectedTab updated to 'Cat Y New'.", `selectedTab is ${mockSelectedTab}`);
+printState("Test 3 Results");
+if(test3_passed) console.log("Test 3: General Rename PASSED\n"); else console.error("Test 3: General Rename FAILED\n");
 
-// 4. Reorder categories manually for testing: B, A, C
-//    (The actual reorder mechanism is not part of this test's scope, only its effect on renaming)
-const manuallyReorderedFeatures = {
-  [DEFAULT_CATEGORY]: savedFeatures[DEFAULT_CATEGORY],
-  "Category B": savedFeatures["Category B"],
-  "Category A": savedFeatures["Category A"],
-  "Category C": savedFeatures["Category C"],
-};
-setSavedFeatures(manuallyReorderedFeatures);
-console.log('\nState after manual reorder (B, A, C):', JSON.stringify(savedFeatures, null, 2));
 
-// 5. Rename a category in the middle ("Category A" to "Category A Renamed")
-contextMenuTab = "Category A"; // Set the category to be renamed
-handleRenameCategory("Category A Renamed");
+// 4. Renaming involving DEFAULT_CATEGORY ("all")
+// 4a. Attempt to rename "all"
+resetMocks();
+console.log("Starting Test 4a: Attempt to rename 'all'");
+mockSavedFeatures = { "all": [], "OtherCat": [] };
+mockContextMenuTab = "all";
+const originalSelectedTab4a = "all";
+mockSelectedTab = originalSelectedTab4a;
+const originalSavedFeatures4a = JSON.parse(JSON.stringify(mockSavedFeatures));
 
-// 6. Verification for step 5
-console.log('\n--- Verification 1: Rename middle category ---');
-let currentKeys = Object.keys(savedFeatures).filter(k => k !== DEFAULT_CATEGORY);
-console.log('Expected order: Category B, Category A Renamed, Category C');
-console.log('Actual order:', currentKeys.join(', '));
-if (currentKeys.length === 3 && currentKeys[0] === "Category B" && currentKeys[1] === "Category A Renamed" && currentKeys[2] === "Category C") {
-  console.log('Verification 1 PASSED');
-} else {
-  console.log('Verification 1 FAILED');
-}
+handleRenameCategory("New All Name");
 
-// 7. Rename the first category ("Category B" to "Category B Renamed")
-contextMenuTab = "Category B"; // Set the category to be renamed
-handleRenameCategory("Category B Renamed");
+let test4a_passed = true;
+test4a_passed = test4a_passed && verify(mockAlerts.length === 1 && mockAlerts[0].includes('Cannot rename the default category "all"'), "Alert for trying to rename 'all' triggered.", "Alert for renaming 'all' NOT triggered or incorrect message.");
+test4a_passed = test4a_passed && verify(JSON.stringify(mockSavedFeatures) === JSON.stringify(originalSavedFeatures4a), "savedFeatures remains unchanged.", "savedFeatures was changed!");
+test4a_passed = test4a_passed && verify(mockSelectedTab === originalSelectedTab4a, "selectedTab remains unchanged.", `selectedTab changed to ${mockSelectedTab}!`);
+printState("Test 4a Results");
+if(test4a_passed) console.log("Test 4a: Attempt to rename 'all' PASSED\n"); else console.error("Test 4a: Attempt to rename 'all' FAILED\n");
 
-// 8. Verification for step 7
-console.log('\n--- Verification 2: Rename first category ---');
-currentKeys = Object.keys(savedFeatures).filter(k => k !== DEFAULT_CATEGORY);
-console.log('Expected order: Category B Renamed, Category A Renamed, Category C');
-console.log('Actual order:', currentKeys.join(', '));
-if (currentKeys.length === 3 && currentKeys[0] === "Category B Renamed" && currentKeys[1] === "Category A Renamed" && currentKeys[2] === "Category C") {
-  console.log('Verification 2 PASSED');
-} else {
-  console.log('Verification 2 FAILED');
-}
 
-// 9. Rename the last category ("Category C" to "Category C Renamed")
-contextMenuTab = "Category C"; // Set the category to be renamed
-handleRenameCategory("Category C Renamed");
+// 4b. Attempt to rename a category *to* "all"
+resetMocks();
+console.log("Starting Test 4b: Attempt to rename a category TO 'all'");
+mockSavedFeatures = { "all": [], "OtherCat": [] };
+mockContextMenuTab = "OtherCat";
+const originalSelectedTab4b = "OtherCat";
+mockSelectedTab = originalSelectedTab4b;
+const originalSavedFeatures4b = JSON.parse(JSON.stringify(mockSavedFeatures));
 
-// 10. Verification for step 9
-console.log('\n--- Verification 3: Rename last category ---');
-currentKeys = Object.keys(savedFeatures).filter(k => k !== DEFAULT_CATEGORY);
-console.log('Expected order: Category B Renamed, Category A Renamed, Category C Renamed');
-console.log('Actual order:', currentKeys.join(', '));
-if (currentKeys.length === 3 && currentKeys[0] === "Category B Renamed" && currentKeys[1] === "Category A Renamed" && currentKeys[2] === "Category C Renamed") {
-  console.log('Verification 3 PASSED');
-} else {
-  console.log('Verification 3 FAILED');
-}
+handleRenameCategory("all");
 
-console.log("\nSimplified manual testing script finished.");
+let test4b_passed = true;
+test4b_passed = test4b_passed && verify(mockAlerts.length === 1 && mockAlerts[0].includes('Cannot rename category to "all"'), "Alert for trying to rename TO 'all' triggered.", "Alert for renaming TO 'all' NOT triggered or incorrect message.");
+test4b_passed = test4b_passed && verify(JSON.stringify(mockSavedFeatures) === JSON.stringify(originalSavedFeatures4b), "savedFeatures remains unchanged.", "savedFeatures was changed!");
+test4b_passed = test4b_passed && verify(mockSelectedTab === originalSelectedTab4b, "selectedTab remains unchanged.", `selectedTab changed to ${mockSelectedTab}!`);
+printState("Test 4b Results");
+if(test4b_passed) console.log("Test 4b: Attempt to rename a category TO 'all' PASSED\n"); else console.error("Test 4b: Attempt to rename a category TO 'all' FAILED\n");
+
+console.log("All tests finished.");
