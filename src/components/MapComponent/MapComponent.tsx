@@ -73,6 +73,17 @@ const MapComponent = ({
     localStorage.setItem("activeBaseLayer", activeBaseLayer)
   }, [activeBaseLayer])
 
+  // useEffect to update mapState.center when the center prop changes
+  useEffect(() => {
+    // Ensure 'center' prop is defined and different from current mapState.center
+    // This prevents potential unnecessary updates or loops.
+    if (center && (center[0] !== mapState.center[0] || center[1] !== mapState.center[1])) {
+      setMapState(prevState => ({ ...prevState, center: center }));
+    }
+    // mapState.center is implicitly part of the closure for setMapState,
+    // but adding 'center' (the prop) is crucial for the dependency array.
+  }, [center]); // Only 'center' (the prop) is needed as a dependency. mapState.center is not needed here.
+
   const handleMapMove = useCallback((center: [number, number], zoom: number) => {
     setMapState({ center, zoom })
   }, [])

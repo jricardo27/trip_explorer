@@ -1,12 +1,15 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
-import React from "react"
-import { MdDragIndicator } from "react-icons/md"
+import { ListItem, ListItemText, ListItemIcon, IconButton, ListItemSecondaryAction } from "@mui/material" // Added ListItemSecondaryAction
+import React from "react" // Keep React import
+import { MdDragIndicator, MdNearMe } from "react-icons/md" // Added MdNearMe
 
+import { useLongPress } from "../../../hooks/useLongPress"
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
+// filterFeatures import removed as it's not used
+import { getCoordinatesForNavigation } from "../../../utils/navigationUtils" // Import the new utility function
 
 interface SortableFeatureItemProps {
   feature: GeoJsonFeature
@@ -15,10 +18,24 @@ interface SortableFeatureItemProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
+  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
+  // searchQuery: string // Removed searchQuery prop
+  navigateToCoordinates?: (coords: [number, number]) => void
+  onClose?: () => void
 }
 
-export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
+export const SortableFeatureItem = ({
+  feature,
+  id,
+  index, // This will now be originalIndex
+  selectedTab,
+  selectedFeature,
+  setSelectedFeature,
+  handleContextMenu,
+  // searchQuery, // Removed from destructuring
+  navigateToCoordinates,
+  onClose,
+}: SortableFeatureItemProps) => {
   const {
     attributes,
     listeners,
@@ -36,22 +53,35 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
     border: isDragging ? "dashed" : "",
   }
 
-  const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
-  const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
+  const isSelected = idxSel(selectedFeature) === idxFeat(index, feature) // index is originalIndex
+  const selection: selectionInfo = { feature: feature, index: index, category: selectedTab } // index is originalIndex
+
+  // Removed isVisible calculation and conditional rendering
+  // const isVisible = searchQuery ? filterFeatures([feature], searchQuery).length > 0 : true
+  // if (!isVisible) {
+  //   return null;
+  // }
+
+  // Integrate useLongPress
+  const longPressProps = useLongPress(
+    (event) => {
+      handleContextMenu(event, selection)
+      // event.stopPropagation() is called by useLongPress if the long press is successful
+    },
+    500 // Duration for long press
+  )
 
   return (
     <ListItem
       ref={setNodeRef}
       style={style}
       onClick={(event: React.MouseEvent) => {
-        event.stopPropagation()
+        event.stopPropagation() // Keep stopPropagation for regular clicks
         setSelectedFeature(isSelected ? null : selection)
       }}
-      onContextMenu={(event) => {
-        handleContextMenu(event, selection)
-        event.stopPropagation()
-      }}
-      {...{ button: "true" }}
+      // Spread longPressProps here. This replaces the old onContextMenu.
+      {...longPressProps}
+      button // Use standard 'button' prop for clickability
     >
       <ListItemIcon>
         <IconButton
@@ -71,6 +101,36 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
       <ListItemText
         primary={feature.properties?.name || "Unnamed Feature"}
       />
+      {/* Conditional rendering of the navigation icon button */}
+      {navigateToCoordinates && feature.geometry && (
+        <ListItemSecondaryAction>
+          <IconButton
+            edge="end" // Standard for secondary actions
+            aria-label="Navigate to POI"
+            onClick={(event: React.MouseEvent) => {
+              event.stopPropagation(); // Prevent ListItem's onClick
+
+              // The check for navigateToCoordinates and feature.geometry is removed
+              // as it's covered by the conditional rendering of the button
+              // and getCoordinatesForNavigation handles null feature/geometry.
+
+              const leafletCoords = getCoordinatesForNavigation(feature);
+
+              if (leafletCoords) {
+                // navigateToCoordinates is guaranteed to be defined here
+                // due to the conditional rendering: {navigateToCoordinates && feature.geometry && ...}
+                navigateToCoordinates(leafletCoords); 
+                if (onClose) {
+                  onClose();
+                }
+              }
+              // If leafletCoords is null, getCoordinatesForNavigation has already logged the error/warning.
+            }}
+          >
+            <MdNearMe />
+          </IconButton>
+        </ListItemSecondaryAction>
+      )}
     </ListItem>
   )
 }

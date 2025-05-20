@@ -1,10 +1,11 @@
 import {
   Drawer,
   Box,
+  TextField,
   useTheme,
   useMediaQuery,
 } from "@mui/material"
-import React, { useState, useContext, useCallback, useEffect } from "react"
+import React, { useState, useContext, useCallback, useEffect, useMemo } from "react" // Added useMemo
 
 import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
@@ -12,6 +13,7 @@ import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
 import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
 import { FeatureList } from "./FeatureList/FeatureList"
+import { filterFeatures } from "./filterUtils" // Ensure this import is active
 import { useCategoryManagement } from "./hooks/useCategoryManagement"
 import { useContextMenu } from "./hooks/useContextMenu"
 import { useFeatureManagement } from "./hooks/useFeatureManagement"
@@ -22,12 +24,19 @@ interface SavedFeaturesDrawerProps {
   drawerOpen: boolean
   onClose: () => void
   setCurrentCategory?: (newState: string) => void
+  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
 }
 
 const excludedProperties = ["id", "images", "style"] as const
 
-const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
+const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({
+  drawerOpen,
+  onClose,
+  setCurrentCategory,
+  navigateToCoordinates, // Destructured navigateToCoordinates
+}) => {
   const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
@@ -49,11 +58,32 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
     setSelectedFeature(null)
   }, [setSelectedFeature])
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value)
+  }
+
   useEffect(() => {
     if (setCurrentCategory) {
       setCurrentCategory(selectedTab)
     }
   }, [selectedTab, setCurrentCategory])
+
+  // Create itemsWithOriginalIndex
+  const itemsWithOriginalIndex = useMemo(() => {
+    return (savedFeatures[selectedTab] || []).map((feature, index) => ({
+      feature,
+      originalIndex: index,
+    }));
+  }, [savedFeatures, selectedTab]);
+
+  // Create filteredItems
+  const filteredItems = useMemo(() => {
+    // The itemsWithOriginalIndex already handles the case where savedFeatures[selectedTab] might be empty.
+    // filterFeatures will handle the empty searchQuery case.
+    return filterFeatures(itemsWithOriginalIndex, searchQuery);
+  }, [itemsWithOriginalIndex, searchQuery]);
+
+  // Dead code related to currentFeatures and filteredFeatures has been removed.
 
   return (
     <>
@@ -81,15 +111,26 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
                 handleTabContextMenu={handleTabContextMenu}
               />
             </Box>
-            <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+            <Box sx={{ flexGrow: 1, overflowY: "auto", p: 2 }}>
+              <TextField
+                fullWidth
+                label="Search Features"
+                variant="outlined"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                sx={{ mb: 2 }}
+              />
               <FeatureList
-                features={savedFeatures[selectedTab] || []}
+                items={filteredItems} // New prop
+                // features and searchQuery props removed
                 setSavedFeatures={setSavedFeatures}
                 selectedTab={selectedTab}
                 selectedFeature={selectedFeature}
                 setSelectedFeature={setSelectedFeature}
                 handleContextMenu={handleContextMenu}
                 excludedProperties={Array.from(excludedProperties)}
+                navigateToCoordinates={navigateToCoordinates}
+                onClose={onClose}
               />
             </Box>
           </Box>
