@@ -1,6 +1,7 @@
 import {
   Drawer,
   Box,
+  TextField,
   useTheme,
   useMediaQuery,
 } from "@mui/material"
@@ -12,6 +13,7 @@ import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
 import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
 import { FeatureList } from "./FeatureList/FeatureList"
+import { filterFeatures } from "./filterUtils" // Import the new helper function
 import { useCategoryManagement } from "./hooks/useCategoryManagement"
 import { useContextMenu } from "./hooks/useContextMenu"
 import { useFeatureManagement } from "./hooks/useFeatureManagement"
@@ -28,6 +30,7 @@ const excludedProperties = ["id", "images", "style"] as const
 
 const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, onClose, setCurrentCategory }) => {
   const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
@@ -49,11 +52,19 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
     setSelectedFeature(null)
   }, [setSelectedFeature])
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value)
+  }
+
   useEffect(() => {
     if (setCurrentCategory) {
       setCurrentCategory(selectedTab)
     }
   }, [selectedTab, setCurrentCategory])
+
+  const currentFeatures = savedFeatures[selectedTab] || []
+  // Use the filterFeatures helper function
+  const filteredFeatures = filterFeatures(currentFeatures, searchQuery)
 
   return (
     <>
@@ -81,9 +92,17 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
                 handleTabContextMenu={handleTabContextMenu}
               />
             </Box>
-            <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+            <Box sx={{ flexGrow: 1, overflowY: "auto", p: 2 }}>
+              <TextField
+                fullWidth
+                label="Search Features"
+                variant="outlined"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                sx={{ mb: 2 }}
+              />
               <FeatureList
-                features={savedFeatures[selectedTab] || []}
+                features={filteredFeatures}
                 setSavedFeatures={setSavedFeatures}
                 selectedTab={selectedTab}
                 selectedFeature={selectedFeature}
