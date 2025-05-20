@@ -41,19 +41,54 @@ export const useCategoryManagement = (
     setSavedFeatures(newSavedFeatures)
   }, [contextMenuTab, savedFeatures, setSavedFeatures])
 
-  const handleRenameCategory = useCallback((newName: string) => {
-    if (contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && newName !== DEFAULT_CATEGORY) {
-      setSavedFeatures((prev: SavedFeaturesStateType) => {
-        const newSavedFeatures = { ...prev }
-        newSavedFeatures[newName] = newSavedFeatures[contextMenuTab]
-        delete newSavedFeatures[contextMenuTab]
-        const keys = Object.keys(newSavedFeatures)
-        const index = keys.indexOf(contextMenuTab)
-        if (index !== -1) keys.splice(index, 1, newName)
-        return Object.fromEntries(keys.map((key) => [key, newSavedFeatures[key]]))
-      })
+const handleRenameCategory = useCallback((newName: string) => {
+  // Initial Guard & Default Category Checks
+  if (!contextMenuTab) {
+    // This case should ideally not happen if context menu is triggered properly
+    console.error("Rename category called without contextMenuTab");
+    return;
+  }
+  if (contextMenuTab === DEFAULT_CATEGORY) {
+    alert(`Cannot rename the default category "${DEFAULT_CATEGORY}".`);
+    return;
+  }
+  if (newName === DEFAULT_CATEGORY) {
+    alert(`Cannot rename category to "${DEFAULT_CATEGORY}". Please choose a different name.`);
+    return;
+  }
+
+  // No-op Rename Check
+  if (newName === contextMenuTab) {
+    return; // It's the same name, do nothing
+  }
+
+  // Existing Name Check (Data Loss Prevention)
+  // This check uses the `savedFeatures` state directly from the hook's scope.
+  // It's done *before* calling `setSavedFeatures`.
+  // The condition `newName !== contextMenuTab` is removed because the no-op check above ensures they are different.
+  if (Object.keys(savedFeatures).includes(newName)) {
+    alert(`Category "${newName}" already exists. Please choose a different name.`);
+    return; // Prevent renaming
+  }
+
+  // If all checks pass, then we attempt to save and select.
+  setSavedFeatures((prev: SavedFeaturesStateType) => {
+    // This function now assumes the pre-checks for default category, no-op, and existing name have passed.
+    const orderedKeys = Object.keys(prev);
+    const newSavedFeatures: SavedFeaturesStateType = {};
+    for (const key of orderedKeys) {
+      if (key === contextMenuTab) {
+        newSavedFeatures[newName] = prev[contextMenuTab];
+      } else {
+        newSavedFeatures[key] = prev[key];
+      }
     }
-  }, [contextMenuTab, setSavedFeatures])
+    return newSavedFeatures;
+  });
+
+  setSelectedTab(newName); // Call if all checks passed and rename proceeded.
+
+}, [contextMenuTab, savedFeatures, setSavedFeatures, setSelectedTab]);
 
   const handleAddCategory = useCallback(() => {
     let categoryName = prompt("Enter name for category")
