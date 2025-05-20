@@ -32,9 +32,10 @@ const WelcomeModal = ({ open, onClose }: WelcomeModalProps) => {
   const {
     selectedRegion,
     setSelectedRegion,
-    availableCategories, // Renamed from categories
+    availableCategories,
     selectedCategories,
     setSelectedCategories,
+    regions: regionsFromContext, // Renamed to avoid conflict with the old 'regions' const
   } = usePoiSelection()
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -54,17 +55,17 @@ const WelcomeModal = ({ open, onClose }: WelcomeModalProps) => {
     )
   }
 
-  const regions = [
-    "westernAustralia",
-    "newSouthWales",
-    "victoria",
-    "queensland",
-    "southAustralia",
-    "tasmania",
-    "northernTerritory",
-    "australianCapitalTerritory",
-    "newZealand",
-  ]
+  // const regions = [ // This hardcoded array is no longer needed
+  //   "westernAustralia",
+  //   "newSouthWales",
+  //   "victoria",
+  //   "queensland",
+  //   "southAustralia",
+  //   "tasmania",
+  //   "northernTerritory",
+  //   "australianCapitalTerritory",
+  //   "newZealand",
+  // ]
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
@@ -90,9 +91,14 @@ const WelcomeModal = ({ open, onClose }: WelcomeModalProps) => {
                 label="Select Region"
                 onChange={handleRegionChange}
               >
-                {regions.map((region) => (
-                  <MenuItem key={region} value={region}>
-                    {region}
+                {regionsFromContext.length === 0 && (
+                  <MenuItem value="" disabled>
+                    Loading regions...
+                  </MenuItem>
+                )}
+                {regionsFromContext.map((region) => (
+                  <MenuItem key={region.id} value={region.id}>
+                    {region.name}
                   </MenuItem>
                 ))}
               </Select>

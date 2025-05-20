@@ -37,7 +37,7 @@ const Tutorial = (): React.ReactNode => {
       setRunTour(false)
     } else if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
       // Potentially handle advancing steps or errors
-      console.log(`Tour event: ${type}, action: ${action}, index: ${index}`)
+      // console.log(`Tour event: ${type}, action: ${action}, index: ${index}`) // Removed console.log
     }
   }
 

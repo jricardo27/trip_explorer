@@ -13,13 +13,33 @@ const formatCategoryName = (filename: string) => {
     .join(" ")
 }
 
-import { CategoryInfo } from "./PoiSelectionContext.ts" // Added import
+import { CategoryInfo, RegionInfo } from "./PoiSelectionContext.ts" // Added RegionInfo
 
 export const PoiSelectionProvider = ({ children }: PoiSelectionProviderProps) => {
   const [selectedRegion, setSelectedRegion] = useState<string>("")
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]) // Stores raw filenames
   const [availableCategories, setAvailableCategories] = useState<CategoryInfo[]>([]) // Stores CategoryInfo objects
+  const [regionsList, setRegionsList] = useState<RegionInfo[]>([]) // New state for regions
 
+  // Fetch regions list on mount
+  useEffect(() => {
+    fetch("/markers/regions-manifest.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch regions-manifest.json")
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setRegionsList(data as RegionInfo[]) // Assuming data is Array<RegionInfo>
+      })
+      .catch((error) => {
+        console.error("Error fetching regions-manifest.json:", error)
+        setRegionsList([]) // Set to empty or handle error appropriately
+      })
+  }, [])
+
+  // Fetch available categories when selectedRegion changes
   useEffect(() => {
     if (selectedRegion) {
       fetch(`/markers/${selectedRegion}/manifest.json`)
@@ -53,7 +73,8 @@ export const PoiSelectionProvider = ({ children }: PoiSelectionProviderProps) =>
     selectedCategories,
     setSelectedCategories,
     availableCategories,
-    setAvailableCategories, // Though set directly by useEffect, including for completeness or future use
+    setAvailableCategories,
+    regions: regionsList, // Pass regionsList as regions
   }
 
   return (
