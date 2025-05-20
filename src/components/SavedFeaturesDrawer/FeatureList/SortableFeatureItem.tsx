@@ -1,10 +1,10 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { ListItem, ListItemText, ListItemIcon, IconButton } from "@mui/material"
+import { ListItem, ListItemText, ListItemIcon, IconButton, ListItemSecondaryAction } from "@mui/material" // Added ListItemSecondaryAction
 import React from "react" // Keep React import
-import { MdDragIndicator } from "react-icons/md"
+import { MdDragIndicator, MdNearMe } from "react-icons/md" // Added MdNearMe
 
-import { useLongPress } from "../../../hooks/useLongPress" // Import useLongPress
+import { useLongPress } from "../../../hooks/useLongPress"
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
@@ -19,9 +19,22 @@ interface SortableFeatureItemProps {
   setSelectedFeature: (selection: selectionInfo | null) => void
   handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
   searchQuery: string // Added searchQuery prop
+  navigateToCoordinates?: (coords: [number, number]) => void // Added navigateToCoordinates prop
+  onClose?: () => void // Added onClose prop
 }
 
-export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu, searchQuery }: SortableFeatureItemProps) => {
+export const SortableFeatureItem = ({
+  feature,
+  id,
+  index,
+  selectedTab,
+  selectedFeature,
+  setSelectedFeature,
+  handleContextMenu,
+  searchQuery,
+  navigateToCoordinates, // Destructured navigateToCoordinates
+  onClose, // Destructured onClose
+}: SortableFeatureItemProps) => {
   const {
     attributes,
     listeners,
@@ -68,7 +81,7 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
       }}
       // Spread longPressProps here. This replaces the old onContextMenu.
       {...longPressProps}
-      {...{ button: "true" }} // Ensure this is still applied correctly
+      button // Use standard 'button' prop for clickability
     >
       <ListItemIcon>
         <IconButton
@@ -88,6 +101,60 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
       <ListItemText
         primary={feature.properties?.name || "Unnamed Feature"}
       />
+      {/* Conditional rendering of the navigation icon button */}
+      {navigateToCoordinates && feature.geometry && (
+        <ListItemSecondaryAction>
+          <IconButton
+            edge="end" // Standard for secondary actions
+            aria-label="Navigate to POI"
+            onClick={(event: React.MouseEvent) => {
+              event.stopPropagation(); // Prevent ListItem's onClick
+
+              if (!navigateToCoordinates || !feature.geometry) {
+                console.warn("Navigation prerequisites not met (missing navigateToCoordinates or geometry).");
+                return;
+              }
+
+              const geometry = feature.geometry;
+              let lngStr: string | number | undefined;
+              let latStr: string | number | undefined;
+
+              if (geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length === 2) {
+                lngStr = geometry.coordinates[0];
+                latStr = geometry.coordinates[1];
+              } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0].length === 2) {
+                lngStr = geometry.coordinates[0][0];
+                latStr = geometry.coordinates[0][1];
+              } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0] && geometry.coordinates[0][0].length === 2) {
+                lngStr = geometry.coordinates[0][0][0];
+                latStr = geometry.coordinates[0][0][1];
+              } else {
+                console.warn(`Unsupported geometry type (${geometry.type}) or malformed coordinates for navigation for feature ID: ${feature.id}`);
+                return;
+              }
+
+              if (lngStr !== undefined && latStr !== undefined) {
+                const lng = parseFloat(String(lngStr));
+                const lat = parseFloat(String(latStr));
+
+                if (!isNaN(lng) && !isNaN(lat)) {
+                  const leafletCoords: [number, number] = [lat, lng];
+                  navigateToCoordinates(leafletCoords);
+                  if (onClose) {
+                    onClose();
+                  }
+                } else {
+                  console.error(`Invalid coordinates after parsing for feature ID: ${feature.id}. Original values:`, { lngStr, latStr });
+                }
+              } else {
+                console.error(`Coordinates could not be extracted for feature ID: ${feature.id}.`);
+              }
+            }}
+          >
+            <MdNearMe />
+          </IconButton>
+        </ListItemSecondaryAction>
+      )}
     </ListItem>
   )
 }

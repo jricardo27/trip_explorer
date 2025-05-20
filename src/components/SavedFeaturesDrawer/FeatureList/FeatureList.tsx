@@ -86,61 +86,14 @@ export const FeatureList = ({
             setSelectedFeature={setSelectedFeature}
             handleContextMenu={handleContextMenu}
             searchQuery={searchQuery} // Pass searchQuery to SortableFeatureItem
+            navigateToCoordinates={navigateToCoordinates} // Pass navigateToCoordinates
+            onClose={onClose} // Pass onClose
           />
           <Collapse in={idxSel(selectedFeature) === idxFeat(index, feature)} timeout="auto" unmountOnExit>
             <ListItem sx={{ pl: 4 }}>
               <Button onClick={() => openCloseEditor(feature)}>Add/edit notes</Button>
             </ListItem>
-            {/* Add "Go to on Map" button here */}
-            {navigateToCoordinates && selectedFeature?.feature.geometry && (
-              <ListItem sx={{ pl: 4 }}>
-                <Button
-                  onClick={() => {
-                    if (!selectedFeature || !selectedFeature.feature.geometry || !navigateToCoordinates) {
-                      return;
-                    }
-                    const geometry = selectedFeature.feature.geometry;
-                    let lngStr: string | number | undefined;
-                    let latStr: string | number | undefined;
-
-                    if (geometry.type === 'Point' && geometry.coordinates && geometry.coordinates.length === 2) {
-                      lngStr = geometry.coordinates[0];
-                      latStr = geometry.coordinates[1];
-                    } else if (geometry.type === 'LineString' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0].length === 2) {
-                      lngStr = geometry.coordinates[0][0];
-                      latStr = geometry.coordinates[0][1];
-                    } else if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0] && geometry.coordinates[0][0] && geometry.coordinates[0][0].length === 2) {
-                      lngStr = geometry.coordinates[0][0][0];
-                      latStr = geometry.coordinates[0][0][1];
-                    } else {
-                      console.warn("Unsupported geometry type or malformed coordinates for navigation:", geometry.type);
-                      return;
-                    }
-
-                    if (lngStr !== undefined && latStr !== undefined) {
-                      const lng = parseFloat(String(lngStr)); // Explicitly convert to string before parseFloat
-                      const lat = parseFloat(String(latStr)); // Explicitly convert to string before parseFloat
-
-                      if (!isNaN(lng) && !isNaN(lat)) {
-                        const leafletCoords: [number, number] = [lat, lng];
-                        navigateToCoordinates(leafletCoords);
-                        if (onClose) {
-                          onClose();
-                        }
-                      } else {
-                        console.error("Invalid coordinates after parsing. Original values:", {lngStr, latStr});
-                      }
-                    } else {
-                      // This case should ideally be caught by the geometry type checks if types are correct,
-                      // but as a fallback:
-                      console.error("Coordinates could not be extracted.");
-                    }
-                  }}
-                >
-                  Go to on Map
-                </Button>
-              </ListItem>
-            )}
+            {/* The "Go to on Map" button ListItem has been removed from here. */}
             {editorVisible && (
               <>
                 <ListItem sx={{ pl: 4 }}>
