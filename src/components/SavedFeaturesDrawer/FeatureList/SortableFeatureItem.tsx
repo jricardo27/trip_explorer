@@ -6,6 +6,7 @@ import { MdDragIndicator } from "react-icons/md"
 
 import { selectionInfo } from "../../../contexts/SavedFeaturesContext"
 import { GeoJsonFeature } from "../../../data/types"
+import { useLongPress } from "../../../hooks/useLongPress"
 import idxFeat, { idxSel } from "../../../utils/idxFeat"
 
 interface SortableFeatureItemProps {
@@ -15,7 +16,7 @@ interface SortableFeatureItemProps {
   selectedTab: string
   selectedFeature: selectionInfo | null
   setSelectedFeature: (selection: selectionInfo | null) => void
-  handleContextMenu: (event: React.MouseEvent, selection: selectionInfo) => void
+  handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
 }
 
 export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
@@ -39,19 +40,24 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
   const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
   const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
 
+  const longPressProps = useLongPress(
+    (event) => {
+      handleContextMenu(event, selection)
+    },
+    500, // Duration for long press
+  )
+
   return (
     <ListItem
       ref={setNodeRef}
       style={style}
       onClick={(event: React.MouseEvent) => {
-        event.stopPropagation()
+        event.stopPropagation() // Keep stopPropagation for regular clicks
         setSelectedFeature(isSelected ? null : selection)
       }}
-      onContextMenu={(event) => {
-        handleContextMenu(event, selection)
-        event.stopPropagation()
-      }}
-      {...{ button: "true" }}
+      // Spread longPressProps here. This replaces the old onContextMenu.
+      {...longPressProps}
+      {...{ button: "true" }} // Ensure this is still applied correctly
     >
       <ListItemIcon>
         <IconButton
