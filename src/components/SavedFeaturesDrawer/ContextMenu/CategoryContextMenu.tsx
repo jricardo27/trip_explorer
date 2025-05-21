@@ -30,23 +30,56 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
     if (newName && newName !== contextMenuTab) handleRenameCategory(newName)
   }, [contextMenuTab, handleRenameCategory])
 
+  // Wrapper to call the handler and then close the menu
   const wrapper = (handler: (event: React.MouseEvent) => void) => (event: React.MouseEvent) => {
     handler(event)
     handleClose()
   }
 
-  const preventDefault = (event: React.MouseEvent) => {
+  // Prevents browser's context menu on the MUI Menu itself and closes it
+  const preventDefaultAndClose = (event: React.MouseEvent) => {
     event.preventDefault()
     handleClose()
   }
 
-  if (!contextMenuTab) return <></>
+  // If there's no specific tab context, don't render the menu.
+  // This also implies that "Add New Category" is only available when a tab is context-clicked.
+  if (!contextMenuTab) {
+    return null // Rendering null is cleaner than an empty fragment
+  }
+
+  const menuItems: React.ReactNode[] = []
+
+  // Conditional items for specific, modifiable categories
+  if (contextMenuTab !== DEFAULT_CATEGORY && contextMenuTab !== NULL_TAB) {
+    menuItems.push(
+      <MenuItem key="move-up" onClick={wrapper(() => moveCategory("up"))}>
+        Move Up
+      </MenuItem>,
+      <MenuItem key="move-down" onClick={wrapper(() => moveCategory("down"))}>
+        Move Down
+      </MenuItem>,
+      <MenuItem key="rename" onClick={wrapper(handleRename)}>
+        Rename Category
+      </MenuItem>,
+      <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>
+        Remove Category
+      </MenuItem>,
+    )
+  }
+
+  // "Add New Category" is always an option if the menu is shown for a tab
+  menuItems.push(
+    <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>
+      Add New Category
+    </MenuItem>,
+  )
 
   return (
     <Menu
       open={contextMenu !== null}
       onClose={handleClose}
-      onContextMenu={preventDefault}
+      onContextMenu={preventDefaultAndClose} // Handle right-click on the menu itself
       anchorReference="anchorPosition"
       anchorPosition={
         contextMenu !== null
@@ -54,15 +87,7 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
           : undefined
       }
     >
-      {contextMenuTab && contextMenuTab !== DEFAULT_CATEGORY && contextMenuTab !== NULL_TAB ? (
-        <>
-          <MenuItem key="move-up" onClick={wrapper(() => moveCategory("up"))}>Move Up</MenuItem>
-          <MenuItem key="move-down" onClick={wrapper(() => moveCategory("down"))}>Move Down</MenuItem>
-          <MenuItem key="rename" onClick={wrapper(handleRename)}>Rename Category</MenuItem>
-          <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>Remove Category</MenuItem>
-        </>
-      ) : null}
-      <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>Add New Category</MenuItem>
+      {menuItems}
     </Menu>
   )
 }
