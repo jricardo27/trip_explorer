@@ -19,7 +19,9 @@ interface SortableFeatureItemProps {
   handleContextMenu: (event: React.MouseEvent | React.TouchEvent, selection: selectionInfo) => void
 }
 
-export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps) => {
+export const SortableFeatureItem = (
+  { feature, id, index, selectedTab, selectedFeature, setSelectedFeature, handleContextMenu }: SortableFeatureItemProps,
+) => {
   const {
     attributes,
     listeners,
@@ -40,6 +42,7 @@ export const SortableFeatureItem = ({ feature, id, index, selectedTab, selectedF
   const isSelected = idxSel(selectedFeature) === idxFeat(index, feature)
   const selection: selectionInfo = { feature: feature, index: index, category: selectedTab }
 
+  // Integrate useLongPress
   const longPressProps = useLongPress(
     (event) => {
       handleContextMenu(event, selection)
