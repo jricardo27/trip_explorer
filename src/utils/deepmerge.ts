@@ -5,13 +5,23 @@ export default function deepMerge(target: Record<string, TAny>, source: Record<s
 
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach((key) => {
-      if (isObject(source[key])) {
-        if (!(key in target)) Object.assign(output, { [key]: source[key] })
-        else output[key] = deepMerge(target[key] as Record<string, TAny>, source[key] as Record<string, TAny>)
+      const sourceValue = source[key];
+      const targetValue = target[key];
+
+      if (isObject(sourceValue)) {
+        if (isObject(targetValue)) {
+          // Both source and target values are objects, so merge them
+          output[key] = deepMerge(targetValue as Record<string, TAny>, sourceValue as Record<string, TAny>);
+        } else {
+          // Source value is an object, but target value is not (or doesn't exist at all)
+          // Overwrite whatever was in target[key] with the source object value
+          output[key] = sourceValue;
+        }
       } else {
-        Object.assign(output, { [key]: source[key] })
+        // Source value is not an object, so assign it directly (overwrite)
+        output[key] = sourceValue;
       }
-    })
+    });
   }
   return output
 }

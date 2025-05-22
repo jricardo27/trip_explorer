@@ -19,7 +19,7 @@ export const TabList: React.FC<TabListProps> = ({ tabs, selectedTab, handleTabCh
       variant="scrollable"
       value={selectedTab}
       onChange={handleTabChange}
-      onContextMenu={(event) => handleTabContextMenu(event, NULL_TAB)}
+      onContextMenu={(event) => handleTabContextMenu(event as React.MouseEvent, NULL_TAB)}
       aria-label="Saved Features Tabs"
       sx={{ height: "100%" }}
     >
@@ -28,7 +28,7 @@ export const TabList: React.FC<TabListProps> = ({ tabs, selectedTab, handleTabCh
           key={tab}
           tab={tab}
           value={tab}
-          onContextMenu={(event) => handleTabContextMenu(event, tab)}
+          onContextMenu={(event) => handleTabContextMenu(event as React.MouseEvent, tab)}
         />
       ))}
     </Tabs>
