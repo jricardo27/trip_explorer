@@ -47,7 +47,7 @@ function App(): React.ReactNode {
     const hasShownModal = localStorage.getItem("hasShownModal")
     if (!hasShownModal) {
       setWelcomeDialogOpen(true)
-      // localStorage.setItem("hasShownModal", "true")
+      localStorage.setItem("hasShownModal", "true")
     }
   }, [])
 

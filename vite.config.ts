@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import react from "@vitejs/plugin-react"
 import { visualizer } from "rollup-plugin-visualizer"
 import { defineConfig } from "vite"
@@ -8,26 +9,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
-        "axios",
-        "file-saver",
-        "jszip",
-        "geojson-to-kml",
-        "leaflet",
-        "react",
-        "react-ga4",
-        "react-image-gallery",
-        "react-leaflet",
-        "react-router-dom",
-        "tinymce",
-        "turndown",
-        "uuid",
-        /^@dnd-kit\/.*/,
-        /^@emotion\/.*/,
-        /^@mui\/.*/,
-        /^@tinymce\/.*/,
-        /^react-dom\/?.*/,
-        /^react\/jsx-runtime/,
-        /^react-toastify\/?.*/,
+        "tinymce", // Core TinyMCE is loaded globally from /public/tinymce
       ],
     },
   },
