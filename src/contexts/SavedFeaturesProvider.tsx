@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 import { GeoJsonFeature } from "../data/types"
 import idxFeat, { idxSel } from "../utils/idxFeat"
+import { LineDefinition, addLineToDB, getLinesFromDB, updateLineInDB, deleteLineFromDB } from "../utils/idbUtils" // Added
 
 import SavedFeaturesContext, { DEFAULT_CATEGORY, SavedFeaturesContextType, SavedFeaturesStateType, selectionInfo } from "./SavedFeaturesContext"
 
@@ -9,105 +11,230 @@ interface SavedFeaturesProviderProps {
   children: React.ReactNode
 }
 
-const STORAGE_KEY = "savedFeatures"
+const PROJECTS_DATA_STORAGE_KEY = "projectsData_v1" // Stores all features for all projects
+const PROJECT_MANAGEMENT_STORAGE_KEY = "projectManagement_v1" // Stores project names and current project
+
+const DEFAULT_PROJECT_NAME = "Default Project"
+
+// Type for all features across all projects
+type AllProjectsDataStateType = {
+  [projectName: string]: SavedFeaturesStateType
+}
+
+// Type for project management state
+type ProjectManagementStateType = {
+  projectNames: string[]
+  currentProjectName: string
+}
 
 const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children }) => {
-  // Initial state setup
-  const [savedFeatures, setSavedFeaturesState] = useState<SavedFeaturesStateType>(() => {
-    const storedFeatures = localStorage.getItem(STORAGE_KEY)
-    return storedFeatures
-      ? JSON.parse(storedFeatures)
-      : {
-          all: [],
-        }
+  // State for all features in all projects
+  const [allProjectsData, setAllProjectsDataState] = useState<AllProjectsDataStateType>(() => {
+    const storedProjectsData = localStorage.getItem(PROJECTS_DATA_STORAGE_KEY)
+    if (storedProjectsData) {
+      return JSON.parse(storedProjectsData)
+    }
+    return {
+      [DEFAULT_PROJECT_NAME]: { [DEFAULT_CATEGORY]: [] },
+    }
   })
 
-  // Save to local storage
-  const saveToLocalStorage = useCallback(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFeatures))
-  }, [savedFeatures])
+  // State for project names and the current project
+  const [projectManagement, setProjectManagementState] = useState<ProjectManagementStateType>(() => {
+    const storedManagementData = localStorage.getItem(PROJECT_MANAGEMENT_STORAGE_KEY)
+    if (storedManagementData) {
+      return JSON.parse(storedManagementData)
+    }
+    return {
+      projectNames: [DEFAULT_PROJECT_NAME],
+      currentProjectName: DEFAULT_PROJECT_NAME,
+    }
+  })
 
-  // Load from local storage
+  // State for lines/routes of the current project
+  const [currentProjectLines, setCurrentProjectLines] = useState<LineDefinition[]>([])
+
+  // Save all data to local storage (project features and management state)
+  // Line data is in IndexedDB, not local storage directly with features.
+  const saveToLocalStorage = useCallback(() => {
+    localStorage.setItem(PROJECTS_DATA_STORAGE_KEY, JSON.stringify(allProjectsData))
+    localStorage.setItem(PROJECT_MANAGEMENT_STORAGE_KEY, JSON.stringify(projectManagement))
+  }, [allProjectsData, projectManagement])
+
+  // Load project features and management state from local storage
   const loadFromLocalStorage = useCallback(() => {
-    const storedFeatures = localStorage.getItem(STORAGE_KEY)
-    if (storedFeatures) {
-      setSavedFeaturesState(JSON.parse(storedFeatures))
+    const storedProjectsData = localStorage.getItem(PROJECTS_DATA_STORAGE_KEY)
+    const storedManagementData = localStorage.getItem(PROJECT_MANAGEMENT_STORAGE_KEY)
+
+    if (storedProjectsData) {
+      setAllProjectsDataState(JSON.parse(storedProjectsData))
+    } else {
+      // Initialize if no project data
+      setAllProjectsDataState({ [DEFAULT_PROJECT_NAME]: { [DEFAULT_CATEGORY]: [] } })
+    }
+
+    if (storedManagementData) {
+      setProjectManagementState(JSON.parse(storedManagementData))
+    } else {
+      // Initialize if no management data
+      const initialProjectName = storedProjectsData ? Object.keys(JSON.parse(storedProjectsData))[0] || DEFAULT_PROJECT_NAME : DEFAULT_PROJECT_NAME
+      setProjectManagementState({
+        projectNames: [initialProjectName],
+        currentProjectName: initialProjectName,
+      })
     }
   }, [])
 
-  // Effect to save features to local storage whenever they change
+  // Effect to save to local storage whenever relevant data changes
   useEffect(() => {
     saveToLocalStorage()
-  }, [savedFeatures, saveToLocalStorage])
+  }, [allProjectsData, projectManagement, saveToLocalStorage])
 
-  const setSavedFeatures = useCallback((arg: SavedFeaturesStateType | ((prev: SavedFeaturesStateType) => SavedFeaturesStateType)) => {
-    if (typeof arg === "function") {
-      setSavedFeaturesState((prevState: SavedFeaturesStateType) => arg(prevState))
+  // Effect to load lines when current project changes
+  useEffect(() => {
+    if (projectManagement.currentProjectName) {
+      getLinesFromDB(projectManagement.currentProjectName)
+        .then(lines => {
+          setCurrentProjectLines(lines)
+        })
+        .catch(error => {
+          console.error("Failed to load lines for project:", projectManagement.currentProjectName, error)
+          setCurrentProjectLines([]) // Reset lines on error
+        })
     } else {
-      setSavedFeaturesState(arg)
+      setCurrentProjectLines([]) // No project selected, clear lines
     }
-  }, [setSavedFeaturesState])
+  }, [projectManagement.currentProjectName])
 
-  // Function to add a feature to a specific list, but not to 'all' by default
+
+  // --- Project Management Functions ---
+  const createNewProject = useCallback((projectName: string) => {
+    if (projectManagement.projectNames.includes(projectName) || !projectName.trim()) {
+      console.warn("Project already exists or name is invalid:", projectName)
+      return
+    }
+    setAllProjectsDataState(prevData => ({
+      ...prevData,
+      [projectName]: { [DEFAULT_CATEGORY]: [] },
+    }))
+    setProjectManagementState(prevMgmt => ({
+      projectNames: [...prevMgmt.projectNames, projectName],
+      currentProjectName: projectName,
+    }))
+    // setCurrentProjectLines([]); // New project will have no lines initially, covered by above useEffect
+  }, [projectManagement.projectNames])
+
+  const setCurrentProjectName = useCallback((projectName: string) => {
+    if (projectManagement.projectNames.includes(projectName)) {
+      setProjectManagementState(prevMgmt => ({
+        ...prevMgmt,
+        currentProjectName: projectName,
+      }))
+    } else {
+      console.warn("Attempted to switch to non-existent project:", projectName)
+    }
+  }, [projectManagement.projectNames])
+
+
+  // --- Feature Management Functions (operating on the current project) ---
+
+  // This function replaces the old setSavedFeatures. It's for loading data into the CURRENT project.
+  const loadDataIntoCurrentProject = useCallback((dataToLoad: SavedFeaturesStateType | ((prevData: SavedFeaturesStateType) => SavedFeaturesStateType)) => {
+    setAllProjectsDataState(prevAllData => {
+      const currentProject = projectManagement.currentProjectName
+      const currentProjectData = prevAllData[currentProject] || { [DEFAULT_CATEGORY]: [] }
+      
+      const newDataForCurrentProject = typeof dataToLoad === "function"
+        ? dataToLoad(currentProjectData)
+        : dataToLoad
+
+      return {
+        ...prevAllData,
+        [currentProject]: newDataForCurrentProject,
+      }
+    })
+  }, [projectManagement.currentProjectName])
+
+
   const addFeature = useCallback((listName: string, feature: GeoJsonFeature) => {
     if (!feature) return
+    setAllProjectsDataState(prevAllData => {
+      const currentProject = projectManagement.currentProjectName
+      const projectData = prevAllData[currentProject] || { [DEFAULT_CATEGORY]: [] }
+      const newList = [...(projectData[listName] || []), feature]
 
-    setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
-      const newList = [...(prevFeatures[listName] || []), feature]
-
+      let updatedProjectData: SavedFeaturesStateType
       if (listName === DEFAULT_CATEGORY) {
-        return {
-          ...prevFeatures,
+        updatedProjectData = {
+          ...projectData,
           [listName]: newList,
         }
       } else {
-        return {
-          ...prevFeatures,
+        updatedProjectData = {
+          ...projectData,
           [listName]: newList,
-          // Remove feature from 'all' if it exists there, ensuring it's not in both
-          [DEFAULT_CATEGORY]: prevFeatures[DEFAULT_CATEGORY].filter((f) => f.properties?.id !== feature.properties?.id),
+          [DEFAULT_CATEGORY]: (projectData[DEFAULT_CATEGORY] || []).filter((f) => f.properties?.id !== feature.properties?.id),
         }
       }
+      return { ...prevAllData, [currentProject]: updatedProjectData }
     })
-  }, [setSavedFeatures])
+  }, [projectManagement.currentProjectName])
 
-  // Function to remove a feature from a specific list
   const removeFeature = useCallback((listName: string, selection: selectionInfo | null) => {
     if (!selection) {
       console.error("No selection info when trying to remove feature")
       return
     }
-
-    setSavedFeatures((prevFeatures: SavedFeaturesStateType) => {
-      const newList = (prevFeatures[listName] || []).filter((f, index) => idxFeat(index, f) !== idxSel(selection))
+    setAllProjectsDataState(prevAllData => {
+      const currentProject = projectManagement.currentProjectName
+      const projectData = prevAllData[currentProject] || { [DEFAULT_CATEGORY]: [] }
+      const newList = (projectData[listName] || []).filter((f, index) => idxFeat(index, f) !== idxSel(selection))
+      
       return {
-        ...prevFeatures,
-        [listName]: newList,
+        ...prevAllData,
+        [currentProject]: {
+          ...projectData,
+          [listName]: newList,
+        },
       }
     })
-  }, [setSavedFeatures])
+  }, [projectManagement.currentProjectName])
 
-  // Function to update a feature in all lists where it exists
   const updateFeature = useCallback((oldFeature: GeoJsonFeature, newFeature: GeoJsonFeature) => {
-    setSavedFeatures((prevFeatures: SavedFeaturesStateType): SavedFeaturesStateType => {
-      const newFeatures = { ...prevFeatures }
-      for (const key in newFeatures) {
-        newFeatures[key] = newFeatures[key].map((item) =>
+    setAllProjectsDataState(prevAllData => {
+      const currentProject = projectManagement.currentProjectName
+      const projectData = prevAllData[currentProject] || { [DEFAULT_CATEGORY]: [] }
+      const newProjectData = { ...projectData }
+      for (const key in newProjectData) {
+        newProjectData[key] = newProjectData[key].map((item) =>
           item.properties?.id === oldFeature.properties?.id ? newFeature : item,
         )
       }
-      return newFeatures
+      return { ...prevAllData, [currentProject]: newProjectData }
     })
-  }, [setSavedFeatures])
+  }, [projectManagement.currentProjectName])
+
+  // --- Context Value ---
+  // The 'savedFeatures' provided to context consumers is now only for the current project
+  const currentProjectSavedFeatures = allProjectsData[projectManagement.currentProjectName] || { [DEFAULT_CATEGORY]: [] }
 
   const contextValue: SavedFeaturesContextType = {
-    savedFeatures,
+    savedFeatures: currentProjectSavedFeatures, // Consumers see only the current project's features
     addFeature,
     removeFeature,
     updateFeature,
-    setSavedFeatures,
+    setSavedFeatures: loadDataIntoCurrentProject, // Renamed for clarity in this new model
     saveToLocalStorage,
     loadFromLocalStorage,
+    currentProjectName: projectManagement.currentProjectName,
+    projectNames: projectManagement.projectNames,
+    setCurrentProjectName,
+    createNewProject,
+    // Line / Route management functions
+    currentProjectLines,
+    addNewLine,
+    updateExistingLine,
+    deleteExistingLine,
   }
 
   return (

@@ -1,1 +1,1 @@
-export { default as GeocodingSearch } from './GeocodingSearch';
+export { default as GeocodingSearch } from "./GeocodingSearch"

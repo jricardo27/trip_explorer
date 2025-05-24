@@ -7,5 +7,7 @@ repos:
         language: node
         require_serial: true
         types_or: [html, javascript, json, jsx, ts, tsx]
-        additional_dependencies:
-          - eslint@9.16.0
+        # Ensure eslint and its plugins are installed via package.json
+        # and accessible in the environment where pre-commit runs.
+        # additional_dependencies:
+        #   - eslint@9.16.0 # Keeping this commented out or removing it

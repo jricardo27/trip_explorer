@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -8,51 +7,52 @@ import {
   DialogTitle,
   TextField,
   Snackbar,
-} from '@mui/material';
-import CryptoJS from 'crypto-js';
+} from "@mui/material"
+import CryptoJS from "crypto-js"
+import React, { useState } from "react"
 
 interface ApiKeyModalProps {
-  open: boolean;
-  onClose: () => void;
+  open: boolean
+  onClose: () => void
 }
 
 const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ open, onClose }) => {
-  const [apiKey, setApiKey] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [apiKey, setApiKey] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
     if (!apiKey.trim() || !password.trim()) {
-      setError('API Key and Password cannot be empty.');
-      return;
+      setError("API Key and Password cannot be empty.")
+      return
     }
-    setError(null);
+    setError(null)
 
     try {
-      const encryptedApiKeyString = CryptoJS.AES.encrypt(apiKey, password).toString();
+      const encryptedApiKeyString = CryptoJS.AES.encrypt(apiKey, password).toString()
       // Store only the encrypted key
-      localStorage.setItem('googleEncryptedApiKey', encryptedApiKeyString);
-      
-      // Remove old insecurely stored items if they exist
-      localStorage.removeItem('googleApiKeyPassword'); // Remove insecure password
-      localStorage.removeItem('googleApiKey'); // Remove old key if name changed
+      localStorage.setItem("googleEncryptedApiKey", encryptedApiKeyString)
 
-      console.log('API Key encrypted and stored (key only). Password is not stored.');
-      onClose(); // Close the modal
-      setApiKey(''); // Clear fields
-      setPassword('');
+      // Remove old insecurely stored items if they exist
+      localStorage.removeItem("googleApiKeyPassword") // Remove insecure password
+      localStorage.removeItem("googleApiKey") // Remove old key if name changed
+
+      console.log("API Key encrypted and stored (key only). Password is not stored.")
+      onClose() // Close the modal
+      setApiKey("") // Clear fields
+      setPassword("")
     } catch (e) {
-      console.error('Encryption failed:', e);
-      setError('Failed to encrypt and store API Key. See console for details.');
+      console.error("Encryption failed:", e)
+      setError("Failed to encrypt and store API Key. See console for details.")
     }
-  };
+  }
 
   const handleCancel = () => {
-    onClose();
-    setError(null); // Clear any previous errors
-    setApiKey(''); // Clear fields
-    setPassword('');
-  };
+    onClose()
+    setError(null) // Clear any previous errors
+    setApiKey("") // Clear fields
+    setPassword("")
+  }
 
   return (
     <>
@@ -106,7 +106,7 @@ const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ open, onClose }) => {
         />
       )}
     </>
-  );
-};
+  )
+}
 
-export default ApiKeyModal;
+export default ApiKeyModal

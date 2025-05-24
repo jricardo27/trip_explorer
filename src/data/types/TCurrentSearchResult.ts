@@ -1,6 +1,6 @@
-import { TCoordinate } from "./TCoordinate";
+import { TCoordinate } from "./TCoordinate"
 
 export type TCurrentSearchResult = {
-  coordinate: TCoordinate;
-  address: string;
-} | null;
+  coordinate: TCoordinate
+  address: string
+} | null
