@@ -13,15 +13,15 @@ const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const params: Record<string, Record<string, number>> = {}
+        const isProduction = import.meta.env.MODE === "production";
+        let requestConfig = {};
 
-        const isProduction = import.meta.env.MODE === "production"
         if (!isProduction) { // Always reload the files when running in development
-          params["params"] = { t: Date.now() }
+          requestConfig = { params: { t: Date.now() } };
         }
 
         const promises = filenames.map(async (filename): Promise<[string, GeoJsonCollection]> => {
-          const response = await axios.get<GeoJsonCollection>(filename, params)
+          const response = await axios.get<GeoJsonCollection>(filename, requestConfig);
 
           if (typeof response.data == "string") {
             throw new Error(`Error requesting ${filename}, ensure that the path is valid.`)
