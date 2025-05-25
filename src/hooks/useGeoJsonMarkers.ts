@@ -4,12 +4,28 @@ import { useEffect, useState } from "react"
 import { GeoJsonCollection, GeoJsonDataMap, GeoJsonFeature, GeoJsonProperties, TAny } from "../data/types"
 import deepMerge from "../utils/deepmerge.ts"
 
+/**
+ * Custom hook to fetch and process GeoJSON data from a list of file paths.
+ *
+ * It loads multiple GeoJSON files, merges shared properties from the FeatureCollection
+ * into individual features, and provides the combined data along with loading and error states.
+ * In development mode, it appends a timestamp to the request URL to bypass browser cache.
+ *
+ * @param filenames An array of strings, where each string is a path to a GeoJSON file.
+ * @returns A `GeoJsonDataMap` object where keys are filenames and values are the
+ *          corresponding `GeoJsonCollection`. The returned object also includes optional
+ *          `loading` (boolean) and `error` (string) properties to indicate the fetch status.
+ */
 const useGeoJsonMarkers = (filenames: string[]): GeoJsonDataMap => {
   const [geoJsonData, setGeoJsonData] = useState<GeoJsonDataMap>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    /**
+     * Fetches and processes GeoJSON data from the provided filenames.
+     * Handles merging of shared properties and updates loading/error states.
+     */
     const fetchData = async () => {
       setLoading(true)
       try {
