@@ -12,13 +12,30 @@ import MapStateManager from "./MapStateManager"
 import MapViewUpdater from "./MapViewUpdater"
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
+/**
+ * Props for the MapComponent.
+ */
 export interface MapComponentProps {
-  children?: React.ReactNode
-  center: TCoordinate | [number, number]
-  overlays?: TLayerOverlay[]
-  contextMenuHandler?: (event: L.LeafletMouseEvent) => void
+  /** Optional child elements to render within the MapContainer, typically map layers or controls. */
+  children?: React.ReactNode;
+  /** The initial center of the map. Can be a TCoordinate object or a [lat, lng] tuple. */
+  center: TCoordinate | [number, number];
+  /** Optional array of overlay layers (TLayerOverlay) to be managed by the LayersControl. */
+  overlays?: TLayerOverlay[];
+  /** Optional callback function to handle context menu events on the map. */
+  contextMenuHandler?: (event: L.LeafletMouseEvent) => void;
 }
 
+/**
+ * A configurable map component based on React Leaflet.
+ *
+ * This component initializes a Leaflet map with base layers, optional overlays,
+ * and persists map state (center, zoom, active base layer, overlay visibility)
+ * to localStorage. It also provides context menu handling and displays the current zoom level.
+ *
+ * @param props The properties for configuring the map component.
+ * @returns A ReactElement rendering the map.
+ */
 const MapComponent = ({
   children,
   center,
@@ -51,6 +68,10 @@ const MapComponent = ({
     return savedBaseLayer ?? "Esri World Street Map"
   })
 
+  /**
+   * Memoized version of setOverlayVisibility to maintain stable references for child components.
+   * Updates the visibility state of overlay layers.
+   */
   const memoizedSetOverlayVisibility = useCallback(
     (newVisibility: React.SetStateAction<Record<string, boolean>>) => {
       setOverlayVisibility(newVisibility)
@@ -58,6 +79,10 @@ const MapComponent = ({
     [],
   )
 
+  /**
+   * Memoized version of setActiveBaseLayer to maintain stable references for child components.
+   * Updates the currently active base layer.
+   */
   const memoizedSetActiveBaseLayer = useCallback(
     (newBaseLayer: React.SetStateAction<string>) => {
       setActiveBaseLayer(newBaseLayer)
@@ -73,6 +98,13 @@ const MapComponent = ({
     localStorage.setItem("activeBaseLayer", activeBaseLayer)
   }, [activeBaseLayer])
 
+  /**
+   * Callback function to update the map's center and zoom level in the component's state.
+   * This state is then persisted to localStorage by the MapStateManager component.
+   *
+   * @param center A tuple representing the new latitude and longitude of the map center.
+   * @param zoom The new zoom level of the map.
+   */
   const handleMapMove = useCallback((center: [number, number], zoom: number) => {
     setMapState({ center, zoom })
   }, [])
