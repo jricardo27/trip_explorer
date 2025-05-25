@@ -1,11 +1,13 @@
 import { Menu as MenuIcon } from "@mui/icons-material"
-import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
+import SettingsIcon from '@mui/icons-material/Settings';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, ListItemIcon } from "@mui/material"
 import React, { useContext, useState } from "react"
 import { FaDownload, FaUpload } from "react-icons/fa"
 import { MdHelpOutline, MdLocationOn } from "react-icons/md"
 import { useNavigate, Link } from "react-router-dom"
 
-import SavedFeaturesContext from "../../contexts/SavedFeaturesContext"
+import SavedFeaturesContext, { SAVED_FEATURES_KEY, CATEGORIES_KEY } from "../../contexts/SavedFeaturesContext"
 import WelcomeModal from "../WelcomeModal/WelcomeModal"
 
 import { importBackup } from "./importBackup"
@@ -46,9 +48,41 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const [openWelcomeModal, setOpenWelcomeModal] = useState<boolean>(false)
   const [importAnchorEl, setImportAnchorEl] = useState<null | HTMLElement>(null)
   const [destinationAnchorEl, setDestinationAnchorEl] = useState<null | HTMLElement>(null)
+  const [settingsAnchorEl, setSettingsAnchorEl] = useState<null | HTMLElement>(null);
+
   const importMenuIsOpen = Boolean(importAnchorEl)
   const exportMenuIsOpen = Boolean(anchorEl)
   const destinationMenuIsOpen = Boolean(destinationAnchorEl)
+  const settingsMenuIsOpen = Boolean(settingsAnchorEl);
+
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
+
+  const localStorageKeysToReset = [
+    'mapState',
+    'overlayVisibility',
+    'activeBaseLayer',
+    'hasShownModal',
+    SAVED_FEATURES_KEY,
+    CATEGORIES_KEY,
+  ];
+
+  const handleOpenResetDialog = () => {
+    setResetDialogOpen(true);
+    handleCloseSettingsMenu();
+  };
+
+  const handleCloseResetDialog = () => {
+    setResetDialogOpen(false);
+  };
+
+  const handleConfirmReset = () => {
+    localStorageKeysToReset.forEach(key => {
+      window.localStorage.removeItem(key);
+    });
+    setResetDialogOpen(false);
+    window.location.reload();
+  };
+
 
   const openExportMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -74,11 +108,20 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
     setDestinationAnchorEl(null)
   }
 
+  const handleOpenSettingsMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setSettingsAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseSettingsMenu = () => {
+    setSettingsAnchorEl(null);
+  };
+
   const closeMenuAfterAction = (handler: (event: React.MouseEvent) => void) => {
     return (event: React.MouseEvent) => {
       handler(event)
       closeExportMenu()
       closeImportMenu()
+      // Not closing settings menu here as reset has its own flow
     }
   }
 
@@ -202,9 +245,57 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
               </Tooltip>
               <WelcomeModal open={openWelcomeModal} onClose={handleCloseWelcomeModal} />
             </Grid2>
+            <Grid2 size={2}>
+              <Tooltip title="Settings" aria-label="Settings">
+                <Button
+                  id="settings-button"
+                  aria-controls={settingsMenuIsOpen ? "settings-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={settingsMenuIsOpen ? "true" : undefined}
+                  onClick={handleOpenSettingsMenu}
+                  color="inherit"
+                  startIcon={<SettingsIcon />}
+                />
+              </Tooltip>
+              <Menu
+                id="settings-menu"
+                anchorEl={settingsAnchorEl}
+                open={settingsMenuIsOpen}
+                onClose={handleCloseSettingsMenu}
+                MenuListProps={{
+                  'aria-labelledby': 'settings-button',
+                }}
+              >
+                <MenuItem onClick={handleOpenResetDialog}>
+                  <ListItemIcon>
+                    <DeleteForeverIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>Reset Application Data</ListItemText>
+                </MenuItem>
+              </Menu>
+            </Grid2>
           </Grid2>
         </Toolbar>
       </AppBar>
+      <Dialog
+        open={resetDialogOpen}
+        onClose={handleCloseResetDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Reset Application Data?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to reset all application data? This will clear your saved places, categories, notes, and map preferences. This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseResetDialog}>Cancel</Button>
+          <Button onClick={handleConfirmReset} color="error" autoFocus>
+            Reset Data
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }
