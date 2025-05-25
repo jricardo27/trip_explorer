@@ -8,6 +8,7 @@ import TopMenu from "./components/TopMenu/TopMenu"
 import WelcomeModal from "./components/WelcomeModal/WelcomeModal"
 import config from "./config"
 import SavedFeaturesProvider from "./contexts/SavedFeaturesProvider"
+import useLocalStorage from "./hooks/useLocalStorage"
 import { AustralianCapitalTerritory } from "./pages/Australia/AustralianCapitalTerritory"
 import { NewSouthWales } from "./pages/Australia/NewSouthWales"
 import { NorthernTerritory } from "./pages/Australia/NorthernTerritory"
@@ -38,22 +39,16 @@ const RedirectHandler = () => {
 }
 
 function App(): React.ReactNode {
-  const [welcomeDialogOpen, setWelcomeDialogOpen] = useState(false)
+  const [hasShownModal, setHasShownModal] = useLocalStorage<boolean>('hasShownModal', false);
+  const [welcomeDialogOpen, setWelcomeDialogOpen] = useState<boolean>(!hasShownModal);
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   ReactGA.initialize(config.ga.measurementId)
 
-  useEffect(() => {
-    const hasShownModal = localStorage.getItem("hasShownModal")
-    if (!hasShownModal) {
-      setWelcomeDialogOpen(true)
-      // localStorage.setItem("hasShownModal", "true")
-    }
-  }, [])
-
   const handleClose = () => {
-    setWelcomeDialogOpen(false)
-  }
+    setWelcomeDialogOpen(false);
+    setHasShownModal(true);
+  };
 
   const openDrawer = () => {
     setDrawerOpen(true)
