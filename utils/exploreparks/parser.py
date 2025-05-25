@@ -1,6 +1,7 @@
 import json
 import sys
 import argparse
+import logging
 from pathlib import Path
 
 import requests
@@ -26,20 +27,20 @@ def get_content(url, html_cache_dir):
     filepath = Path(html_cache_dir) / filename
 
     if filepath.exists():
-        print("Loading contents for ", url)
+        logging.info(f"Loading cached content for: {url}")
         with open(filepath, encoding="utf-8") as file:
             return file.read()
 
-    print("Getting content from:", url)
+    logging.info(f"Fetching content from: {url}")
     try:
         response = requests.get(url)
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching {url}: {e}")
+        logging.error(f"Error fetching {url}: {e}")
         sys.exit(1)
 
     # Check if the request was successful
     if response.status_code != 200:
-        print(f"Error {response.status_code} while fetching {url}")
+        logging.error(f"Error {response.status_code} while fetching {url}")
         sys.exit(1)
 
     with open(filepath, "w", encoding="utf-8") as file:
@@ -120,24 +121,24 @@ def extract_map_features(soup, link: str, html_cache_dir: str):
                 json.dump(settings_json, file, indent=2)
         else:
             # Handle case where script_tag is None, perhaps log or return empty features
-            print(f"Warning: No 'drupal-settings-json' script tag found for {link}")
+            logging.warning(f"Warning: No 'drupal-settings-json' script tag found for {link}")
             return []
 
 
     leaflet = settings_json.get("leaflet")
     if not leaflet:
-        print("No map found in ", filename)
+        logging.warning(f"No map data found in settings: {filename}")
         return []
 
     # Try to get the specific layer, but fall back if it doesn't exist
     layer = leaflet.get("leaflet-map-view-places-places-parks-sites-campgrounds-map")
 
     if not layer:
-        print(f"No 'leaflet-map-view-places-places-parks-sites-campgrounds-map' layer found in {filename}. Trying first available layer.")
+        logging.warning(f"No default layer found in map data: {filename}")
         if leaflet.values():
             layer = list(leaflet.values())[0]
         else:
-            print(f"No layers found at all in {filename}.")
+            logging.warning(f"No layers found at all in {filename}.")
             return []
 
 
@@ -147,7 +148,7 @@ def extract_map_features(soup, link: str, html_cache_dir: str):
         else:
             # Ensure lat and lon are present
             if "lat" not in feat or "lon" not in feat:
-                print(f"Warning: Feature in {link} is missing lat/lon: {feat.get('title', 'Untitled')}")
+                logging.warning(f"Missing lat/lon for a feature in {filename}. Feature: {feat.get('title', 'N/A')}")
                 continue # Skip this feature
             coordinates = [feat["lon"], feat["lat"]]
 
@@ -212,6 +213,10 @@ if __name__ == "__main__":
     parser.add_argument("--html_cache_dir", default="./html", help="Directory to cache downloaded HTML and JSON files.")
     args = parser.parse_args()
 
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+    logging.info(f"Starting scraper with base_url: {args.base_url}, output_file: {args.output_file}, cache_dir: {args.html_cache_dir}")
     Path(args.html_cache_dir).mkdir(parents=True, exist_ok=True)
 
     parse_main(args.base_url, args.output_file, args.html_cache_dir)
+    logging.info(f"Scraping complete. Output saved to {args.output_file}")
