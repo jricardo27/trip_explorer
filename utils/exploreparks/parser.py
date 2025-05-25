@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 
 import requests
@@ -37,16 +38,20 @@ def get_content(url):
             return file.read()
 
     print("Getting content from:", url)
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching {url}: {e}")
+        sys.exit(1)
 
     # Check if the request was successful
-    if response.status_code == 200:
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(response.content.decode("utf-8"))
+    if response.status_code != 200:
+        print(f"Error {response.status_code} while fetching {url}")
+        sys.exit(1)
 
-        return response.content
-
-    exit(f"Error ${response.status_code}")
+    with open(filepath, "w", encoding="utf-8") as file:
+        file.write(response.content.decode("utf-8"))
+    return response.content
 
 
 def parse_main():
