@@ -11,7 +11,7 @@ This repository contains a React and TypeScript project. Please adhere to the fo
 ## TypeScript and React Specifics
 
 *   **No Semicolons:** Do not use semicolons at the end of statements.
-*   **Type Annotations:** Always use type annotations for variables, function parameters, and return types.
+*   **Type Annotations:** Always use type annotations for function parameters, and return types. For variables, leverage type inference and only add explicit types when the type is not obvious from the assigned value.
 *   **Avoid `any`:** Do not use `any` as a type annotation. Strive for more specific types whenever possible. If you must use `any`, provide a comment explaining why.
 *   **React Best Practices:** Follow standard React best practices, such as using functional components with hooks where appropriate.
 
