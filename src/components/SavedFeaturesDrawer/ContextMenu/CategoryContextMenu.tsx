@@ -12,6 +12,7 @@ interface CategoryContextMenuProps {
   handleRenameCategory: (newName: string) => void
   handleAddCategory: () => void
   handleRemoveCategory: () => void
+  handlePlanRoute: (category: string) => void // Added for planning route
 }
 
 export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
@@ -22,6 +23,7 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
   handleRenameCategory,
   handleAddCategory,
   handleRemoveCategory,
+  handlePlanRoute,
 }) => {
   const handleRename = useCallback(() => {
     if (!contextMenuTab || contextMenuTab === NULL_TAB) return
@@ -65,15 +67,30 @@ export const CategoryContextMenu: React.FC<CategoryContextMenuProps> = ({
       <MenuItem key="remove" onClick={wrapper(handleRemoveCategory)}>
         Remove Category
       </MenuItem>,
+      // Add Plan Route option for non-default categories
+      <MenuItem key="plan-route" onClick={wrapper(() => handlePlanRoute(contextMenuTab))}>
+        Plan Route
+      </MenuItem>,
+    )
+  } else if (contextMenuTab === DEFAULT_CATEGORY) {
+    // Add Plan Route option for the "all" category
+    menuItems.push(
+      <MenuItem key="plan-route-all" onClick={wrapper(() => handlePlanRoute(DEFAULT_CATEGORY))}>
+        Plan Route
+      </MenuItem>,
     )
   }
 
   // "Add New Category" is always an option if the menu is shown for a tab
-  menuItems.push(
-    <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>
-      Add New Category
-    </MenuItem>,
-  )
+  // Ensure it's not added twice if contextMenuTab is NULL_TAB (though current logic prevents menu for NULL_TAB)
+  if (contextMenuTab !== NULL_TAB) {
+    menuItems.push(
+      <MenuItem key="add-new" onClick={wrapper(handleAddCategory)}>
+        Add New Category
+      </MenuItem>,
+    )
+  }
+
 
   return (
     <Menu

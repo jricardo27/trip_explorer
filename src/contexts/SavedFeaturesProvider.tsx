@@ -11,6 +11,8 @@ interface SavedFeaturesProviderProps {
 
 const STORAGE_KEY = "savedFeatures"
 
+import * as GeoJSON from "geojson" // Import GeoJSON types
+
 const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children }) => {
   // Initial state setup
   const [savedFeatures, setSavedFeaturesState] = useState<SavedFeaturesStateType>(() => {
@@ -21,6 +23,7 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
           all: [],
         }
   })
+  const [activeRouteGeoJson, setActiveRouteGeoJsonState] = useState<GeoJSON.LineString | null>(null)
 
   // Save to local storage
   const saveToLocalStorage = useCallback(() => {
@@ -108,6 +111,8 @@ const SavedFeaturesProvider: React.FC<SavedFeaturesProviderProps> = ({ children 
     setSavedFeatures,
     saveToLocalStorage,
     loadFromLocalStorage,
+    activeRouteGeoJson, // Provide new state
+    setActiveRouteGeoJson: setActiveRouteGeoJsonState, // Provide new state setter
   }
 
   return (
