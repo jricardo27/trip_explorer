@@ -10,6 +10,7 @@ import { BaseLayers } from "./BaseLayers"
 import MapEvents from "./MapEvents"
 import MapStateManager from "./MapStateManager"
 import MapViewUpdater from "./MapViewUpdater"
+import RouteDisplayLayer from "./RouteDisplayLayer" // Added for route display
 import ZoomLevelDisplay from "./ZoomLevelDisplay"
 
 export interface MapComponentProps {
@@ -125,6 +126,7 @@ const MapComponent = ({
               </LayersControl.Overlay>
             ))}
         </LayersControl>
+        <RouteDisplayLayer /> {/* Added RouteDisplayLayer */}
         {children}
       </MapContainer>
     </>

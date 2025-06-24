@@ -22,6 +22,8 @@ export type SavedFeaturesContextType = {
   setSavedFeatures: setSavedFeaturesType
   saveToLocalStorage: () => void
   loadFromLocalStorage: () => void
+  activeRouteGeoJson: GeoJSON.LineString | null // Added for active route
+  setActiveRouteGeoJson: (route: GeoJSON.LineString | null) => void // Added for active route
 }
 
 export const DEFAULT_CATEGORY = "all"

@@ -9,6 +9,7 @@ import React, { useState, useContext, useCallback, useEffect, useMemo } from "re
 
 import SavedFeaturesContext, { DEFAULT_CATEGORY } from "../../contexts/SavedFeaturesContext"
 
+import { createRouteGeoJson } from "../../utils/createRouteGeoJson" // Added for route planning
 import { CategoryContextMenu } from "./ContextMenu/CategoryContextMenu"
 import { FeatureContextMenu } from "./ContextMenu/FeatureContextMenu"
 import { FeatureDragContext } from "./FeatureList/FeatureDragContext"
@@ -32,7 +33,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const [selectedTab, setSelectedTab] = useState<string>(DEFAULT_CATEGORY)
   const [searchQuery, setSearchQuery] = useState<string>("")
 
-  const { savedFeatures, setSavedFeatures, removeFeature } = useContext(SavedFeaturesContext)!
+  const { savedFeatures, setSavedFeatures, removeFeature, setActiveRouteGeoJson, activeRouteGeoJson } = useContext(SavedFeaturesContext)! // Added activeRouteGeoJson
   const { selectedFeature, setSelectedFeature } = useFeatureSelection()
   const { contextMenu, contextMenuTab, contextMenuFeature, handleContextMenu, handleTabContextMenu, handleClose } = useContextMenu()
   const { moveCategory, handleRenameCategory, handleAddCategory, handleRemoveCategory } = useCategoryManagement(
@@ -72,6 +73,31 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
   const filteredItems = useMemo(() => {
     return filterFeatures(itemsWithOriginalIndex, searchQuery)
   }, [itemsWithOriginalIndex, searchQuery])
+
+  // Effect to clear the route if features change, to prevent stale routes
+  // A more sophisticated approach would track which category the route is for
+  // and only clear if that specific category's features change.
+  useEffect(() => {
+    if (activeRouteGeoJson) { // Only clear if there's an active route
+      setActiveRouteGeoJson(null)
+      // Optionally, notify user that route was cleared due to changes
+      // console.log("Route cleared due to changes in saved features.")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedFeatures, setActiveRouteGeoJson]) // activeRouteGeoJson is included to prevent clearing if it was already null
+
+  const handlePlanRoute = useCallback((category: string) => {
+    const featuresToRoute = savedFeatures[category]
+    if (featuresToRoute && featuresToRoute.length > 1) {
+      const routeGeoJson = createRouteGeoJson(featuresToRoute)
+      setActiveRouteGeoJson(routeGeoJson)
+    } else {
+      setActiveRouteGeoJson(null) // Clear route if not enough points
+      // Optionally, provide user feedback (e.g., toast notification)
+      alert("Need at least two points in a category to plan a route.")
+    }
+    handleClose() // Close context menu
+  }, [savedFeatures, setActiveRouteGeoJson, handleClose])
 
   return (
     <>
@@ -128,6 +154,7 @@ const SavedFeaturesDrawer: React.FC<SavedFeaturesDrawerProps> = ({ drawerOpen, o
           handleRenameCategory={handleRenameCategory}
           handleAddCategory={handleAddCategory}
           handleRemoveCategory={handleRemoveCategory}
+          handlePlanRoute={handlePlanRoute} // Pass the new handler
         />
         <FeatureContextMenu
           contextMenu={contextMenu}

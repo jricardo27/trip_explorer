@@ -1,4 +1,4 @@
-import { Menu as MenuIcon } from "@mui/icons-material"
+import { Menu as MenuIcon, ClearAll as ClearAllIcon } from "@mui/icons-material" // Added ClearAllIcon
 import { AppBar, Box, Button, Grid2, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography, alpha } from "@mui/material"
 import React, { useContext, useState } from "react"
 import { FaDownload, FaUpload } from "react-icons/fa"
@@ -39,7 +39,7 @@ const destinations = [
 
 const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const location = window.location.pathname
-  const { savedFeatures, setSavedFeatures } = useContext(SavedFeaturesContext)!
+  const { savedFeatures, setSavedFeatures, setActiveRouteGeoJson, activeRouteGeoJson } = useContext(SavedFeaturesContext)! // Added setActiveRouteGeoJson and activeRouteGeoJson
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -85,6 +85,10 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
   const handleOpenWelcomeModal = () => setOpenWelcomeModal(true)
   const handleCloseWelcomeModal = () => setOpenWelcomeModal(false)
 
+  const handleClearRoute = () => {
+    setActiveRouteGeoJson(null)
+  }
+
   const handleDestinationChange = (_event: React.MouseEvent<HTMLElement>, newDestination: string) => {
     localStorage.removeItem("mapState")
     navigate(newDestination)
@@ -95,8 +99,8 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Grid2 container spacing={2} sx={{ flexGrow: 1 }}>
-            <Grid2 size={2}>
+          <Grid2 container spacing={{ xs: 1, sm: 2 }} sx={{ flexGrow: 1 }} alignItems="center">
+            <Grid2 xs={12} sm="auto" md={3} lg={4}>
               <Tooltip title="Go back to destination selection" aria-label="Go back to destination selection">
                 <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -105,12 +109,19 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                 </Link>
               </Tooltip>
             </Grid2>
-            <Grid2 size={2}>
+            <Grid2>
               <Tooltip title="Saved Features" aria-label="Saved Features">
-                <Button onClick={onMenuClick} color="inherit" startIcon={<MenuIcon />} />
+                <Button onClick={onMenuClick} color="inherit" startIcon={<MenuIcon />} sx={{ minWidth: "auto", padding: "6px" }}/>
               </Tooltip>
             </Grid2>
-            <Grid2 size={2}>
+            {activeRouteGeoJson && (
+              <Grid2>
+                <Tooltip title="Clear Route" aria-label="Clear Route">
+                  <Button onClick={handleClearRoute} color="inherit" startIcon={<ClearAllIcon />} sx={{ minWidth: "auto", padding: "6px" }} />
+                </Tooltip>
+              </Grid2>
+            )}
+            <Grid2>
               <Tooltip title="Export" aria-label="Export">
                 <Button
                   id="fade-button"
@@ -133,7 +144,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                 <MenuItem onClick={closeMenuAfterAction(() => saveAsBackup(savedFeatures))}>Export backup</MenuItem>
               </Menu>
             </Grid2>
-            <Grid2 size={2}>
+            <Grid2>
               <Tooltip title="Import" aria-label="Import">
                 <Button
                   id="import-button"
@@ -156,7 +167,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                 <MenuItem onClick={closeMenuAfterAction(() => { importBackup("merge", setSavedFeatures) })}>Merge Categories</MenuItem>
               </Menu>
             </Grid2>
-            <Grid2 size={2}>
+            <Grid2>
               <Tooltip title="Destinations" aria-label="Destinations">
                 <Button
                   id="destination-button"
@@ -196,7 +207,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ onMenuClick }: TopMenuProps) => {
                 ))}
               </Menu>
             </Grid2>
-            <Grid2 size={2}>
+            <Grid2>
               <Tooltip title="Help" aria-label="Help">
                 <Button onClick={handleOpenWelcomeModal} color="inherit" startIcon={<MdHelpOutline />} />
               </Tooltip>
